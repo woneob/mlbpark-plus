@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* write */
+form[name="manage_chk"] > table,
+form[name="manage_chk"] table[width="640"] {width:100% !important;}
+form[name="manage_chk"] table[width="640"] > tbody > tr > td {padding:10px;background:#fff;}
+form[name="manage_chk"] > table > tbody > tr > td:first-child {width:100px !important;padding-left:15px;}
+form[name="manage_chk"] select[name="s_prefix"] {padding:2px;}
+form[name="manage_chk"] input[name="s_subject"] {padding:2px;width:500px;}
+form[name="manage_chk"] table[width="640"] iframe {width:100% !important;background:#fff !important;}

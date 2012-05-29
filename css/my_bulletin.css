@@ -1,0 +1,5 @@
+@charset "utf-8";
+
+body {width:980px;margin:0 auto;}
+td[width="317"] > table[width="260"] {width:100% !important;margin:0 0 14px !important;}
+td[width="260"] > table[width="260"][bgcolor="D5D5D5"]{display:none;}

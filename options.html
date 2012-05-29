@@ -1,0 +1,337 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MLBPARK PLUS OPTIONS</title>
+<style>
+html {background:#fff;}
+body {padding-top:20px;font:12px/1.4 Dotum,'돋움',sans-serif;color:#4c4c4c;overflow-y:scroll;}
+#container {width:540px;margin:0 auto;}
+header {position:relative;margin-bottom:5px;}
+header h1 {width:224px;height:38px;margin:0;background:url(images/logo.png) no-repeat;text-indent:-9999px;}
+header a {position:absolute;right:7px;top:17px;color:#666;text-decoration:none;}
+header a:hover {text-decoration:underline;}
+article {padding:10px 15px;border-width:1px;border-style:solid;border-color:#e6e6e6 #ddd #ccc #e3e3e3;border-radius:5px;background:#f8f8f8;box-shadow:inset 0 1px 0 #fff,1px 1px 1px #eee;}
+.desc {margin-bottom:10px;border-bottom:1px solid #ccc;}
+.desc strong {letter-spacing:-1px;}
+.form {padding-bottom:5px;border-bottom:1px dotted #ddd;}
+.row {position:relative;padding:8px 0 8px 30px;letter-spacing:-1px;}
+.row input[type="checkbox"] {position:absolute;left:7px;top:10px;margin:0;}
+.row input[type="text"] {width:300px;font:12px Dotum, '돋움', sans-serif;color:#444;padding:3px;}
+.row label {display:inline-block;font-weight:bold;}
+.row span {display:block;font-size:11px;color:#888;letter-spacing:-1px;}
+#widthVal {width:300px;}
+#slideCurrent {letter-spacing:0;vertical-align:7px;}
+#slideCurrent:after {content:' px';color:#888;}
+.toggleBox {margin-top:5px;background:#f1f1f1;border:1px solid #e8e8e8;padding:5px;}
+#blockInfo .blockType {padding:8px 10px 0;}
+#blockInfo p {margin:0;padding:2px 0;}
+#blockInfo p label {font-weight:normal;vertical-align:-3px;}
+#blockInfo p input {vertical-align:middle;margin:0 2px 0 0;color:#666;}
+#action {position:relative;border-top:1px dotted #fff;padding:10px 0 10px 27px;}
+#action .save {font:12px Dotum,'돋움',sans-serif;color:#4c4c4c;padding:3px 5px;}
+#action .reset {position:absolute;top:15px;right:0;border:none;background:none;text-decoration:underline;font-size:11px;color:#999;cursor:pointer;}
+#action .reset:hover {color:#5a5a5a;}
+#action .saveMsg {padding-left:15px;background:url(images/check.png) no-repeat 0 0;line-height:16px;}
+footer {padding:8px 0;font-size:11px;color:#999;text-align:center;}
+footer a {color:#999;text-decoration:none;}
+footer a:hover {color:#666;text-decoration:underline;}
+</style>
+
+<script src="javascripts/jquery-1.7.2.min.js"></script>
+<script>
+function reset(){
+	document.getElementById('titIcon').checked = true ;
+	document.getElementById('blind').checked = true;
+	document.getElementById('block').checked = false;
+	document.getElementById('blockInput').value = '';
+	document.getElementById('blockUser').checked = false;
+	document.getElementById('blockUserInput').value = '';
+	document.getElementById('userHistory').checked = false;
+	document.getElementById('reply').checked = true;
+	document.getElementById('video').checked = true;
+	document.getElementById('passwd').checked = false;
+	document.getElementById('width').checked = false;
+	document.getElementById('widthVal').value = '858';
+	document.getElementById('slideCurrent').innerText = '858';
+	document.getElementById('range').style.display = 'none';
+}
+
+function restore(){
+	if (localStorage['titIcon'] == 1 || localStorage['titIcon'] == null) {
+		document.getElementById('titIcon').checked = true;
+	} else {
+		document.getElementById('titIcon').checked = false;
+	}
+
+	if (localStorage['blind'] == 1 || localStorage['blind'] == null) {
+		document.getElementById('blind').checked = true;
+	} else {
+		document.getElementById('blind').checked = false;
+	}
+
+	if (localStorage['block'] == 0 || localStorage['block'] == null) {
+		document.getElementById('block').checked = false;
+		document.getElementById('blockInfo').style.display = 'none';
+		document.getElementById('blockInput').disabled = true;
+	} else {
+		document.getElementById('block').checked = true;
+		document.getElementById('blockInfo').style.display = 'block';
+		document.getElementById('blockInput').disabled = false;
+	}
+
+	if (!(localStorage['blockInput'] == null)) {
+		document.getElementById('blockInput').value = localStorage['blockInput'];
+	} 
+
+	if (localStorage['blockType'] == '2') {
+		document.getElementById('blockType_2').checked = true;
+	} else {
+		document.getElementById('blockType_1').checked = true;
+	}
+
+	if (localStorage['blockUser'] == 0 || localStorage['blockUser'] == null) {
+		document.getElementById('blockUser').checked = false;
+		document.getElementById('blockUserInfo').style.display = 'none';
+		document.getElementById('blockUserInput').disabled = true;
+	} else {
+		document.getElementById('blockUser').checked = true;
+		document.getElementById('blockUserInfo').style.display = 'block';
+		document.getElementById('blockUserInput').disabled = false;
+	}
+
+	if (!(localStorage['blockUserInput'] == null)) {
+		document.getElementById('blockUserInput').value = localStorage['blockUserInput'];
+	} 
+
+	if (localStorage['userHistory'] == 1) {
+		document.getElementById('userHistory').checked = true;
+	} else {
+		document.getElementById('userHistory').checked = false;
+	}
+
+	if (localStorage['reply'] == 1 || localStorage['reply'] == null) {
+		document.getElementById('reply').checked = true;
+	} else {
+		document.getElementById('reply').checked = false;
+	}
+
+	if (localStorage['video'] == 1 || localStorage['video'] == null) {
+		document.getElementById('video').checked = true;
+	} else {
+		document.getElementById('video').checked = false;
+	}
+
+	if (localStorage['passwd'] == 1) {
+		document.getElementById('passwd').checked = true;
+	} else {
+		document.getElementById('passwd').checked = false;
+	}
+
+	if (localStorage['width'] == null) {
+		document.getElementById('width').checked = false;
+		document.getElementById('range').style.display = 'none';
+		document.getElementById('slideCurrent').innerText = '858';
+	} else if (localStorage['width'] == 0) {
+		document.getElementById('width').checked = false;
+		document.getElementById('range').style.display = 'none';
+		document.getElementById('slideCurrent').innerText = localStorage['widthVal'];
+	} else {
+		document.getElementById('width').checked = true;
+		document.getElementById('slideCurrent').innerText = localStorage['widthVal'];
+		document.getElementById('range').style.display = 'block';
+	}
+
+	if (localStorage['widthVal']) {
+		document.getElementById('widthVal').value = localStorage['widthVal'];
+	}
+}
+
+function save(){
+	if (document.getElementById("titIcon").checked == true) {localStorage["titIcon"] = 1;}
+	else {localStorage["titIcon"] = 0;}
+
+	if (document.getElementById("blind").checked == true) {localStorage["blind"] = 1;}
+	else {localStorage["blind"] = 0;}
+
+	if (document.getElementById("block").checked == true) {localStorage["block"] = 1;}
+	else {localStorage["block"] = 0;}
+
+	if (!(document.getElementById("blockInput").value.length == 0)) {
+		localStorage["blockInput"] = document.getElementById("blockInput").value;
+	} else {localStorage["block"] = 0;}
+
+	if (document.getElementById("blockType_1").checked == true) {localStorage["blockType"] = 1;}
+	else {localStorage["blockType"] = 2;}
+
+	if (document.getElementById("blockUser").checked == true) {localStorage["blockUser"] = 1;}
+	else {localStorage["blockUser"] = 0;}
+
+	if (!(document.getElementById("blockUserInput").value.length == 0)) {
+		localStorage["blockUserInput"] = document.getElementById("blockUserInput").value;
+	} else {localStorage["blockUser"] = 0;}
+
+	if (document.getElementById("userHistory").checked == true) {localStorage["userHistory"] = 1;}
+	else {localStorage["userHistory"] = 0;}
+
+	if (document.getElementById("reply").checked == true) {localStorage["reply"] = 1;}
+	else {localStorage["reply"] = 0;}
+
+	if (document.getElementById("video").checked == true) {localStorage["video"] = 1;}
+	else {localStorage["video"] = 0;}
+
+	if (document.getElementById("passwd").checked == true) {localStorage["passwd"] = 1;}
+	else {localStorage["passwd"] = 0;}
+
+	if (document.getElementById("width").checked == true) {localStorage["width"] = 1;}
+	else {localStorage["width"] = 0;}
+
+	localStorage['widthVal'] = document.getElementById("widthVal").value;
+
+	$('.saveMsg').remove();
+	$('#action').append('<span class="saveMsg">저장되었습니다.</span>');
+	setTimeout(function() {
+		$('.saveMsg').fadeOut('slow',function(){
+			$(this).remove();
+		});
+	}, 1000);
+}
+
+$(function(){
+	$('#width').change(function(){
+		var $range = $('#range');
+		if (this.checked) {
+				$range.slideDown(200);
+		} else {
+				$range.slideUp(200);
+		}
+	});
+
+	$('#block').change(function(){
+		var $blockInfo = $('#blockInfo');
+		$blockInput = $('#blockInput');
+
+		if (this.checked) {
+			$blockInfo.slideDown(200);
+			$blockInput.removeAttr('disabled');
+		} else {
+			$blockInfo.slideUp(200);
+			$blockInput.attr('disabled','disabled');
+		}
+	});
+
+	$('#blockUser').change(function(){
+		var $blockUserInfo = $('#blockUserInfo');
+		$blockUserInput = $('#blockUserInput');
+
+		if (this.checked) {
+			$blockUserInfo.slideDown(200);
+			$blockUserInput.removeAttr('disabled');
+		} else {
+			$blockUserInfo.slideUp(200);
+			$blockUserInput.attr('disabled','disabled');
+		}
+	});
+});
+</script>
+</head>
+
+<body onload='restore();'>
+<section id="container">
+	<header>
+		<h1>MLBPARK PLUS OPTIONS</h1>
+		<a href="http://mlbpark.donga.com/" rel="external" target="_blank">MLBPARK 바로가기</a>
+	</header>
+	<article>
+		<div class="desc">
+			<p><strong>MLBPARK PLUS</strong> 옵션 설정 페이지 입니다.</p>
+			<p>옵션 항목은 과도하게 사용할 경우 느려질 수 있으니 반드시 필요에 의해서만 사용해주시고<br />사용하지 않는 항목들은 비활성화 시켜주시기 바랍니다.</p>
+		</div>
+		<div class="form">
+			<div class="row">
+				<input type="checkbox" id="titIcon" checked="checked" />
+				<label for="titIcon">제목 아이콘 사용</label>
+				<span>게시물 목록의 제목 중 지정된 키워드를 포함한 제목 앞에 아이콘을 표시합니다.</span>
+				<span>MLB타운, 한국야구타운, BULLPEN, TODAY베스트 페이지에만 적용됩니다.</span>
+			</div>
+			<div class="row">
+				<input type="checkbox" id="blind" checked="checked" /> 
+				<label for="blind">본문 차단 사용</label>
+				<span>댓글 내용에 지정된 키워드가 있을 경우 본문을 가리고 경고문구를 보여줍니다.</span>
+				<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
+			</div>
+			<div class="row">
+				<input type="checkbox" id="block" />
+				<label for="block">제목 차단 사용</label>
+				<span>목록 제목에 지정된 키워드가 있을 경우 해당 제목을 노출시키지 않거나 무시하도록 도와줍니다.</span>
+				<span>MLB타운, 한국야구타운, BULLPEN, TODAY베스트 페이지의 게시물 목록에만 적용됩니다.</span>
+				<div id="blockInfo" class="toggleBox">
+					<span><input type="text" id="blockInput" placeholder="차단 키워드 입력" /></span>
+					<span>* 키워드를 쉼표나 띄어쓰기로 구분해서 입력합니다. 예) 여자친구, 소개팅</span>
+					<div class="blockType">
+						<p>
+							<input type="radio" id="blockType_1" name="blockType" value="1" />
+							<label for="blockType_1">제목을 차단 문구로 변경하여 스스로 스킵하기</label>
+						</p>
+						<p>
+							<input type="radio" id="blockType_2" name="blockType" value="2" />
+							<label for="blockType_2">목록에서 제거하여 노출시키지 않기</label>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<input type="checkbox" id="blockUser" />
+				<label for="blockUser">닉네임 차단 사용</label>
+				<span>목록과 댓글에서 지정된 닉네임 사용자의 글을 노출시키지 않습니다.</span>
+				<span>MLB타운, 한국야구타운, BULLPEN, TODAY베스트 페이지의 게시물 목록, 댓글에만 적용됩니다.</span>
+				<div id="blockUserInfo" class="toggleBox">
+					<span><input type="text" id="blockUserInput" placeholder="차단 닉네임 입력" /></span>
+					<span>* 닉네임을 <strong>공백 없이 쉼표</strong>로 구분해서 입력합니다. 예) 사용자,</span>
+				</div>
+			</div>
+			<div class="row">
+				<input type="checkbox" id="userHistory" checked="checked" />
+				<label for="userHistory">본문 작성자의 최신 게시물 보기</label>
+				<span>본문 하단에 작성자의 최신 게시물을 불러옵니다.</span>
+				<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
+			</div>
+			<div class="row">
+				<input type="checkbox" id="reply" checked="checked" />
+				<label for="reply">답글 달기 버튼 사용</label>
+				<span>댓글에 답글 버튼을 노출하고 버튼 클릭 시 해당 댓글의 작성자 닉네임을 댓글 입력창에 자동 입력합니다.</span>
+				<span>MLB타운, 한국야구타운, BULLPEN, TODAY베스트 페이지에만 적용됩니다.</span>
+			</div>
+			<div class="row">
+				<input type="checkbox" id="video" checked="checked" />
+				<label for="video">동영상 사이즈 확장</label>
+				<span>동영상 사이즈를 본문 크기에 맞게 확장합니다.</span>
+				<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
+			</div>
+			<div class="row">
+				<input type="checkbox" id="passwd" />
+				<label for="passwd">비밀번호 변경 요청 무시</label>
+				<span>로그인 시 비밀번호 변경 요청을 무시하고 로그인을 완료합니다.</span>
+			</div>
+			<div class="row">
+				<input type="checkbox" id="width" />
+				<label for="width">지정 너비 사용</label>
+				<span>컨테이너의 너비를 임의로 설정하여 원하는 크기로 사용합니다.</span>
+				<div id="range" class="toggleBox">
+					<input id="widthVal" name="widthVal" type="range" min="780" max="1000" step="1" value="858" oninput="slideCurrent.value = parseInt (widthVal.value);" />
+					<output id="slideCurrent" for="widthVal"></output>
+				</div>
+			</div>
+		</div>
+
+		<div id="action">
+			<button type="button" class="save" onclick="save();">설정 저장</button>
+			<button type="button" class="reset" onclick="reset();">초기화</button>
+		</div>
+	</article>
+	<footer>
+		&copy;<a href="http://1upnote.com/mlbpark-plus/" target="_blank">1UPNOTE</a>
+	</footer>
+</section>
+</body>
+</html>

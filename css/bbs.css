@@ -1,0 +1,46 @@
+@charset "utf-8";
+
+/* table width switch --------------------- */
+td[width="687"] > table[width="702"],
+td[width="687"] > table[width="703"],
+td[width="687"] > table[width="660"]{width:100% !important;}
+/* proto */
+td[width="673"] {width:100% !important;}
+td[width="673"] > table[width="702"],
+td[width="673"] > table[width="703"]{width:100% !important;}
+
+td.D12darkgray {display:none;}
+img[src="http://image.donga.com/mlbpark/img200807/sub_bod05.gif"] {display:none;}
+/* thead */
+table[background$="sub_tep_02.gif"] td[width="4"] {width:4px !important;}
+table[background$="sub_tep_02.gif"] td[width="1"] {width:1px !important;}
+table[background$="sub_tep_02.gif"] td[width="50"] {width:50px !important;}
+table[background$="sub_tep_02.gif"] td[width="383"] {width:auto !important;}
+table[background$="sub_tep_02.gif"] td[width="140"] {width:140px !important;}
+table[background$="sub_tep_02.gif"] td[width="66"] {width:95px !important;}
+table[background$="sub_tep_02.gif"] td:nth-child(10)[align="center"] {width:80px !important;}
+/* tbody */
+table[width="703"] tr[height="30"] td[width="45"],
+table[width="703"] td[height="30"] td[width="45"] {width:45px !important;}
+table[width="703"] tr[height="30"] td.G12read,
+table[width="703"] td[height="30"] td.G12read {width:auto !important;}
+table[width="703"] tr[height="30"] td[width="82"],
+table[width="703"] td[height="30"] td[width="82"] {width:80px !important;font-size:12px;}
+table[width="703"] tr[height="30"] td[width="44"],
+table[width="703"] td[height="30"] td[width="44"] {width:50px !important;text-align:left !important;}
+table[width="703"] tr[height="30"] td[width="66"],
+table[width="703"] td[height="30"] td[width="66"] {width:83px !important;}
+table[width="703"] tr[height="30"] td[width="40"],
+table[width="703"] td[height="30"] td[width="40"] {width:80px !important;padding-right:15px;}
+table[width="703"] > tbody > tr[height="30"]:hover {background-color:#f9f9f9;}
+table[width="703"] > tbody > tr > td[height="30"]:hover {background-color:#f9f9f9;}
+table[width="703"] > tbody > tr[height="50"]:hover {background-color:#f9f9f9;}
+
+/* view --------------------- */
+td.G13 > table[style^="table-layout"] {margin:0 !important;}
+table[width="702"] {width:100%;box-sizing:border-box;}
+table[width="702"] td[height="44"] {border-top:1px solid #ccc;border-bottom:1px solid #eee;}
+table[width="702"] > tbody > tr:nth-child(3) > td[background] {padding-top:5px;background:#f8f8f8 !important;border:1px solid #eee; !important;}
+
+/* remove --------------------- */
+td[width="687"] > table:last-child[width="660"] {display:none;}

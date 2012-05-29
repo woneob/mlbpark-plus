@@ -1,0 +1,83 @@
+@charset "utf-8";
+
+/* layout --------------------- */
+table[width="980"]{width:100% !important;margin:15px 0;}
+table[width="980"] > tbody > tr:first-child > td[width="200"] {background:#f7f7f7;border:1px solid #ddd;padding-top:10px;}
+table[width="980"] > tbody > tr:first-child > td[width="21"],
+table[width="980"] > tbody > tr:first-child > td[width="40"]{width:21px !important;}
+table[width="980"] > tbody > tr:first-child > td[width="21"]:before,
+table[width="980"] > tbody > tr:first-child > td[width="40"]:before{content:'';display:block;width:21px;height:1px;}
+table[width="980"] > tbody > tr:first-child > td:last-child {width:auto !important;}
+table[width="980"] > tbody > tr:nth-child(3) {display:none;}
+table[width="759"]{width:100% !important;}
+table[width="700"]{width:100% !important;}
+
+/* remove images --------------------- */
+img[src^="http://image.donga.com/mlbpark/img200807/icon_s"],
+img[src="http://image.donga.com/mlbpark/img2012/main/tit_login.gif"],
+img[src^="http://image.donga.com/mlbpark/img200807/logoin_"],
+img[src="http://image.donga.com/mlbpark/img200807/blank.gif"],
+img[src^="http://image.donga.com/mlbpark/img200807/main_line466_"],
+img[src="http://image.donga.com/mlbpark/img200807/sub_unbg01.gif"]{display:none;}
+td[background="http://image.donga.com/mlbpark/img200807/logoin_03.gif"],
+td[background="http://image.donga.com/mlbpark/img200807/logoin_09.gif"],
+td[background="http://image.donga.com/mlbpark/img200807/main_line466_03.gif"]{background:none !important;}
+
+/* sidebar --------------------- */
+/* login info */
+#preViewQue2 {margin:0 15px 10px;padding:11px 0 0;background-color:#efefef;border:1px solid #e3e3e3;border-bottom-color:#ddd;box-shadow:inset 0 1px 0 #fff;}
+#preViewQue2 .logout .txt {margin-bottom:3px;}
+#preViewQue2 .btn {margin-top:10px;padding:3px 0 2px;background:#e6e6e6;font-size:11px;letter-spacing:-1px;}
+#preViewQue2 .btn a {color:#777;}
+#preViewQue2 .btn strong {font-weight:normal;}
+#preViewQue2 .btn > * {margin:0 2px;}
+/* menu */
+table[width="172"] {margin:0 !important;}
+table[width="172"] br {display:none;}
+table[width="172"] table[width="150"] {margin:0 auto !important;width:160px !important;}
+table[width="172"] table[width="150"] font {display:block;color:#666;border-bottom:1px solid #e3e3e3;}
+table[width="172"] table[width="150"] td a {color:#5a5a5a;}
+
+/* content --------------------- */
+/* layout fix */
+table[width="980"] > tbody > tr:nth-child(2) > td[width="21"],
+table[width="980"] > tbody > tr:nth-child(2) > td[width="270"],
+table[width="980"] > tbody > tr:nth-child(2) > td[width="1"] {display:none;}
+table[width="980"] > tbody > tr:nth-child(2) > td[width="466"]{width:100% !important;}
+/* recent articles */
+table[width="466"] {width:100% !important;margin:10px 0 0 !important;}
+table[width="466"] table[width="466"] {width:100% !important;margin:0 0 0 !important;}
+table[width="466"] table[width="466"] td[width="38"] {padding-right:5px;}
+table[width="450"] {width:100% !important;border-top:1px solid #ddd;border-bottom:1px solid #ddd;}
+table[width="450"] tr {border-bottom:1px solid #eee;}
+table[width="450"] tr:last-child {border:none;}
+table[width="450"] tr:hover {background-color:#f9f9f9;}
+table[width="450"] td:first-child {width:auto !important;padding-left:10px;}
+table[width="450"] td:first-child img {vertical-align:middle;margin-right:5px;}
+table[width="450"] td[width="50"] {width:60px !important;text-align:center;}
+
+/* scrap --------------------- */
+table[width="700"] form + tbody tr table[width="100%"] tr {height:30px !important;border-bottom:1px solid #eee;}
+table[width="700"] form + tbody tr table[width="100%"] tr:hover {background-color:#f9f9f9;}
+table[width="700"] form + tbody tr table[width="100%"] td {vertical-align:middle;}
+table[width="700"] form + tbody tr table[width="100%"] td[width="66"] {width:50px !important;padding-left:10px;}
+table[width="700"] form + tbody tr table[width="100%"] td input[type="checkbox"] {vertical-align:middle;margin-right:3px;}
+table[width="700"] form + tbody tr table[width="100%"] td[width="56"] img {cursor:pointer;}
+
+/* pagination --------------------- */
+table[width="700"] td[width="510"] font > * {margin:0 4px;vertical-align:top;line-height:12px;}
+
+/* message --------------------- */
+div[align="left"] > table:first-child[width="700"] tr:first-child td[width="475"] {width:auto !important;}
+div[align="left"] > table:first-child[width="700"] tr:first-child td[width="475"] img {cursor:pointer;}
+div[align="left"] > table:first-child[width="700"] tr:first-child td[width="212"] {width:200px !important;background:url('http://image.donga.com/mlbpark/img200807/memo_bg.gif') repeat-x 0 100%;}
+div[align="left"] > table:first-child[width="700"] tr:first-child td[width="212"] img {display:none;}
+div[align="left"] > table:first-child[width="700"] tr:first-child td[width="212"] a {display:inline-block;color:#666;}
+div[align="left"] > table:first-child[width="700"] tr:first-child td[width="212"] a:hover {color:#111;}
+div[align="left"] > table:first-child[width="700"] tr:first-child td[width="212"] a:after {display:inline-block;margin-right:2px;padding:8px 10px 4px 24px;border:1px solid #ccc;border-bottom:none;border-radius:3px 3px 0 0;background:#fff url('http://image.donga.com/mlbpark/img200807/menu_icon03.gif') no-repeat 8px 50%;}
+div[align="left"] > table:first-child[width="700"] tr:first-child td[width="212"] a:hover:after {background-color:#f9f9f9;}
+div[align="left"] > table:first-child[width="700"] tr:first-child td[width="212"] a:first-child:after {content:'받은메모함';padding:8px 10px 8px 24px;background-color:#fff !important;font-weight:bold;letter-spacing:-1px;}
+div[align="left"] > table:first-child[width="700"] tr:first-child td[width="212"] a:last-child:after {content:'보낸메모함';}
+div[align="left"] > table:first-child[width="700"] tr:nth-child(2) td[valign="bottom"] > img[src="http://image.donga.com/mlbpark/img200807/memo_bg.gif"] {display:none;}
+div[align="left"] > table:first-child[width="700"] tr:nth-child(2) td[valign="bottom"] {height:4px;background:url('http://image.donga.com/mlbpark/img200807/memo_bg.gif') repeat-x;}
+div[align="left"] > table:first-child[width="700"] td img {vertical-align:middle !important;}

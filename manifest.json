@@ -1,0 +1,97 @@
+{
+	"author": "bbbig",
+	"name": "MLBPARK PLUS",
+	"description": "MLBPARK 크롬 확장프로그램입니다. 큰 사람 되세요",
+	"version": "1.93",
+	"icons": {
+		"16": "images/icon_16.png",
+		"32": "images/icon_32.png",
+		"48": "images/icon_48.png",
+		"128": "images/icon_128.png"
+	},
+	"content_scripts": [
+		{
+			"matches": ["http://mlbpark.donga.com/*"]
+			,"css":["css/common.css"]
+			,"js":["javascripts/jquery-1.7.2.min.js","javascripts/common.js"]
+			,"run_at": "document_start"
+		},
+		{
+			"matches": ["http://mlbpark.donga.com/"]
+			,"css":["css/main.css"]
+			,"js":["javascripts/main.js"]
+			,"run_at": "document_start"
+		},
+		{
+			"matches": [ 
+				"http://mlbpark.donga.com/mbs/articleL.php*",
+				"http://mlbpark.donga.com/mbs/articleV.php*",
+				"http://mlbpark.donga.com/bbs/mlb_today.php*",
+				"http://mlbpark.donga.com/mbs/commentV.php*"
+			]
+			,"run_at":"document_start"
+			,"css":["css/mbs.css"]
+			,"js":["javascripts/mbs.js"]
+		},
+		{
+			"matches": [ 
+				"http://mlbpark.donga.com/bbs/list.php*",
+				"http://mlbpark.donga.com/bbs/view.php*"
+			]
+			,"run_at":"document_start"
+			,"css":["css/bbs.css"]
+		},
+		{
+			"matches": [ 
+				"http://mlbpark.donga.com/mbs/articleW.php*",
+				"http://mlbpark.donga.com/mbs/articleM.php*",
+				"http://mlbpark.donga.com/bbs/write.php*"
+			]
+			,"run_at":"document_start"
+			,"css":["css/write.css"]
+			,"js":["javascripts/write.js"]
+		},
+		{
+			"matches": [ 
+				"http://mlbpark.donga.com/mypage/",
+				"http://mlbpark.donga.com/mypage/my_scrap.php*",
+				"http://mlbpark.donga.com/mypage/my_message.php*",
+				"http://mlbpark.donga.com/mypage/my_emoticon.php*"
+			]
+			,"run_at":"document_start"
+			,"css":["css/mypage.css"]
+		},
+		{
+			"matches": [ 
+				"http://mlbpark.donga.com/mypage/my_bulletin.php*",
+				"http://mlbpark.donga.com/mbs/my_bulletin.php*"
+			]
+			,"run_at":"document_start"
+			,"css":["css/my_bulletin.css"]
+			,"js":["javascripts/my_bulletin.js"]
+		},
+		{
+			"matches": [ 
+				"https://secure.donga.com/membership/real_for_member.php*"
+			]
+			,"run_at":"document_start"
+			,"js":["javascripts/passwd.js"]
+		},
+		{
+			"matches": [
+				"http://www.donga.com/members/login.php*"
+			]
+			,"run_at":"document_start"
+			,"css":["css/login.css"]
+		}
+	],
+	"background_page": "background.html",
+	"permissions": [
+		"webRequest",
+		"webRequestBlocking",
+		"http://*.donga.com/*",
+		"http://*.donga.com:8080/*",
+		"http://210.115.150.117/log/*"
+	],
+	"options_page": "options.html"
+}
