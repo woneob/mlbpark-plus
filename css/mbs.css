@@ -41,6 +41,7 @@ table[width="660"][height="31"] td[width="140"] {width:150px !important;}
 table[width="660"][height="31"] td:nth-child(8)[align="center"]{width:145px;}
 table[width="660"] tr[height="30"] td[width="341"] {width:auto !important;}
 table[width="660"] tr[height="30"] td[width="82"] {width:92px !important;font-size:12px;}
+table[width="660"] tr[height="30"] td[width="82"] a.disabled {text-decoration:none;cursor:default;}
 table[width="660"] tr[height="30"] td:nth-child(5)[align="center"] {width:150px;}
 table[width="660"] tr[height="30"]:hover {background-color:#f9f9f9;}
 table[width="660"] tr td[bgcolor="E6E6E6"] {height:1px !important;}

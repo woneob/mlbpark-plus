@@ -81,7 +81,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 
 				var pathname = window.location.pathname;
 				if(window.location.pathname == "/bbs/mlb_today.php"){
-					$('td[width="82"] font').wrap('<a href="#" onclick="return false;" />');
+					$('td[width="82"] font').wrap('<a href="#" onclick="return false;" class="disabled" />');
 				}
 
 				$(blockUserValue).each(function(i,v){
