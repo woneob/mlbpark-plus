@@ -213,11 +213,11 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 				},
 				success: function(data) {
 					$myArea.html(data);
-				},
-				complete: function() {
 					userBlock();
 					highlightWriter();
 					urlReplace();
+				},
+				complete: function() {
 					replyButton();
 					$('#cmtLoader').stop().animate({'opacity':0},200);
 				}
