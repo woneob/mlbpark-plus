@@ -68,6 +68,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 
 		//component
 		var $myArea = $('#myArea');
+		var $commentContent = $myArea.find('.G12');
 		var $user = $('td[width="18%"].D11 div[id^="nik_"]');
 		var nickname = $user.next().text();
 		//var $userIdSrc = $user.find('li:first-child').attr('onclick');
@@ -150,7 +151,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 			document.head.appendChild(vdoCss);
 		}
 
-		// hilight writer
+		//hilight writer
 		function highlightWriter(){
 			if ($user.length > 0) {
 				$myArea.find('td[width="140"] a:contains("' + nickname +'")').each(function(){
@@ -159,13 +160,25 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 			}
 		}highlightWriter();
 
+		//text URL replacement
+		function urlReplace(){
+			var replacePattern1 = /\s(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+			var replacePattern2 = /\s(^|[^\/])(www\.[\S]+(\b|$))/ig;
+			var replaceTxt1 = ' <a href="$1" target="_blank">$1</a>';
+			var replaceTxt2 = ' <a href="http://$2" target="_blank">$2</a>';
+
+			$commentContent.html(function(i, val) {
+				return val.replace(replacePattern1, replaceTxt1).replace(replacePattern2, replaceTxt2);
+			});
+		}urlReplace();
+
 		//reply button
 		function replyButton(){
 			if ((replyVar === '1') || (!replyVar)) {
 				var btn = '<button type=\"button\" class=\"btn_reply\" title=\"답글 달기\">[답글]</button>';
 				var $textarea = $('textarea[name="line_content"]');
 
-				$myArea.find('.G12').append(btn);
+				$commentContent.append(btn);
 				$('.btn_reply').bind('click',function(){
 					var username = $(this).closest('table').parent().prev().find('a').text();
 					if (!$.trim($textarea.val())){
@@ -205,6 +218,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 				complete: function() {
 					userBlock();
 					highlightWriter();
+					urlReplace();
 					replyButton();
 					$('#cmtLoader').stop().animate({'opacity':0},200);
 				}
