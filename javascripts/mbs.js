@@ -162,7 +162,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 		//text URL replacement
 		function urlReplace(){
 			var replacePattern1 = /\s(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-			var replacePattern2 = /\s(^|[^\/])(www\.[\S]+(\b|$))/ig;
+			var replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/ig;
 			var replaceTxt1 = ' <a href="$1" target="_blank">$1</a>';
 			var replaceTxt2 = ' <a href="http://$2" target="_blank">$2</a>';
 
@@ -215,9 +215,9 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 					$myArea.html(data);
 					userBlock();
 					highlightWriter();
-					urlReplace();
 				},
 				complete: function() {
+					urlReplace();
 					replyButton();
 					$('#cmtLoader').stop().animate({'opacity':0},200);
 				}
