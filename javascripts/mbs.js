@@ -51,7 +51,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 					$elem.each(function(){
 						var orginTxt = $(this).text();
 
-						$(this).text(blockMsg).css('color','#aaaaaa').addClass('blockTitle').attr('title','제목 : ' + orginTxt).bind('click',function(){
+						$(this).text(blockMsg).addClass('blockTitle').attr('title','제목 : ' + orginTxt).bind('click',function(){
 							return confirm("차단된 글을 열람하시겠습니까?");
 						});
 					});

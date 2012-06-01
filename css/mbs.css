@@ -61,7 +61,6 @@ form[name="writeForm"] td[width="56"] a[href^="javascript:startRequest"] {displa
 #btn_cmtLoad:active {border-color:#b8b8b8 #c6c6c6 #c6c6c6 #bcbcbc;box-shadow:none;background-image:-webkit-linear-gradient(bottom, #fff 0, #f0f0f0 2px, #fff 80%,#eee 100%);text-shadow:none;}
 #cmtLoader {opacity:0;position:absolute;margin:6px 0 0 5px;display:inline-block;width:14px;height:14px;background:url("chrome-extension://__MSG_@@extension_id__/images/loader.gif") no-repeat;}
 
-
 /* history */
 #history {margin:0 0 20px;padding:20px 0 5px;}
 #history .historyHead {padding-top:2px;border-top:1px dotted #dfdfdf;border-bottom:1px solid #eee;margin-bottom:4px;}
@@ -104,6 +103,7 @@ form[name="writeForm"] td[width="56"] a[href^="javascript:startRequest"] {displa
 .G12read .ico_game:before {background-position:0 -144px;}
 .G12read .ico_adult:before {background-position:0 -112px;}
 .G12read .ico_warn:before {background-position:0 -48px;}
+.blockTitle {color:#aaa !important;}
 .blockTitle:before {display:none !important;}
 
 /* extra */
