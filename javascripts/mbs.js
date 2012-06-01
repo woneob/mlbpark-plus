@@ -60,7 +60,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 				$(blockValue).each(function(i,v){
 					var $elem = $listLnk.find('a:contains("'+ v +'")');
 					$elem.each(function(){
-						$(this).closest('tr[height="30"]').css('display','none').next().css('display','none');
+						$(this).closest('tr[height="30"]').addClass('displayNone').next().addClass('displayNone');
 					});
 				});
 			}
@@ -89,10 +89,10 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 					var $userCmtNick = $myArea.find('a:contains("' + v + '")');
 
 					$userNick.each(function(){
-						$(this).closest('tr[height="30"]').css('display','none').next().css('display','none');
+						$(this).closest('tr[height="30"]').addClass('displayNone').next().addClass('displayNone');
 					});
 					$userCmtNick.each(function(){
-						$(this).closest('table').closest('tr').css('display','none').next().css('display','none');
+						$(this).closest('table').closest('tr').addClass('displayNone').next().addClass('displayNone');
 					});
 				});
 			}

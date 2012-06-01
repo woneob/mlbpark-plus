@@ -138,6 +138,7 @@ div[id^="nik_"] li {padding:2px 0 !important;}
 div[id^="nik_"] li:hover {color:#111;}
 
 /* remove --------------------- */
+.displayNone {display:none !important;}
 table[width="980"] > tbody > tr > td[width="687"] > table[width="702"][height="19"] {display:none;}
 .ad_left_w, .ad_right_w,
 iframe[src^="http://ar.donga.com/"],
