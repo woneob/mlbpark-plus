@@ -18,15 +18,15 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 			var $links = $listLnk.find('a');
 			var txt = {
 				mobile: /(맛폰)/i,
-				img: /(짤방|JPG|jpg|GIF|gif|JYP|jyp)/i,
+				img: /(짤방|jpg|gif|jyp)/i,
 				question: /(질문|요\?|여\?|죠\?)/i,
-				music: /(브금|BGM|bgm|음악|가수|노래)/i,
-				vs: /(VS|vs)/i,
-				tv: /(SWF|swf|AVI|avi|플짤|영상|FLV|flv)/i,
+				music: /(브금|bgm|음악|가수|노래)/i,
+				vs: /(vs)/i,
+				tv: /(swf|avi|플짤|영상|flv)/i,
 				adult: /(19금|\[19\] |\(19\)|주번나|성진국)/i,
 				warn: /(혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|혐오주의)/i,
 				twitter: /(트윗|트위터)/i,
-				game: /디아|\[스타|프야매|lol|LOL|게임/i
+				game: /디아|\[스타|프야매|lol|게임/i
 			}
 
 			$links.each(function() {
