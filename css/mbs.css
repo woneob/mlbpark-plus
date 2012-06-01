@@ -1,41 +1,41 @@
 @charset "utf-8";
 /* thead */
-table[width="980"] > tbody > tr > td[width="687"] > table[width="702"][height="31"] td[width="4"]{width:4px !important;}
-table[width="980"] > tbody > tr > td[width="687"] > table[width="702"][height="31"] td[width="50"]{width:50px !important;}
-table[width="980"] > tbody > tr > td[width="687"] > table[width="702"][height="31"] td[width="383"]{width:auto !important;}
-table[width="980"] > tbody > tr > td[width="687"] > table[width="702"][height="31"] td[width="140"]{width:140px !important;}
-table[width="980"] > tbody > tr > td[width="687"] > table[width="702"][height="31"] td[width="70"]{width:85px !important;}
-table[width="980"] > tbody > tr > td[width="687"] > table[width="702"][height="31"] td:nth-child(10)[align="center"] {width:66px !important;}
+td[width="687"] > table[width="702"][height="31"] td[width="4"]{width:4px !important;}
+td[width="687"] > table[width="702"][height="31"] td[width="50"]{width:50px !important;}
+td[width="687"] > table[width="702"][height="31"] td[width="383"]{width:auto !important;}
+td[width="687"] > table[width="702"][height="31"] td[width="140"]{width:140px !important;}
+td[width="687"] > table[width="702"][height="31"] td[width="70"]{width:85px !important;}
+td[width="687"] > table[width="702"][height="31"] td:nth-child(10)[align="center"] {width:66px !important;}
 
 /* tbody */
-table[width="980"] > tbody > tr > td[width="687"] > table[width="702"] > tbody > tr[height="30"]:hover {background-color:#f9f9f9;}
-table[width="980"] > tbody > tr > td[width="687"] > table[width="702"] > tbody > tr > td[height="30"]:hover {background-color:#f9f9f9;}
-table[width="980"] > tbody > tr > td[width="687"] > table[width="702"] > tbody > tr[height="30"] > td[align="center"] > table[width="100%"] td[width="45"] {width:50px !important;}
-table[width="980"] > tbody > tr > td[width="687"] > table[width="702"] > tbody > tr > td > table[width="100%"] td[width="383"] {width:auto !important;}
-table[width="980"] > tbody > tr > td[width="687"] > table[width="702"] > tbody > tr > td > table[width="100%"] td[width="82"] {width:80px !important;font-size:12px;}
-table[width="980"] > tbody > tr > td[width="687"] > table[width="702"] > tbody > tr > td > table[width="100%"] td[width="44"]{width:40px !important;}
-table[width="980"] > tbody > tr > td[width="687"] > table[width="702"] > tbody > tr > td > table[width="100%"] td[width="66"]{width:100px !important;}
-table[width="980"] > tbody > tr > td[width="687"] > table[width="702"] > tbody > tr > td > table[width="100%"] td[width="40"]{padding-right:15px !important;width:50px !important;}
+td[width="687"] > table[width="702"] > tbody > tr[height="30"]:hover {background-color:#f9f9f9;}
+td[width="687"] > table[width="702"] > tbody > tr > td[height="30"]:hover {background-color:#f9f9f9;}
+td[width="687"] > table[width="702"] > tbody > tr[height="30"] > td[align="center"] > table[width="100%"] td[width="45"] {width:50px !important;}
+td[width="687"] > table[width="702"] > tbody > tr > td > table[width="100%"] td[width="383"] {width:auto !important;}
+td[width="687"] > table[width="702"] > tbody > tr > td > table[width="100%"] td[width="82"] {width:80px !important;font-size:12px;}
+td[width="687"] > table[width="702"] > tbody > tr > td > table[width="100%"] td[width="44"]{width:40px !important;}
+td[width="687"] > table[width="702"] > tbody > tr > td > table[width="100%"] td[width="66"]{width:100px !important;}
+td[width="687"] > table[width="702"] > tbody > tr > td > table[width="100%"] td[width="40"]{padding-right:15px !important;width:50px !important;}
 
 /* today Best section */
 table[width="660"] {width:100% !important;}
 table[width="660"] > tbody > tr:first-child > td > table[width='466'] td[width='428'] > img {display:none;}
 table[width="660"] > tbody > tr:nth-child(2) > td {height:3px;}
 table[width="660"] > tbody > tr:nth-child(2) > td > img[src^='http://image.donga.com/mlbpark/img200807/main_line660_0'] {display:none;}
-table[width="660"] > tbody > tr:nth-child(3) > td[background] {background:none !important;}
-table[width="660"] > tbody > tr:nth-child(3) > td > table[width='640'] {width:100% !important;border-top:1px solid #ccc;table-layout:fixed;}
-table[width="660"] > tbody > tr:nth-child(3) > td > table[width='640'] td[width='1'] {display:none;}
-table[width="660"] > tbody > tr:nth-child(3) > td > table[width='640'] td[width='214'] {width:33.3333% !important;}
-table[width="660"] > tbody > tr:nth-child(3) > td > table[width='640'] td[width='230'] {width:auto !important;}
-table[width="660"] > tbody > tr:nth-child(3) > td > table[width='640'] td[width='214'] table[width='200'],
-table[width="660"] > tbody > tr:nth-child(3) > td > table[width='640'] td[width='230'] table[width='200'] {background-color:#f7f7f7;border-bottom:1px solid #eee;}
-table[width="660"] > tbody > tr:nth-child(3) > td > table[width='640'] table[width='200']{width:100% !important;}
-table[width="660"] > tbody > tr:nth-child(3) > td > table[width='640'] table[width='200'] > tbody > tr > td {height:24px;vertical-align:middle !important;font-size:12px !important;}
-table[width="660"] > tbody > tr:nth-child(3) > td > table[width='640'] table[width='200'] > tbody > tr > td[width='32'] {padding-right:5px;}
-table[width="660"] > tbody > tr:nth-child(3) > td > table[width='640'] table[width='200'][style^='MARGIN']{table-layout:fixed;margin-top:10px !important;}
-table[width="660"] > tbody > tr:nth-child(3) > td > table[width='640'] table[width='200'][style^='MARGIN'] td[width='190'] {width:auto !important;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
-table[width="660"] > tbody > tr:nth-child(3) > td > table[width='640'] table[width='200'] img[src$='maim_dot01.gif'] {margin-left:5px;}
-table[width="660"] > tbody > tr:nth-child(4) > td > img {display:none;}
+table[width="660"] > tbody > tr:nth-child(3) > td {background:none !important;}
+table[width="660"] > tbody > tr:nth-child(3) table[width='640'] {width:100% !important;border-top:1px solid #ccc;table-layout:fixed;}
+table[width="660"] > tbody > tr:nth-child(3) td[width='1'] {display:none;}
+table[width="660"] > tbody > tr:nth-child(3) td[width='214'] {width:33.3333% !important;}
+table[width="660"] > tbody > tr:nth-child(3) td[width='230'] {width:auto !important;}
+table[width="660"] > tbody > tr:nth-child(3) td[width='214'] table[width='200'],
+table[width="660"] > tbody > tr:nth-child(3) td[width='230'] table[width='200'] {background-color:#f7f7f7;border-bottom:1px solid #eee;}
+table[width="660"] > tbody > tr:nth-child(3) table[width='200']{width:100% !important;}
+table[width="660"] > tbody > tr:nth-child(3) table[width='200'] > tbody > tr > td {height:24px;vertical-align:middle !important;font-size:12px !important;}
+table[width="660"] > tbody > tr:nth-child(3) table[width='200'] > tbody > tr > td[width='32'] {padding-right:5px;}
+table[width="660"] > tbody > tr:nth-child(3) table[width='200'][style^='MARGIN']{table-layout:fixed;margin-top:10px !important;}
+table[width="660"] > tbody > tr:nth-child(3) table[width='200'][style^='MARGIN'] td[width='190'] {width:auto !important;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+table[width="660"] > tbody > tr:nth-child(3) table[width='200'] img[src$='maim_dot01.gif'] {margin-left:5px;}
+table[width="660"] > tbody > tr:nth-child(4) > td img {display:none;}
 table[width="660"][height="31"] td[width="340"] {width:auto !important;}
 table[width="660"][height="31"] td[width="140"] {width:150px !important;}
 table[width="660"][height="31"] td:nth-child(8)[align="center"]{width:145px;}
@@ -44,7 +44,7 @@ table[width="660"] tr[height="30"] td[width="82"] {width:92px !important;font-si
 table[width="660"] tr[height="30"] td[width="82"] a.disabled {text-decoration:none;cursor:default;}
 table[width="660"] tr[height="30"] td:nth-child(5)[align="center"] {width:150px;}
 table[width="660"] tr[height="30"]:hover {background-color:#f9f9f9;}
-table[width="660"] tr td[bgcolor="E6E6E6"] {height:1px !important;}
+table[width="660"] td[bgcolor="E6E6E6"] {height:1px !important;}
 table[width="660"] td[width="510"][height="50"]{padding-top:10px;}
 table[width="660"] td[width="510"][height="50"] td a {margin:0 5px;}
 
