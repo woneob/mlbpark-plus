@@ -8,17 +8,16 @@ td[width="687"] > table[width="660"]{width:100% !important;}
 td[width="673"] {width:100% !important;}
 td[width="673"] > table[width="702"],
 td[width="673"] > table[width="703"]{width:100% !important;}
-
 td.D12darkgray {display:none;}
 img[src="http://image.donga.com/mlbpark/img200807/sub_bod05.gif"] {display:none;}
 /* thead */
-table[background$="sub_tep_02.gif"] td[width="4"] {width:4px !important;}
-table[background$="sub_tep_02.gif"] td[width="1"] {width:1px !important;}
-table[background$="sub_tep_02.gif"] td[width="50"] {width:50px !important;}
-table[background$="sub_tep_02.gif"] td[width="383"] {width:auto !important;}
-table[background$="sub_tep_02.gif"] td[width="140"] {width:140px !important;}
-table[background$="sub_tep_02.gif"] td[width="66"] {width:95px !important;}
-table[background$="sub_tep_02.gif"] td:nth-child(10)[align="center"] {width:80px !important;}
+table[height="31"] td[width="4"] {width:4px !important;}
+table[height="31"] td[width="1"] {width:1px !important;}
+table[height="31"] td[width="50"] {width:50px !important;}
+table[height="31"] td[width="383"] {width:auto !important;}
+table[height="31"] td[width="140"] {width:140px !important;}
+table[height="31"] td[width="66"] {width:95px !important;}
+table[height="31"] td:nth-child(10)[align="center"] {width:80px !important;}
 /* tbody */
 table[width="703"] tr[height="30"] td[width="45"],
 table[width="703"] td[height="30"] td[width="45"] {width:45px !important;}
