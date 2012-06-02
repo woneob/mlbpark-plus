@@ -20,7 +20,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 				mobile: /(맛폰)/i,
 				img: /(짤방|jpg|gif|jyp)/i,
 				question: /(질문|요\?|여\?|죠\?)/i,
-				music: /(브금|bgm|음악|가수|노래)/i,
+				music: /(브금|bgm|음악|가수|노래|뮤직)/i,
 				vs: /(vs)/i,
 				tv: /(swf|avi|플짤|영상|flv)/i,
 				adult: /(19금|\[19\] |\(19\)|주번나|성진국)/i,
