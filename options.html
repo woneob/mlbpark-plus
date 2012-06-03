@@ -51,6 +51,7 @@ function reset(){
 	document.getElementById('blockUserInput').value = '';
 	document.getElementById('userHistory').checked = false;
 	document.getElementById('reply').checked = true;
+	document.getElementById('userCommentView').checked = true;
 	document.getElementById('video').checked = true;
 	document.getElementById('passwd').checked = false;
 	document.getElementById('width').checked = false;
@@ -118,6 +119,12 @@ function restore(){
 		document.getElementById('reply').checked = false;
 	}
 
+	if (localStorage['userCommentView'] == 1 || localStorage['userCommentView'] == null) {
+		document.getElementById('userCommentView').checked = true;
+	} else {
+		document.getElementById('userCommentView').checked = false;
+	}
+
 	if (localStorage['video'] == 1 || localStorage['video'] == null) {
 		document.getElementById('video').checked = true;
 	} else {
@@ -178,6 +185,9 @@ function save(){
 
 	if (document.getElementById("reply").checked == true) {localStorage["reply"] = 1;}
 	else {localStorage["reply"] = 0;}
+
+	if (document.getElementById("userCommentView").checked == true) {localStorage["userCommentView"] = 1;}
+	else {localStorage["userCommentView"] = 0;}
 
 	if (document.getElementById("video").checked == true) {localStorage["video"] = 1;}
 	else {localStorage["video"] = 0;}
@@ -303,6 +313,12 @@ $(function(){
 				<label for="reply">답글 달기 버튼 사용</label>
 				<span>댓글에 답글 버튼을 노출하고 버튼 클릭 시 해당 댓글의 작성자 닉네임을 댓글 입력창에 자동 입력합니다.</span>
 				<span>MLB타운, 한국야구타운, BULLPEN, TODAY베스트 페이지에만 적용됩니다.</span>
+			</div>
+			<div class="row">
+				<input type="checkbox" id="userCommentView" checked="checked" />
+				<label for="userCommentView">댓글 모아보기 사용</label>
+				<span>댓글 목록 중에서 특정 사용자의 댓글들만 모아서 볼 수 있습니다.</span>
+				<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
 			</div>
 			<div class="row">
 				<input type="checkbox" id="video" checked="checked" />
