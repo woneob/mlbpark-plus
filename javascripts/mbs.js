@@ -232,9 +232,11 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 		function viewUserComment(){
 			if ((userCommentViewVar === '1') || (!userCommentViewVar)) {
 				var viewCmt = '<button type="button" class="btn_userCmt" title="이 글에 단 댓글 보기">?</button>';
-				$myArea.find('a[title=" 에게 메모 보내기"]').each(function(){
-					$(this).after(viewCmt);
-				});
+				if(window.location.pathname !== "/mbs/commentV.php"){
+					$myArea.find('a[title=" 에게 메모 보내기"]').each(function(){
+						$(this).after(viewCmt);
+					});
+				}
 
 				var $btn_userCmt = $('.btn_userCmt');
 				$('.btn_userCmt').bind('click',function(){
