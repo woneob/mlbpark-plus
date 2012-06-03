@@ -80,7 +80,6 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 			if (blockUserVar === '1' ) {
 				var blockUserValue = blockUserInputVar.split(',');
 
-				var pathname = window.location.pathname;
 				if(window.location.pathname == "/bbs/mlb_today.php"){
 					$('td[width="82"] font').wrap('<a href="#" onclick="return false;" class="disabled" />');
 				}
