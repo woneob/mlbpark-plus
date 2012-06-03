@@ -64,7 +64,8 @@
 		{
 			"matches": [ 
 				"http://mlbpark.donga.com/mypage/my_bulletin.php*",
-				"http://mlbpark.donga.com/mbs/my_bulletin.php*"
+				"http://mlbpark.donga.com/mbs/my_bulletin.php*",
+				"http://mlbpark.donga.com/mypage/my_send_message.php*"
 			]
 			,"run_at":"document_start"
 			,"css":["css/my_bulletin.css"]
