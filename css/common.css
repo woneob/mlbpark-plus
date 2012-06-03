@@ -94,7 +94,7 @@ table[width="55"] td[background$="sub_icon_bg01.gif"] {padding:3px 0 6px;height:
 #myArea table[width="97%"] td[width="140"] a {font:12px Dotum, '돋움', sans-serif;}
 #myArea table[width="97%"] td[width="140"] img {margin-right:3px;vertical-align:middle;}
 #myArea table[width="97%"] td.G12 * {max-width:100%;}
-#myArea table[width="97%"] td.G12 img {margin:0 !important;height:auto !important;}
+#myArea table[width="97%"] td.G12 img {width:auto !important;margin:0 !important;height:auto !important;}
 #myArea .me {font-weight:bold !important;color:#003567;background:rgba(0,34,65,.08);padding:1px 2px;border:1px solid rgba(0,0,0,.1);border-radius:3px;vertical-align:middle;}
 #myArea .me:hover {text-decoration:none;color:#001222;}
 
