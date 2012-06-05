@@ -19,7 +19,8 @@ td[width="687"] > table[width="702"] td[width="40"] {padding-right:15px !importa
 
 /* today Best section */
 table[width="660"] {width:100% !important;}
-table[width="660"] > tbody > tr:first-child {display:none;}
+table[width="660"] > tbody > tr:first-child img[src="http://image.donga.com/mlbpark/img200807/icon_s2.gif"],
+table[width="660"] > tbody > tr:first-child img[src="http://image.donga.com/mlbpark/img200807/main_tai_05b.gif"] {display:none;}
 table[width="660"] > tbody > tr:nth-child(2) img[src="http://image.donga.com/mlbpark/img200807/main_line660_01.gif"] {display:none;}
 table[width="660"] > tbody > tr:nth-child(3) > td {background:none !important;}
 table[width="660"] > tbody > tr:nth-child(3) table[width='640'] {width:100% !important;border-top:1px solid #ccc;table-layout:fixed;}
