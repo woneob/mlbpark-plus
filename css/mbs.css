@@ -62,7 +62,7 @@ form[name="writeForm"] td[width="56"] a[href^="javascript:startRequest"] {displa
 #cmtLoader {opacity:0;position:absolute;margin:6px 0 0 5px;display:inline-block;width:14px;height:14px;background:url("chrome-extension://__MSG_@@extension_id__/images/loader.gif") no-repeat;}
 
 /* history */
-#history {clear:both;margin:0 0 20px;padding:20px 0 5px;}
+#history {clear:both;margin:0 0 10px;padding:20px 0 5px;}
 #history .historyHead {padding-top:2px;border-top:1px dotted #dfdfdf;border-bottom:1px solid #eee;margin-bottom:4px;}
 #history .historyHead h3 {display:inline-block;margin-right:4px;font-weight:normal !important;letter-spacing:-1px;}
 #history .historyHead h3 span {font-weight:bold !important;letter-spacing:0;}
