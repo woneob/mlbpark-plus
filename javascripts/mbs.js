@@ -41,6 +41,10 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 			});
 		}
 
+		$.expr[':'].Contains = function(a,i,m){
+			return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
+		};
+
 		//title block
 		if (blockVar === '1' ) {
 			var blockValue = response.blockInput.split(/[\s,]+/);
@@ -48,7 +52,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 			if (blockTypeVar == '1' ) {
 				$(blockValue).each(function(i,v){
 					var blockMsg = '설정에 의해 차단된 글 입니다';
-					var $elem = $listLnk.find('a:contains("'+ v +'")');
+					var $elem = $listLnk.find('a:Contains("'+ v +'")');
 					$elem.each(function(){
 						var orginTxt = $(this).text();
 
@@ -59,7 +63,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 				});
 			} else {
 				$(blockValue).each(function(i,v){
-					var $elem = $listLnk.find('a:contains("'+ v +'")');
+					var $elem = $listLnk.find('a:Contains("'+ v +'")');
 					$elem.each(function(){
 						$(this).closest('tr[height="30"]').addClass('displayNone').next().addClass('displayNone');
 					});
@@ -103,7 +107,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 			var cobTxt = '<div id=\"warnBtn\"><span>댓글에 COB가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
 			var soapTxt = '<div id=\"warnBtn\"><span>댓글에 비누가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
 
-			if (($myArea.find('.G12:contains("COB")').length > 0) || ($myArea.find('.G12:contains("cob")').length > 0))  {
+			if ($myArea.find('.G12:Contains("COB")').length > 0)  {
 				$article.css('display','none').before(cobTxt);
 			} else if ($myArea.find('.G12:contains("비누")').length > 0) {
 				$article.css('display','none').before(soapTxt);
