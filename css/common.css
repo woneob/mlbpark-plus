@@ -102,7 +102,7 @@ table[width="55"] td[background$="sub_icon_bg01.gif"] {padding:3px 0 6px;height:
 form[name="writeForm"] > table {width:100% !important;margin:10px 0 20px !important;}
 form[name="writeForm"] table[width="93%"]{width:100% !important;}
 form[name="writeForm"] td[width="578"] {width:auto !important;padding-left:154px;text-align:right;}
-form[name="writeForm"] td[width="578"] textarea {box-sizing:border-box;width:100%;padding:10px !important;resize:vertical;}
+form[name="writeForm"] td[width="578"] textarea {box-sizing:border-box;width:100%;padding:10px !important;font-size:12px;resize:vertical;}
 form[name="writeForm"] td[width="56"] {width:80px !important;text-align:center;}
 
 /* pagination --------------------- */
