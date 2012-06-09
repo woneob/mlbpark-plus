@@ -71,13 +71,19 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 			}
 		}
 
+
+
 		//component
 		var $myArea = $('#myArea');
 		var $user = $('td[width="18%"].D11 div[id^="nik_"]');
 		var nickname = $user.next().text();
-		//var $userIdSrc = $user.find('li:first-child').attr('onclick');
-		//var userId = $userIdSrc.match(/id=([^&]+)\'/)[1];
 		var $article = $('.G13 > div[align="justify"]');
+
+		if(window.location.pathname == "/mbs/articleV.php"){
+			var $userIdSrc = $user.find('li:first-child').attr('onclick');
+			var userId = $userIdSrc.match(/id=([^&]+)\'/)[1];
+			$user.next().after('<span class="userIdVal">(' + userId + ')</span>');
+		}
 
 		//user block
 		function userBlock(){
@@ -124,7 +130,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 			var $userIdR = $user.find('li').last().attr('onclick');
 			if ($userIdR){
 				var userId = $userIdR.match(/mbsUid=([^&]+)\'\,\'550/)[1];
-				var historyBox ='<div id="history">\n' + '	<div class="historyHead">\n' + '		<h3><span>' + nickname + '</span> 님의 최근 글</h3>\n' + '		<button type="button" onclick="MlbNewWindow2(\'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId +'\',\'550\',\'500\')">[더 보기]</button>\n' + '	</div>\n' + '	<div id="historyLoading">\n' + '		<div><span class="stick1"></span><span class="stick2"></span><span class="stick3"></span></div>\n' + '	</div>\n' + '	<div id="historyList">\n' + '	</div>\n' + '</div>\n';
+				var historyBox ='<div id="history"><div class="historyHead"><h3><span>'+nickname+'<span>('+userId+')</span></span> 님의 최근 글</h3><button type="button" onclick="MlbNewWindow2(\'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId +'\',\'550\',\'500\')">[더 보기]</button>\n' + '	</div>\n' + '	<div id="historyLoading">\n' + '		<div><span class="stick1"></span><span class="stick2"></span><span class="stick3"></span></div></div><div id="historyList"></div></div>';
 
 				$article.after(historyBox);
 				$.get('http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId, function(response){
