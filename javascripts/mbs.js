@@ -117,16 +117,11 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 			});
 		}
 
+		//add userId
 		if(window.location.pathname == "/mbs/articleV.php"){
-			//add userId
 			var $userIdSrc = $user.find('li:first-child').attr('onclick');
 			var userId = $userIdSrc.match(/id=([^&]+)\'/)[1];
 			$user.next().after('<span class="userIdVal">(' + userId + ')</span>');
-
-			//IP link
-			var $ipElem = $('.D11[width="46%"]').find('font[color="999999"]');
-			var ipAddr = $ipElem.text();
-			$ipElem.html('<a href="https://www.google.co.kr/#&newwindow=1&safe=off&site=&source=hp&q=site:mlbpark.donga.com+%22'+ipAddr+'%22&fp=1" target="_blank" title="IP '+ipAddr+'를 구글에서 검색하기">'+ipAddr+'</a>');
 		}
 
 		//user history
