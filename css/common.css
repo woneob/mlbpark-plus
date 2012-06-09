@@ -97,6 +97,8 @@ table[width="55"] td[background$="sub_icon_bg01.gif"] {padding:3px 0 6px;height:
 #myArea table[width="97%"] td.G12 img {width:auto !important;margin:0 !important;height:auto !important;}
 #myArea .me {font-weight:bold !important;color:#003567;background:rgba(0,34,65,.08);padding:1px 2px;border:1px solid rgba(0,0,0,.1);border-radius:3px;vertical-align:middle;}
 #myArea .me:hover {text-decoration:none;color:#001222;}
+#myArea .D11[width="110"] {width:110px !important;padding-left:20px;}
+#myArea .D11[width="110"] font {margin:0;}
 
 /* comment form */
 form[name="writeForm"] > table {width:100% !important;margin:10px 0 20px !important;}
