@@ -42,6 +42,7 @@ footer a:hover {color:#666;text-decoration:underline;}
 <script>
 function reset(){
 	document.getElementById('titIcon').checked = true ;
+	document.getElementById('team').checked = true ;
 	document.getElementById('blind').checked = true;
 	document.getElementById('block').checked = false;
 	document.getElementById('blockInfo').style.display = 'none';
@@ -65,6 +66,12 @@ function restore(){
 		document.getElementById('titIcon').checked = true;
 	} else {
 		document.getElementById('titIcon').checked = false;
+	}
+
+	if (localStorage['team'] == 1 || localStorage['team'] == null) {
+		document.getElementById('team').checked = true;
+	} else {
+		document.getElementById('team').checked = false;
 	}
 
 	if (localStorage['blind'] == 1 || localStorage['blind'] == null) {
@@ -159,6 +166,9 @@ function restore(){
 function save(){
 	if (document.getElementById("titIcon").checked == true) {localStorage["titIcon"] = 1;}
 	else {localStorage["titIcon"] = 0;}
+
+	if (document.getElementById("team").checked == true) {localStorage["team"] = 1;}
+	else {localStorage["team"] = 0;}
 
 	if (document.getElementById("blind").checked == true) {localStorage["blind"] = 1;}
 	else {localStorage["blind"] = 0;}
@@ -265,6 +275,12 @@ $(function(){
 				<label for="titIcon">제목 아이콘 사용</label>
 				<span>게시물 목록의 제목 중 지정된 키워드를 포함한 제목 앞에 아이콘을 표시합니다.</span>
 				<span>MLB타운, 한국야구타운, BULLPEN, TODAY베스트 페이지에만 적용됩니다.</span>
+			</div>
+			<div class="row">
+				<input type="checkbox" id="team" checked="checked" />
+				<label for="team">팀 아이콘 사용</label>
+				<span>제목 말머리에 프로야구 팀이 입력되있으면 해당 팀 아이콘을 제목 앞에 표시합니다.</span>
+				<span>한국야구타운 페이지에만 적용됩니다.</span>
 			</div>
 			<div class="row">
 				<input type="checkbox" id="blind" checked="checked" /> 

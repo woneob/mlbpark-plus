@@ -1,5 +1,6 @@
 chrome.extension.sendRequest({action:'mbs'}, function(response) {
 	var titIconVar = response.titIcon;
+	teamVar = response.team;
 	blockVar = response.block;
 	blockInputVar = response.blockInput;
 	blockTypeVar = response.blockType;
@@ -39,6 +40,35 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 					}
 				}
 			});
+		}
+
+		//team
+		if ((teamVar == '1' ) || (!teamVar)) {
+			if (window.location.search.indexOf('mbsC=kbotown') > -1) {
+				var $links = $listLnk.children('a');
+				var team = {
+					kia: /(\[기아\]\s?|\[kia\]\s?)/i,
+					nexen: /(\[넥센\]\s?)/i,
+					doosan: /(\[두산\]\s?)/i,
+					lotte: /(\[롯데\]\s?)/i,
+					samsung: /(\[삼성\]\s?)/i,
+					sk: /(\[sk\]\s?)/i,
+					lg: /(\[엘지\]\s?|\[lg\]\s?)/i,
+					hanwha: /(\[한화\]\s?)/i
+				}
+				$listLnk.addClass('teamTxt');
+				$links.each(function() {
+					var t = $(this).text();
+					for (var item in team) {
+						var re = team[item];
+						if (re.test(t)) {
+							var rep = t.replace(re,'');
+							$(this).text(rep).before('<em class="team_'+item+'"></em>');
+							return;
+						}
+					}
+				});
+			}
 		}
 
 		$.expr[':'].Contains = function(a,i,m){
