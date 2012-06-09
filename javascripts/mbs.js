@@ -71,8 +71,6 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 			}
 		}
 
-
-
 		//component
 		var $myArea = $('#myArea');
 		var $user = $('td[width="18%"].D11 div[id^="nik_"]');
@@ -211,14 +209,13 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 		//comment refresh
 		$myArea.after('<div id="commentRefresh"><button type="button" id="btn_cmtLoad">최신 댓글 불러오기</button><span id="cmtLoader"></span>');
 
-		var $writeForm = $('form[name="writeForm"]');
-		mbsC = $writeForm.find('input[name="mbsC"]').val();
-		mbsIdx = $writeForm.find('input[name="mbsIdx"]').val();
-		cpage = $writeForm.find('input[name="cpage"]').val();
-		if ($writeForm.find('input[name="wday"]').length > 0){
-			wday = $writeForm.find('input[name="wday"]').val();
+		var mbsC = $('input[name="mbsC"]').val();
+		var mbsIdx = $('input[name="mbsIdx"]').val();
+		var cpage = $('input[name="cpage"]').val();
+		if ($('input[name="wday"]').length > 0){
+			var wday = $('input[name="wday"]').val();
 		} else {
-			wday = $writeForm.find('input[name="co_day"]').val();
+			var wday = $('input[name="co_day"]').val();
 		}
 
 		$('#btn_cmtLoad').bind('click',function(){
