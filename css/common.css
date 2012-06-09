@@ -86,7 +86,7 @@ table[width="55"] td[background$="sub_icon_bg01.gif"] {padding:3px 0 6px;height:
 /* comment list */
 #myArea {border-top:1px solid #ccc;}
 #myArea td[bgcolor="B8B8B8"] {display:none;}
-#myArea > table[width="702"] {width:100% !important;}
+#myArea > table[width="702"] {width:100% !important;margin:0 !important;}
 #myArea table[width="97%"] {min-width:580px;}
 #myArea table[width="97%"] tr .btn_reply {visibility:hidden;vertical-align:-1px;background:transparent url("chrome-extension://__MSG_@@extension_id__/images/btn_reply.png") no-repeat 0 0;width:28px;height:12px;overflow:hidden;cursor:pointer;border:none;text-indent:-9999px;}
 #myArea table[width="97%"] tr .btn_reply:hover {background-position:0 -12px;}
