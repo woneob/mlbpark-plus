@@ -63,10 +63,26 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 						var re = team[item];
 						if (re.test(t)) {
 							var rep = t.replace(re,'');
-							$(this).text(rep).before('<em class="team_'+item+'"></em>');
+							$(this).text(rep).before('<em data-team="'+item+'" class="team"></em>');
 							return;
 						}
 					}
+				});
+
+				$('.team').bind('click',function(){
+					var dataTeam = this.getAttribute('data-team');
+					var searchUrl = '/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=';
+					var searchTeam = {
+						kia: searchUrl + 'kia',
+						nexen: searchUrl + '%B3%D8%BC%BE',
+						doosan: searchUrl + '%B5%CE%BB%EA',
+						lotte: searchUrl + '%B7%D4%B5%A5',
+						samsung: searchUrl + '%BB%EF%BC%BA',
+						sk: searchUrl + 'sk',
+						lg: searchUrl + 'lg',
+						hanwha: searchUrl + '%C7%D1%C8%AD'
+					}
+					document.location.href = searchTeam[dataTeam];
 				});
 			}
 		}
