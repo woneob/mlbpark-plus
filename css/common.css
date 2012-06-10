@@ -45,18 +45,18 @@ body {padding:0 !important;}
 #navi .s_navi12 a:before {width:49px;background-position:-453px 0;}
 #navi .s_navi13 a:before {width:53px;background-position:-502px 0;}
 #navi .s_navi14 a:before {width:89px;background-position:-555px 0;}
-#navi .s_navi1 a:hover:before, #navi .s_navi1 a.on:before {background-position:0 -18px;}
-#navi .s_navi2 a:hover:before, #navi .s_navi2 a.on:before {background-position:-16px -18px;}
-#navi .s_navi3 a:hover:before, #navi .s_navi3 a.on:before {background-position:-71px -18px;}
-#navi .s_navi4 a:hover:before, #navi .s_navi4 a.on:before {background-position:-150px -18px;}
-#navi .s_navi5 a:hover:before, #navi .s_navi5 a.on:before {background-position:-213px -18px;}
-#navi .s_navi6 a:hover:before, #navi .s_navi6 a.on:before {background-position:-242px -18px;}
-#navi .s_navi8 a:hover:before, #navi .s_navi8 a.on:before {background-position:-284px -18px;}
-#navi .s_navi10 a:hover:before, #navi .s_navi10 a.on:before {background-position:-350px -18px;}
-#navi .s_navi11 a:hover:before, #navi .s_navi11 a.on:before {background-position:-403px -18px;}
-#navi .s_navi12 a:hover:before, #navi .s_navi12 a.on:before {background-position:-453px -18px;}
-#navi .s_navi13 a:hover:before, #navi .s_navi13 a.on:before {background-position:-502px -18px;}
-#navi .s_navi14 a:hover:before, #navi .s_navi14 a.on:before {background-position:-555px -18px;}
+#navi .s_navi1 a:hover:before, #navi .s_navi1 a.on:before {background-position:0 -20px;}
+#navi .s_navi2 a:hover:before, #navi .s_navi2 a.on:before {background-position:-16px -20px;}
+#navi .s_navi3 a:hover:before, #navi .s_navi3 a.on:before {background-position:-71px -20px;}
+#navi .s_navi4 a:hover:before, #navi .s_navi4 a.on:before {background-position:-150px -20px;}
+#navi .s_navi5 a:hover:before, #navi .s_navi5 a.on:before {background-position:-213px -20px;}
+#navi .s_navi6 a:hover:before, #navi .s_navi6 a.on:before {background-position:-242px -20px;}
+#navi .s_navi8 a:hover:before, #navi .s_navi8 a.on:before {background-position:-284px -20px;}
+#navi .s_navi10 a:hover:before, #navi .s_navi10 a.on:before {background-position:-350px -20px;}
+#navi .s_navi11 a:hover:before, #navi .s_navi11 a.on:before {background-position:-403px -20px;}
+#navi .s_navi12 a:hover:before, #navi .s_navi12 a.on:before {background-position:-453px -20px;}
+#navi .s_navi13 a:hover:before, #navi .s_navi13 a.on:before {background-position:-502px -20px;}
+#navi .s_navi14 a:hover:before, #navi .s_navi14 a.on:before {background-position:-555px -20px;}
 
 /* remove sidebar */
 table[width="980"] > tbody > tr > td[width="270"] {display:none;}
