@@ -5,7 +5,7 @@ td[width="687"] > table[height="31"] td[width="50"]{width:50px !important;}
 td[width="687"] > table[height="31"] td[width="383"]{width:auto !important;}
 td[width="687"] > table[height="31"] td[width="140"]{width:140px !important;}
 td[width="687"] > table[height="31"] td[width="70"]{width:85px !important;}
-td[width="687"] > table[height="31"] td:nth-child(10)[align="center"] {width:66px !important;}
+td[width="687"] > table[height="31"] td:nth-child(10)[align="center"] {width:60px !important;}
 
 /* tbody */
 td[width="687"] > table[width="702"] tr[height="30"]:hover {background-color:#f9f9f9;}
@@ -15,7 +15,7 @@ td[width="687"] > table[width="702"] td[width="383"] {width:auto !important;}
 td[width="687"] > table[width="702"] td[width="82"] {width:80px !important;font-size:12px;}
 td[width="687"] > table[width="702"] td[width="44"] {width:40px !important;}
 td[width="687"] > table[width="702"] td[width="66"] {width:100px !important;}
-td[width="687"] > table[width="702"] td[width="40"] {padding-right:15px !important;width:50px !important;}
+td[width="687"] > table[width="702"] td[width="40"] {padding-right:15px !important;width:40px !important;}
 table[width="99%"] td[width="82%"] {width:75% !important;}
 table[width="99%"] td[width="18%"] {width:25% !important;}
 table[width="99%"] td[width="18%"] .userIdVal {font-weight:normal;}
