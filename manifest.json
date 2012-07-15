@@ -17,6 +17,13 @@
 			,"run_at": "document_start"
 		},
 		{
+			"matches": ["http://mlbpark.donga.com/*"]
+			,"exclude_matches":["http://mlbpark.donga.com/my*"]
+			,"js":["javascripts/common_idle.js"]
+			,"run_at": "document_idle"
+
+		},
+		{
 			"matches": ["http://mlbpark.donga.com/"]
 			,"css":["css/main.css"]
 			,"js":["javascripts/main.js"]
