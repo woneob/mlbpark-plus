@@ -34,10 +34,16 @@
 						'	<p>'+text+'</p>\n'+
 						'	<div>\n'+
 						'		<a href="http://mlbpark.donga.com/mypage/my_message.php">쪽지함 가기</a>\n'+
-						'		<a href="#">닫기</a>\n'+
+						'		<a id="toasterClose" href="#">닫기</a>\n'+
 						'	</div>\n'+
 						'</div>\n'
 					);
+					$('#toasterClose').bind('click',function(){
+						$('#memoAlarm').fadeOut(300,function(){
+							$(this).remove();
+						});
+						return false;
+					});
 				}
 			}
 		});
