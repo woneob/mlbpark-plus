@@ -97,7 +97,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 
 			if (blockTypeVar == '1' ) {
 				$(blockValue).each(function(i,v){
-					var blockMsg = '설정에 의해 차단된 글 입니다';
+					var blockMsg = '차단 키워드('+ v +')가 포함된 글 입니다';
 					var $elem = $listLnk.find('a:Contains("'+ v +'")');
 					$elem.each(function(){
 						var orginTxt = $(this).text();
