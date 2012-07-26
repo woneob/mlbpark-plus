@@ -7,7 +7,7 @@ chrome.extension.sendRequest({action:'imageSearch'}, function(response) {
 		var $article = $('.G13 > div[align="justify"]');
 		$contentImg = $article.find('img');
 
-		$(document).ready(function() {
+		$(window).load(function() {
 			$contentImg.each(function(){
 				var src = $(this).attr('src');
 				var pos = $(this).position();
