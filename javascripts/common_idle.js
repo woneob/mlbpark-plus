@@ -1,7 +1,7 @@
 chrome.extension.sendRequest({action:'imageSearch'}, function(response) {
 	var imageSearchVar = response.imageSearch;
 
-	if (imageSearchVar === '1') {
+	if ((imageSearchVar === '1') || (!imageSearchVar)) {
 		//google search by image
 		var $container = $('#container');
 		var $article = $('.G13 > div[align="justify"]');
