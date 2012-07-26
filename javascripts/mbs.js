@@ -126,7 +126,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 		//user block
 		function userBlock(){
 			if (blockUserVar === '1' ) {
-				var blockUserValue = blockUserInputVar.split(',');
+				var blockUserValue = blockUserInputVar.replace(/\n/g, '').split(',');
 
 				if(window.location.pathname == "/bbs/mlb_today.php"){
 					$('td[width="82"] font').wrap('<a href="#" onclick="return false;" class="disabled" />');

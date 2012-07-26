@@ -18,12 +18,13 @@ article {padding:10px 15px;border-width:1px;border-style:solid;border-color:#e6e
 .row {position:relative;padding:8px 0 8px 30px;letter-spacing:-1px;}
 .row input[type="checkbox"] {position:absolute;left:7px;top:10px;margin:0;}
 .row input[type="text"] {width:300px;font:12px Dotum, '돋움', sans-serif;color:#444;padding:3px;}
+.row textarea {width:452px;height:50px;border-color:#ccc;resize:vertical;font:12px/1.4 Dotum, '돋움', sans-serif;color:#444;padding:3px;}
 .row label {display:inline-block;font-weight:bold;}
-.row span {display:block;font-size:11px;color:#888;letter-spacing:-1px;}
+.row span {display:block;font-size:11px;line-height:1.6;color:#888;letter-spacing:-1px;}
 #widthVal {width:300px;}
 #slideCurrent {letter-spacing:0;vertical-align:7px;}
 #slideCurrent:after {content:' px';color:#888;}
-.toggleBox {margin-top:5px;background:#f1f1f1;border:1px solid #e8e8e8;padding:5px;}
+.toggleBox {margin-top:5px;background:#f1f1f1;border:1px solid #e1e1e1;padding:5px;}
 #blockInfo .blockType {padding:8px 10px 0;}
 #blockInfo p {margin:0;padding:2px 0;}
 #blockInfo p label {font-weight:normal;vertical-align:-3px;}
@@ -304,17 +305,18 @@ $(function(){
 				<span>목록 제목에 지정된 키워드가 있을 경우 해당 제목을 노출시키지 않거나 무시하도록 도와줍니다.</span>
 				<span>MLB타운, 한국야구타운, BULLPEN, TODAY베스트 페이지의 게시물 목록에만 적용됩니다.</span>
 				<div id="blockInfo" class="toggleBox">
-					<span><input type="text" id="blockInput" placeholder="차단 키워드 입력" /></span>
+					<textarea id="blockInput" rows="3" cols="40" placeholder="차단 키워드 입력"></textarea>
 					<span>* 키워드를 쉼표로 구분해서 입력합니다. 예) 여자친구,소개팅</span>
 					<span>* 알파벳 키워드는 대, 소문자를 구분하지 않고 적용됩니다.</span>
+					<span>* 차단 키워드 수가 많을 수록 성능이 저하될 수 있으니 유의해 주시기 바랍니다.</span>
 					<div class="blockType">
 						<p>
 							<input type="radio" id="blockType_1" name="blockType" value="1" />
-							<label for="blockType_1">제목을 차단 문구로 변경하여 스스로 스킵하기</label>
+							<label for="blockType_1">제목을 <strong>차단 문구로 변경</strong>하여 스스로 스킵하기</label>
 						</p>
 						<p>
 							<input type="radio" id="blockType_2" name="blockType" value="2" />
-							<label for="blockType_2">목록에서 제거하여 노출시키지 않기</label>
+							<label for="blockType_2">목록에서 <strong>제거</strong>하여 노출시키지 않기</label>
 						</p>
 					</div>
 				</div>
@@ -325,8 +327,9 @@ $(function(){
 				<span>목록과 댓글에서 지정된 닉네임 사용자의 글을 노출시키지 않습니다.</span>
 				<span>MLB타운, 한국야구타운, BULLPEN, TODAY베스트 페이지의 게시물 목록, 댓글에만 적용됩니다.</span>
 				<div id="blockUserInfo" class="toggleBox">
-					<span><input type="text" id="blockUserInput" placeholder="차단 닉네임 입력" /></span>
+					<textarea rows="3" cols="40" id="blockUserInput" placeholder="차단 닉네임 입력"></textarea>
 					<span>* 닉네임을 <strong>공백 없이 쉼표</strong>로 구분해서 입력합니다. 예) 사용자,</span>
+					<span>* 차단 닉네임 수가 많을 수록 성능이 저하될 수 있으니 유의해 주시기 바랍니다.</span>
 				</div>
 			</div>
 			<div class="row">
