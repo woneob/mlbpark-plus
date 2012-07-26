@@ -54,6 +54,7 @@ function reset(){
 	document.getElementById('reply').checked = true;
 	document.getElementById('userCommentView').checked = true;
 	document.getElementById('video').checked = true;
+	document.getElementById('imageSearch').checked = true;
 	document.getElementById('passwd').checked = false;
 	document.getElementById('width').checked = false;
 	document.getElementById('widthVal').value = '858';
@@ -138,6 +139,12 @@ function restore(){
 		document.getElementById('video').checked = false;
 	}
 
+	if (localStorage['imageSearch'] == 1 || localStorage['imageSearch'] == null) {
+		document.getElementById('imageSearch').checked = true;
+	} else {
+		document.getElementById('imageSearch').checked = false;
+	}
+
 	if (localStorage['passwd'] == 1) {
 		document.getElementById('passwd').checked = true;
 	} else {
@@ -201,6 +208,9 @@ function save(){
 
 	if (document.getElementById("video").checked == true) {localStorage["video"] = 1;}
 	else {localStorage["video"] = 0;}
+
+	if (document.getElementById("imageSearch").checked == true) {localStorage["imageSearch"] = 1;}
+	else {localStorage["imageSearch"] = 0;}
 
 	if (document.getElementById("passwd").checked == true) {localStorage["passwd"] = 1;}
 	else {localStorage["passwd"] = 0;}
@@ -341,6 +351,12 @@ $(function(){
 				<input type="checkbox" id="video" checked="checked" />
 				<label for="video">동영상 사이즈 확장</label>
 				<span>동영상 사이즈를 본문 크기에 맞게 확장합니다.</span>
+				<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
+			</div>
+			<div class="row">
+				<input type="checkbox" id="imageSearch" checked="checked" />
+				<label for="imageSearch">이미지 구글 검색 버튼 사용</label>
+				<span>본문에 등록된 이미지에 구글 검색 버튼을 추가하여 이미지 검색을 도와줍니다.</span>
 				<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
 			</div>
 			<div class="row">
