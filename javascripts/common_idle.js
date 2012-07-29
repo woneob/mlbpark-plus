@@ -1,37 +1,3 @@
-chrome.extension.sendRequest({action:'imageSearch'}, function(response) {
-	var imageSearchVar = response.imageSearch;
-
-	if ((imageSearchVar === '1') || (!imageSearchVar)) {
-		//google search by image
-		var $container = $('#container');
-		var $article = $('.G13 > div[align="justify"]');
-		$contentImg = $article.find('img');
-
-		$(window).load(function() {
-			$contentImg.each(function(){
-				var src = $(this).attr('src');
-				var pos = $(this).position();
-				pos.bottom = pos.top + $(this).height();
-				pos.right = pos.left + $(this).width();
-
-				if(src.substr(0,7) != 'http://'){
-					src = 'http://mlbpark.donga.com' + src;
-				}
-
-				$('<a/>',{
-					class: 'btn_iSearch',
-					href: 'https://www.google.com/searchbyimage?image_url=' + src,
-					target: '_blank',
-					title: '구글에서 이미지 검색'
-				}).css({
-					top: pos.bottom,
-					left: pos.right
-				}).appendTo($container);
-			});
-		});
-	}
-});
-
 function getCookie(name) {
 	var nameOfCookie = name + "=";
 	var x = 0;

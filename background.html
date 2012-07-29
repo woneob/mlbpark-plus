@@ -58,7 +58,8 @@ function onRequest(request, sender, sendResponse) {
 				userHistory: localStorage["userHistory"],
 				reply: localStorage["reply"],
 				userCommentView: localStorage["userCommentView"],
-				video: localStorage["video"]
+				video: localStorage["video"],
+				imageSearch: localStorage["imageSearch"]
 			});
 		break;
 		case 'width':
@@ -70,11 +71,6 @@ function onRequest(request, sender, sendResponse) {
 		case 'passwd':
 			sendResponse({
 				passwd: localStorage["passwd"]
-			});
-		break;
-		case 'imageSearch':
-			sendResponse({
-				imageSearch: localStorage["imageSearch"]
 			});
 		break;
 	}

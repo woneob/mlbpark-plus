@@ -11,6 +11,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 	replyVar = response.reply;
 	userCommentViewVar = response.userCommentView;
 	videoVar = response.video;
+	imageSearchVar = response.imageSearch;
 
 	$(document).ready(function() {
 		var $listLnk = $('.G12read');
@@ -122,6 +123,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 		var $user = $('td[width="18%"].D11 div[id^="nik_"]');
 		var nickname = $user.next().text();
 		var $article = $('.G13 > div[align="justify"]');
+		var $container = $('#container');
 
 		//user block
 		function userBlock(){
@@ -365,6 +367,28 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 				});
 			}
 		}viewUserComment();
+
+		//google search by image
+		if ((imageSearchVar === '1') || (!imageSearchVar)) {
+			var $contentImg = $article.find('img');
+			$contentImg.each(function(){
+				var $t = $(this);
+				$t.load(function(){
+					var src = $(this).attr('src');
+					if(src.substr(0,7) != 'http://') {
+						src = 'http://mlbpark.donga.com' + src;
+					}
+					var imageWrap = '<span class="iWrap"></span>';
+					var btn_iSearch = '<a href="https://www.google.com/searchbyimage?image_url='+ src +'" class="btn_iSearch" target="_blank" title="구글에서 이미지 검색"></a>';
+
+					if ($t.parent('a').length) {
+						$t.parent().wrap(imageWrap).after(btn_iSearch);
+					} else {
+						$t.wrap(imageWrap).after(btn_iSearch);
+					}
+				});
+			});
+		}
 
 		//prerender
 		var target = document.head;
