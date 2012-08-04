@@ -57,6 +57,7 @@ function reset(){
 	document.getElementById('video').checked = true;
 	document.getElementById('imageSearch').checked = true;
 	document.getElementById('passwd').checked = false;
+	document.getElementById('notice').checked = false;
 	document.getElementById('width').checked = false;
 	document.getElementById('widthVal').value = '858';
 	document.getElementById('slideCurrent').innerText = '858';
@@ -152,6 +153,12 @@ function restore(){
 		document.getElementById('passwd').checked = false;
 	}
 
+	if (localStorage['notice'] == 1) {
+		document.getElementById('notice').checked = true;
+	} else {
+		document.getElementById('notice').checked = false;
+	}
+
 	if (localStorage['width'] == null) {
 		document.getElementById('width').checked = false;
 		document.getElementById('range').style.display = 'none';
@@ -215,6 +222,9 @@ function save(){
 
 	if (document.getElementById("passwd").checked == true) {localStorage["passwd"] = 1;}
 	else {localStorage["passwd"] = 0;}
+
+	if (document.getElementById("notice").checked == true) {localStorage["notice"] = 1;}
+	else {localStorage["notice"] = 0;}
 
 	if (document.getElementById("width").checked == true) {localStorage["width"] = 1;}
 	else {localStorage["width"] = 0;}
@@ -366,6 +376,11 @@ $(function(){
 				<input type="checkbox" id="passwd" />
 				<label for="passwd">비밀번호 변경 요청 무시</label>
 				<span>로그인 시 비밀번호 변경 요청을 무시하고 로그인을 완료합니다.</span>
+			</div>
+			<div class="row">
+				<input type="checkbox" id="notice" />
+				<label for="notice">공지사항 가리기</label>
+				<span>게시물 목록에서 공지사항을 보이지 않게 설정합니다.</span>
 			</div>
 			<div class="row">
 				<input type="checkbox" id="width" />

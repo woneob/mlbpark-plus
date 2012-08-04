@@ -11,6 +11,7 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 	replyVar = response.reply;
 	userCommentViewVar = response.userCommentView;
 	videoVar = response.video;
+	noticeVar = response.notice;
 	imageSearchVar = response.imageSearch;
 
 	$(document).ready(function() {
@@ -147,6 +148,14 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 				});
 			}
 		}userBlock();
+
+		//notice blind
+		if (noticeVar === '1') {
+			var $noticeEl = $('center:contains("공지")');
+			$noticeEl.each(function(){
+				$(this).closest('table[width="702"] > tbody > tr').addClass('displayNone').next().addClass('displayNone');
+			});
+		}
 
 		//content blind
 		if ((blindVar === '1') || (!blindVar)) {
