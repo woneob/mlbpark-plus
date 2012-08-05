@@ -383,17 +383,19 @@ chrome.extension.sendRequest({action:'mbs'}, function(response) {
 			$contentImg.each(function(){
 				var $t = $(this);
 				$t.load(function(){
-					var src = $(this).attr('src');
-					if(src.substr(0,7) != 'http://') {
-						src = 'http://mlbpark.donga.com' + src;
-					}
-					var imageWrap = '<span class="iWrap"></span>';
-					var btn_iSearch = '<a href="https://www.google.com/searchbyimage?image_url='+ src +'" class="btn_iSearch" target="_blank" title="구글에서 이미지 검색"></a>';
+					if ($t.width() > 50 && $t.height() > 50) {
+						var src = $(this).attr('src');
+						if(src.substr(0,7) != 'http://') {
+							src = 'http://mlbpark.donga.com' + src;
+						}
+						var imageWrap = '<span class="iWrap"></span>';
+						var btn_iSearch = '<a href="https://www.google.com/searchbyimage?image_url='+ src +'" class="btn_iSearch" target="_blank" title="구글에서 이미지 검색"></a>';
 
-					if ($t.parent('a').length) {
-						$t.parent().wrap(imageWrap).after(btn_iSearch);
-					} else {
-						$t.wrap(imageWrap).after(btn_iSearch);
+						if ($t.parent('a').length) {
+							$t.parent().wrap(imageWrap).after(btn_iSearch);
+						} else {
+							$t.wrap(imageWrap).after(btn_iSearch);
+						}
 					}
 				});
 			});
