@@ -127,5 +127,6 @@
 		"javascripts/passwd.js",
 		"javascripts/write.js",
 		"css/video.css"
-	]
+	],
+	"minimum_chrome_version": "20"
 }
