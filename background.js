@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<title>MLBPARK PLUS background</title>
-<script>
 chrome.webRequest.onBeforeRequest.addListener(
 	function() {
-		return {redirectUrl: chrome.extension.getURL('/javascripts/blank.js') };
+		return {redirectUrl: chrome.extension.getURL('javascripts/blank.js') };
 	}, {
 		urls:[
 			"http://idolpark.donga.com/*",
@@ -18,7 +12,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 chrome.webRequest.onBeforeRequest.addListener(
 	function() {
-		return {redirectUrl: chrome.extension.getURL('/javascripts/blank.js') };
+		return {redirectUrl: chrome.extension.getURL('javascripts/blank.js') };
 	}, {
 		urls:[
 			"http://ar.donga.com/*",
@@ -26,7 +20,8 @@ chrome.webRequest.onBeforeRequest.addListener(
 			"http://mlbpark.donga.com/acecounter/*",
 			"http://210.115.150.117/log/*",
 			"http://mlbpark.donga.com/mypage/memo_read.php",
-			"http://www2.donga.com:8080/*"
+			"http://www2.donga.com:8080/*",
+			"http://sports.donga.com/pictorial/*"
 		]
 	}, ["blocking"]
 );
@@ -43,7 +38,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 	}, ["blocking"]
 );
 
-function onRequest(request, sender, sendResponse) {
+function onMessage(request, sender, sendResponse) {
 	switch (request.action){
 		case 'mbs':
 			sendResponse({
@@ -76,9 +71,4 @@ function onRequest(request, sender, sendResponse) {
 		break;
 	}
 }
-chrome.extension.onRequest.addListener(onRequest);
-</script>
-</head>
-<body>
-</body>
-</html>
+chrome.extension.onMessage.addListener(onMessage);

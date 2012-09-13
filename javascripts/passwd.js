@@ -1,4 +1,4 @@
-chrome.extension.sendRequest({action:'passwd'}, function(response) {
+chrome.extension.sendMessage({action:'passwd'}, function(response) {
 	var passwdVar = response.passwd;
 
 	if (passwdVar === '1') {

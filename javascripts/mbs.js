@@ -1,4 +1,4 @@
-chrome.extension.sendRequest({action:'mbs'}, function(response) {
+chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	var titIconVar = response.titIcon;
 	teamVar = response.team;
 	blockVar = response.block;

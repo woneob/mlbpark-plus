@@ -1,4 +1,4 @@
-chrome.extension.sendRequest({action:'width'}, function(response) {
+chrome.extension.sendMessage({action:'width'}, function(response) {
 	var widthVar = response.width;
 	widthValVar = response.widthVal;
 
