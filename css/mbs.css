@@ -16,6 +16,7 @@ td[width="687"] > table[width="702"] td[width="82"] {width:80px !important;font-
 td[width="687"] > table[width="702"] td[width="44"] {width:40px !important;}
 td[width="687"] > table[width="702"] td[width="66"] {width:100px !important;}
 td[width="687"] > table[width="702"] td[width="40"] {padding-right:15px !important;width:40px !important;}
+td[width="687"] > table[width="702"] .picture {display:none;}
 table[width="99%"] td[width="82%"] {width:75% !important;}
 table[width="99%"] td[width="18%"] {width:25% !important;}
 table[width="99%"] td[width="18%"] .userIdVal {font-weight:normal;}
