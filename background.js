@@ -1,6 +1,6 @@
 chrome.webRequest.onBeforeRequest.addListener(
 	function() {
-		return {redirectUrl: chrome.extension.getURL('javascripts/blank.js') };
+		return {redirectUrl:"about:blank"};
 	}, {
 		urls:[
 			"http://idolpark.donga.com/*",
@@ -12,7 +12,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 chrome.webRequest.onBeforeRequest.addListener(
 	function() {
-		return {redirectUrl: chrome.extension.getURL('javascripts/blank.js') };
+		return {redirectUrl:"about:blank"};
 	}, {
 		urls:[
 			"http://ar.donga.com/*",
@@ -34,7 +34,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 			"http://mlbpark.donga.com/data/",
 			"http://mlbpark.donga.com/data/emoticon/0.gif",
 			"http://mlbpark.donga.com/data/emoticon/1.gif"
-		]
+		], types : ["image"]
 	}, ["blocking"]
 );
 
