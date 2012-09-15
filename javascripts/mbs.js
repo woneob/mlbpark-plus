@@ -16,10 +16,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 	$(document).ready(function() {
 		var $listLnk = $('.G12read');
+		var $links = $listLnk.find('a');
 
 		//title icon
 		if ((titIconVar == '1' ) || (!titIconVar)) {
-			var $links = $listLnk.find('a');
 			var txt = {
 				mobile: /(맛폰)/i,
 				img: /(짤방|jpg|gif|jyp)/i,
@@ -47,7 +47,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		//team
 		if ((teamVar == '1' ) || (!teamVar)) {
 			if (window.location.search.indexOf('mbsC=kbotown') > -1) {
-				var $links = $listLnk.children('a');
 				var team = {
 					kia: /(\[기아\]\s?|\[kia\]\s?)/i,
 					nexen: /(\[넥센\]\s?)/i,
@@ -58,6 +57,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					lg: /(\[엘지\]\s?|\[lg\]\s?)/i,
 					hanwha: /(\[한화\]\s?)/i
 				}
+
 				$listLnk.addClass('teamTxt');
 				$links.each(function() {
 					var t = $(this).text();
