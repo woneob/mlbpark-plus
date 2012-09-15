@@ -209,6 +209,11 @@ $(window).load(function(){
 		}
 	});
 
+	$('#widthVal').change(function(){
+		var newValue = this.value;
+		$('#slideCurrent').text(newValue);
+	});
+
 	$('#block').change(function(){
 		var $blockInfo = $('#blockInfo');
 		$blockInput = $('#blockInput');
