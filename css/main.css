@@ -14,6 +14,7 @@
 .heardline ul li .txt {display:block !important;width:auto !important;padding:3px 0 0 103px !important;vertical-align:middle;}
 
 .heardline ul li .txt strong {display:block !important;}
+.heardline ul li .txt strong a {white-space:nowrap;text-overflow:ellipsis;}
 .heardline ul li .txt .s_font {display: -webkit-box;width:auto !important;white-space:normal !important;text-overflow:clip !important;-webkit-line-clamp:3;word-wrap:break-word;-webkit-box-orient: vertical;}
  
 /* article box --------------------- */
