@@ -8,5 +8,7 @@ td.G13 div[align="justify"] embed[src^="http://flvs.daum.net/flvPlayer.swf"] {wi
 td.G13 div[align="justify"] embed[src^="http://v.nate.com/"]{width:100% !important;height:480px !important;}
 td.G13 div[align="justify"] embed[src*="http://mediadownloads.mlb.com"],
 td.G13 div[align="justify"] embed[flashvars*="http://mediadownloads.mlb.com"]{width:100% !important;height:480px !important;}
-td.G13 div[align="justify"] embed[src*="http://serviceapi.nmv.naver.com"]{width:100% !important;height:570px !important;}
+td.G13 div[align="justify"] embed[src*="http://serviceapi.nmv.naver.com"],
+td.G13 div[align="justify"] iframe[src*="http://serviceapi.nmv.naver.com"]{width:100% !important;height:510px !important;}
 td.G13 div[align="justify"] embed[src^="http://afbbs.afreeca.com"]{width:100% !important;height:500px !important;}
+td.G13 div[align="justify"] embed[src^="http://flvr.pandora.tv"]{width:100% !important;height:490px !important;}
