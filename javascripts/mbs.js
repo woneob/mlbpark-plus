@@ -151,7 +151,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		//notice blind
 		if (noticeVar == '1') {
-			var $noticeEl = $('center:contains("공지")');
+			var $noticeEl = $('.A11gray:contains("공지")');
 			$noticeEl.each(function(){
 				$(this).closest('table[width="702"] > tbody > tr').addClass('displayNone').next().addClass('displayNone');
 			});
