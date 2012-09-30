@@ -1,7 +1,7 @@
 chrome.extension.sendMessage({action:'passwd'}, function(response) {
 	var passwdVar = response.passwd;
 
-	if (passwdVar === '1') {
+	if (passwdVar == '1') {
 		function getParameterByName(name) {
 			name = name.replace(/[\[]/,'\\\[').replace(/[\]]/,'\\\]');
 			var regexS = '[\\?&]' + name + '=([^&#]*)';

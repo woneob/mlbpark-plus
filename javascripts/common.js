@@ -3,7 +3,7 @@ chrome.extension.sendMessage({action:'width'}, function(response) {
 	widthValVar = response.widthVal;
 
 	//custom container width
-	if (widthVar === '1') {
+	if (widthVar == '1') {
 		var customWidth = document.createElement('style'); 
 		customWidth.appendChild(document.createTextNode('#wrap {max-width:' + widthValVar + 'px !important;}'));
 		document.documentElement.insertBefore(customWidth);
