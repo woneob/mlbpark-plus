@@ -19,7 +19,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		var $links = $listLnk.find('a');
 
 		//title icon
-		if ((titIconVar == '1' ) || (!titIconVar)) {
+		if ((titIconVar == '1' ) || (titIconVar == null)) {
 			var txt = {
 				mobile: /(맛폰)/i,
 				img: /(짤방|jpg|gif|jyp)/i,
@@ -45,7 +45,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 
 		//team
-		if ((teamVar == '1' ) || (!teamVar)) {
+		if ((teamVar == '1' ) || (teamVar == null)) {
 			if (window.location.search.indexOf('mbsC=kbotown') > -1) {
 				var team = {
 					kia: /(\[기아\]\s?|\[kia\]\s?)/i,
@@ -94,7 +94,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		};
 
 		//title block
-		if (blockVar === '1' ) {
+		if (blockVar == '1' ) {
 			var blockValue = response.blockInput.split(/[\s,]+/);
 
 			if (blockTypeVar == '1' ) {
@@ -128,7 +128,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		//user block
 		function userBlock(){
-			if (blockUserVar === '1' ) {
+			if (blockUserVar == '1' ) {
 				var blockUserValue = blockUserInputVar.replace(/\n/g, '').split(',');
 
 				if(window.location.pathname == "/bbs/mlb_today.php"){
@@ -150,7 +150,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}userBlock();
 
 		//notice blind
-		if (noticeVar === '1') {
+		if (noticeVar == '1') {
 			var $noticeEl = $('center:contains("공지")');
 			$noticeEl.each(function(){
 				$(this).closest('table[width="702"] > tbody > tr').addClass('displayNone').next().addClass('displayNone');
@@ -158,7 +158,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 
 		//content blind
-		if ((blindVar === '1') || (!blindVar)) {
+		if ((blindVar == '1') || (blindVar == null)) {
 			var cobTxt = '<div id=\"warnBtn\"><span>댓글에 COB가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
 			var soapTxt = '<div id=\"warnBtn\"><span>댓글에 비누가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
 
@@ -182,7 +182,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 
 		//user history
-		if (userHistoryVar === '1') {
+		if (userHistoryVar == '1') {
 			var $userIdR = $user.find('li').last().attr('onclick');
 			if ($userIdR){
 				var userId = $userIdR.match(/mbsUid=([^&]+)\'\,\'550/)[1];
@@ -208,7 +208,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 
 		//videoCss
-		if ((videoVar === '1') || (!videoVar)) {
+		if ((videoVar == '1') || (videoVar == null)) {
 			var vdoCss = document.createElement('link');
 			vdoCss.rel = 'stylesheet';
 			vdoCss.type = 'text/css';
@@ -239,7 +239,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		//reply button
 		function replyButton(){
-			if ((replyVar === '1') || (!replyVar)) {
+			if ((replyVar == '1') || (replyVar == null)) {
 				var btn = '<button type=\"button\" class=\"btn_reply\" title=\"답글 달기\">[답글]</button>';
 				var $textarea = $('textarea[name="line_content"]');
 
@@ -294,7 +294,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		//view userComment
 		function viewUserComment(){
-			if ((userCommentViewVar === '1') || (!userCommentViewVar)) {
+			if ((userCommentViewVar == '1') || (userCommentViewVar == null)) {
 				var viewCmt = '<button type="button" class="btn_userCmt" title="이 글에 단 댓글 보기">?</button>';
 				if(window.location.pathname !== "/mbs/commentV.php"){
 					$myArea.find('a[title=" 에게 메모 보내기"]').each(function(){
@@ -378,7 +378,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}viewUserComment();
 
 		//google search by image
-		if ((imageSearchVar === '1') || (!imageSearchVar)) {
+		if ((imageSearchVar == '1') || (imageSearchVar == null)) {
 			var $contentImg = $article.find('img');
 			$contentImg.each(function(){
 				var $t = $(this);
