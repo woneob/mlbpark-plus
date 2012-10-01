@@ -17,6 +17,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	$(document).ready(function() {
 		var $listLnk = $('.G12read');
 		var $links = $listLnk.find('a');
+		var loc = window.location.href;
 
 		//title icon
 		if ((titIconVar == '1' ) || (titIconVar == null)) {
@@ -47,7 +48,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		//team
 		if ((teamVar == '1' ) || (teamVar == null)) {
-			if (window.location.search.indexOf('mbsC=kbotown') > -1) {
+			if (loc.indexOf('mbsC=kbotown') > -1) {
 				var team = {
 					kia: /(\[기아\]\s?|\[kia\]\s?)/i,
 					nexen: /(\[넥센\]\s?)/i,
@@ -175,14 +176,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			});
 		}
 
-		var loc = window.location;
-
 		//tab Navigation highlighter
-		$.urlParam = function(name){
-			var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(loc.href);
-			return results[1] || 0;
-		}
-		if ($.urlParam('mbsW') === 'search'){
+		if (loc.indexOf('mbsW=search') > -1){
+			$.urlParam = function(name){
+				var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(loc);
+				return results[1] || 0;
+			}
 			switch ($.urlParam('mbsC')) {
 				case 'bullpen':
 					document.getElementById('navi4').className = 'on';
