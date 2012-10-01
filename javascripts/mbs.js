@@ -187,9 +187,20 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var $userIdR = $user.find('li').last().attr('onclick');
 			if ($userIdR){
 				var userId = $userIdR.match(/mbsUid=([^&]+)\'\,\'550/)[1];
-				var historyBox ='<div id="history"><div class="historyHead"><h3><span>'+nickname+'<span>('+userId+')</span></span> 님의 최근 글</h3><button type="button" onclick="MlbNewWindow2(\'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId +'\',\'550\',\'500\')">[더 보기]</button>\n' + '	</div>\n' + '	<div id="historyLoading">\n' + '		<div><span class="stick1"></span><span class="stick2"></span><span class="stick3"></span></div></div><div id="historyList"></div></div>';
-
-				$article.after(historyBox);
+				
+					$article.after(
+					'<div id="history">\n'+
+					'	<div class="historyHead">\n'+
+					'		<h3><span>'+nickname+'<span>('+userId+')</span></span> 님의 최근 글</h3>\n'+
+					'		<button type="button" onclick="MlbNewWindow2(\'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId +'\',\'550\',\'500\')">[더 보기]</button>\n' + 
+					'	</div>\n'+ 
+					'	<div id="historyLoading">\n'+
+					'		<div><span class="stick1"></span><span class="stick2"></span><span class="stick3"></span></div>\n'+
+					'	</div>\n'+
+					'	<div id="historyList"></div>\n'+
+					'</div>'
+					);
+				
 				$.get('http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId, function(response){
 					var responseWrapper = $('<div />').append(response.replace(/<script(.|\s)*?\/script>/g, ''));
 					var $hList = $('#historyList');
