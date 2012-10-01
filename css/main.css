@@ -2,6 +2,7 @@
 
 /* layout --------------------- */
 #wrap {width:858px !important;max-width:858px !important;}
+#main_content {padding-top:7px !important;}
 #main_content .left_cont {width:100% !important;float:none !important;margin:0 !important;}
 
 /* headline --------------------- */
