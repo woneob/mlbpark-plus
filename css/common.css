@@ -8,10 +8,14 @@ body {padding:0 !important;}
 #hearder {height:80px !important}
 #hearder .gnb {position:absolute;top:35px;right:0;}
 #hearder .gnb a[onclick="addBookmark();"] {display:none;}
+#hearder .header_cont {display:block !important;position:relative;}
 #hearder .header_cont h1 {padding:35px 0 0 5px !important;}
-#hearder .menu {top:45px !important;left:210px !important;}
+#hearder .menu{float:none !important;position:static !important;padding:45px 0 0 210px !important;}
 #hearder .menu li {margin-right:8px !important;padding-left:15px !important;}
 #hearder .menu img {width:auto;height:14px !important;}
+#hearder .header_cont .menu li.h_cartoon {position:absolute !important;top:15px !important;right:-7px;}
+#hearder .header_cont .menu li.h_cartoon img {height:20px !important;}
+
 
 /* navigation */
 #navi {height:41px !important;background:#4871bb !important;padding-bottom:2px;box-shadow:0 1px 0 #d9d9d9;border-bottom:1px solid #2851a0;}
