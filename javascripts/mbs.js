@@ -175,8 +175,29 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			});
 		}
 
+		var loc = window.location;
+
+		//tab Navigation highlighter
+		$.urlParam = function(name){
+			var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(loc.href);
+			return results[1] || 0;
+		}
+		if ($.urlParam('mbsW') === 'search'){
+			switch ($.urlParam('mbsC')) {
+				case 'bullpen':
+					document.getElementById('navi4').className = 'on';
+				break;
+				case 'kbotown':
+					document.getElementById('navi3').className = 'on';
+				break;
+				case 'mlbtown':
+					document.getElementById('navi2').className = 'on';
+				break;
+			}
+		}
+
 		//add userId
-		if(window.location.pathname == "/mbs/articleV.php"){
+		if(loc.pathname == "/mbs/articleV.php"){
 			var $userIdSrc = $user.find('li:first-child').attr('onclick');
 			var userId = $userIdSrc.match(/id=([^&]+)\'/)[1];
 			$user.next().after('<span class="userIdVal">(' + userId + ')</span>');
