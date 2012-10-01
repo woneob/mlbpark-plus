@@ -1,7 +1,7 @@
 {
 	"name": "MLBPARK PLUS",
 	"description": "MLBPARK 크롬 확장프로그램입니다. 큰 사람 되세요",
-	"version": "2.84",
+	"version": "2.85",
 	"icons": {
 		"16": "images/icon_16.png",
 		"32": "images/icon_32.png",
@@ -14,13 +14,6 @@
 			,"css":["css/common.css"]
 			,"js":["javascripts/jquery-1.8.1.min.js","javascripts/common.js"]
 			,"run_at": "document_start"
-		},
-		{
-			"matches": ["http://mlbpark.donga.com/*"]
-			,"exclude_matches":["http://mlbpark.donga.com/my*"]
-			,"js":["javascripts/common_idle.js"]
-			,"run_at": "document_idle"
-
 		},
 		{
 			"matches": ["http://mlbpark.donga.com/"]
@@ -88,8 +81,15 @@
 			"matches": [
 				"http://www.donga.com/members/login.php*"
 			]
-			,"run_at":"document_start"
+			,"run_at":"document_end"
 			,"css":["css/login.css"]
+		},
+		{
+			"matches": ["http://mlbpark.donga.com/*"]
+			,"exclude_matches":["http://mlbpark.donga.com/my*"]
+			,"js":["javascripts/common_idle.js"]
+			,"run_at": "document_idle"
+
 		}
 	],
 	"background": {
