@@ -6,11 +6,11 @@ body {padding:0 !important;}
 #wrap {max-width:858px;min-width:780px;overflow:visible !important;padding:0 10px;margin:0 auto;box-sizing:border-box;}
 #hearder, #hearder .gnb, #container, #container > table[width="980"], #footer {width:100% !important;}
 #hearder {height:80px !important}
-#hearder .gnb {position:absolute;top:35px;right:0;}
+#hearder .gnb {position:absolute;float:right;z-index:2 !important;width:270px !important;top:35px;right:0;}
 #hearder .gnb a[onclick="addBookmark();"] {display:none;}
 #hearder .header_cont {display:block !important;position:relative;}
 #hearder .header_cont h1 {padding:35px 0 0 5px !important;}
-#hearder .menu{float:none !important;position:static !important;padding:45px 0 0 210px !important;}
+#hearder .menu{z-index:1 !important;float:none !important;position:static !important;padding:45px 0 0 210px !important;}
 #hearder .menu li {margin-right:8px !important;padding-left:15px !important;}
 #hearder .menu img {width:auto;height:14px !important;}
 #hearder .header_cont .menu li.h_cartoon {position:absolute !important;top:15px !important;right:-7px;}
