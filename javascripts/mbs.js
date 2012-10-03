@@ -196,7 +196,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 
 		//add userId
-		if(loc.pathname == "/mbs/articleV.php"){
+		if (loc.indexOf('articleV.php') > -1){
 			var $userIdSrc = $user.find('li:first-child').attr('onclick');
 			var userId = $userIdSrc.match(/id=([^&]+)\'/)[1];
 			$user.next().after('<span class="userIdVal">(' + userId + ')</span>');
