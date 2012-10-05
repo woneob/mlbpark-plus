@@ -7,6 +7,7 @@
 
 /* headline --------------------- */
 .heardline {box-sizing:border-box;width:100% !important;height:auto !important;margin-bottom:3px;overflow:hidden;border-color:#cdcdcd;}
+.heardline .tit_photo .txt {border:0 !important;}
 .heardline ul {padding-left:416px !important;}
 .heardline ul li {width:100% !important;}
 .heardline ul li:last-child {margin-bottom:0 !important;}
