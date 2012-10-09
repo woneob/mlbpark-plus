@@ -241,11 +241,13 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		//videoCss
 		if ((videoVar == '1') || (videoVar == null)) {
-			var vdoCss = document.createElement('link');
-			vdoCss.rel = 'stylesheet';
-			vdoCss.type = 'text/css';
-			vdoCss.href = chrome.extension.getURL('/css/video.css');
-			document.head.appendChild(vdoCss);
+			if (loc.indexOf('articleV.php') > -1){
+				var vdoCss = document.createElement('link');
+				vdoCss.rel = 'stylesheet';
+				vdoCss.type = 'text/css';
+				vdoCss.href = chrome.extension.getURL('/css/video.css');
+				document.head.appendChild(vdoCss);
+			}
 		}
 
 		//hilight writer
