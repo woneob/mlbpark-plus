@@ -49,7 +49,7 @@
 .article_box .news_cont .notice ul li a, .article_box .news_cont .notice ul li a b {font-weight:normal !important;}
 .article_box .news_cont .notice ul li:first-child a, .article_box .news_cont .notice ul li:first-child a b {font-weight:bold !important;}
 /* sidebar --------------------- */
-#main_content .right_cont {box-sizing:border-box;width:230px !important;height:403px;position:absolute;top:319px;right:0;border-left:1px solid #e3e3e3;border-right:1px solid #e3e3e3;}
+#main_content .right_cont {box-sizing:border-box;width:230px !important;height:403px;position:absolute;top:323px;right:0;border-left:1px solid #e3e3e3;border-right:1px solid #e3e3e3;}
 /* login box */
 .login_box {width:100% !important;height:auto !important;background:none !important;margin-bottom:15px;padding:0 !important;border:none !important;}
 .login_box h3 {background:none !important;padding:13px 0 7px 10px !important;}
