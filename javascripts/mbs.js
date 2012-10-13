@@ -348,11 +348,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}urlReplace();
 
 			//reply button
+			var $textarea = $('textarea[name="line_content"]');
+
 			function replyButton(){
 				if ((replyVar == '1') || (replyVar == null)) {
 					var btn = '<button type=\"button\" class=\"btn_reply\" title=\"답글 달기\">[답글]</button>';
-					var $textarea = $('textarea[name="line_content"]');
-
 					$myArea.find('.G12').append(btn);
 					$('.btn_reply').bind('click',function(){
 						var username = $(this).closest('table').parent().prev().find('a').text();
@@ -429,6 +429,31 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			elms[i].href = elms[i].href.replace('articleVC', 'articleV');
 		}
 
+		//shotcut keys
+		var $paging = $('.paging');
+		$currentPage = $paging.find('font');
+
+		$paging.find('> img').remove();
+		$('table[height="31"]').attr('id','tableList');
+
+		var pLink = $currentPage.prev('a').attr('href');
+		var nLink = $currentPage.next('a').attr('href');
+
+		$(document).keyup(function(e){
+			if ($(e.target).is('input, textarea')) {
+				return;   
+			}
+			if (e.which === 65) {
+				window.location.href = pLink;
+			}
+			if (e.which === 83) {
+				window.location.href = nLink;
+			}
+			if (e.which === 68) {
+				$('body').animate({scrollTop: $('#tableList').offset().top}, 300);
+			}
+		});
+
 		//prerender
 		var target = document.head;
 		pr1 = document.createElement('link');
@@ -436,8 +461,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		pr1.href = 'http://mlbpark.donga.com/mbs/articleL.php?mbsC=bullpen';
 		pr2 = document.createElement('link');
 		pr2.rel = 'prerender';
-		pr2.href = $('.paging').find('font').next().next().attr('href');
+		pr2.href = nLink;
+		pr3 = document.createElement('link');
+		pr3.rel = 'prerender';
+		pr3.href = pLink;
 		target.appendChild(pr1);
 		target.appendChild(pr2);
+		target.appendChild(pr3);
 	});
 });
