@@ -28,13 +28,13 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 chrome.webRequest.onBeforeRequest.addListener(
 	function() {
-		return {redirectUrl:'http://image.donga.com/mlbpark/img200807/icon_01.gif'};
+		return {redirectUrl:chrome.extension.getURL('/images/userIcon.gif')};
 	}, {
 		urls:[
 			"http://mlbpark.donga.com/data/",
 			"http://mlbpark.donga.com/data/emoticon/0.gif",
 			"http://mlbpark.donga.com/data/emoticon/1.gif"
-		], types : ["image"]
+		]
 	}, ["blocking"]
 );
 
