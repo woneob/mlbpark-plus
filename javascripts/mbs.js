@@ -440,17 +440,19 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		var nLink = $currentPage.next('a').attr('href');
 
 		$(document).keyup(function(e){
-			if ($(e.target).is('input, textarea')) {
-				return;   
-			}
-			if (e.which === 65) {
-				window.location.href = pLink;
-			}
-			if (e.which === 83) {
-				window.location.href = nLink;
-			}
-			if (e.which === 68) {
-				$('body').animate({scrollTop: $('#tableList').offset().top}, 300);
+			if (loc.pathname != '/mbs/commentV.php'){
+				if ($(e.target).is('input, textarea')) {
+					return;   
+				}
+				if (e.which === 65) {
+					window.location.href = pLink;
+				}
+				if (e.which === 83) {
+					window.location.href = nLink;
+				}
+				if (e.which === 68) {
+					$('body').animate({scrollTop: $('#tableList').offset().top}, 300);
+				}
 			}
 		});
 
