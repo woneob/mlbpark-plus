@@ -17,7 +17,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	$(document).ready(function() {
 		var $listLnk = $('.G12read');
 		var $links = $listLnk.find('a');
-		var loc = window.location.href;
+		var loc = window.location;
+		var locHref = loc.href;
 
 		//title icon
 		if ((titIconVar == '1' ) || (titIconVar == null)) {
@@ -48,7 +49,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		//team
 		if ((teamVar == '1' ) || (teamVar == null)) {
-			if (loc.indexOf('mbsC=kbotown') > -1) {
+			if (locHref.indexOf('mbsC=kbotown') > -1) {
 				var team = {
 					kia: /(\[기아\]\s?|\[kia\]\s?)/i,
 					nexen: /(\[넥센\]\s?)/i,
@@ -131,7 +132,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			if (blockUserVar == '1' ) {
 				var blockUserValue = blockUserInputVar.replace(/\n/g, '').split(',');
 
-				if(window.location.pathname == "/bbs/mlb_today.php"){
+				if(loc.pathname == "/bbs/mlb_today.php"){
 					$('td[width="82"] font').wrap('<a href="#" onclick="return false;" class="disabled" />');
 				}
 
@@ -157,10 +158,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			});
 		}
 
-		if (loc.indexOf('V.php') > -1){
+		if (locHref.indexOf('V.php') > -1){
 			var $article = $('.G13 > div[align="justify"]');
 
-			if (loc.indexOf('articleV.php') > -1){
+			if (locHref.indexOf('articleV.php') > -1){
 				var userId =  $user.find('li:first-child').attr('onclick').match(/id=([^&]+)\'/)[1];
 
 				//content blind
@@ -253,7 +254,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					if ((userCommentViewVar == '1') || (userCommentViewVar == null)) {
 						var viewCmt = '<button type="button" class="btn_userCmt" title="이 글에 단 댓글 보기">?</button>';
 
-						if(window.location.pathname !== "/mbs/commentV.php"){
+						if(loc.pathname !== "/mbs/commentV.php"){
 							$myArea.find('a[title=" 에게 메모 보내기"]').each(function(){
 								$(this).after(viewCmt);
 							});
@@ -310,9 +311,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 									$('#modalFormTextarea').click(function(){
 										if ($('#loginArea a:first-child').text() == '로그인'){
 											var loginConfirm = confirm("로그인 후 사용 가능합니다.\n로그인 페이지로 이동하시겠습니까?");
-											var goUrl = escape(location.href);
 											if (loginConfirm == true){
-												window.location = 'http://www.donga.com/members/login.php\?gourl=' + goUrl;
+												window.location = 'http://www.donga.com/members/login.php\?gourl=' + escape(locHref);
 											}
 										}
 									});
@@ -405,9 +405,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 
 		//tab Navigation highlighter
-		if (loc.indexOf('mbsW=search') > -1){
+		if (locHref.indexOf('mbsW=search') > -1){
 			$.urlParam = function(name){
-				var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(loc);
+				var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(locHref);
 				return results[1] || 0;
 			}
 			switch ($.urlParam('mbsC')) {
