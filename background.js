@@ -55,6 +55,7 @@ function onMessage(request, sender, sendResponse) {
 				userCommentView: localStorage["userCommentView"],
 				video: localStorage["video"],
 				notice: localStorage["notice"],
+				shortcut: localStorage["shortcut"],
 				imageSearch: localStorage["imageSearch"]
 			});
 		break;

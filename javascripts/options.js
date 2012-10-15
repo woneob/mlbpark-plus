@@ -15,6 +15,7 @@ function reset(){
 	document.getElementById('imageSearch').checked = true;
 	document.getElementById('passwd').checked = false;
 	document.getElementById('notice').checked = false;
+	document.getElementById('notice').checked = true;
 	document.getElementById('width').checked = false;
 	document.getElementById('widthVal').value = '858';
 	document.getElementById('slideCurrent').innerText = '858';
@@ -116,6 +117,12 @@ function restore(){
 		document.getElementById('notice').checked = false;
 	}
 
+	if (localStorage['shortcut'] == 1 || localStorage['shortcut'] == null) {
+		document.getElementById('shortcut').checked = true;
+	} else {
+		document.getElementById('shortcut').checked = false;
+	}
+
 	if (localStorage['width'] == null) {
 		document.getElementById('width').checked = false;
 		document.getElementById('range').style.display = 'none';
@@ -182,6 +189,9 @@ function save(){
 
 	if (document.getElementById("notice").checked == true) {localStorage["notice"] = 1;}
 	else {localStorage["notice"] = 0;}
+
+	if (document.getElementById("shortcut").checked == true) {localStorage["shortcut"] = 1;}
+	else {localStorage["shortcut"] = 0;}
 
 	if (document.getElementById("width").checked == true) {localStorage["width"] = 1;}
 	else {localStorage["width"] = 0;}
