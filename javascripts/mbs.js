@@ -20,78 +20,102 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		var $links = $listLnk.find('a');
 		var loc = window.location;
 		var locHref = loc.href;
-
-		//title icon
-		if ((titIconVar == '1' ) || (titIconVar == null)) {
-			var txt = {
-				mobile: /(맛폰)/i,
-				img: /(짤방|jpg|gif|jyp)/i,
-				question: /(질문|요\?|여\?|죠\?)/i,
-				music: /(브금|bgm|음악|가수|노래|뮤직)|싸이|강남스타일/i,
-				vs: /(vs)/i,
-				tv: /(swf|avi|플짤|영상|flv)/i,
-				adult: /(19금|\[19\] |\(19\)|주번나|성진국)/i,
-				warn: /(혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|혐오주의)/i,
-				twitter: /(트윗|트위터)/i,
-				game: /디아|\[스타|프야매|lol|게임/i,
-				politics : /안철수|문재인|박근혜|ㅂㄱㅎ|이인제|대선|선거/i
+		
+		// title icon & team icon
+		var titIcon = {
+			mobile: {
+			   regex: /(맛폰)/i
+			},
+			img: {
+				regex: /(짤방|jpg|gif|jyp)/i
+			},
+			question: {
+				regex: /(질문|요\?|여\?|죠\?)/i
+			},
+			music: {
+				regex: /(브금|bgm|음악|가수|노래|뮤직)|싸이|강남스타일/i
+			},
+			vs: {
+				regex: /(vs)/i
+			},
+			tv: {
+				regex: /(swf|avi|플짤|영상|flv)/i
+			},
+			adult: {
+				regex: /(19금|\[19\] |\(19\)|주번나|성진국)/i
+			},
+			warn: {
+				regex: /(혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|혐오주의)/i
+			},
+			twitter: {
+				regex: /(트윗|트위터)/i
+			},
+			game: {
+				regex: /디아|\[스타|프야매|lol|게임/i
+			},
+			politics : {
+				regex: /안철수|문재인|박근혜|ㅂㄱㅎ|이인제|대선|선거/i
 			}
-
-			$links.each(function() {
-				var t = $(this).text();
-				for (var item in txt) {
-					var re = txt[item];
-					if (re.test(t)) {
+		};
+		var team = {
+			kia: {
+				regex: /(\[기아\]\s?|\[kia\]\s?)/i,
+				searchKeyword: 'kia'
+			},
+			nexen: {
+				regex: /(\[넥센\]\s?)/i,
+				searchKeyword: '%B3%D8%BC%BE'
+			},
+			doosan: {
+				regex: /(\[두산\]\s?)/i,
+				searchKeyword: '%B5%CE%BB%EA'
+			},
+			lotte: {
+				regex: /(\[롯데\]\s?)/i,
+				searchKeyword: '%B7%D4%B5%A5'
+			},
+			samsung: {
+				regex: /(\[삼성\]\s?)/i,
+				searchKeyword: '%BB%EF%BC%BA'
+			},
+			sk: {
+				regex: /(\[sk\]\s?)/i,
+				searchKeyword: 'sk'
+			},
+			lg: {
+				regex: /(\[엘지\]\s?|\[lg\]\s?)/i,
+				searchKeyword: 'lg'
+			},
+			hanwha: {
+				regex: /(\[한화\]\s?)/i,
+				searchKeyword: '%C7%D1%C8%AD'
+			}
+		};
+		$links.each(function() {
+			// title icon
+			var item, t = $(this).text();
+			if ((titIconVar == '1' ) || (titIconVar === null)) {
+				for (item in titIcon) {
+					if(titIcon[item].regex.test(t)) {
 						$(this).addClass('ico').addClass('ico_' + item);
 					}
 				}
-			});
-		}
-
-		//team
-		if ((teamVar == '1' ) || (teamVar == null)) {
-			if (locHref.indexOf('mbsC=kbotown') > -1) {
-				var team = {
-					kia: /(\[기아\]\s?|\[kia\]\s?)/i,
-					nexen: /(\[넥센\]\s?)/i,
-					doosan: /(\[두산\]\s?)/i,
-					lotte: /(\[롯데\]\s?)/i,
-					samsung: /(\[삼성\]\s?)/i,
-					sk: /(\[sk\]\s?)/i,
-					lg: /(\[엘지\]\s?|\[lg\]\s?)/i,
-					hanwha: /(\[한화\]\s?)/i
-				}
-
-				$listLnk.addClass('teamTxt');
-				$links.each(function() {
-					var t = $(this).text();
-					for (var item in team) {
-						var re = team[item];
-						if (re.test(t)) {
-							var rep = t.replace(re,'');
-							$(this).text(rep).before('<em data-team="'+item+'" class="team"></em>');
-							return;
+			}
+			// team icon
+			if ((teamVar == '1' ) || (teamVar === null)) {
+				if (locHref.indexOf('mbsC=kbotown') > -1) {
+					$listLnk.addClass('teamTxt');
+					for(item in team) {
+						var matched = team[item].regex.exec(t);
+						if(matched) {
+							$(this).text(t.replace(matched[1],'')).before('<em data-team="'+item+'" class="team" onclick="location.href=\'/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=' + team[item].searchKeyword + '\'"></em>');
+							break;
 						}
 					}
-				});
-
-				$('.team').bind('click',function(){
-					var dataTeam = this.getAttribute('data-team');
-					var searchUrl = '/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=';
-					var searchTeam = {
-						kia: searchUrl + 'kia',
-						nexen: searchUrl + '%B3%D8%BC%BE',
-						doosan: searchUrl + '%B5%CE%BB%EA',
-						lotte: searchUrl + '%B7%D4%B5%A5',
-						samsung: searchUrl + '%BB%EF%BC%BA',
-						sk: searchUrl + 'sk',
-						lg: searchUrl + 'lg',
-						hanwha: searchUrl + '%C7%D1%C8%AD'
-					}
-					document.location.href = searchTeam[dataTeam];
-				});
+				}
 			}
-		}
+		});
+
 
 		$.expr[':'].Contains = function(a,i,m){
 			return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
@@ -444,7 +468,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			$(document).keyup(function(e){
 				if (loc.pathname != '/mbs/commentV.php'){
 					if ($(e.target).is('input, textarea')) {
-						return;   
+						return;
 					}
 					if (e.which === 65) {
 						window.location.href = pLink;
