@@ -25,19 +25,19 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		// 순서대로 먼저 매칭되는 것을 사용
 		var titIcon = {
 			politics : {
-				regex: /안철수|문재인|박근혜|ㅂㄱㅎ|이인제|대선|선거/i
+				regex: /안철수|문재인|박근혜|ㅂㄱㅎ|이인제|대선|선거/
 			},
 			game: {
 				regex: /디아|\[스타|프야매|lol|게임/i
 			},
 			twitter: {
-				regex: /(트윗|트위터)/i
+				regex: /(트윗|트위터)/
 			},
 			warn: {
-				regex: /(혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|혐오주의)/i
+				regex: /(혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|혐오주의)/
 			},
 			adult: {
-				regex: /(19금|\[19\] |\(19\)|주번나|성진국)/i
+				regex: /(19금|\[19\] |\(19\)|주번나|성진국)/
 			},
 			tv: {
 				regex: /(swf|avi|플짤|영상|flv)/i
@@ -49,13 +49,13 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				regex: /(브금|bgm|음악|가수|노래|뮤직)|싸이|강남스타일/i
 			},
 			question: {
-				regex: /(질문|요\?|여\?|죠\?)/i
+				regex: /(질문|요\?|여\?|죠\?)/
 			},
 			img: {
 				regex: /(짤방|jpg|gif|jyp)/i
 			},
 			mobile: {
-				regex: /(맛폰)/i
+				regex: /(맛폰)/
 			}
 		};
 		var team = {
@@ -64,19 +64,19 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				searchKeyword: 'kia'
 			},
 			nexen: {
-				regex: /(\[넥센\]\s?)/i,
+				regex: /(\[넥센\]\s?)/,
 				searchKeyword: '%B3%D8%BC%BE'
 			},
 			doosan: {
-				regex: /(\[두산\]\s?)/i,
+				regex: /(\[두산\]\s?)/,
 				searchKeyword: '%B5%CE%BB%EA'
 			},
 			lotte: {
-				regex: /(\[롯데\]\s?)/i,
+				regex: /(\[롯데\]\s?)/,
 				searchKeyword: '%B7%D4%B5%A5'
 			},
 			samsung: {
-				regex: /(\[삼성\]\s?)/i,
+				regex: /(\[삼성\]\s?)/,
 				searchKeyword: '%BB%EF%BC%BA'
 			},
 			sk: {
@@ -88,7 +88,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				searchKeyword: 'lg'
 			},
 			hanwha: {
-				regex: /(\[한화\]\s?)/i,
+				regex: /(\[한화\]\s?)/,
 				searchKeyword: '%C7%D1%C8%AD'
 			}
 		};
