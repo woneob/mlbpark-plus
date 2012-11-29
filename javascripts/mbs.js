@@ -123,7 +123,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		//title block
 		if (blockVar == '1' ) {
-			var blockValue = response.blockInput.split(/[\s,]+/);
+			var blockValue = response.blockInput.split(/[ \t]*,[ \t]*/);
 
 			if (blockTypeVar == '1' ) {
 				$(blockValue).each(function(i,v){
@@ -155,7 +155,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		//user block
 		function userBlock(){
 			if (blockUserVar == '1' ) {
-				var blockUserValue = blockUserInputVar.replace(/\n/g, '').split(',');
+				var blockUserValue = blockUserInputVar.split(',');
 
 				if(loc.pathname == "/bbs/mlb_today.php"){
 					$('td[width="82"] font').wrap('<a href="#" onclick="return false;" class="disabled" />');

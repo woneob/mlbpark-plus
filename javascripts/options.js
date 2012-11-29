@@ -156,7 +156,15 @@ function save(){
 	else {localStorage["block"] = 0;}
 
 	if (!(document.getElementById("blockInput").value.length == 0)) {
-		localStorage["blockInput"] = document.getElementById("blockInput").value;
+		// 설명을 위해 한 줄씩 적용 - 속도가 중요한 부분 아님
+		// point: 각 라인은 콤마로 끝나도록 수정되어야 함 - 화면의 차단하는 코드에서는 라인 구분 없이 콤마로만 구분
+		var blockInputVar = document.getElementById("blockInput").value
+			.replace(/,[ \t]*\n/g, ',\n')	// 각 라인의 마지막 쉼표 뒤 공백/탭 제거
+			.replace(/(,*\n)+/g, ',\n')		// 연속된 쉼표 제거
+			.replace(/\n,+/g, '\n')			// 쉼표로 시작되는 라인 제거
+			.replace(/(^,+)|(,+$)/g, '');	// 맨 처음/마지막 쉼표 제거
+		localStorage["blockInput"] = blockInputVar;
+		document.getElementById("blockInput").value = localStorage["blockInput"];
 	} else {localStorage["block"] = 0;}
 
 	if (document.getElementById("blockType_1").checked == true) {localStorage["blockType"] = 1;}
@@ -166,7 +174,15 @@ function save(){
 	else {localStorage["blockUser"] = 0;}
 
 	if (!(document.getElementById("blockUserInput").value.length == 0)) {
-		localStorage["blockUserInput"] = document.getElementById("blockUserInput").value;
+		// 설명을 위해 한 줄씩 적용 - 속도가 중요한 부분 아님
+		// point: 각 라인은 콤마로 끝나도록 수정되어야 함 - 화면의 차단하는 코드에서는 라인 구분 없이 콤마로만 구분
+		var blockUserInputVar = document.getElementById("blockUserInput").value
+			.replace(/,\t*\n/g, ',\n')		// 각 라인의 마지막 쉼표 뒤 탭 제거
+			.replace(/(,*\n)+/g, ',\n')		// 연속된 쉼표 제거
+			.replace(/\n,+/g, '\n')			// 쉼표로 시작되는 라인 제거
+			.replace(/(^,+)|(,+$)/g, '');	// 맨 처음/마지막 쉼표 제거
+		localStorage["blockUserInput"] = blockUserInputVar;
+		document.getElementById("blockUserInput").value = localStorage["blockUserInput"];
 	} else {localStorage["blockUser"] = 0;}
 
 	if (document.getElementById("userHistory").checked == true) {localStorage["userHistory"] = 1;}
