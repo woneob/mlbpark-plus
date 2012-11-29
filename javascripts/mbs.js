@@ -22,39 +22,40 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		var locHref = loc.href;
 		
 		// title icon & team icon
+		// 순서대로 먼저 매칭되는 것을 사용
 		var titIcon = {
-			mobile: {
-			   regex: /(맛폰)/i
-			},
-			img: {
-				regex: /(짤방|jpg|gif|jyp)/i
-			},
-			question: {
-				regex: /(질문|요\?|여\?|죠\?)/i
-			},
-			music: {
-				regex: /(브금|bgm|음악|가수|노래|뮤직)|싸이|강남스타일/i
-			},
-			vs: {
-				regex: /(vs)/i
-			},
-			tv: {
-				regex: /(swf|avi|플짤|영상|flv)/i
-			},
-			adult: {
-				regex: /(19금|\[19\] |\(19\)|주번나|성진국)/i
-			},
-			warn: {
-				regex: /(혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|혐오주의)/i
-			},
-			twitter: {
-				regex: /(트윗|트위터)/i
+			politics : {
+				regex: /안철수|문재인|박근혜|ㅂㄱㅎ|이인제|대선|선거/i
 			},
 			game: {
 				regex: /디아|\[스타|프야매|lol|게임/i
 			},
-			politics : {
-				regex: /안철수|문재인|박근혜|ㅂㄱㅎ|이인제|대선|선거/i
+			twitter: {
+				regex: /(트윗|트위터)/i
+			},
+			warn: {
+				regex: /(혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|혐오주의)/i
+			},
+			adult: {
+				regex: /(19금|\[19\] |\(19\)|주번나|성진국)/i
+			},
+			tv: {
+				regex: /(swf|avi|플짤|영상|flv)/i
+			},
+			vs: {
+				regex: /(vs)/i
+			},
+			music: {
+				regex: /(브금|bgm|음악|가수|노래|뮤직)|싸이|강남스타일/i
+			},
+			question: {
+				regex: /(질문|요\?|여\?|죠\?)/i
+			},
+			img: {
+				regex: /(짤방|jpg|gif|jyp)/i
+			},
+			mobile: {
+				regex: /(맛폰)/i
 			}
 		};
 		var team = {
@@ -98,6 +99,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				for (item in titIcon) {
 					if(titIcon[item].regex.test(t)) {
 						$(this).addClass('ico').addClass('ico_' + item);
+						break;
 					}
 				}
 			}
