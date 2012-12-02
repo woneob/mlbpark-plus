@@ -8,8 +8,9 @@ td[width="687"] > table[height="31"] td[width="70"]{width:85px !important;}
 td[width="687"] > table[height="31"] td:nth-child(10)[align="center"] {width:60px !important;}
 
 /* tbody */
+td[width="687"] > table[width="702"] tr[height="30"] {height:auto;}
 td[width="687"] > table[width="702"] tr[height="30"]:hover {background-color:#f9f9f9;}
-td[width="687"] > table[width="702"] td[height="30"]:hover {background-color:#f9f9f9;}
+td[width="687"] > table[width="702"] tr[height="30"] tr {height:30px;}
 td[width="687"] > table[width="702"] tr[height="30"] > td[align="center"] > table[width="100%"] .A11gray {width:50px !important;}
 td[width="687"] > table[width="702"] td[width="383"] {width:auto !important;}
 td[width="687"] > table[width="702"] td[width="82"] {width:80px !important;font-size:12px;}
