@@ -94,7 +94,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		$links.each(function() {
 			// title icon
 			var item, t = $(this).text();
-			if ((titIconVar == '1' ) || (titIconVar === null)) {
+			if ((titIconVar == '1' ) || (titIconVar === undefined)) {
 				for (item in titIcon) {
 					if(titIcon[item].regex.test(t)) {
 						$(this).addClass('ico').addClass('ico_' + item);
@@ -103,7 +103,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 			}
 			// team icon
-			if ((teamVar == '1' ) || (teamVar === null)) {
+			if ((teamVar == '1' ) || (teamVar === undefined)) {
 				if (locHref.indexOf('mbsC=kbotown') > -1) {
 					$listLnk.addClass('teamTxt');
 					for(item in team) {
@@ -191,7 +191,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				var userId =  $user.find('li:first-child').attr('onclick').match(/id=([^&]+)\'/)[1];
 
 				//content blind
-				if ((blindVar == '1') || (blindVar == null)) {
+				if ((blindVar == '1') || (blindVar === undefined)) {
 					var cobTxt = '<div id=\"warnBtn\"><span>댓글에 COB가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
 					var soapTxt = '<div id=\"warnBtn\"><span>댓글에 비누가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
 
@@ -235,7 +235,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				//google search by image
-				if ((imageSearchVar == '1') || (imageSearchVar == null)) {
+				if ((imageSearchVar == '1') || (imageSearchVar === undefined)) {
 					var $contentImg = $article.find('img');
 					$contentImg.each(function(){
 						var $t = $(this);
@@ -259,7 +259,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				//videoCss
-				if ((videoVar == '1') || (videoVar == null)) {
+				if ((videoVar == '1') || (videoVar === undefined)) {
 					var vdoCss = document.createElement('link');
 					vdoCss.rel = 'stylesheet';
 					vdoCss.type = 'text/css';
