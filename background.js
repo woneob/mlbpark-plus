@@ -5,7 +5,8 @@ chrome.webRequest.onBeforeRequest.addListener(
 		urls:[
 			"http://idolpark.donga.com/*",
 			"http://sports.donga.com/*",
-			"http://mlbpark.donga.com/poll/*"
+			"http://mlbpark.donga.com/poll/*",
+			"http://openapi.donga.com/SPORTS/suggestion"
 		], types: ["sub_frame"]
 	}, ["blocking"]
 );
