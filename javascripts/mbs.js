@@ -25,7 +25,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		// 순서대로 먼저 매칭되는 것을 사용
 		var titIcon = {
 			politics : {
-				regex: /안철수|문재인|박근혜|ㅂㄱㅎ|대선|선거|투표|공약|여론조사/
+				regex: /안철수|문재인|박근혜|ㅂㄱㅎ|대선|선거|투표|공약|여론조사|대통령/
 			},
 			game: {
 				regex: /디아|\[스타|프야매|lol|게임/i
