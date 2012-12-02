@@ -1,18 +1,18 @@
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
-	var titIconVar = response.titIcon;
-	teamVar = response.team;
-	blockVar = response.block;
-	blockInputVar = response.blockInput;
-	blockTypeVar = response.blockType;
-	blockUserVar = response.blockUser;
-	blockUserInputVar = response.blockUserInput;
-	blindVar = response.blind;
-	userHistoryVar = response.userHistory;
-	replyVar = response.reply;
-	userCommentViewVar = response.userCommentView;
-	videoVar = response.video;
-	noticeVar = response.notice;
-	shortcutVar = response.shortcut;
+	var titIconVar = response.titIcon,
+	teamVar = response.team,
+	blockVar = response.block,
+	blockInputVar = response.blockInput,
+	blockTypeVar = response.blockType,
+	blockUserVar = response.blockUser,
+	blockUserInputVar = response.blockUserInput,
+	blindVar = response.blind,
+	userHistoryVar = response.userHistory,
+	replyVar = response.reply,
+	userCommentViewVar = response.userCommentView,
+	videoVar = response.video,
+	noticeVar = response.notice,
+	shortcutVar = response.shortcut,
 	imageSearchVar = response.imageSearch;
 
 	$(document).ready(function() {
@@ -57,8 +57,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			mobile: {
 				regex: /(맛폰)/
 			}
-		};
-		var team = {
+		}, team = {
 			kia: {
 				regex: /(\[기아\]\s?|\[kia\]\s?)/i,
 				searchKeyword: 'kia'
@@ -319,11 +318,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 										'</div>\n'
 									);
 
-									var responseWrapper = $('<div />').append(response.replace(/<script(.|\s)*?\/script>/g, ''));
-									var cmt = responseWrapper.find('a[title=" 에게 메모 보내기"]:contains("' + selectUser + '")');
-									var cmtVal = cmt.closest('td').nextAll();
-									var cmtCout = cmt.length;
-									var $modal = $('#commentModalBox');
+									var responseWrapper = $('<div />').append(response.replace(/<script(.|\s)*?\/script>/g, '')),
+									cmt = responseWrapper.find('a[title=" 에게 메모 보내기"]:contains("' + selectUser + '")'),
+									cmtVal = cmt.closest('td').nextAll(),
+									cmtCout = cmt.length,
+									$modal = $('#commentModalBox');
 
 									$('#cmtCount').html('(' + cmtCout + ')');
 									$('#userCmtList').append(cmtVal);
@@ -364,10 +363,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 			//text URL replacement
 			function urlReplace(){
-				var replacePattern1 = /\s(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-				var replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/ig;
-				var replaceTxt1 = ' <a href="$1" target="_blank">$1</a>';
-				var replaceTxt2 = ' <a href="http://$2" target="_blank">$2</a>';
+				var replacePattern1 = /\s(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
+				replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/ig,
+				replaceTxt1 = ' <a href="$1" target="_blank">$1</a>',
+				replaceTxt2 = ' <a href="http://$2" target="_blank">$2</a>';
 
 				$myArea.find('.G12').html(function(i, val) {
 					return val.replace(replacePattern1, replaceTxt1).replace(replacePattern2, replaceTxt2);
@@ -398,9 +397,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			//comment refresh
 			$myArea.after('<div id="commentRefresh"><button type="button" id="btn_cmtLoad">최신 댓글 불러오기</button><span id="cmtLoader"></span>');
 
-			var mbsC = $('input[name="mbsC"]').val();
-			var mbsIdx = $('input[name="mbsIdx"]').val();
-			var cpage = $('input[name="cpage"]').val();
+			var mbsC = $('input[name="mbsC"]').val(),
+			mbsIdx = $('input[name="mbsIdx"]').val(),
+			cpage = $('input[name="cpage"]').val();
 
 			if ($('input[name="wday"]').length > 0){
 				var wday = $('input[name="wday"]').val();
@@ -463,8 +462,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		$paging.find('> img').remove();
 		$('table[height="31"]').attr('id','tableList');
 
-		var pLink = $currentPage.prev('a').attr('href');
-		var nLink = $currentPage.next('a').attr('href');
+		var pLink = $currentPage.prev('a').attr('href'),
+		nLink = $currentPage.next('a').attr('href');
 
 		if ((shortcutVar == '1') || (shortcutVar == null)) {
 			$(document).keyup(function(e){

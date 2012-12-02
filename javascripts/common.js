@@ -1,5 +1,5 @@
 chrome.extension.sendMessage({action:'width'}, function(response) {
-	var widthVar = response.width;
+	var widthVar = response.width,
 	widthValVar = response.widthVal;
 
 	//custom container width
