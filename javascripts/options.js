@@ -5,7 +5,7 @@ function reset(){
 	document.getElementById('block').checked = false;
 	document.getElementById('blockInfo').style.display = 'none';
 	document.getElementById('blockInput').value = '';
-	document.getElementById('blockType').checked = false;
+	document.getElementById('blockType_1').checked = true;
 	document.getElementById('blockUser').checked = false;
 	document.getElementById('blockUserInfo').style.display = 'none';
 	document.getElementById('blockUserInput').value = '';
