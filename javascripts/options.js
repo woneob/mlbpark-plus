@@ -15,7 +15,7 @@ function reset(){
 	document.getElementById('imageSearch').checked = true;
 	document.getElementById('passwd').checked = false;
 	document.getElementById('notice').checked = false;
-	document.getElementById('notice').checked = true;
+	document.getElementById('shortcut').checked = true;
 	document.getElementById('width').checked = false;
 	document.getElementById('widthVal').value = '858';
 	document.getElementById('slideCurrent').innerText = '858';
