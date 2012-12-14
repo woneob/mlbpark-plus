@@ -24,6 +24,8 @@ function reset(){
 }
 
 function restore(){
+// for test
+console.log('localStorage size: ' + localStorage.length);
 	if (localStorage['titIcon'] == 1 || localStorage['titIcon'] == null) {
 		document.getElementById('titIcon').checked = true;
 	} else {
@@ -134,8 +136,8 @@ function restore(){
 		document.getElementById('slideCurrent').innerText = localStorage['widthVal'];
 	} else {
 		document.getElementById('width').checked = true;
-		document.getElementById('slideCurrent').innerText = localStorage['widthVal'];
 		document.getElementById('range').style.display = 'block';
+		document.getElementById('slideCurrent').innerText = localStorage['widthVal'];
 	}
 
 	if (localStorage['widthVal']) {
