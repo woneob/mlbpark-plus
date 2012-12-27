@@ -1,3 +1,19 @@
+window.addEventListener('message', function(event) {
+	// We only accept messages from ourselves
+	if (window != event.source) return;
+
+	if(event.data.action in {blockUser:1}) {
+		chrome.extension.sendMessage({action:event.data.action, data:event.data}, function(response) {
+			if(response.result) {
+				alert('닉네임 차단: ' + response.user);
+			} else {
+				alert('닉네임 차단 실패\n' + response.message);
+			}
+		});
+	}
+}, false);
+
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	var titIconVar = response.titIcon,
 	teamVar = response.team,
@@ -92,6 +108,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 		};
 		$links.each(function() {
+// TODO: 필요한 부분으로 이동해야함
+// 테스트를 위해 화면에 찍어주는 임시 코드
+$(this).after('<a href="#" onclick="window.postMessage({action:\'blockUser\', user:\'' + $(this).text().charAt(0) + '\'}, \'*\');return false;">blockUserTest</a>');
+
 			// title icon
 			var item, t = $(this).text();
 			if ((titIconVar == '1' ) || (titIconVar === undefined)) {

@@ -39,6 +39,33 @@ chrome.webRequest.onBeforeRequest.addListener(
 	}, ["blocking"]
 );
 
+function blockUser(request, sender) {
+	var user = request.data.user;
+	var blockUserVar = localStorage["blockUserInput"];
+	if(!user) {
+		return {
+			result: false,
+			user: user,
+			message: '잘못된 닉네임: "' + user + '"'
+		};
+	}
+	// 기존 설정된 차단 닉네임이 있는지 확인
+	if(!blockUserVar || 0 > blockUserVar.search(new RegExp('(,|^)' + user.replace(/([\[\]\(\)])/g, '\\$1') + '(,|$)'))) {
+		if(!blockUserVar) localStorage["blockUserInput"] = user;
+		else localStorage["blockUserInput"] = blockUserVar + ',' + user;
+		return {
+			result: true,
+			user: user
+		};
+	} else {
+		return {
+			result: false,
+			user: user,
+			message: '이미 포함되어 있는 닉네임: "' + user + '"'
+		};
+	}
+};
+
 function onMessage(request, sender, sendResponse) {
 	switch (request.action){
 		case 'mbs':
@@ -70,6 +97,9 @@ function onMessage(request, sender, sendResponse) {
 			sendResponse({
 				passwd: localStorage["passwd"]
 			});
+		break;
+		case 'blockUser':
+			sendResponse(blockUser(request, sender));
 		break;
 	}
 }
