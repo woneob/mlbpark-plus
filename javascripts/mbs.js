@@ -1,19 +1,3 @@
-window.addEventListener('message', function(event) {
-	// We only accept messages from ourselves
-	if (window != event.source) return;
-
-	if(event.data.action in {blockUser:1}) {
-		chrome.extension.sendMessage({action:event.data.action, data:event.data}, function(response) {
-			if(response.result) {
-				alert('닉네임 차단: ' + response.user);
-			} else {
-				alert('닉네임 차단 실패\n' + response.message);
-			}
-		});
-	}
-}, false);
-
-
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	var titIconVar = response.titIcon,
 	teamVar = response.team,
@@ -108,10 +92,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 		};
 		$links.each(function() {
-// TODO: 필요한 부분으로 이동해야함
-// 테스트를 위해 화면에 찍어주는 임시 코드
-$(this).after('<a href="#" onclick="window.postMessage({action:\'blockUser\', user:\'' + $(this).text().charAt(0) + '\'}, \'*\');return false;">blockUserTest</a>');
-
 			// title icon
 			var item, t = $(this).text();
 			if ((titIconVar == '1' ) || (titIconVar === undefined)) {
@@ -519,4 +499,34 @@ $(this).after('<a href="#" onclick="window.postMessage({action:\'blockUser\', us
 		target.appendChild(pr2);
 		target.appendChild(pr3);
 	});
+
+	$(window).load(function(){
+		$('div[id^=nik_]').each(function(){
+			var userNick = $(this).next().text();
+
+			$(this).find('ul').append($('<li>닉네임 차단</li>').bind('click',function(){
+				window.postMessage({
+					action:'userBlockDelivery',
+					user: userNick
+				}, '*');
+				return false;
+			}));
+		});
+	})
 });
+
+window.addEventListener('message', function(event) {
+	// We only accept messages from ourselves
+	if (window != event.source) return;
+
+	if(event.data.action in {userBlockDelivery:1}) {
+		chrome.extension.sendMessage({action:event.data.action, data:event.data}, function(response) {
+			if(response.result) {
+				alert('"' + response.user + '" 님이 차단되었습니다.');
+				location.reload();
+			} else {
+				alert('닉네임 차단을 실패했습니다.\n' + response.message);
+			}
+		});
+	}
+}, false);

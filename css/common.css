@@ -115,7 +115,7 @@ td.D11 img {vertical-align:middle;}
 
 /* user information */
 div[id^="nik_"] {background:#fff;margin:0 !important;padding:5px 8px;font:normal 11px Dotum, '돋움', sans-serif;letter-spacing:-1px;color:#666;border-width:1px !important;box-shadow:1px 1px 1px rgba(0,0,0,.1);border-radius:3px;}
-div[id^="nik_"] li {padding:2px 0 !important;}
+div[id^="nik_"] li {padding:2px 0 !important;cursor:pointer;}
 div[id^="nik_"] li:hover {color:#111;}
 
 /* remove --------------------- */
