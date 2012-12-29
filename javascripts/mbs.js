@@ -501,17 +501,20 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	});
 
 	$(window).load(function(){
-		$('div[id^=nik_]').each(function(){
-			var userNick = $(this).next().text();
+		// Add a 'User Block' to User Menu
+		if (blockUserVar == '1' ) {
+			$('div[id^=nik_]').each(function(){
+				var userNick = $(this).next().text();
 
-			$(this).find('ul').append($('<li>닉네임 차단</li>').bind('click',function(){
-				window.postMessage({
-					action:'userBlockDelivery',
-					user: userNick
-				}, '*');
-				return false;
-			}));
-		});
+				$(this).find('ul').append($('<li>닉네임 차단</li>').bind('click',function(){
+					window.postMessage({
+						action:'userBlockDelivery',
+						user: userNick
+					}, '*');
+					return false;
+				}));
+			});
+		}
 	})
 });
 
