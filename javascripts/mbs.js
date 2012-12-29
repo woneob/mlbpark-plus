@@ -522,7 +522,7 @@ window.addEventListener('message', function(event) {
 	if(event.data.action in {userBlockDelivery:1}) {
 		chrome.extension.sendMessage({action:event.data.action, data:event.data}, function(response) {
 			if(response.result) {
-				alert('"' + response.user + '" 님이 차단되었습니다.');
+				alert('"' + response.user + '" 님을 닉네임 차단에 등록했습니다.');
 				location.reload();
 			} else {
 				alert('닉네임 차단을 실패했습니다.\n' + response.message);
