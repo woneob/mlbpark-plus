@@ -26,8 +26,7 @@ https://chrome.google.com/webstore/detail/migdlkcljdaobpodfbpcdpihehhhjefm </fon
 
 ## 이용 방법
 <font size="2">크롬 웹스토어에서 MLBPARK PLUS를 설치한 뒤 **옵션 페이지**에서 원하시는 기능을 활성화/비활성화 시켜주시면 됩니다.<br />
-<small><font color="#888888">* 옵션 페이지는 크롬 우측 상단의 설정 및 관리버튼(몽키스패너 버튼)을 클릭하여 확장프로그램 항목으로 이동 후 설치된 MLBPARK PLUS에 **옵션** 링크를 클릭하시면 됩니다.</font></small><br />
-[soaring2님의 도움말 보기](http://mlbpark.donga.com/mbs/articleV.php?mbsC=bullpen&mbsIdx=883774)</font>
+<small><font color="#888888">* 옵션 페이지는 크롬 우측 상단의 설정 및 관리버튼(몽키스패너 버튼)을 클릭하여 확장프로그램 항목으로 이동 후 설치된 MLBPARK PLUS에 **옵션** 링크를 클릭하시면 됩니다.</font></small></font>
 
 ## 비용 및 라이선스
 <font size="2">MLBPARK PLUS는 비용 없이 모든 기능을 자유롭게 사용할 수 있는 **프리웨어** 입니다.<br />
