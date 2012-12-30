@@ -166,7 +166,11 @@ function save(){
 			.replace(/(^,+)|(,+$)/g, '');	// 맨 처음/마지막 쉼표 제거
 		localStorage["blockInput"] = blockInputVar;
 		document.getElementById("blockInput").value = localStorage["blockInput"];
-	} else {localStorage["block"] = 0;}
+	} else {
+		localStorage["blockInput"] = '';
+		localStorage["block"] = 0;
+		document.getElementById("block").checked = false;
+	}
 
 	if (document.getElementById("blockType_1").checked == true) {localStorage["blockType"] = 1;}
 	else {localStorage["blockType"] = 2;}
@@ -184,7 +188,7 @@ function save(){
 			.replace(/(^,+)|(,+$)/g, '');	// 맨 처음/마지막 쉼표 제거
 		localStorage["blockUserInput"] = blockUserInputVar;
 		document.getElementById("blockUserInput").value = localStorage["blockUserInput"];
-	} else {localStorage["blockUser"] = 0;}
+	} else {localStorage["blockUserInput"] = '';}
 
 	if (document.getElementById("userHistory").checked == true) {localStorage["userHistory"] = 1;}
 	else {localStorage["userHistory"] = 0;}
