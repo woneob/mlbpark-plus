@@ -53,6 +53,7 @@ function storeDefaultOptionValueIfNotExists() {
 	if(null == localStorage['userCommentView']) localStorage['userCommentView'] = 1;
 	if(null == localStorage['video']) localStorage['video'] = 1;
 	if(null == localStorage['imageSearch']) localStorage['imageSearch'] = 1;
+	if(null == localStorage['videoSearch']) localStorage['videoSearch'] = 1;
 	if(null == localStorage['passwd']) localStorage['passwd'] = 0;
 	if(null == localStorage['notice']) localStorage['notice'] = 0;
 	if(null == localStorage['shortcut']) localStorage['shortcut'] = 1;
