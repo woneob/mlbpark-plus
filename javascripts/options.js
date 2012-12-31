@@ -24,8 +24,6 @@ function reset(){
 }
 
 function restore(){
-// for test
-console.log('localStorage size: ' + localStorage.length);
 	if (localStorage['titIcon'] == 1 || localStorage['titIcon'] == null) {
 		document.getElementById('titIcon').checked = true;
 	} else {
