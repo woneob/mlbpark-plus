@@ -17,7 +17,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 	$(document).ready(function() {
 		var $listLnk = $('.G12read');
-		var $links = $listLnk.find('a');
+		var $links = $listLnk.children('a');
 		var loc = window.location;
 		var locHref = loc.href;
 		
