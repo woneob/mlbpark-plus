@@ -67,6 +67,28 @@ function blockUserFn(request, sender) {
 	}
 };
 
+function storeDefaultOptionValueIfNotExists() {
+	if(null == localStorage['titIcon']) localStorage['titIcon'] = 1;
+	if(null == localStorage['team']) localStorage['team'] = 1;
+	if(null == localStorage['blind']) localStorage['blind'] = 1;
+	if(null == localStorage['block']) localStorage['block'] = 0;
+	if(null == localStorage['blockInput']) localStorage['blockInput'] = '';
+	if(null == localStorage['blockType']) localStorage['blockType'] = 1;
+	if(null == localStorage['blockUser']) localStorage['blockUser'] = 0;
+	if(null == localStorage['blockUserInput']) localStorage['blockUserInput'] = '';
+	if(null == localStorage['userHistory']) localStorage['userHistory'] = 0;
+	if(null == localStorage['reply']) localStorage['reply'] = 1;
+	if(null == localStorage['userCommentView']) localStorage['userCommentView'] = 1;
+	if(null == localStorage['video']) localStorage['video'] = 1;
+	if(null == localStorage['imageSearch']) localStorage['imageSearch'] = 1;
+	if(null == localStorage['videoSearch']) localStorage['videoSearch'] = 1;
+	if(null == localStorage['passwd']) localStorage['passwd'] = 0;
+	if(null == localStorage['notice']) localStorage['notice'] = 0;
+	if(null == localStorage['shortcut']) localStorage['shortcut'] = 1;
+	if(null == localStorage['width']) localStorage['width'] = 0;
+	if(null == localStorage['widthVal']) localStorage['widthVal'] = 858;
+}
+
 function onMessage(request, sender, sendResponse) {
 	switch (request.action){
 		case 'mbs':
@@ -105,3 +127,4 @@ function onMessage(request, sender, sendResponse) {
 	}
 }
 chrome.extension.onMessage.addListener(onMessage);
+storeDefaultOptionValueIfNotExists();

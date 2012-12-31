@@ -134,8 +134,8 @@ function restore(){
 		document.getElementById('slideCurrent').innerText = localStorage['widthVal'];
 	} else {
 		document.getElementById('width').checked = true;
-		document.getElementById('slideCurrent').innerText = localStorage['widthVal'];
 		document.getElementById('range').style.display = 'block';
+		document.getElementById('slideCurrent').innerText = localStorage['widthVal'];
 	}
 
 	if (localStorage['widthVal']) {
