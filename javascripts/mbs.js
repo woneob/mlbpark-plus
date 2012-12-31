@@ -16,8 +16,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	imageSearchVar = response.imageSearch;
 
 	$(document).ready(function() {
-		var $listLnk = $('.G12read');
-		var $links = $listLnk.children('a');
+		var $listLnk = $('.G12read > a');
 		var loc = window.location;
 		var locHref = loc.href;
 		
@@ -88,7 +87,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				searchKeyword: '%C7%D1%C8%AD'
 			}
 		};
-		$links.each(function() {
+		$listLnk.each(function() {
 			// title icon
 			var item, t = $(this).text();
 			if ((titIconVar == '1' ) || (titIconVar === undefined)) {
@@ -114,7 +113,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 		});
 
-
 		$.expr[':'].Contains = function(a,i,m){
 			return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
 		};
@@ -126,7 +124,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			if (blockTypeVar == '1' ) {
 				$(blockValue).each(function(i,v){
 					var blockMsg = '차단 키워드('+ v +')가 포함된 글 입니다';
-					var $elem = $listLnk.find('a:Contains("'+ v +'")');
+					var $elem = $listLnk.filter(':Contains("'+ v +'")');
 					$elem.each(function(){
 						var orginTxt = $(this).text();
 
@@ -137,7 +135,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				});
 			} else {
 				$(blockValue).each(function(i,v){
-					var $elem = $listLnk.find('a:Contains("'+ v +'")');
+					var $elem = $listLnk.filter(':Contains("'+ v +'")');
 					$elem.each(function(){
 						$(this).closest('tr[height="30"]').addClass('displayNone').next().addClass('displayNone');
 					});
