@@ -125,6 +125,7 @@ em[data-team="samsung"] {background-position:0 -68px !important;}
 em[data-team="sk"] {background-position:0 -85px !important;}
 em[data-team="lg"] {background-position:0 -102px !important;}
 em[data-team="hanwha"] {background-position:0 -119px !important;}
+em[data-team="nc"] {background-position:0 -136px !important;}
 
 /* extra */
 #warnBtn {display:inline-block;background:#fff;padding:6px 10px 5px;color:#555;font:12px 'Gulim';cursor:pointer;border-width:1px;border-style:solid;border-color:#e7e7e7 #c3c3c3 #bfbfbf #d8d8d8;box-shadow:1px 1px 1px rgba(0,0,0,.1);border-radius:5px;}

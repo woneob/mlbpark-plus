@@ -78,6 +78,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				regex: /(\[sk\]\s?)/i,
 				searchKeyword: 'sk'
 			},
+			nc: {
+				regex: /(\[엔씨\]\s?|\[nc\]\s?)/i,
+				searchKeyword: 'nc'
+			},
 			lg: {
 				regex: /(\[엘지\]\s?|\[lg\]\s?)/i,
 				searchKeyword: 'lg'
