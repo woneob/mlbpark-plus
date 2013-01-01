@@ -56,7 +56,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}, team = {
 			kia: {
 				regex: /(\[기아\]\s?|\[kia\]\s?)/i,
-				searchKeyword: 'kia'
+				searchKeyword: 'kia+OR+%B1%E2%BE%C6'
 			},
 			nexen: {
 				regex: /(\[넥센\]\s?)/,
@@ -76,15 +76,15 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			},
 			sk: {
 				regex: /(\[sk\]\s?)/i,
-				searchKeyword: 'sk'
+				searchKeyword: 'sk+OR+%BF%A1%BD%BA%C4%C9%C0%CC'
 			},
 			nc: {
 				regex: /(\[엔씨\]\s?|\[nc\]\s?)/i,
-				searchKeyword: 'nc'
+				searchKeyword: 'nc+OR+%BF%A3%BE%BE'
 			},
 			lg: {
 				regex: /(\[엘지\]\s?|\[lg\]\s?)/i,
-				searchKeyword: 'lg'
+				searchKeyword: 'lg+OR+%BF%A4%C1%F6'
 			},
 			hanwha: {
 				regex: /(\[한화\]\s?)/,
