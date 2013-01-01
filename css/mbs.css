@@ -115,8 +115,8 @@ form[name="writeForm"] td[width="56"] a[href^="javascript:startRequest"] {displa
 .blockTitle:before {display:none !important;}
 
 /* team */
-.teamTxt {margin-left:54px;}
-.G12read em {position:absolute;display:inline-block;margin:1px 0 0 0;width:48px;height:17px;overflow:hidden;background:url('chrome-extension://__MSG_@@extension_id__/images/team.png') no-repeat;cursor:pointer;}
+.team_show .G12read {padding-left:54px;}
+.G12read em {position:absolute;display:inline-block;margin:1px 0 0 -54px;width:48px;height:17px;overflow:hidden;background:url('chrome-extension://__MSG_@@extension_id__/images/team.png') no-repeat;cursor:pointer;}
 .G12read em:hover {opacity:.8;}
 em[data-team="nexen"] {background-position:0 -17px !important;}
 em[data-team="doosan"] {background-position:0 -34px !important;}
