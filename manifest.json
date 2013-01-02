@@ -92,6 +92,10 @@
 
 		}
 	],
+	"browser_action": {
+		"default_title": "MLBPARK PLUS",
+		"default_popup": "popup.html"
+	},
 	"background": {
 		"scripts": ["background.js"]
 	},

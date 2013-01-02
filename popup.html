@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>MLBPARK PLUS</title>
+<base target="_blank" />
+<style>
+* {padding:0;margin:0;}
+body {padding:10px;background:#fff;font:12px/1.4 Dotum,'돋움',sans-serif;}
+#container {width:240px;}
+header {position:reletive;margin-bottom:10px;padding:10px 0;border-bottom:1px solid #e3e3e3;font-size:11px;}
+header span {font-family:Arial,sans-serif;color:#999;}
+header img {margin-right:5px;vertical-align: middle;}
+header .gotoOptions {position:absolute;top:21px;right:11px;padding-left:12px;background:url('images/icon_settings.png') no-repeat 0 45%;text-decoration:none;letter-spacing:-1px;word-spacing:-1px;color:#666;}
+header .gotoOptions:hover {color:#333;}
+
+#contents {padding:5px;}
+#contents .inputRow {position:relative;margin-bottom:8px;padding-left:20px;}
+#contents .inputRow input[type="checkbox"] {position:absolute;left:0;top:2px;}
+#contents .inputRow label {letter-spacing:-1px;}
+#contents .inputRow input[type="checkbox"]:not(:checked) + label {color:#888;}
+#contents .inputRow input[type="text"] {width:150px;padding:2px 5px;font:11px/1.4 Dotum,돋움,sans-serif;color:#444;background:#fcfcfc;border:1px solid #d7d7d7;}
+#contents .inputRow button {height:21px;padding:0 4px;background:-webkit-linear-gradient(top,#fff 0,#f4f4f4 100%);border-width:1px;border-style:solid;border-color:#ededed #cecece #c2c2c2 #ededed;border-radius:1px;font:11px/1.4 Dotum,돋움,sans-serif;letter-spacing:-1px;color:#666;cursor:pointer;}
+
+footer {padding-top:10px;border-top:1px solid #e3e3e3;font:11px Arial,sans-serif;}
+footer a {color:#0092ca;}
+footer a:hover {color:#006aa1;}
+
+#links_external {font-size:11px;}
+#links_external li {display:inline;}
+#links_external li + li:before {content:'\2022';margin-right:3px;color:#999;font-size:10px;}
+#links_external a {text-decoration:none;}
+.twitter {padding-left:14px;background:url('images/icon_twitter.png') no-repeat 0 50%;}
+#status {visibility:hidden;height:20px;font-size:11px;text-align:center;padding-right:20px;letter-spacing:-1px;color:#fb6101;}
+#message:before {content:url('images/check.png');vertical-align:middle;margin-right:2px;}
+</style>
+</head>
+<body>
+	<div id="container">
+		<header>
+			<img src="images/logo_small.png" alt="MLBPARK PLUS" />
+			<span>ver.2.9</span>
+			<a href="options.html" class="gotoOptions">전체 옵션</a>
+		</header>
+		
+		<div id="contents">
+			<div class="inputRow">
+				<input type="checkbox" id="titIcon" />
+				<label for="titIcon">제목 아이콘 사용</label>
+			</div>
+			<div class="inputRow">
+				<input type="checkbox" id="team" />
+				<label for="team">팀 아이콘 사용</label>
+			</div>
+			<div class="inputRow">
+				<input type="checkbox" id="block" />
+				<label for="block">제목 차단 사용</label>
+				<div class="txtInput">
+					<input type="text" placeholder="차단할 키워드 입력" />
+					<button type="button">추가</button>
+				</div>
+			</div>
+			<div class="inputRow">
+				<input type="checkbox" id="blockUser" />
+				<label for="blockUser">닉네임 차단 사용</label>
+				<div class="txtInput">
+					<input type="text" placeholder="차단할 닉네임 입력" />
+					<button type="button">추가</button>
+				</div>
+			</div>
+			<div class="inputRow">
+				<input type="checkbox" id="userHistory" />
+				<label for="userHistory">본문 작성자의 최신 게시물 보기</label>
+			</div>
+		</div>
+		
+		<div id="status">
+			<p id="message">저장되었습니다.</p>
+		</div>
+
+		<footer>
+			<div id="links_external">
+				<ul>
+					<li><a href="http://mlbpark.donga.com" title="엠엘비파크 바로가기">MLBPARK</a></li>
+					<li><a href="https://chrome.google.com/webstore/detail/mlbpark-plus/migdlkcljdaobpodfbpcdpihehhhjefm" title="크롬 웹스토어 바로가기">Web Store</a></li>
+					<li><a href="https://github.com/woneob/MLBPARK-PLUS" title="깃허브 바로가기">github</a></li>
+				</ul>
+			</div>
+			<p class="twitter">Follow <a href="http://twitter.com/mlbparkplus" title="MLBPARK PLUS 공식 트위터">@mlbparkplus</a></p>
+		</footer>
+	</div>
+</body>
+</html>
