@@ -124,7 +124,14 @@ function onMessage(request, sender, sendResponse) {
 		case 'userBlockDelivery':
 			sendResponse(blockUserFn(request, sender));
 		break;
+		case 'extensionInfo':
+			sendResponse(extensionInfo);
+		break;
 	}
 }
 chrome.extension.onMessage.addListener(onMessage);
 storeDefaultOptionValueIfNotExists();
+
+// Chrome extension info
+var extensionInfo = '';
+chrome.management.get(chrome.i18n.getMessage('@@extension_id'), function(result) {extensionInfo = result;});
