@@ -521,14 +521,16 @@ window.addEventListener('message', function(event) {
 	// We only accept messages from ourselves
 	if (window != event.source) return;
 
-	if(event.data.action in {userBlockDelivery:1}) {
-		chrome.extension.sendMessage({action:event.data.action, data:event.data}, function(response) {
-			if(response.result) {
-				alert('"' + response.user + '" 님을 닉네임 차단에 등록했습니다.');
-				location.reload();
-			} else {
-				alert('닉네임 차단을 실패했습니다.\n' + response.message);
-			}
-		});
+	switch(event.data.action) {
+		case 'userBlockDelivery' :
+			chrome.extension.sendMessage({action:event.data.action, data:event.data}, function(response) {
+				if(response.result) {
+					alert('"' + response.user + '" 님을 닉네임 차단에 등록했습니다.');
+					location.reload();
+				} else {
+					alert('닉네임 차단을 실패했습니다.\n' + response.message);
+				}
+			});
+		break;
 	}
 }, false);
