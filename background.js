@@ -39,6 +39,36 @@ chrome.webRequest.onBeforeRequest.addListener(
 	}, ["blocking"]
 );
 
+// 제목 차단 키워드 등록 - 사용자 차단과 거의 동일(bad smell, 비슷한게 또 추가되면 refactoring 필요)
+function blockTitlteFn(request, sender) {
+	var title = request.data.title;
+	var blockVar = localStorage["blockInput"];
+	if(!title) {
+		return {
+			result: false,
+			title: title,
+			message: '알 수 없는 키워드(' + title + ') 입니다.'
+		};
+	}
+
+	// 기존 설정된 차단 키워드가 있는지 확인
+	if(!blockVar || 0 > blockVar.search(new RegExp('(,|^)' + title.replace(/([\[\]\(\)])/g, '\\$1') + '(,|$)'))) {
+		if(!blockVar) localStorage["blockInput"] = title;
+		else localStorage["blockInput"] = blockVar + ',' + title;
+		return {
+			result: true,
+			title: title
+		};
+	} else {
+		return {
+			result: false,
+			title: title,
+			message: '키워드 "' + title + '"는 이미 차단되어 있습니다.'
+		};
+	}
+};
+
+// 사용자 차단 등록 - 제목 키워드 차단과 거의 동일(bad smell, 비슷한게 또 추가되면 refactoring 필요)
 function blockUserFn(request, sender) {
 	var user = request.data.user;
 	var blockUserVar = localStorage["blockUserInput"];
@@ -121,17 +151,13 @@ function onMessage(request, sender, sendResponse) {
 				passwd: localStorage["passwd"]
 			});
 		break;
+		case 'titleBlockDelivery':
+			sendResponse(blockTitlteFn(request, sender));
+		break;
 		case 'userBlockDelivery':
 			sendResponse(blockUserFn(request, sender));
-		break;
-		case 'extensionInfo':
-			sendResponse(extensionInfo);
 		break;
 	}
 }
 chrome.extension.onMessage.addListener(onMessage);
 storeDefaultOptionValueIfNotExists();
-
-// Chrome extension info
-var extensionInfo = '';
-chrome.management.get(chrome.i18n.getMessage('@@extension_id'), function(result) {extensionInfo = result;});
