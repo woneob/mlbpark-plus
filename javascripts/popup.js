@@ -75,7 +75,7 @@ $(window).load(function(){
 	// extension 정보를 가져와서 버전을 보여준다.
 	chrome.management.get(chrome.i18n.getMessage('@@extension_id'), function(result) {
 		extensionInfo = result;
-		$('#version').text(extensionInfo.version);
+		$('#version').text('ver. ' + extensionInfo.version);
 	});
 
 	restore();
