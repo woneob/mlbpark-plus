@@ -31,7 +31,8 @@ footer a:hover {color:#006aa1;}
 #links_external li + li:before {content:'\2022';margin-right:3px;color:#999;font-size:10px;}
 #links_external a {text-decoration:none;}
 .twitter {padding-left:14px;background:url('images/icon_twitter.png') no-repeat 0 50%;}
-#status {visibility:hidden;height:20px;font-size:11px;text-align:center;padding-right:20px;letter-spacing:-1px;color:#fb6101;}
+#status {height:20px;font-size:11px;text-align:center;padding-right:20px;letter-spacing:-1px;color:#fb6101;}
+#message {display:none;}
 #message:before {content:url('images/check.png');vertical-align:middle;margin-right:2px;}
 </style>
 <script src="./javascripts/jquery-1.8.1.min.js"></script>
@@ -77,7 +78,7 @@ footer a:hover {color:#006aa1;}
 		</div>
 		
 		<div id="status">
-			<p id="message">저장되었습니다.</p>
+			<p id="message"></p>
 		</div>
 
 		<footer>
