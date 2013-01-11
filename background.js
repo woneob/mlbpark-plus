@@ -161,3 +161,7 @@ function onMessage(request, sender, sendResponse) {
 }
 chrome.extension.onMessage.addListener(onMessage);
 storeDefaultOptionValueIfNotExists();
+chrome.runtime.onInstalled.addListener(function(detail) {
+	chrome.tabs.create({url: 'options.html'});
+	alert(JSON.stringify(detail));
+});
