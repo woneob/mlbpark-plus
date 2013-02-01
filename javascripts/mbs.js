@@ -176,7 +176,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		if (noticeVar == '1') {
 			var $noticeEl = $('.A11gray:contains("공지")');
 			$noticeEl.each(function(){
-				$(this).closest('table[width="702"] > tbody > tr').addClass('displayNone').next().addClass('displayNone');
+				var parent = this.parentNode.parentNode.parentNode.parentNode.parentNode;
+				parent.className = 'displayNone';
+				parent.nextSibling.nextSibling.className = 'displayNone';
 			});
 		}
 
@@ -220,7 +222,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					'	<div id="historyList"></div>\n'+
 					'</div>'
 					);
-
 
 					$.ajax({
 						type: "GET",
