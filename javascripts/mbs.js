@@ -93,7 +93,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		};
 		$listLnk.each(function() {
 			// title icon
-			var item, t = $(this).text();
+			var item, t = this.textContent;
 			if ((titIconVar == '1' ) || (titIconVar === undefined)) {
 				for (item in titIcon) {
 					if(titIcon[item].regex.test(t)) {
