@@ -132,7 +132,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				if (blockTypeVar == '1' ) {
 					$elem.each(function(){
 						var orginTxt = this.textContent;
-
 						$(this).text(blockMsg).addClass('blockTitle').attr('title','제목 : ' + orginTxt).on('click',function(){
 							return confirm("차단된 글을 열람하시겠습니까?");
 						});
@@ -159,9 +158,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					$('td[width="82"] font').wrap('<a href="#" onclick="return false;" class="disabled" />');
 				}
 
-				$(blockUserValue).each(function(i,v){
-					var $userNick = $('td[width="82"]').find('a:contains("'+ v +'")');
-					var $userCmtNick = $(myArea).find('a:contains("' + v + '")');
+				for (var u = 0; u < blockUserValue.length; u++) {
+					var $userNick = $('td[width="82"]').find('a:contains("'+ blockUserValue[u] +'")');
+					var $userCmtNick = $(myArea).find('a:contains("' + blockUserValue[u] + '")');
 
 					$userNick.each(function(){
 						$(this).closest('tr[height="30"]').addClass('displayNone').next().addClass('displayNone');
@@ -169,7 +168,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					$userCmtNick.each(function(){
 						$(this).closest('table').closest('tr').addClass('displayNone').next().addClass('displayNone');
 					});
-				});
+				}
 			}
 		}userBlock();
 
