@@ -105,7 +105,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			// team icon
 			if ((teamVar == '1' ) || (teamVar === undefined)) {
 				if (locHref.indexOf('mbsC=kbotown') > -1) {
-					$(document.body).addClass('team_show');
+					document.body.className = 'team_show';
 					for(item in team) {
 						var matched = team[item].regex.exec(t);
 						if(matched) {
