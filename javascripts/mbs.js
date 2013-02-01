@@ -97,7 +97,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			if ((titIconVar == '1' ) || (titIconVar === undefined)) {
 				for (item in titIcon) {
 					if(titIcon[item].regex.test(t)) {
-						$(this).addClass('ico').addClass('ico_' + item);
+						this.className = 'ico ico_' + item;
 						break;
 					}
 				}
