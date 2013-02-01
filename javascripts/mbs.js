@@ -132,7 +132,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					$elem.each(function(){
 						var orginTxt = this.textContent;
 
-						$(this).text(blockMsg).addClass('blockTitle').attr('title','제목 : ' + orginTxt).bind('click',function(){
+						$(this).text(blockMsg).addClass('blockTitle').attr('title','제목 : ' + orginTxt).on('click',function(){
 							return confirm("차단된 글을 열람하시겠습니까?");
 						});
 					});
@@ -200,7 +200,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						$article.css('display','none').before(soapTxt);
 					}
 
-					$('#warnBtn').bind('click',function() {
+					$('#warnBtn').on('click',function() {
 						$(this).remove();
 						$article.slideDown(300);
 					});
@@ -285,7 +285,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						}
 
 						var $btn_userCmt = $('.btn_userCmt');
-						$('.btn_userCmt').bind('click',function(){
+						$('.btn_userCmt').on('click',function(){
 							var $this = $(this);
 							$('#commentModal').remove();
 
@@ -332,7 +332,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 										$modal.css('top',height/2.3 - vPosition/2);
 									});
 
-									$('#modalFormTextarea').click(function(){
+									$('#modalFormTextarea').on('click',function(){
 										if ($('#loginArea a:first-child').text() == '로그인'){
 											var loginConfirm = confirm("로그인 후 사용 가능합니다.\n로그인 페이지로 이동하시겠습니까?");
 											if (loginConfirm == true){
@@ -352,7 +352,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							});
 						});
 
-						$('#commentModalMask,#commentModalClose').live('click',function(){
+						$(document.body).on('click','#commentModalMask,#commentModalClose',function(){
 							$('#commentModal').remove();
 						});
 					}
@@ -378,7 +378,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				if ((replyVar == '1') || (replyVar == null)) {
 					var btn = '<button type=\"button\" class=\"btn_reply\" title=\"답글 달기\">[답글]</button>';
 					$(myArea).find('.G12').append(btn);
-					$('.btn_reply').bind('click',function(){
+					$('.btn_reply').on('click',function(){
 						var username = $(this).closest('table').parent().prev().find('a').text();
 						if (!$.trim($(textarea).val())){
 							$(textarea).focus().val(username + '// ');
@@ -405,7 +405,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				var wday = document.getElementsByName('co_day')[0].value;
 			}
 
-			$('#btn_cmtLoad').bind('click',function(){
+			$('#btn_cmtLoad').on('click',function(){
 				$.ajax({
 					type: 'post',
 					async: true,
@@ -504,7 +504,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			$('div[id^=nik_]').each(function(){
 				var userNick = this.nextSibling.textContent;
 
-				$(this).find('ul').append($('<li>닉네임 차단</li>').bind('click',function(){
+				$(this).find('ul').append($('<li>닉네임 차단</li>').on('click',function(){
 					window.postMessage({
 						action:'userBlockDelivery',
 						user: userNick
