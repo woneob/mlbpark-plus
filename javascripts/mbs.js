@@ -148,7 +148,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 
 		//component
-		var $myArea = $('#myArea');
+		var myArea = document.getElementById('myArea');
 		var $user = $('td[width="18%"].D11 div[id^="nik_"]');
 		var nickname = $user.next().text();
 
@@ -163,7 +163,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				$(blockUserValue).each(function(i,v){
 					var $userNick = $('td[width="82"]').find('a:contains("'+ v +'")');
-					var $userCmtNick = $myArea.find('a:contains("' + v + '")');
+					var $userCmtNick = $(myArea).find('a:contains("' + v + '")');
 
 					$userNick.each(function(){
 						$(this).closest('tr[height="30"]').addClass('displayNone').next().addClass('displayNone');
@@ -194,9 +194,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					var cobTxt = '<div id=\"warnBtn\"><span>댓글에 COB가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
 					var soapTxt = '<div id=\"warnBtn\"><span>댓글에 비누가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
 
-					if ($myArea.find('.G12:Contains("COB")').length > 0)  {
+					if ($(myArea).find('.G12:Contains("COB")').length > 0)  {
 						$article.css('display','none').before(cobTxt);
-					} else if ($myArea.find('.G12:contains("비누")').length > 0) {
+					} else if ($(myArea).find('.G12:contains("비누")').length > 0) {
 						$article.css('display','none').before(soapTxt);
 					}
 
@@ -269,7 +269,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				//highlight comment writer
 				function highlightWriter(){
 
-					$myArea.find('td[width="140"] a:contains("' + nickname +'")').each(function(){
+					$(myArea).find('td[width="140"] a:contains("' + nickname +'")').each(function(){
 						this.className += 'me';
 					});
 				}highlightWriter();
@@ -280,7 +280,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						var viewCmt = '<button type="button" class="btn_userCmt" title="이 글에 단 댓글 보기">?</button>';
 
 						if(loc.pathname !== "/mbs/commentV.php"){
-							$myArea.find('a[title=" 에게 메모 보내기"]').each(function(){
+							$(myArea).find('a[title=" 에게 메모 보내기"]').each(function(){
 								$(this).after(viewCmt);
 							});
 						}
@@ -367,7 +367,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				replaceTxt1 = ' <a href="$1" target="_blank">$1</a>',
 				replaceTxt2 = ' <a href="http://$2" target="_blank">$2</a>';
 
-				$myArea.find('.G12').html(function(i, val) {
+				$(myArea).find('.G12').html(function(i, val) {
 					return val.replace(replacePattern1, replaceTxt1).replace(replacePattern2, replaceTxt2);
 				});
 			}urlReplace();
@@ -378,7 +378,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			function replyButton(){
 				if ((replyVar == '1') || (replyVar == null)) {
 					var btn = '<button type=\"button\" class=\"btn_reply\" title=\"답글 달기\">[답글]</button>';
-					$myArea.find('.G12').append(btn);
+					$(myArea).find('.G12').append(btn);
 					$('.btn_reply').bind('click',function(){
 						var username = $(this).closest('table').parent().prev().find('a').text();
 						if (!$.trim($textarea.val())){
@@ -394,7 +394,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}replyButton();
 
 			//comment refresh
-			$myArea.after('<div id="commentRefresh"><button type="button" id="btn_cmtLoad">최신 댓글 불러오기</button><span id="cmtLoader"></span>');
+			$(myArea).after('<div id="commentRefresh"><button type="button" id="btn_cmtLoad">최신 댓글 불러오기</button><span id="cmtLoader"></span>');
 
 			var mbsC = document.getElementsByName('mbsC')[0].value,
 			mbsIdx =  document.getElementsByName('mbsIdx')[0].value,
@@ -415,7 +415,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						 $('#cmtLoader').css('opacity','1');
 					},
 					success: function(data) {
-						$myArea.html(data);
+						$(myArea).html(data);
 						userBlock();
 						highlightWriter();
 						viewUserComment();
