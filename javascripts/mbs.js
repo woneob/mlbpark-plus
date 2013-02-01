@@ -270,7 +270,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				function highlightWriter(){
 
 					$myArea.find('td[width="140"] a:contains("' + nickname +'")').each(function(){
-						this.classList.add('me');
+						this.className += 'me';
 					});
 				}highlightWriter();
 
