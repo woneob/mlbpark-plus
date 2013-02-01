@@ -457,14 +457,13 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 
 		//shotcut keys
-		var $paging = $('.paging');
-		$currentPage = $paging.find('font');
+		var paging = document.getElementsByClassName('paging');
+		var $currentPage = $(paging).find('font');
 
-		$paging.find('> img').remove();
-		$('table[height="31"]').attr('id','tableList');
+		$(paging).find('> img').remove();
 
-		var pLink = $currentPage.prev('a').attr('href'),
-		nLink = $currentPage.next('a').attr('href');
+		var pLink = $currentPage[0].previousSibling.href;
+		var nLink = $currentPage[0].nextSibling.href;
 
 		if ((shortcutVar == '1') || (shortcutVar == null)) {
 			$(document).keyup(function(e){
@@ -479,7 +478,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						window.location.href = nLink;
 					}
 					if (e.which === 68) {
-						$('body').animate({scrollTop: $('#tableList').offset().top}, 300);
+						$(document.body).animate({scrollTop: $('table[height="31"]').offset().top}, 300);
 					}
 				}
 			});
