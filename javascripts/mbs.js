@@ -503,7 +503,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		// Add a 'User Block' to User Menu
 		if (blockUserVar == '1' ) {
 			$('div[id^=nik_]').each(function(){
-				var userNick = $(this).next().text();
+				var userNick = this.nextSibling.textContent;
 
 				$(this).find('ul').append($('<li>닉네임 차단</li>').bind('click',function(){
 					window.postMessage({
