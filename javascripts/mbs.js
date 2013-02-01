@@ -298,7 +298,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 								cache: false,
 								success: function(response) {
 									var selectUser = $this.prev().text();
-									$('body').append(
+									$(document.body).append(
 										'<div id="commentModal">\n'+
 										'	<div id="commentModalMask"></div>\n'+
 										'	<div id="commentModalBox">\n'+
