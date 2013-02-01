@@ -468,7 +468,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		if ((shortcutVar == '1') || (shortcutVar == null)) {
 			$(document).keyup(function(e){
-				if (loc.pathname != '/mbs/commentV.php'){
+				if (loc.pathname !== '/mbs/commentV.php'){
 					if ($(e.target).is('input, textarea')) {
 						return;
 					}
