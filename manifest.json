@@ -12,7 +12,7 @@
 		{
 			"matches": ["http://mlbpark.donga.com/*"]
 			,"css":["css/common.css"]
-			,"js":["javascripts/jquery-1.8.1.min.js","javascripts/common.js"]
+			,"js":["javascripts/jquery-1.9.0.min.js","javascripts/common.js"]
 			,"run_at": "document_start"
 		},
 		{
