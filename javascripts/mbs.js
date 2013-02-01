@@ -268,7 +268,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				//highlight comment writer
 				function highlightWriter(){
-
 					$(myArea).find('td[width="140"] a:contains("' + nickname +'")').each(function(){
 						this.className += 'me';
 					});
@@ -373,7 +372,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}urlReplace();
 
 			//reply button
-			var $textarea = $('textarea[name="line_content"]');
+			var textarea = document.getElementsByName('line_content');
 
 			function replyButton(){
 				if ((replyVar == '1') || (replyVar == null)) {
@@ -381,12 +380,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					$(myArea).find('.G12').append(btn);
 					$('.btn_reply').bind('click',function(){
 						var username = $(this).closest('table').parent().prev().find('a').text();
-						if (!$.trim($textarea.val())){
-							$textarea.focus().val(username + '// ');
+						if (!$.trim($(textarea).val())){
+							$(textarea).focus().val(username + '// ');
 						} else {
 							var question = confirm('아직 작성 중인 댓글이 있습니다.\n다시 작성하시겠습니까?');
 							if (question){
-								$textarea.focus().val(username + '// ');
+								$(textarea).focus().val(username + '// ');
 							} return false; 
 						} return false;
 					});
