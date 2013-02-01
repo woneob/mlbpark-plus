@@ -240,7 +240,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						var $t = $(this);
 						$t.load(function(){
 							if ($t.width() > 50 && $t.height() > 50) {
-								var src = $(this).attr('src');
+								var src = this.src;
 								if(src.substr(0,7) != 'http://') {
 									src = 'http://mlbpark.donga.com' + src;
 								}
