@@ -125,10 +125,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		if (blockVar == '1' ) {
 			var blockValue = response.blockInput.split(/[ \t\n]*,[ \t\n]*/);
 
-			if (blockTypeVar == '1' ) {
-				$(blockValue).each(function(i,v){
-					var blockMsg = '차단 키워드('+ v +')가 포함된 글 입니다';
-					var $elem = $(listLnk).filter(':Contains("'+ v +'")');
+			for (var j = 0; j < blockValue.length; j++) {
+				var blockMsg = '차단 키워드('+ blockValue[j] +')가 포함된 글 입니다';
+				var $elem = $(listLnk).filter(':Contains("'+ blockValue[j] +'")');
+
+				if (blockTypeVar == '1' ) {
 					$elem.each(function(){
 						var orginTxt = this.textContent;
 
@@ -136,14 +137,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							return confirm("차단된 글을 열람하시겠습니까?");
 						});
 					});
-				});
-			} else {
-				$(blockValue).each(function(i,v){
-					var $elem = $(listLnk).filter(':Contains("'+ v +'")');
+				} else {
 					$elem.each(function(){
 						$(this).closest('tr[height="30"]').addClass('displayNone').next().addClass('displayNone');
 					});
-				});
+				}
 			}
 		}
 
@@ -244,7 +242,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					$contentImg.each(function(){
 						var $t = $(this);
 						$t.load(function(){
-							if ($t.width() > 50 && $t.height() > 50) {
+							if ($t[0].clientWidth > 50 && $t[0].clientHeight > 50) {
 								var src = this.src;
 								if(src.substr(0,7) != 'http://') {
 									src = 'http://mlbpark.donga.com' + src;
