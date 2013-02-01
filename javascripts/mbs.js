@@ -396,14 +396,14 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			//comment refresh
 			$myArea.after('<div id="commentRefresh"><button type="button" id="btn_cmtLoad">최신 댓글 불러오기</button><span id="cmtLoader"></span>');
 
-			var mbsC = $('input[name="mbsC"]').val(),
-			mbsIdx = $('input[name="mbsIdx"]').val(),
-			cpage = $('input[name="cpage"]').val();
+			var mbsC = document.getElementsByName('mbsC')[0].value,
+			mbsIdx =  document.getElementsByName('mbsIdx')[0].value,
+			cpage =document.getElementsByName('cpage')[0].value;
 
-			if ($('input[name="wday"]').length > 0){
-				var wday = $('input[name="wday"]').val();
+			if (document.getElementsByName('wday').length > 0){
+				var wday = document.getElementsByName('wday')[0].value;
 			} else {
-				var wday = $('input[name="co_day"]').val();
+				var wday = document.getElementsByName('co_day')[0].value;
 			}
 
 			$('#btn_cmtLoad').bind('click',function(){
