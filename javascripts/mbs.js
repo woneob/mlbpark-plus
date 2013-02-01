@@ -224,12 +224,17 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					'</div>'
 					);
 
-					$.get('http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId, function(response){
-						$('#historyList').append($(response).find('td[bgcolor="#FFFFFF"] > table:nth-child(2)').html()).find('a[target]').removeAttr('target');
-					});
 
-					$("#historyLoading").ajaxStop(function(){
-						$(this).remove();
+					$.ajax({
+						type: "GET",
+						url: 'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId,
+						cache: false,
+						success: function(response) {
+							$('#historyList').append($(response).find('td[bgcolor="#FFFFFF"] > table:nth-child(2)').html()).find('a[target]').removeAttr('target');
+						},
+						complete: function(){
+							$("#historyLoading").remove();
+						}
 					});
 				}
 
@@ -291,7 +296,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 							$.ajax({
 								type: "GET",
-								url: 'http://mlbpark.donga.com/mbs/commentRV.php?mbsC='+mbsC+'&comment_ymd='+wday+'&comment_idx='+mbsIdx+'&cpage='+cpage,
+								url: 'http://mlbpark.donga.com/mbs/commentRV.php?mbsC='+mbsC+'&comment_ymd='+wday+'&comment_idx='+mbsIdx,
 								cache: false,
 								success: function(response) {
 									var selectUser = $this.prev().text();
@@ -308,7 +313,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 										'			<input type="hidden" name="mbsC" value="'+mbsC+'" />\n'+
 										'			<input type="hidden" name="mbsIdx" value="'+mbsIdx+'" />\n'+
 										'			<input type="hidden" name="wday" value="'+wday+'" />\n'+
-										'			<input type="hidden" name="cpage" value="'+cpage+'" />\n'+
 										'			<textarea id="modalFormTextarea" name="line_content" cols="75" rows="3" autocomplete="off">'+selectUser+'// </textarea>\n'+
 										'			<button type="submit">댓글 등록</button>\n'+
 										'		</form>\n'+
@@ -395,21 +399,20 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			//comment refresh
 			$(myArea).after('<div id="commentRefresh"><button type="button" id="btn_cmtLoad">최신 댓글 불러오기</button><span id="cmtLoader"></span>');
 
-			var mbsC = document.getElementsByName('mbsC')[0].value,
-			mbsIdx =  document.getElementsByName('mbsIdx')[0].value,
-			cpage =document.getElementsByName('cpage')[0].value;
+			var mbsC = document.getElementsByName('mbsC')[0].value;
+			var mbsIdx =  document.getElementsByName('mbsIdx')[0].value;
 
-			if (document.getElementsByName('wday').length > 0){
-				var wday = document.getElementsByName('wday')[0].value;
-			} else {
+			if (loc.pathname == '/mbs/commentV.php'){
 				var wday = document.getElementsByName('co_day')[0].value;
+			} else {
+				var wday = document.getElementsByName('wday')[0].value;
 			}
 
 			$('#btn_cmtLoad').on('click',function(){
 				$.ajax({
 					type: 'post',
 					async: true,
-					url: 'http://mlbpark.donga.com/mbs/commentRV.php?mbsC='+mbsC+'&comment_ymd='+wday+'&comment_idx='+mbsIdx+'&cpage='+cpage,
+					url: 'http://mlbpark.donga.com/mbs/commentRV.php?mbsC='+mbsC+'&comment_ymd='+wday+'&comment_idx='+mbsIdx,
 					beforeSend: function() {
 						 $('#cmtLoader').css('opacity','1');
 					},
