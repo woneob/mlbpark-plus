@@ -130,7 +130,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					var blockMsg = '차단 키워드('+ v +')가 포함된 글 입니다';
 					var $elem = $listLnk.filter(':Contains("'+ v +'")');
 					$elem.each(function(){
-						var orginTxt = $(this).text();
+						var orginTxt = this.textContent;
 
 						$(this).text(blockMsg).addClass('blockTitle').attr('title','제목 : ' + orginTxt).bind('click',function(){
 							return confirm("차단된 글을 열람하시겠습니까?");
