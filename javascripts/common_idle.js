@@ -38,7 +38,7 @@ if ($('#loginArea a:first-child').text() == '로그아웃'){
 					'	</div>\n'+
 					'</div>\n'
 				);
-				$('#toasterClose').bind('click',function(){
+				$('#toasterClose').on('click',function(){
 					$('#memoAlarm').fadeOut(300,function(){
 						$(this).remove();
 					});
@@ -48,4 +48,3 @@ if ($('#loginArea a:first-child').text() == '로그아웃'){
 		}
 	});
 }
-
