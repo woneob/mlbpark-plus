@@ -109,7 +109,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					for(item in team) {
 						var matched = team[item].regex.exec(t);
 						if(matched) {
-							$(this).text(t.replace(matched[1],'')).before('<em data-team="'+item+'" onclick="location.href=\'/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=' + team[item].searchKeyword + '\'"></em>');
+							this.textContent = t.replace(matched[1],'');
+							$(this).before('<em data-team="'+item+'" onclick="location.href=\'/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=' + team[item].searchKeyword + '\'"></em>');
 							break;
 						}
 					}
