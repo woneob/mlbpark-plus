@@ -133,7 +133,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				if (blockTypeVar == '1' ) {
 					$elem.each(function(){
 						var orginTxt = this.textContent;
-						$(this).text(blockMsg).addClass('blockTitle').attr('title','제목 : ' + orginTxt).on('click',function(){
+						this.textContent = blockMsg;
+						this.className = 'blockTitle';
+						this.setAttribute('title','제목 : '+ orginTxt);
+						$(this).on('click',function(){
 							return confirm("차단된 글을 열람하시겠습니까?");
 						});
 					});
