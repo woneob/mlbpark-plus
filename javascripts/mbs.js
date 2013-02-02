@@ -331,12 +331,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 									$('#cmtCount').text('(' + cmtCout + ')');
 									$('#userCmtList').append(cmtVal);
 
-									var vPosition = $modal.outerHeight();
-									$modal.css('top',$(window).height()/2.3 - vPosition/2);
-									$(window).resize(function (){
-										var height = $(window).height();
-										$modal.css('top',height/2.3 - vPosition/2);
-									});
+									var vPosition = $modal.outerHeight()*-.5;
+									$modal[0].style.marginTop = vPosition + 'px';
 
 									$('#modalFormTextarea').on('click',function(){
 										if ($('#loginArea a:first-child').text() == '로그인'){
