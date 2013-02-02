@@ -293,7 +293,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 						var $btn_userCmt = $('.btn_userCmt');
 						$('.btn_userCmt').on('click',function(){
-							var $this = $(this);
+							var select = this;
 							$('#commentModal').remove();
 
 							$.ajax({
@@ -301,7 +301,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 								url: 'http://mlbpark.donga.com/mbs/commentRV.php?mbsC='+mbsC+'&comment_ymd='+wday+'&comment_idx='+mbsIdx,
 								cache: false,
 								success: function(response) {
-									var selectUser = $this.prev().text();
+									var selectUser = select.previousSibling.textContent;
 									$(document.body).append(
 										'<div id="commentModal">\n'+
 										'	<div id="commentModalMask"></div>\n'+
@@ -348,12 +348,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 									});
 								},
 								beforeSend : function(){
-									$this.addClass('userCmtLoading');
-									$btn_userCmt.attr('disabled','disabled');
+									select.classList.add('userCmtLoading');
+									$btn_userCmt.prop('disabled', true);
 								},
 								complete: function(){
-									$this.removeClass('userCmtLoading');
-									$btn_userCmt.attr('disabled',false);
+									select.classList.remove('userCmtLoading');
+									$btn_userCmt.prop('disabled', false);
 								}
 							});
 						});
