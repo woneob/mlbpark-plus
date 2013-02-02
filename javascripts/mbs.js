@@ -125,6 +125,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
 		};
 
+		// Repeat parentNode
+		function up(el, n) {
+			while(n-- && (el = el.parentNode)) ;
+			return el;
+		}
+
 		//title block
 		if (blockVar == '1' ) {
 			var blockValue = response.blockInput.split(/[ \t\n]*,[ \t\n]*/);
@@ -145,7 +151,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					});
 				} else {
 					$elem.each(function(){
-						$(this).closest('tr[height="30"]').addClass('displayNone');
+						up(this,6).className = 'displayNone';
 					});
 				}
 			}
@@ -170,10 +176,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					var $userCmtNick = $(myArea).find('a:contains("' + blockUserValue[u] + '")');
 
 					$userNick.each(function(){
-						$(this).closest('tr[height="30"]').addClass('displayNone');
+						up(this,7).className = 'displayNone';
 					});
 					$userCmtNick.each(function(){
-						$(this).closest('table').closest('tr').addClass('displayNone');
+						up(this,7).className = 'displayNone';
 					});
 				}
 			}
@@ -183,8 +189,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		if (noticeVar == '1') {
 			var $noticeEl = $('.A11gray:contains("공지")');
 			$noticeEl.each(function(){
-				var parent = this.parentNode.parentNode.parentNode.parentNode.parentNode;
-				parent.className = 'displayNone';
+				up(this,5).className = 'displayNone';
 			});
 		}
 
@@ -383,7 +388,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					var btn = '<button type=\"button\" class=\"btn_reply\" title=\"답글 달기\">[답글]</button>';
 					$(myArea).find('.G12').append(btn);
 					$('.btn_reply').on('click',function(){
-						var username = $(this).closest('table').parent().prev().find('a').text();
+						var username = up(this,5).previousElementSibling.getElementsByTagName('a')[0].textContent;
 						if (!$.trim($(textarea).val())){
 							$(textarea).focus().val(username + '// ');
 						} else {
