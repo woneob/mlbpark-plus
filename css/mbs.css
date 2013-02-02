@@ -65,6 +65,12 @@ form[name="writeForm"] td[width="56"] a[href^="javascript:startRequest"] {displa
 #btn_cmtLoad:hover {border-color:#c6c6c6 #6c6c6c #494949 #c6c6c6;color:#222;}
 #btn_cmtLoad:active {border-color:#b8b8b8 #c6c6c6 #c6c6c6 #bcbcbc;box-shadow:none;background-image:-webkit-linear-gradient(bottom, #fff 0, #f0f0f0 2px, #fff 80%,#eee 100%);text-shadow:none;}
 #cmtLoader {opacity:0;position:absolute;margin:6px 0 0 5px;display:inline-block;width:14px;height:14px;background:url("chrome-extension://__MSG_@@extension_id__/images/loader.gif") no-repeat;}
+#cmtLoader.show {opacity:1;}
+#cmtLoader.hide {-webkit-animation: hide .3s ease-out; }
+@-webkit-keyframes hide {
+	from {opacity:1;}
+	to {opacity:0;}
+}
 
 /* history */
 #history {clear:both;margin:0 0 10px;padding:20px 0 5px;}

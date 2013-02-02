@@ -414,12 +414,13 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 
 			$('#btn_cmtLoad').on('click',function(){
+				var cmtLoader = document.getElementById('cmtLoader');
 				$.ajax({
 					type: 'post',
 					async: true,
 					url: 'http://mlbpark.donga.com/mbs/commentRV.php?mbsC='+mbsC+'&comment_ymd='+wday+'&comment_idx='+mbsIdx,
 					beforeSend: function() {
-						 $('#cmtLoader').css('opacity','1');
+						 cmtLoader.className = 'show';
 					},
 					success: function(data) {
 						$(myArea).html(data);
@@ -430,7 +431,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					complete: function() {
 						urlReplace();
 						replyButton();
-						$('#cmtLoader').stop().animate({'opacity':0},200);
+						cmtLoader.className = 'hide';
 					}
 				});
 			});
