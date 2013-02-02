@@ -104,6 +104,7 @@ form[name="writeForm"] td[width="56"] a[href^="javascript:startRequest"] {displa
 .G12read .ico:before {content:'';display:inline-block;width:16px;height:16px;position:relative;margin-right:3px;bottom:-3px;background:url('chrome-extension://__MSG_@@extension_id__/images/icon.png') no-repeat;}
 .G12read .ico_mobile:before {background-position:0 -96px;}
 .G12read .ico_question:before {background-position:0 -64px;}
+.G12read .ico_female:before {background-position:0 -160px;}
 .G12read .ico_tv:before {background-position:0 -16px;}
 .G12read .ico_twitter:before {background-position:0 -128px;}
 .G12read .ico_music:before {background-position:0 -80px;}

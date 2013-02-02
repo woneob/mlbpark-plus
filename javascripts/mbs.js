@@ -26,6 +26,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			game: {
 				regex: /디아|\[스타|프야매|lol|게임/i
 			},
+			female: {
+				regex: /여자|처자|ㅊㅈ|여친|녀 |여성/
+			},
 			twitter: {
 				regex: /(트윗|트위터)/
 			},
