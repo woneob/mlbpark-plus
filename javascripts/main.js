@@ -23,7 +23,7 @@ $(document).ready(function() {
 		var $controller = $('a[href^="javascript:onclick=show_tab"]');
 		$tab = $('#score_result > div');
 
-		$controller.bind('click',function(e){
+		$controller.on('click',function(e){
 			var el = $(this).attr('href').match(/[0-9]/);
 			if ((el > 0) && (el <= 7)){
 				$tab.css('display','none');
