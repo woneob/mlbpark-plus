@@ -145,7 +145,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					});
 				} else {
 					$elem.each(function(){
-						$(this).closest('tr[height="30"]').addClass('displayNone').next().addClass('displayNone');
+						$(this).closest('tr[height="30"]').addClass('displayNone');
 					});
 				}
 			}
@@ -170,10 +170,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					var $userCmtNick = $(myArea).find('a:contains("' + blockUserValue[u] + '")');
 
 					$userNick.each(function(){
-						$(this).closest('tr[height="30"]').addClass('displayNone').next().addClass('displayNone');
+						$(this).closest('tr[height="30"]').addClass('displayNone');
 					});
 					$userCmtNick.each(function(){
-						$(this).closest('table').closest('tr').addClass('displayNone').next().addClass('displayNone');
+						$(this).closest('table').closest('tr').addClass('displayNone');
 					});
 				}
 			}
@@ -185,7 +185,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			$noticeEl.each(function(){
 				var parent = this.parentNode.parentNode.parentNode.parentNode.parentNode;
 				parent.className = 'displayNone';
-				parent.nextSibling.nextSibling.className = 'displayNone';
 			});
 		}
 
