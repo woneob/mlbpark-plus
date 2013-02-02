@@ -34,13 +34,15 @@ $(document).ready(function() {
 	});
 
 	//scoreBoard tab
-	var content = '#score_rank, #score_result';
-	tab = '#score_tab a';
-	$(tab).click(function(e){
-		$(tab).removeClass('selected');
-		$(this).addClass('selected');
-		$(content).css('display','none');
-		$($(this).attr('href')).css('display','block');
+	var scoreRank = document.getElementById('score_rank');
+	var scoreReslut = document.getElementById('score_result');
+
+	$(document.body).on('click','#score_tab a', function(e){
+		$('#score_tab a').removeClass('selected');
+		this.className = 'selected';
+		scoreRank.style.display = 'none';
+		scoreReslut.style.display = 'none';
+		$(this.hash)[0].style.display ='block';
 		e.preventDefault();
 	});
 
