@@ -48,7 +48,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				regex: /(브금|bgm|음악|가수|노래|뮤직)/i
 			},
 			question: {
-				regex: /(질문|요\?|여\?|죠\?)/
+				regex: /(질문|요\?|여\?|죠\?|나요)/
 			},
 			img: {
 				regex: /(짤방|jpg|gif|jyp)/i
