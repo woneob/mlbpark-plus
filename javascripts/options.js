@@ -271,11 +271,11 @@ $(window).load(function(){
 		}
 	});
 
-	$('.save').bind('click',function(){
+	$('.save').on('click',function(){
 		save();
 	});
 
-	$('.reset').bind('click',function(){
+	$('.reset').on('click',function(){
 		reset();
 	});
 });

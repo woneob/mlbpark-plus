@@ -33,7 +33,7 @@ function restore() {
  */
 function bindEvent() {
 	// 제목 차단
-	$('#blockBtn').bind('click', function() {
+	$('#blockBtn').on('click', function() {
 		var blockVar = $('#blockInput').val();
 		if('' != blockVar) {
 			window.postMessage({
@@ -44,7 +44,7 @@ function bindEvent() {
 		}
 	});
 	// 사용자 차단
-	$('#blockUserBtn').bind('click', function() {
+	$('#blockUserBtn').on('click', function() {
 		var blockUserVar = $('#blockUserInput').val();
 		if('' != blockUserVar) {
 			window.postMessage({
@@ -55,7 +55,7 @@ function bindEvent() {
 		}
 	});
 	// 옵션 체크박스 - 모든 체크박스에 이벤트 바인딩
-	$(':checkbox').bind('change', function(event) {
+	$(':checkbox').on('change', function(event) {
 		var $messageBox = $('#status #message');
 		if (this.checked) {
 			localStorage[this.id] = 1;
