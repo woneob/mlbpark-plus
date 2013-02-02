@@ -328,7 +328,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 									cmtCout = cmt.length,
 									$modal = $('#commentModalBox');
 
-									$('#cmtCount').html('(' + cmtCout + ')');
+									$('#cmtCount').text('(' + cmtCout + ')');
 									$('#userCmtList').append(cmtVal);
 
 									var vPosition = $modal.outerHeight();
