@@ -45,7 +45,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				regex: /(vs)/i
 			},
 			music: {
-				regex: /(브금|bgm|음악|가수|노래|뮤직)|싸이|강남스타일/i
+				regex: /(브금|bgm|음악|가수|노래|뮤직)/i
 			},
 			question: {
 				regex: /(질문|요\?|여\?|죠\?)/
