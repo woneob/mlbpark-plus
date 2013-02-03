@@ -16,7 +16,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	imageSearchVar = response.imageSearch;
 
 	$(document).ready(function() {
-		listLink =  document.querySelectorAll('.G12read > a');
+		var listLink =  document.querySelectorAll('.G12read > a');
 		var loc = window.location;
 		var locHref = loc.href;
 		
@@ -108,7 +108,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		// Repeat parentNode
 		function up(el, n) {
-			while(n-- && (el = el.parentNode)) ;
+			while(n-- && (el = el.parentNode));
 			return el;
 		}
 
