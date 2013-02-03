@@ -23,39 +23,17 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		// title icon & team icon
 		// 순서대로 먼저 매칭되는 것을 사용
 		var titIcon = {
-			game: {
-				regex: /디아|\[스타|프야매|lol|게임/i
-			},
-			female: {
-				regex: /여자|처자|ㅊㅈ|여친|녀 |여성/
-			},
-			twitter: {
-				regex: /(트윗|트위터)/
-			},
-			warn: {
-				regex: /(혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|혐오주의)/
-			},
-			adult: {
-				regex: /(19금|\[19\] |\(19\)|주번나|성진국)/
-			},
-			tv: {
-				regex: /(swf|avi|플짤|영상|flv)/i
-			},
-			vs: {
-				regex: /(vs)/i
-			},
-			music: {
-				regex: /(브금|bgm|음악|가수|노래|뮤직)/i
-			},
-			question: {
-				regex: /(질문|요\?|여\?|죠\?|나요)/
-			},
-			img: {
-				regex: /(짤방|jpg|gif|jyp)/i
-			},
-			mobile: {
-				regex: /(맛폰)/
-			}
+			game: /디아|\[스타|프야매|lol|게임/i,
+			female: /여자|처자|ㅊㅈ|여친|녀 |여성/,
+			twitter: /(트윗|트위터)/,
+			warn: /(혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|혐오주의)/,
+			adult: /(19금|\[19\] |\(19\)|주번나|성진국)/,
+			tv: /(swf|avi|플짤|영상|flv)/i,
+			vs: /(vs)/i,
+			music: /(브금|bgm|음악|가수|노래|뮤직)/i,
+			question: /(질문|요\?|여\?|죠\?|나요)/,
+			img: /(짤방|jpg|gif|jyp)/i,
+			mobile: /(맛폰)/
 		}, team = {
 			kia: {
 				regex: /(\[기아\]\s?|\[kia\]\s?)/i,
@@ -99,7 +77,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var item, t = this.textContent;
 			if ((titIconVar == '1' ) || (titIconVar === undefined)) {
 				for (item in titIcon) {
-					if(titIcon[item].regex.test(t)) {
+					if(titIcon[item].test(t)) {
 						this.className = 'ico ico_' + item;
 						break;
 					}
@@ -211,7 +189,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						$article.css('display','none').before(cobTxt);
 					} else if ($(myArea).find('.G12:contains("비누")').length > 0) {
 						$article.css('display','none').before(soapTxt);
-					} else if(titIcon.warn.regex.test(subjectText)) {
+					} else if(titIcon.warn.test(subjectText)) {
 						$article.addClass('grayscale').before(warnTxt);
 					}
 
