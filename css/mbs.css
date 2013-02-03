@@ -135,10 +135,10 @@ em[data-team="hanwha"] {background-position:0 -119px !important;}
 em[data-team="nc"] {background-position:0 -136px !important;}
 
 /* extra */
-#warnBtn {display:inline-block;background:#fff;padding:6px 10px 5px;color:#555;font:12px 'Gulim';cursor:pointer;border-width:1px;border-style:solid;border-color:#e7e7e7 #c3c3c3 #bfbfbf #d8d8d8;box-shadow:1px 1px 1px rgba(0,0,0,.1);border-radius:5px;}
-#warnBtn:hover {background-color:#fafafa;border-color:#dbdbdb;box-shadow:1px 1px 1px #fff}
-#warnBtn span {color:#cd1313;}
-#warnBtn span:before {content:'';display:inline-block;width:16px;height:16px;margin-right:3px;background:url('chrome-extension://__MSG_@@extension_id__/images/icon.png') no-repeat 0 -48px;vertical-align:-4px;}
+.warnBtn {position:relative;top:-20px;display:inline-block;background:#fff;padding:6px 10px 5px;color:#555;font:12px 'Gulim';cursor:pointer;border-width:1px;border-style:solid;border-color:#e7e7e7 #c3c3c3 #bfbfbf #d8d8d8;box-shadow:1px 1px 1px rgba(0,0,0,.1);border-radius:5px;}
+.warnBtn:hover {background-color:#fafafa;border-color:#dbdbdb;box-shadow:1px 1px 1px #fff}
+.warnBtn span {color:#cd1313;}
+.warnBtn span:before {content:'';display:inline-block;width:16px;height:16px;margin-right:3px;background:url('chrome-extension://__MSG_@@extension_id__/images/icon.png') no-repeat 0 -48px;vertical-align:-4px;}
 .highlight {background-color:#fffcc9;border:1px solid #f4f0b1;border-radius:3px;padding:1px 2px;margin:0 1px;color:#504730;}
 a:hover .highlight {background-color:#f6f3b7;border-color:#eae6a3;color:#c40000;text-decoration:none !important;}
 input.box2:focus {outline:none;}
@@ -146,6 +146,7 @@ input.box2:focus {outline:none;}
 .btn_iSearch {position:absolute;right:3px;bottom:3px;width:26px;height:26px;overflow:hidden;background:url("chrome-extension://__MSG_@@extension_id__/images/btn_iSearch.png") no-repeat;text-indent:-9999px;}
 .btn_iSearch:hover {background-position:0 -26px;}
 a[href^="javascript:userInfo"] {white-space:pre-wrap;}
+.grayscale {-webkit-filter:grayscale(1);}
 
 /* comment modal */
 .btn_userCmt {width:15px;height:15px;vertical-align:middle;margin-left:2px;background:url('chrome-extension://__MSG_@@extension_id__/images/comment.png') no-repeat;border:none;text-indent:-9999px;cursor:pointer;}

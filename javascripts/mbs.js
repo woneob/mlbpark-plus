@@ -201,18 +201,27 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				//content blind
 				if ((blindVar == '1') || (blindVar === undefined)) {
-					var cobTxt = '<div id=\"warnBtn\"><span>댓글에 COB가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
-					var soapTxt = '<div id=\"warnBtn\"><span>댓글에 비누가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
+					var subject = document.getElementsByTagName('strong')[0];
+					var subjectText = subject.textContent;
+					var cobTxt = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 COB가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
+					var soapTxt = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 비누가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
+					var warnTxt = '<div id="btn_color"class=\"warnBtn\"><span>경고 문구가 포함되어 본문을 흑백처리 합니다.</span> 원문을 보시려면 클릭하세요.</div>';
 
 					if ($(myArea).find('.G12:Contains("COB")').length > 0)  {
 						$article.css('display','none').before(cobTxt);
 					} else if ($(myArea).find('.G12:contains("비누")').length > 0) {
 						$article.css('display','none').before(soapTxt);
+					} else if(titIcon.warn.regex.test(subjectText)) {
+						$article.addClass('grayscale').before(warnTxt);
 					}
 
-					$('#warnBtn').on('click',function() {
+					$('.warnBtn').on('click',function(){
 						$(this).remove();
-						$article.slideDown(300);
+						if (this.id == 'btn_color') {
+							$article.removeClass('grayscale');
+						} else {
+							$article.slideDown(300);
+						}
 					});
 				}
 
