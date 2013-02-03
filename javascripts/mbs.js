@@ -190,13 +190,13 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 					if ($(myArea).find('.G12:Contains("COB")').length > 0) {
 						article.style.display = 'none';
-						$(article).before(cobTxt);
+						article.insertAdjacentHTML('beforebegin', cobTxt);
 					} else if ($(myArea).find('.G12:contains("비누")').length > 0) {
 						article.style.display = 'none';
-						$(article).before(soapTxt);
+						article.insertAdjacentHTML('beforebegin', soapTxt);
 					} else if(titIcon.warn.test(subjectText)) {
 						article.className = 'grayscale';
-						$(article).before(warnTxt);
+						article.insertAdjacentHTML('beforebegin', warnTxt);
 					}
 
 					$(document.getElementsByClassName('warnBtn')).on('click',function(){
@@ -214,7 +214,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				//user history
 				if (userHistoryVar == '1') {
-					$(article).after(
+					article.insertAdjacentHTML('afterend',
 					'<div id="history">\n'+
 					'	<div class="historyHead">\n'+
 					'		<h3><span>'+nickname+'<span>('+userId+')</span></span> 님의 최근 글</h3>\n'+
@@ -287,7 +287,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 						if(loc.pathname !== "/mbs/commentV.php"){
 							$(myArea).find('a[title=" 에게 메모 보내기"]').each(function(){
-								$(this).after(viewCmt);
+								this.insertAdjacentHTML('afterend',viewCmt);
 							});
 						}
 
@@ -395,7 +395,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}replyButton();
 
 			//comment refresh
-			$(myArea).after('<div id="commentRefresh"><button type="button" id="btn_cmtLoad">최신 댓글 불러오기</button><span id="cmtLoader"></span>');
+			myArea.insertAdjacentHTML('afterend','<div id="commentRefresh"><button type="button" id="btn_cmtLoad">최신 댓글 불러오기</button><span id="cmtLoader"></span>');
 
 			var mbsC = document.getElementsByName('mbsC')[0].value;
 			var mbsIdx =  document.getElementsByName('mbsIdx')[0].value;
