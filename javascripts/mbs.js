@@ -16,7 +16,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	imageSearchVar = response.imageSearch;
 
 	$(document).ready(function() {
-		listLnk =  document.querySelectorAll('.G12read > a');
+		listLink =  document.querySelectorAll('.G12read > a');
 		var loc = window.location;
 		var locHref = loc.href;
 		
@@ -72,13 +72,16 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				searchKeyword: '%C7%D1%C8%AD'
 			}
 		};
-		$(listLnk).each(function() {
+
+		for (var i = 0; i < listLink.length; i++) {
 			// title icon
-			var item, t = this.textContent;
+			var t = listLink[i];
+			var title = t.textContent;
+
 			if ((titIconVar == '1' ) || (titIconVar === undefined)) {
-				for (item in titIcon) {
-					if(titIcon[item].test(t)) {
-						this.className = 'ico ico_' + item;
+				for (key in titIcon) {
+					if(titIcon[key].test(title)) {
+						t.className = 'ico ico_' + key;
 						break;
 					}
 				}
@@ -87,17 +90,17 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			if ((teamVar == '1' ) || (teamVar === undefined)) {
 				if (locHref.indexOf('mbsC=kbotown') > -1) {
 					document.body.className = 'team_show';
-					for(item in team) {
-						var matched = team[item].regex.exec(t);
+					for(name in team) {
+						var matched = team[name].regex.exec(title);
 						if(matched) {
-							this.textContent = t.replace(matched[1],'');
-							$(this).before('<em data-team="'+item+'" onclick="location.href=\'/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=' + team[item].searchKeyword + '\'"></em>');
+							t.textContent = title.replace(matched[1],'');
+							t.insertAdjacentHTML('beforeBegin','<em data-team="'+ name +'" onclick="location.href=\'/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=' + team[name].searchKeyword + '\'"></em>');
 							break;
 						}
 					}
 				}
 			}
-		});
+		}
 
 		$.expr[':'].Contains = function(a,i,m){
 			return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
@@ -115,7 +118,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 			for (var j = 0; j < blockValue.length; j++) {
 				var blockMsg = '차단 키워드('+ blockValue[j] +')가 포함된 글 입니다';
-				var $elem = $(listLnk).filter(':Contains("'+ blockValue[j] +'")');
+				var $elem = $(listLink).filter(':Contains("'+ blockValue[j] +'")');
 
 				if (blockTypeVar == '1' ) {
 					$elem.each(function(){
