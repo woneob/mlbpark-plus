@@ -210,7 +210,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				//add userId
-				$user.next().after('<span class="userIdVal">(' + userId + ')</span>');
+				$user[0].nextSibling.insertAdjacentHTML('afterend','<span class="userIdVal">(' + userId + ')</span>');
 
 				//user history
 				if (userHistoryVar == '1') {
