@@ -172,7 +172,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 
 		if (locHref.indexOf('V.php') > -1){
-			var $article = $('.G13 > div[align="justify"]');
+			var article = document.querySelector('.G13 > div[align="justify"]');
 
 			if (locHref.indexOf('articleV.php') > -1){
 				var userId =  $user.find('li:first-child').attr('onclick').match(/id=([^&]+)\'/)[1];
@@ -185,20 +185,23 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					var soapTxt = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 비누가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
 					var warnTxt = '<div id="btn_color"class=\"warnBtn\"><span>경고 문구가 포함되어 본문을 흑백처리 합니다.</span> 원문을 보시려면 클릭하세요.</div>';
 
-					if ($(myArea).find('.G12:Contains("COB")').length > 0)  {
-						$article.css('display','none').before(cobTxt);
+					if ($(myArea).find('.G12:Contains("COB")').length > 0) {
+						article.style.display = 'none';
+						$(article).before(cobTxt);
 					} else if ($(myArea).find('.G12:contains("비누")').length > 0) {
-						$article.css('display','none').before(soapTxt);
+						article.style.display = 'none';
+						$(article).before(soapTxt);
 					} else if(titIcon.warn.test(subjectText)) {
-						$article.addClass('grayscale').before(warnTxt);
+						article.className = 'grayscale';
+						$(article).before(warnTxt);
 					}
 
-					$('.warnBtn').on('click',function(){
+					$(document.getElementsByClassName('warnBtn')).on('click',function(){
 						$(this).remove();
 						if (this.id == 'btn_color') {
-							$article.removeClass('grayscale');
+							article.classList.remove('grayscale');
 						} else {
-							$article.slideDown(300);
+							$(article).slideDown(300);
 						}
 					});
 				}
@@ -208,7 +211,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				//user history
 				if (userHistoryVar == '1') {
-					$article.after(
+					$(article).after(
 					'<div id="history">\n'+
 					'	<div class="historyHead">\n'+
 					'		<h3><span>'+nickname+'<span>('+userId+')</span></span> 님의 최근 글</h3>\n'+
@@ -236,7 +239,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				//google search by image
 				if ((imageSearchVar == '1') || (imageSearchVar === undefined)) {
-					var $contentImg = $article.find('img');
+					var $contentImg = $(article).find('img');
 					$contentImg.each(function(){
 						var $t = $(this);
 						$t.load(function(){
