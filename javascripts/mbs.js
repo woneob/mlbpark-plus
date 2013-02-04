@@ -114,11 +114,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		//title block
 		if (blockVar == '1' ) {
-			var blockValue = response.blockInput.split(/[ \t\n]*,[ \t\n]*/);
-
-			for (var j = 0; j < blockValue.length; j++) {
-				var blockMsg = '차단 키워드('+ blockValue[j] +')가 포함된 글 입니다';
-				var $elem = $(listLink).filter(':Contains("'+ blockValue[j] +'")');
+			for (var j = 0; j < blockInputVar.length; j++) {
+				var blockMsg = '차단 키워드('+ blockInputVar[j] +')가 포함된 글 입니다';
+				var $elem = $(listLink).filter(':Contains("'+ blockInputVar[j] +'")');
 
 				if (blockTypeVar == '1' ) {
 					$elem.each(function(){
@@ -146,15 +144,13 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		//user block
 		function userBlock(){
 			if (blockUserVar == '1' ) {
-				var blockUserValue = blockUserInputVar.split(/\n*,\n*/);
-
 				if(loc.pathname == "/bbs/mlb_today.php"){
 					$('td[width="82"] font').wrap('<a href="#" onclick="return false;" class="disabled" />');
 				}
 
-				for (var u = 0; u < blockUserValue.length; u++) {
-					var $userNick = $('td[width="82"]').find('a:contains("'+ blockUserValue[u] +'")');
-					var $userCmtNick = $(myArea).find('a:contains("' + blockUserValue[u] + '")');
+				for (var u = 0; u < blockUserInputVar.length; u++) {
+					var $userNick = $('td[width="82"]').find('a:contains("'+ blockUserInputVar[u] +'")');
+					var $userCmtNick = $(myArea).find('a:contains("' + blockUserInputVar[u] + '")');
 
 					$userNick.each(function(){
 						up(this,7).className = 'displayNone';
