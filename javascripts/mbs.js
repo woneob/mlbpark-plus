@@ -130,6 +130,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 		}
 
+		$(document.getElementsByClassName('blockTitle')).on('click',function(){
+			return confirm("차단된 글을 열람하시겠습니까?");
+		})
+
 		$.expr[':'].Contains = function(a,i,m){
 			return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
 		};
