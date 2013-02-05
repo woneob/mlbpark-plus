@@ -73,11 +73,17 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 		};
 
+		// Repeat parentNode
+		function up(el, n) {
+			while(n-- && (el = el.parentNode));
+			return el;
+		}
+
 		for (var i = 0; i < listLink.length; i++) {
-			// title icon
 			var t = listLink[i];
 			var title = t.textContent;
 
+			// title icon
 			if ((titIconVar == '1' ) || (titIconVar === undefined)) {
 				for (key in titIcon) {
 					if(titIcon[key].test(title)) {
@@ -86,6 +92,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					}
 				}
 			}
+
 			// team icon
 			if ((teamVar == '1' ) || (teamVar === undefined)) {
 				if (locHref.indexOf('mbsC=kbotown') > -1) {
@@ -100,41 +107,32 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					}
 				}
 			}
+
+			//title block
+			if (blockVar == '1' ) {
+				if (blockTypeVar == '1' ) {
+					for(var b = 0; b < blockInputVar.length; b++) {
+						if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+							t.textContent = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
+							t.className = 'blockTitle';
+							t.setAttribute('title','제목 : '+ title);
+							break;
+						}
+					}
+				} else {
+					for(var b = 0; b < blockInputVar.length; b++) {
+						if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+							up(t,6).className = 'displayNone';
+							break;
+						}
+					}
+				}
+			}
 		}
 
 		$.expr[':'].Contains = function(a,i,m){
 			return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
 		};
-
-		// Repeat parentNode
-		function up(el, n) {
-			while(n-- && (el = el.parentNode));
-			return el;
-		}
-
-		//title block
-		if (blockVar == '1' ) {
-			for (var j = 0; j < blockInputVar.length; j++) {
-				var blockMsg = '차단 키워드('+ blockInputVar[j] +')가 포함된 글 입니다';
-				var $elem = $(listLink).filter(':Contains("'+ blockInputVar[j] +'")');
-
-				if (blockTypeVar == '1' ) {
-					$elem.each(function(){
-						var orginTxt = this.textContent;
-						this.textContent = blockMsg;
-						this.className = 'blockTitle';
-						this.setAttribute('title','제목 : '+ orginTxt);
-						$(this).on('click',function(){
-							return confirm("차단된 글을 열람하시겠습니까?");
-						});
-					});
-				} else {
-					$elem.each(function(){
-						up(this,6).className = 'displayNone';
-					});
-				}
-			}
-		}
 
 		//component
 		var myArea = document.getElementById('myArea');
@@ -145,29 +143,40 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		function userBlock(){
 			if (blockUserVar == '1' ) {
 				if(loc.pathname == "/bbs/mlb_today.php"){
-					$('td[width="82"] font').wrap('<a href="#" onclick="return false;" class="disabled" />');
+					var userNick = document.querySelectorAll('td[width="82"] font');
+					var upCount = '6';
+				} else {
+					var userNick = document.querySelectorAll('td[width="82"] a');
+					var upCount = '7';
 				}
 
-				for (var u = 0; u < blockUserInputVar.length; u++) {
-					var $userNick = $('td[width="82"]').find('a:contains("'+ blockUserInputVar[u] +'")');
-					var $userCmtNick = $(myArea).find('a:contains("' + blockUserInputVar[u] + '")');
+				var userCmtNick = document.querySelectorAll('td[width="140"] a');
+				for (var i = 0; i < blockUserInputVar.length; i++) {
+					for (var u = 0; u < userNick.length; u++) {
+						if (userNick[u].textContent === blockUserInputVar[i]) {
+							up(userNick[u],upCount).className = 'displayNone';
+							break;
+						}
+					}
 
-					$userNick.each(function(){
-						up(this,7).className = 'displayNone';
-					});
-					$userCmtNick.each(function(){
-						up(this,7).className = 'displayNone';
-					});
+					for (var u = 0; u < userCmtNick.length; u++) {
+						if (userCmtNick[u].textContent === blockUserInputVar[i]) {
+							up(userCmtNick[u],7).className = 'displayNone';
+							break;
+						}
+					}
 				}
 			}
 		}userBlock();
 
 		//notice blind
 		if (noticeVar == '1') {
-			var $noticeEl = $('.A11gray:contains("공지")');
-			$noticeEl.each(function(){
-				up(this,5).className = 'displayNone';
-			});
+			var cat = document.getElementsByClassName('A11gray');
+			for (var c = 0; c < cat.length; c++) {
+				if (cat[c].textContent === '공지') {
+					up(cat[c],5).className = 'displayNone';
+				}
+			}
 		}
 
 		if (locHref.indexOf('V.php') > -1){

@@ -127,7 +127,7 @@ function onMessage(request, sender, sendResponse) {
 				team: localStorage["team"],
 				blind: localStorage["blind"],
 				block: localStorage["block"],
-				blockInput: localStorage["blockInput"].split(/[ \t\n]*,[ \t\n]*/),
+				blockInput: localStorage["blockInput"].toLowerCase().split(/[ \t\n]*,[ \t\n]*/),
 				blockType: localStorage["blockType"],
 				blockUser: localStorage["blockUser"],
 				blockUserInput: localStorage["blockUserInput"].split(/\n*,\n*/),
