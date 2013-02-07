@@ -246,26 +246,43 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 			//google search by image
 			if ((imageSearchVar == '1') || (imageSearchVar === undefined)) {
-				var $contentImg = $(article).find('img');
-				$contentImg.each(function(){
-					var $t = $(this);
-					$t.load(function(){
-						if ($t[0].clientWidth > 50 && $t[0].clientHeight > 50) {
-							var src = this.src;
-							if(src.substr(0,7) != 'http://') {
-								src = 'http://mlbpark.donga.com' + src;
-							}
-							var imageWrap = '<span class="iWrap"></span>';
-							var btn_iSearch = '<a href="https://www.google.com/searchbyimage?image_url='+ src +'" class="btn_iSearch" target="_blank" title="구글에서 이미지 검색"></a>';
+				$.event.special.load = {
+					add: function (hollaback) {
+						if (this.complete || this.readyState === 4) {
+							hollaback.handler.apply(this);
+						} else if (this.readyState === 'uninitialized' && this.src.indexOf('data:') === 0) {
+							$(this).trigger('error');
+						} else {
+							$(this).bind('load', hollaback.handler);
+						}
+					}
+				};
 
-							if ($t.parent('a').length) {
-								$t.parent().wrap(imageWrap).after(btn_iSearch);
+				var images = article.getElementsByTagName('img');
+				var imagesLength = images.length;
+
+				for (var i = 0; i < imagesLength; i++) {
+					$(images[i]).on('load',function(e){
+						var width = images[i].clientWidth;
+						var height = images[i].clientHeight;
+
+						if (width && height > 50) {
+							var src = images[i].src;
+							var btn_iSearch = '<a href="https://www.google.com/searchbyimage?image_url='+ src +'" class="btn_iSearch" target="_blank" title="구글에서 이미지 검색"></a>';
+							var imageWrap = '<span class="iWrap"></span>';
+
+							if(src.substr(0,7) != 'http://') {
+								var src = 'http://mlbpark.donga.com' + src;
+							}
+
+							if (images[i].parentNode.tagName.toLowerCase() == 'a') {
+								$(images[i].parentNode).wrap(imageWrap).after(btn_iSearch);
 							} else {
-								$t.wrap(imageWrap).after(btn_iSearch);
+								$(images[i]).wrap(imageWrap).after(btn_iSearch);
 							}
 						}
 					});
-				});
+				}
 			}
 
 			//videoCss

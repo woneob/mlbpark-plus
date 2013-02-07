@@ -42,7 +42,7 @@ td img[src^="http://image.donga.com/mlbpark/img200807/sub_line_"] {display:none;
 td[background^="http://image.donga.com/mlbpark/img200807/sub_line_"] {background:none !important}
 
 /* article --------------------- */
-td.G13 td.G13 {padding:20px;}
+td.G13 td.G13 {padding:20px;position:relative}
 td.G13 > table {width:100%;box-sizing:border-box;}
 td.G13 > div[align="justify"] {width:100% !important;box-sizing:border-box;margin:0 0 40px !important;}
 td.G13 > div[align="justify"] img {width:auto !important;height:auto !important;max-width:100%;}

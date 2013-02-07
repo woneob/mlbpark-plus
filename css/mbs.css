@@ -143,7 +143,7 @@ em[data-team="nc"] {background-position:0 -136px !important;}
 a:hover .highlight {background-color:#f6f3b7;border-color:#eae6a3;color:#c40000;text-decoration:none !important;}
 input.box2:focus {outline:none;}
 .iWrap {display:inline-block;position:relative;}
-.btn_iSearch {position:absolute;right:3px;bottom:3px;width:26px;height:26px;overflow:hidden;background:url("chrome-extension://__MSG_@@extension_id__/images/btn_iSearch.png") no-repeat;text-indent:-9999px;}
+.btn_iSearch {position:absolute;right:3px;bottom:3px;width:26px;height:26px;overflow:hidden;background:url("chrome-extension://__MSG_@@extension_id__/images/btn_iSearch.png") no-repeat;}
 .btn_iSearch:hover {background-position:0 -26px;}
 a[href^="javascript:userInfo"] {white-space:pre-wrap;}
 .grayscale {-webkit-filter:grayscale(1);}
