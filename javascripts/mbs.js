@@ -138,40 +138,13 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
 		};
 
-		//component
-		var myArea = document.getElementById('myArea');
-		var $user = $('td[width="18%"].D11 div[id^="nik_"]');
-		var nickname = $user.next().text();
-
-		//user block
-		function userBlock(){
-			if (blockUserVar == '1' ) {
-				if(loc.pathname == "/bbs/mlb_today.php"){
-					var userNick = document.querySelectorAll('td[width="82"] font');
-					var upCount = '6';
-				} else {
-					var userNick = document.querySelectorAll('td[width="82"] a');
-					var upCount = '7';
-				}
-
-				var userCmtNick = document.querySelectorAll('td[width="140"] a');
-				for (var i = 0; i < blockUserInputVar.length; i++) {
-					for (var u = 0; u < userNick.length; u++) {
-						if (userNick[u].textContent === blockUserInputVar[i]) {
-							up(userNick[u],upCount).className = 'displayNone';
-							break;
-						}
-					}
-
-					for (var u = 0; u < userCmtNick.length; u++) {
-						if (userCmtNick[u].textContent === blockUserInputVar[i]) {
-							up(userCmtNick[u],7).className = 'displayNone';
-							break;
-						}
-					}
-				}
-			}
-		}userBlock();
+		if(loc.pathname == "/bbs/mlb_today.php"){
+			var nickEl = document.querySelectorAll('td[width="82"] font');
+			var upCount = '6';
+		} else {
+			var nickEl = document.querySelectorAll('td[width="82"] a');
+			var upCount = '7';
+		}
 
 		//notice blind
 		if (noticeVar == '1') {
@@ -183,192 +156,215 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 		}
 
-		if (locHref.indexOf('V.php') > -1){
-			var article = document.querySelector('.G13 > div[align="justify"]');
-
-			if (locHref.indexOf('articleV.php') > -1){
-				var userId =  $user.find('li:first-child').attr('onclick').match(/id=([^&]+)\'/)[1];
-
-				//content blind
-				if ((blindVar == '1') || (blindVar === undefined)) {
-					var subject = document.getElementsByTagName('strong')[0];
-					var subjectText = subject.textContent;
-					var cobTxt = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 COB가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
-					var soapTxt = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 비누가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
-					var warnTxt = '<div id="btn_color"class=\"warnBtn\"><span>경고 문구가 포함되어 본문을 흑백처리 합니다.</span> 원문을 보시려면 클릭하세요.</div>';
-
-					if ($(myArea).find('.G12:Contains("COB")').length > 0) {
-						article.style.display = 'none';
-						article.insertAdjacentHTML('beforebegin', cobTxt);
-					} else if ($(myArea).find('.G12:contains("비누")').length > 0) {
-						article.style.display = 'none';
-						article.insertAdjacentHTML('beforebegin', soapTxt);
-					} else if(titIcon.warn.test(subjectText)) {
-						article.className = 'grayscale';
-						article.insertAdjacentHTML('beforebegin', warnTxt);
+		//user block
+		function userBlock(){
+			if (blockUserVar == '1' ) {
+				var CmtNickEl = document.querySelectorAll('td[width="140"] a');
+				for (var i = 0; i < blockUserInputVar.length; i++) {
+					for (var u = 0; u < nickEl.length; u++) {
+						if (nickEl[u].textContent === blockUserInputVar[i]) {
+							up(nickEl[u],upCount).className = 'displayNone';
+							break;
+						}
 					}
 
-					$(document.getElementsByClassName('warnBtn')).on('click',function(){
-						$(this).remove();
-						if (this.id == 'btn_color') {
-							article.classList.remove('grayscale');
-						} else {
-							$(article).slideDown(300);
+					for (var u = 0; u < CmtNickEl.length; u++) {
+						if (CmtNickEl[u].textContent === blockUserInputVar[i]) {
+							up(CmtNickEl[u],7).className = 'displayNone';
+							break;
 						}
-					});
+					}
+				}
+			}
+		}userBlock();
+
+		if (locHref.indexOf('V.php') > -1){
+			var myArea = document.getElementById('myArea');
+			var article = document.querySelector('.G13 > div[align="justify"]');
+			var userEl = document.querySelector ('div[id^="nik_"]');
+			var userId =  $(userEl).find('li:first-child').attr('onclick').match(/id=([^&]+)\'/)[1];
+			var nickname = userEl.nextSibling.textContent;
+
+			//content blind
+			if ((blindVar == '1') || (blindVar === undefined)) {
+				var subject = document.getElementsByTagName('strong')[0].textContent;
+				var btn_cob = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 COB가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
+				var btn_soap = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 비누가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
+				var btn_warn = '<div id="btn_color"class=\"warnBtn\"><span>경고 문구가 포함되어 본문을 흑백처리 합니다.</span> 원문을 보시려면 클릭하세요.</div>';
+
+				if ($(myArea).find('.G12:Contains("COB")').length > 0) {
+					article.style.display = 'none';
+					article.insertAdjacentHTML('beforebegin', btn_cob);
+				} else if ($(myArea).find('.G12:contains("비누")').length > 0) {
+					article.style.display = 'none';
+					article.insertAdjacentHTML('beforebegin', btn_soap);
+				} else if(titIcon.warn.test(subject)) {
+					article.className = 'grayscale';
+					article.insertAdjacentHTML('beforebegin', btn_warn);
 				}
 
-				//add userId
-				$user[0].nextSibling.insertAdjacentHTML('afterend','<span class="userIdVal">(' + userId + ')</span>');
+				$(document.getElementsByClassName('warnBtn')).on('click',function(){
+					this.className = 'displayNone';
+					if (this.id == 'btn_color') {
+						article.classList.remove('grayscale');
+					} else {
+						$(article).slideDown(300);
+					}
+				});
+			}
 
-				//user history
-				if (userHistoryVar == '1') {
-					article.insertAdjacentHTML('afterend',
-					'<div id="history">\n'+
-					'	<div class="historyHead">\n'+
-					'		<h3><span>'+nickname+'<span>('+userId+')</span></span> 님의 최근 글</h3>\n'+
-					'		<button type="button" onclick="MlbNewWindow2(\'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId +'\',\'550\',\'500\')">[더 보기]</button>\n' + 
-					'	</div>\n'+ 
-					'	<div id="historyLoading">\n'+
-					'		<div><span class="stick1"></span><span class="stick2"></span><span class="stick3"></span></div>\n'+
-					'	</div>\n'+
-					'	<div id="historyList"></div>\n'+
-					'</div>'
-					);
+			//add userId
+			userEl.nextSibling.insertAdjacentHTML('afterend','<span class="userIdVal">(' + userId + ')</span>');
 
-					$.ajax({
-						type: "GET",
-						url: 'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId,
-						cache: false,
-						success: function(response) {
-							$('#historyList').append($(response).find('td[bgcolor="#FFFFFF"] > table:nth-child(2)').html()).find('a[target]').removeAttr('target');
-						},
-						complete: function(){
-							$("#historyLoading").remove();
+			//user history
+			if (userHistoryVar == '1') {
+				article.insertAdjacentHTML('afterend',
+				'<div id="history">\n'+
+				'	<div class="historyHead">\n'+
+				'		<h3><span>'+nickname+'<span>('+userId+')</span></span> 님의 최근 글</h3>\n'+
+				'		<button type="button" onclick="MlbNewWindow2(\'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId +'\',\'550\',\'500\')">[더 보기]</button>\n' + 
+				'	</div>\n'+ 
+				'	<div id="historyLoading">\n'+
+				'		<div><span class="stick1"></span><span class="stick2"></span><span class="stick3"></span></div>\n'+
+				'	</div>\n'+
+				'	<div id="historyList"></div>\n'+
+				'</div>'
+				);
+
+				$.ajax({
+					type: "GET",
+					url: 'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId,
+					cache: false,
+					success: function(response) {
+						$('#historyList').append($(response).find('td[bgcolor="#FFFFFF"] > table:nth-child(2)').html()).find('a[target]').removeAttr('target');
+					},
+					complete: function(){
+						$("#historyLoading").remove();
+					}
+				});
+			}
+
+			//google search by image
+			if ((imageSearchVar == '1') || (imageSearchVar === undefined)) {
+				var $contentImg = $(article).find('img');
+				$contentImg.each(function(){
+					var $t = $(this);
+					$t.load(function(){
+						if ($t[0].clientWidth > 50 && $t[0].clientHeight > 50) {
+							var src = this.src;
+							if(src.substr(0,7) != 'http://') {
+								src = 'http://mlbpark.donga.com' + src;
+							}
+							var imageWrap = '<span class="iWrap"></span>';
+							var btn_iSearch = '<a href="https://www.google.com/searchbyimage?image_url='+ src +'" class="btn_iSearch" target="_blank" title="구글에서 이미지 검색"></a>';
+
+							if ($t.parent('a').length) {
+								$t.parent().wrap(imageWrap).after(btn_iSearch);
+							} else {
+								$t.wrap(imageWrap).after(btn_iSearch);
+							}
 						}
 					});
-				}
+				});
+			}
 
-				//google search by image
-				if ((imageSearchVar == '1') || (imageSearchVar === undefined)) {
-					var $contentImg = $(article).find('img');
-					$contentImg.each(function(){
-						var $t = $(this);
-						$t.load(function(){
-							if ($t[0].clientWidth > 50 && $t[0].clientHeight > 50) {
-								var src = this.src;
-								if(src.substr(0,7) != 'http://') {
-									src = 'http://mlbpark.donga.com' + src;
-								}
-								var imageWrap = '<span class="iWrap"></span>';
-								var btn_iSearch = '<a href="https://www.google.com/searchbyimage?image_url='+ src +'" class="btn_iSearch" target="_blank" title="구글에서 이미지 검색"></a>';
+			//videoCss
+			if ((videoVar == '1') || (videoVar === undefined)) {
+				var vdoCss = document.createElement('link');
+				vdoCss.rel = 'stylesheet';
+				vdoCss.type = 'text/css';
+				vdoCss.href = chrome.extension.getURL('/css/video.css');
+				document.head.appendChild(vdoCss);
+			}
 
-								if ($t.parent('a').length) {
-									$t.parent().wrap(imageWrap).after(btn_iSearch);
-								} else {
-									$t.wrap(imageWrap).after(btn_iSearch);
-								}
+			//highlight comment writer
+			function highlightWriter(){
+				$(myArea).find('td[width="140"] a:contains("' + nickname +'")').each(function(){
+					this.className += 'me';
+				});
+			}
+			highlightWriter();
+
+			//view userComment
+			function viewUserComment(){
+				if ((userCommentViewVar == '1') || (userCommentViewVar == null)) {
+					var viewCmt = '<button type="button" class="btn_userCmt" title="이 글에 단 댓글 보기">?</button>';
+
+					if(loc.pathname !== "/mbs/commentV.php"){
+						$(myArea).find('a[title=" 에게 메모 보내기"]').each(function(){
+							this.insertAdjacentHTML('afterend',viewCmt);
+						});
+					}
+
+					var $btn_userCmt = $('.btn_userCmt');
+					$('.btn_userCmt').on('click',function(){
+						var select = this;
+						$('#commentModal').remove();
+
+						$.ajax({
+							type: "GET",
+							url: 'http://mlbpark.donga.com/mbs/commentRV.php?mbsC='+mbsC+'&comment_ymd='+wday+'&comment_idx='+mbsIdx,
+							cache: false,
+							success: function(response) {
+								var selectUser = select.previousSibling.textContent;
+								$(document.body).append(
+									'<div id="commentModal">\n'+
+									'	<div id="commentModalMask"></div>\n'+
+									'	<div id="commentModalBox">\n'+
+									'		<div id="modalHead">\n'+
+									'			<h3><strong>'+selectUser+'</strong> 님이 이 글에 남긴 댓글 <span id="cmtCount"></span></h3>\n'+
+									'			<button type="button" id="commentModalClose" title="닫기">close</button>\n'+
+									'		</div>\n'+
+									'		<div id="userCmtList"></div>\n'+
+									'		<form id="modalForm" name="writeForm2" method="post" action="commentWE.php">\n'+
+									'			<input type="hidden" name="mbsC" value="'+mbsC+'" />\n'+
+									'			<input type="hidden" name="mbsIdx" value="'+mbsIdx+'" />\n'+
+									'			<input type="hidden" name="wday" value="'+wday+'" />\n'+
+									'			<textarea id="modalFormTextarea" name="line_content" cols="75" rows="3" autocomplete="off">'+selectUser+'// </textarea>\n'+
+									'			<button type="submit">댓글 등록</button>\n'+
+									'		</form>\n'+
+									'	</div>\n'+
+									'</div>\n'
+								);
+
+								var responseWrapper = $('<div />').append(response.replace(/<script(.|\s)*?\/script>/g, '')),
+								cmt = responseWrapper.find('a[title=" 에게 메모 보내기"]:contains("' + selectUser + '")'),
+								cmtVal = cmt.closest('td').nextAll(),
+								cmtCout = cmt.length,
+								$modal = $('#commentModalBox');
+
+								$('#cmtCount').text('(' + cmtCout + ')');
+								$('#userCmtList').append(cmtVal);
+
+								var vPosition = $modal.outerHeight()*-.5;
+								$modal[0].style.marginTop = vPosition + 'px';
+
+								$('#modalFormTextarea').on('click',function(){
+									if ($('#loginArea a:first-child').text() == '로그인'){
+										var loginConfirm = confirm("로그인 후 사용 가능합니다.\n로그인 페이지로 이동하시겠습니까?");
+										if (loginConfirm == true){
+											window.location = 'http://www.donga.com/members/login.php\?gourl=' + escape(locHref);
+										}
+									}
+								});
+							},
+							beforeSend : function(){
+								select.classList.add('userCmtLoading');
+								$btn_userCmt.prop('disabled', true);
+							},
+							complete: function(){
+								select.classList.remove('userCmtLoading');
+								$btn_userCmt.prop('disabled', false);
 							}
 						});
 					});
-				}
 
-				//videoCss
-				if ((videoVar == '1') || (videoVar === undefined)) {
-					var vdoCss = document.createElement('link');
-					vdoCss.rel = 'stylesheet';
-					vdoCss.type = 'text/css';
-					vdoCss.href = chrome.extension.getURL('/css/video.css');
-					document.head.appendChild(vdoCss);
-				}
-
-				//highlight comment writer
-				function highlightWriter(){
-					$(myArea).find('td[width="140"] a:contains("' + nickname +'")').each(function(){
-						this.className += 'me';
+					$(document.body).on('click','#commentModalMask,#commentModalClose',function(){
+						$('#commentModal').remove();
 					});
-				}highlightWriter();
-
-				//view userComment
-				function viewUserComment(){
-					if ((userCommentViewVar == '1') || (userCommentViewVar == null)) {
-						var viewCmt = '<button type="button" class="btn_userCmt" title="이 글에 단 댓글 보기">?</button>';
-
-						if(loc.pathname !== "/mbs/commentV.php"){
-							$(myArea).find('a[title=" 에게 메모 보내기"]').each(function(){
-								this.insertAdjacentHTML('afterend',viewCmt);
-							});
-						}
-
-						var $btn_userCmt = $('.btn_userCmt');
-						$('.btn_userCmt').on('click',function(){
-							var select = this;
-							$('#commentModal').remove();
-
-							$.ajax({
-								type: "GET",
-								url: 'http://mlbpark.donga.com/mbs/commentRV.php?mbsC='+mbsC+'&comment_ymd='+wday+'&comment_idx='+mbsIdx,
-								cache: false,
-								success: function(response) {
-									var selectUser = select.previousSibling.textContent;
-									$(document.body).append(
-										'<div id="commentModal">\n'+
-										'	<div id="commentModalMask"></div>\n'+
-										'	<div id="commentModalBox">\n'+
-										'		<div id="modalHead">\n'+
-										'			<h3><strong>'+selectUser+'</strong> 님이 이 글에 남긴 댓글 <span id="cmtCount"></span></h3>\n'+
-										'			<button type="button" id="commentModalClose" title="닫기">close</button>\n'+
-										'		</div>\n'+
-										'		<div id="userCmtList"></div>\n'+
-										'		<form id="modalForm" name="writeForm2" method="post" action="commentWE.php">\n'+
-										'			<input type="hidden" name="mbsC" value="'+mbsC+'" />\n'+
-										'			<input type="hidden" name="mbsIdx" value="'+mbsIdx+'" />\n'+
-										'			<input type="hidden" name="wday" value="'+wday+'" />\n'+
-										'			<textarea id="modalFormTextarea" name="line_content" cols="75" rows="3" autocomplete="off">'+selectUser+'// </textarea>\n'+
-										'			<button type="submit">댓글 등록</button>\n'+
-										'		</form>\n'+
-										'	</div>\n'+
-										'</div>\n'
-									);
-
-									var responseWrapper = $('<div />').append(response.replace(/<script(.|\s)*?\/script>/g, '')),
-									cmt = responseWrapper.find('a[title=" 에게 메모 보내기"]:contains("' + selectUser + '")'),
-									cmtVal = cmt.closest('td').nextAll(),
-									cmtCout = cmt.length,
-									$modal = $('#commentModalBox');
-
-									$('#cmtCount').text('(' + cmtCout + ')');
-									$('#userCmtList').append(cmtVal);
-
-									var vPosition = $modal.outerHeight()*-.5;
-									$modal[0].style.marginTop = vPosition + 'px';
-
-									$('#modalFormTextarea').on('click',function(){
-										if ($('#loginArea a:first-child').text() == '로그인'){
-											var loginConfirm = confirm("로그인 후 사용 가능합니다.\n로그인 페이지로 이동하시겠습니까?");
-											if (loginConfirm == true){
-												window.location = 'http://www.donga.com/members/login.php\?gourl=' + escape(locHref);
-											}
-										}
-									});
-								},
-								beforeSend : function(){
-									select.classList.add('userCmtLoading');
-									$btn_userCmt.prop('disabled', true);
-								},
-								complete: function(){
-									select.classList.remove('userCmtLoading');
-									$btn_userCmt.prop('disabled', false);
-								}
-							});
-						});
-
-						$(document.body).on('click','#commentModalMask,#commentModalClose',function(){
-							$('#commentModal').remove();
-						});
-					}
-				}viewUserComment();
+				}
 			}
+			viewUserComment();
 
 			//text URL replacement
 			function urlReplace(){
@@ -380,7 +376,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				$(myArea).find('.G12').html(function(i, val) {
 					return val.replace(replacePattern1, replaceTxt1).replace(replacePattern2, replaceTxt2);
 				});
-			}urlReplace();
+			}
+			urlReplace();
 
 			//reply button
 			var textarea = document.getElementsByName('line_content');
@@ -401,7 +398,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						} return false;
 					});
 				}
-			}replyButton();
+			}
+			replyButton();
 
 			//comment refresh
 			myArea.insertAdjacentHTML('afterend','<div id="commentRefresh"><button type="button" id="btn_cmtLoad">최신 댓글 불러오기</button><span id="cmtLoader"></span>');
