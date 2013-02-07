@@ -295,9 +295,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 			//highlight comment writer
 			function highlightWriter(){
-				$(myArea).find('td[width="140"] a:contains("' + nickname +'")').each(function(){
-					this.className += 'me';
-				});
+				var cmtName = myArea.querySelectorAll('td[width="140"] a');
+				for (var i = 0; i < cmtName.length; i++) {
+					if (cmtName[i].textContent === nickname) {
+						cmtName[i].className = 'me';
+					}
+				}
 			}
 			highlightWriter();
 
