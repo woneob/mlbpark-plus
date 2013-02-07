@@ -272,7 +272,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			if ((videoVar == '1') || (videoVar === undefined)) {
 				var vdoCss = document.createElement('link');
 				vdoCss.rel = 'stylesheet';
-				vdoCss.type = 'text/css';
 				vdoCss.href = chrome.extension.getURL('/css/video.css');
 				document.head.appendChild(vdoCss);
 			}
