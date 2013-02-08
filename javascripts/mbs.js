@@ -507,19 +507,33 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	$(window).load(function(){
 		// Add a 'User Block' to User Menu
 		if (blockUserVar == '1' ) {
-			$('div[id^=nik_]').each(function(){
-				var userNick = this.nextSibling.textContent;
+			var userMenu = document.querySelectorAll('div[id^=nik_]');
+			for (var i = 0; i < userMenu.length; i++) {
+				var userNick = userMenu[i].nextSibling.textContent;
+				userMenu[i].getElementsByTagName('ul')[0].insertAdjacentHTML('beforeEnd','<li data-user="'+userNick+'">닉네임 차단</li>');
+			}
 
-				$(this).find('ul').append($('<li>닉네임 차단</li>').on('click',function(){
-					window.postMessage({
-						action:'userBlockDelivery',
-						user: userNick
-					}, '*');
-					return false;
-				}));
+			$('li[data-user]').on('click',function(){
+				window.postMessage({
+					action:'userBlockDelivery',
+					user: this.getAttribute('data-user')
+				}, '*');
+				return false;
 			});
+
+			// $('div[id^=nik_]').each(function(){
+			// 	var userNick = this.nextSibling.textContent;
+
+			// 	$(this).find('ul').append($('<li>닉네임 차단</li>').on('click',function(){
+			// 		window.postMessage({
+			// 			action:'userBlockDelivery',
+			// 			user: userNick
+			// 		}, '*');
+			// 		return false;
+			// 	}));
+			// });
 		}
-	})
+	});
 });
 
 window.addEventListener('message', function(event) {
