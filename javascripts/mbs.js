@@ -164,14 +164,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					for (var u = 0; u < nickEl.length; u++) {
 						if (nickEl[u].textContent === blockUserInputVar[i]) {
 							up(nickEl[u],upCount).className = 'displayNone';
-							break;
 						}
 					}
 
 					for (var u = 0; u < CmtNickEl.length; u++) {
 						if (CmtNickEl[u].textContent === blockUserInputVar[i]) {
 							up(CmtNickEl[u],7).className = 'displayNone';
-							break;
 						}
 					}
 				}
