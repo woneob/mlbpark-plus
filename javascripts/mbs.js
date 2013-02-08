@@ -250,23 +250,25 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				window.onload = function(){
 					for (var i = 0; i < images.length; i++) {
-						var width = images[i].clientWidth;
-						var height = images[i].clientHeight;
+						var t = images[i];
+						var width = t.clientWidth;
+						var height = t.clientHeight;
 
 						if (width && height > 50) {
-							var src = images[i].src;
-							var btn_iSearch = '<a href="https://www.google.com/searchbyimage?image_url='+ src +'" class="btn_iSearch" target="_blank" title="구글에서 이미지 검색"></a>';
 							var imageWrap = document.createElement("span");
 							imageWrap.className = 'iWrap';
 
+							var src = t.src;
 							if(src.substr(0,7) != 'http://') {
 								var src = 'http://mlbpark.donga.com' + src;
 							}
 
-							if (images[i].parentNode.tagName.toLowerCase() == 'a') {
-								$(images[i].parentNode).wrap(imageWrap).after(btn_iSearch);
+							var btn_iSearch = '<a href="https://www.google.com/searchbyimage?image_url='+ src +'" class="btn_iSearch" target="_blank" title="구글에서 이미지 검색"></a>';
+
+							if (t.parentNode.tagName.toLowerCase() == 'a') {
+								$(t.parentNode).wrap(imageWrap).after(btn_iSearch);
 							} else {
-								$(images[i]).wrap(imageWrap).after(btn_iSearch);
+								$(t).wrap(imageWrap).after(btn_iSearch);
 							}
 						}
 					}
