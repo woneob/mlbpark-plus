@@ -257,7 +257,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						if (width && height > 50) {
 							var src = images[i].src;
 							var btn_iSearch = '<a href="https://www.google.com/searchbyimage?image_url='+ src +'" class="btn_iSearch" target="_blank" title="구글에서 이미지 검색"></a>';
-							var imageWrap = '<span class="iWrap"></span>';
+							var imageWrap = document.createElement("span");
+							imageWrap.className = 'iWrap';
 
 							if(src.substr(0,7) != 'http://') {
 								var src = 'http://mlbpark.donga.com' + src;
@@ -520,18 +521,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}, '*');
 				return false;
 			});
-
-			// $('div[id^=nik_]').each(function(){
-			// 	var userNick = this.nextSibling.textContent;
-
-			// 	$(this).find('ul').append($('<li>닉네임 차단</li>').on('click',function(){
-			// 		window.postMessage({
-			// 			action:'userBlockDelivery',
-			// 			user: userNick
-			// 		}, '*');
-			// 		return false;
-			// 	}));
-			// });
 		}
 	});
 });
