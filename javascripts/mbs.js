@@ -293,40 +293,33 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				document.head.appendChild(vdoCss);
 			}
 
-			//highlight comment writer
-			function highlightWriter(){
+			function commentUser(){
 				var cmtName = myArea.querySelectorAll('td[width="140"] a');
+				var viewCmt = '<button type="button" class="btn_userCmt" title="이 글에 단 댓글 보기">?</button>';
+
 				for (var i = 0; i < cmtName.length; i++) {
+					//highlight comment writer
 					if (cmtName[i].textContent === nickname) {
 						cmtName[i].className = 'me';
 					}
-				}
-			}
-			highlightWriter();
 
-			//view userComment
-			function viewUserComment(){
-				if ((userCommentViewVar == '1') || (userCommentViewVar == null)) {
-					var viewCmt = '<button type="button" class="btn_userCmt" title="이 글에 단 댓글 보기">?</button>';
-
-					if(loc.pathname !== "/mbs/commentV.php"){
-						$(myArea).find('a[title=" 에게 메모 보내기"]').each(function(){
-							this.insertAdjacentHTML('afterend',viewCmt);
-						});
+					//view userComment
+					if ((userCommentViewVar == '1') || (userCommentViewVar == null)) {
+						cmtName[i].insertAdjacentHTML('afterend',viewCmt);
 					}
+				}
 
-					var $btn_userCmt = $('.btn_userCmt');
-					$('.btn_userCmt').on('click',function(){
-						var select = this;
-						$('#commentModal').remove();
-
+				if ((userCommentViewVar == '1') || (userCommentViewVar == null)) {
+					var btn_userCmt = myArea.querySelectorAll('.btn_userCmt');
+					$(btn_userCmt).on('click',function(){
+						var t = this;
 						$.ajax({
 							type: "GET",
 							url: 'http://mlbpark.donga.com/mbs/commentRV.php?mbsC='+mbsC+'&comment_ymd='+wday+'&comment_idx='+mbsIdx,
 							cache: false,
 							success: function(response) {
-								var selectUser = select.previousSibling.textContent;
-								$(document.body).append(
+								var selectUser = t.previousSibling.textContent;
+								document.body.insertAdjacentHTML('beforeEnd',
 									'<div id="commentModal">\n'+
 									'	<div id="commentModalMask"></div>\n'+
 									'	<div id="commentModalBox">\n'+
@@ -348,32 +341,31 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 								var responseWrapper = $('<div />').append(response.replace(/<script(.|\s)*?\/script>/g, '')),
 								cmt = responseWrapper.find('a[title=" 에게 메모 보내기"]:contains("' + selectUser + '")'),
-								cmtVal = cmt.closest('td').nextAll(),
-								cmtCout = cmt.length,
-								$modal = $('#commentModalBox');
+								cmtVal = cmt.closest('td').nextAll();
+								var cmtCount = cmt.length;
+								var el_modal = document.getElementById('commentModalBox');
+								var el_cmtCount = document.getElementById('cmtCount');
+								var el_userCmtList = document.getElementById('userCmtList');
 
-								$('#cmtCount').text('(' + cmtCout + ')');
-								$('#userCmtList').append(cmtVal);
+								el_cmtCount.textContent = '(' + cmtCount + ')';
+								$(el_userCmtList).append(cmtVal);
 
-								var vPosition = $modal.outerHeight()*-.5;
-								$modal[0].style.marginTop = vPosition + 'px';
+								var vPosition = el_modal.offsetHeight*-.5;
+								el_modal.style.marginTop = vPosition + 'px';
 
 								$('#modalFormTextarea').on('click',function(){
 									if ($('#loginArea a:first-child').text() == '로그인'){
-										var loginConfirm = confirm("로그인 후 사용 가능합니다.\n로그인 페이지로 이동하시겠습니까?");
-										if (loginConfirm == true){
+										if (confirm("로그인 후 사용 가능합니다.\n로그인 페이지로 이동하시겠습니까?") == true){
 											window.location = 'http://www.donga.com/members/login.php\?gourl=' + escape(locHref);
 										}
 									}
 								});
 							},
 							beforeSend : function(){
-								select.classList.add('userCmtLoading');
-								$btn_userCmt.prop('disabled', true);
+								t.classList.add('userCmtLoading');
 							},
 							complete: function(){
-								select.classList.remove('userCmtLoading');
-								$btn_userCmt.prop('disabled', false);
+								t.classList.remove('userCmtLoading');
 							}
 						});
 					});
@@ -383,7 +375,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					});
 				}
 			}
-			viewUserComment();
+			commentUser();
 
 			//text URL replacement
 			function urlReplace(){
@@ -444,8 +436,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					success: function(data) {
 						$(myArea).html(data);
 						userBlock();
-						highlightWriter();
-						viewUserComment();
+						commentUser();
 					},
 					complete: function() {
 						urlReplace();
