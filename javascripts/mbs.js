@@ -246,23 +246,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 			//google search by image
 			if ((imageSearchVar == '1') || (imageSearchVar === undefined)) {
-				$.event.special.load = {
-					add: function (hollaback) {
-						if (this.complete || this.readyState === 4) {
-							hollaback.handler.apply(this);
-						} else if (this.readyState === 'uninitialized' && this.src.indexOf('data:') === 0) {
-							$(this).trigger('error');
-						} else {
-							$(this).bind('load', hollaback.handler);
-						}
-					}
-				};
-
 				var images = article.getElementsByTagName('img');
 				var imagesLength = images.length;
 
-				for (var i = 0; i < imagesLength; i++) {
-					$(images[i]).on('load',function(e){
+				window.onload = function(){
+					for (var i = 0; i < imagesLength; i++) {
 						var width = images[i].clientWidth;
 						var height = images[i].clientHeight;
 
@@ -281,8 +269,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 								$(images[i]).wrap(imageWrap).after(btn_iSearch);
 							}
 						}
-					});
-				}
+					}
+				};
 			}
 
 			//videoCss
