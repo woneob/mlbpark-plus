@@ -247,10 +247,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			//google search by image
 			if ((imageSearchVar == '1') || (imageSearchVar === undefined)) {
 				var images = article.getElementsByTagName('img');
-				var imagesLength = images.length;
 
 				window.onload = function(){
-					for (var i = 0; i < imagesLength; i++) {
+					for (var i = 0; i < images.length; i++) {
 						var width = images[i].clientWidth;
 						var height = images[i].clientHeight;
 
