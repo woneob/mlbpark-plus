@@ -15,37 +15,39 @@ function getCookie(name) {
 	return "";
 }
 
-var loginArea = document.getElementById('loginArea');
-var loginStatus = loginArea.firstElementChild.textContent;
-if (loginStatus === '로그아웃'){
-	var userId = getCookie("dongauserid");
-	$.ajax({
-		type: "GET",
-		url: 'http://mlbpark.donga.com/mypage/memo.php?id='+userId,
-		dataType: "html",
-		cache: false,
-		success: function(response) {
-			if (!(response.indexOf('정상적인 접근이 아닙니다') >= 0)){
-				var responseWrapper = $('<div />').append(response.replace(/<script(.|\s)*?\/script>/g, ''));
-				from = responseWrapper.find('tr:first-child td[height="25"] strong').text();
-				text = responseWrapper.find('textarea').text();
-				document.body.insertAdjacentHTML('beforeEnd',
-					'<div id="memoAlarm">\n'+
-					'	<h3>'+from+' 쪽지가 도착했습니다.</h3>\n'+
-					'	<p>'+text+'</p>\n'+
-					'	<div>\n'+
-					'		<a href="http://mlbpark.donga.com/mypage/my_message.php">쪽지함 가기</a>\n'+
-					'		<a id="toasterClose" href="#">닫기</a>\n'+
-					'	</div>\n'+
-					'</div>\n'
-				);
-				$('#toasterClose').on('click',function(){
-					$('#memoAlarm').fadeOut(300,function(){
-						$(this).remove();
+if (window.location.href.indexOf('articleV.php') > -1) {
+	var loginArea = document.getElementById('loginArea');
+	var loginStatus = loginArea.firstElementChild.textContent;
+	if (loginStatus === '로그아웃'){
+		var userId = getCookie("dongauserid");
+		$.ajax({
+			type: "GET",
+			url: 'http://mlbpark.donga.com/mypage/memo.php?id='+userId,
+			dataType: "html",
+			cache: false,
+			success: function(response) {
+				if (!(response.indexOf('정상적인 접근이 아닙니다') >= 0)){
+					var responseWrapper = $('<div />').append(response.replace(/<script(.|\s)*?\/script>/g, ''));
+					from = responseWrapper.find('tr:first-child td[height="25"] strong').text();
+					text = responseWrapper.find('textarea').text();
+					document.body.insertAdjacentHTML('beforeEnd',
+						'<div id="memoAlarm">\n'+
+						'	<h3>'+from+' 쪽지가 도착했습니다.</h3>\n'+
+						'	<p>'+text+'</p>\n'+
+						'	<div>\n'+
+						'		<a href="http://mlbpark.donga.com/mypage/my_message.php">쪽지함 가기</a>\n'+
+						'		<a id="toasterClose" href="#">닫기</a>\n'+
+						'	</div>\n'+
+						'</div>\n'
+					);
+					$('#toasterClose').on('click',function(){
+						$('#memoAlarm').fadeOut(300,function(){
+							$(this).remove();
+						});
+						return false;
 					});
-					return false;
-				});
+				}
 			}
-		}
-	});
+		});
+	}
 }

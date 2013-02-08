@@ -183,102 +183,104 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var userId =  $(userEl).find('li:first-child').attr('onclick').match(/id=([^&]+)\'/)[1];
 			var nickname = userEl.nextSibling.textContent;
 
-			//content blind
-			if ((blindVar == '1') || (blindVar === undefined)) {
-				var subject = document.getElementsByTagName('strong')[0].textContent;
-				var btn_cob = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 COB가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
-				var btn_soap = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 비누가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
-				var btn_warn = '<div id="btn_color"class=\"warnBtn\"><span>경고 문구가 포함되어 본문을 흑백처리 합니다.</span> 원문을 보시려면 클릭하세요.</div>';
+			if (locHref.indexOf('articleV.php') > -1) {
+				//content blind
+				if ((blindVar == '1') || (blindVar === undefined)) {
+					var subject = document.getElementsByTagName('strong')[0].textContent;
+					var btn_cob = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 COB가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
+					var btn_soap = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 비누가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
+					var btn_warn = '<div id="btn_color"class=\"warnBtn\"><span>경고 문구가 포함되어 본문을 흑백처리 합니다.</span> 원문을 보시려면 클릭하세요.</div>';
 
-				if ($(myArea).find('.G12:Contains("COB")').length > 0) {
-					article.style.display = 'none';
-					article.insertAdjacentHTML('beforebegin', btn_cob);
-				} else if ($(myArea).find('.G12:contains("비누")').length > 0) {
-					article.style.display = 'none';
-					article.insertAdjacentHTML('beforebegin', btn_soap);
-				} else if(titIcon.warn.test(subject)) {
-					article.className = 'grayscale';
-					article.insertAdjacentHTML('beforebegin', btn_warn);
+					if ($(myArea).find('.G12:Contains("COB")').length > 0) {
+						article.style.display = 'none';
+						article.insertAdjacentHTML('beforebegin', btn_cob);
+					} else if ($(myArea).find('.G12:contains("비누")').length > 0) {
+						article.style.display = 'none';
+						article.insertAdjacentHTML('beforebegin', btn_soap);
+					} else if(titIcon.warn.test(subject)) {
+						article.className = 'grayscale';
+						article.insertAdjacentHTML('beforebegin', btn_warn);
+					}
+
+					$(document.getElementsByClassName('warnBtn')).on('click',function(){
+						this.className = 'displayNone';
+						if (this.id == 'btn_color') {
+							article.classList.remove('grayscale');
+						} else {
+							$(article).slideDown(300);
+						}
+					});
 				}
 
-				$(document.getElementsByClassName('warnBtn')).on('click',function(){
-					this.className = 'displayNone';
-					if (this.id == 'btn_color') {
-						article.classList.remove('grayscale');
-					} else {
-						$(article).slideDown(300);
-					}
-				});
-			}
+				//add userId
+				userEl.nextSibling.insertAdjacentHTML('afterend','<span class="userIdVal">(' + userId + ')</span>');
 
-			//add userId
-			userEl.nextSibling.insertAdjacentHTML('afterend','<span class="userIdVal">(' + userId + ')</span>');
+				//user history
+				if (userHistoryVar == '1') {
+					article.insertAdjacentHTML('afterend',
+					'<div id="history">\n'+
+					'	<div class="historyHead">\n'+
+					'		<h3><span>'+nickname+'<span>('+userId+')</span></span> 님의 최근 글</h3>\n'+
+					'		<button type="button" onclick="MlbNewWindow2(\'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId +'\',\'550\',\'500\')">[더 보기]</button>\n' + 
+					'	</div>\n'+ 
+					'	<div id="historyLoading">\n'+
+					'		<div><span class="stick1"></span><span class="stick2"></span><span class="stick3"></span></div>\n'+
+					'	</div>\n'+
+					'	<div id="historyList"></div>\n'+
+					'</div>'
+					);
 
-			//user history
-			if (userHistoryVar == '1') {
-				article.insertAdjacentHTML('afterend',
-				'<div id="history">\n'+
-				'	<div class="historyHead">\n'+
-				'		<h3><span>'+nickname+'<span>('+userId+')</span></span> 님의 최근 글</h3>\n'+
-				'		<button type="button" onclick="MlbNewWindow2(\'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId +'\',\'550\',\'500\')">[더 보기]</button>\n' + 
-				'	</div>\n'+ 
-				'	<div id="historyLoading">\n'+
-				'		<div><span class="stick1"></span><span class="stick2"></span><span class="stick3"></span></div>\n'+
-				'	</div>\n'+
-				'	<div id="historyList"></div>\n'+
-				'</div>'
-				);
+					$.ajax({
+						type: "GET",
+						url: 'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId,
+						cache: false,
+						success: function(response) {
+							$('#historyList').append($(response).find('td[bgcolor="#FFFFFF"] > table:nth-child(2)').html()).find('a[target]').removeAttr('target');
+						},
+						complete: function(){
+							$("#historyLoading").remove();
+						}
+					});
+				}
 
-				$.ajax({
-					type: "GET",
-					url: 'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId,
-					cache: false,
-					success: function(response) {
-						$('#historyList').append($(response).find('td[bgcolor="#FFFFFF"] > table:nth-child(2)').html()).find('a[target]').removeAttr('target');
-					},
-					complete: function(){
-						$("#historyLoading").remove();
-					}
-				});
-			}
+				//google search by image
+				if ((imageSearchVar == '1') || (imageSearchVar === undefined)) {
+					var images = article.getElementsByTagName('img');
 
-			//google search by image
-			if ((imageSearchVar == '1') || (imageSearchVar === undefined)) {
-				var images = article.getElementsByTagName('img');
+					window.onload = function(){
+						for (var i = 0; i < images.length; i++) {
+							var t = images[i];
+							var width = t.clientWidth;
+							var height = t.clientHeight;
 
-				window.onload = function(){
-					for (var i = 0; i < images.length; i++) {
-						var t = images[i];
-						var width = t.clientWidth;
-						var height = t.clientHeight;
+							if (width && height > 50) {
+								var imageWrap = document.createElement("span");
+								imageWrap.className = 'iWrap';
 
-						if (width && height > 50) {
-							var imageWrap = document.createElement("span");
-							imageWrap.className = 'iWrap';
+								var src = t.src;
+								if(src.substr(0,7) != 'http://') {
+									var src = 'http://mlbpark.donga.com' + src;
+								}
 
-							var src = t.src;
-							if(src.substr(0,7) != 'http://') {
-								var src = 'http://mlbpark.donga.com' + src;
-							}
+								var btn_iSearch = '<a href="https://www.google.com/searchbyimage?image_url='+ src +'" class="btn_iSearch" target="_blank" title="구글에서 이미지 검색"></a>';
 
-							var btn_iSearch = '<a href="https://www.google.com/searchbyimage?image_url='+ src +'" class="btn_iSearch" target="_blank" title="구글에서 이미지 검색"></a>';
-
-							if (t.parentNode.tagName.toLowerCase() == 'a') {
-								$(t.parentNode).wrap(imageWrap).after(btn_iSearch);
-							} else {
-								$(t).wrap(imageWrap).after(btn_iSearch);
+								if (t.parentNode.tagName.toLowerCase() == 'a') {
+									$(t.parentNode).wrap(imageWrap).after(btn_iSearch);
+								} else {
+									$(t).wrap(imageWrap).after(btn_iSearch);
+								}
 							}
 						}
-					}
-				};
-			}
+					};
+				}
 
-			//videoCss
-			if ((videoVar == '1') || (videoVar === undefined)) {
-				var vdoCss = document.createElement('link');
-				vdoCss.rel = 'stylesheet';
-				vdoCss.href = chrome.extension.getURL('/css/video.css');
-				document.head.appendChild(vdoCss);
+				//videoCss
+				if ((videoVar == '1') || (videoVar === undefined)) {
+					var vdoCss = document.createElement('link');
+					vdoCss.rel = 'stylesheet';
+					vdoCss.href = chrome.extension.getURL('/css/video.css');
+					document.head.appendChild(vdoCss);
+				}
 			}
 
 			function commentUser(){
@@ -436,73 +438,75 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			});
 		}
 
-		//tab Navigation highlighter
-		if (locHref.indexOf('mbsW=search') > -1){
-			$.urlParam = function(name){
-				var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(locHref);
-				return results[1] || 0;
-			}
-			switch ($.urlParam('mbsC')) {
-				case 'bullpen':
-					document.getElementById('navi4').className = 'on';
-				break;
-				case 'kbotown':
-					document.getElementById('navi3').className = 'on';
-				break;
-				case 'mlbtown':
-					document.getElementById('navi2').className = 'on';
-				break;
-			}
-		}
-
-		//replace with href of link
-		var elms = document.getElementsByTagName('a');
-		for (i=0; i<elms.length; i++) {
-			elms[i].href = elms[i].href.replace('articleVC', 'articleV');
-		}
-
-		//shotcut keys
-		var paging = document.getElementsByClassName('paging');
-		var $currentPage = $(paging).find('font');
-
-		$(paging).find('> img').remove();
-
-		var pLink = $currentPage[0].previousSibling.href;
-		var nLink = $currentPage[0].nextSibling.href;
-
-		if ((shortcutVar == '1') || (shortcutVar == null)) {
-			$(document).keyup(function(e){
-				if (loc.pathname !== '/mbs/commentV.php'){
-					if ($(e.target).is('input, textarea')) {
-						return;
-					}
-					if (e.which === 65) {
-						window.location.href = pLink;
-					}
-					if (e.which === 83) {
-						window.location.href = nLink;
-					}
-					if (e.which === 68) {
-						$(document.body).animate({scrollTop: $('table[height="31"]').offset().top}, 300);
-					}
+		if (locHref.indexOf('articleV.php') > -1) {
+			//tab Navigation highlighter
+			if (locHref.indexOf('mbsW=search') > -1){
+				$.urlParam = function(name){
+					var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(locHref);
+					return results[1] || 0;
 				}
-			});
-		}
+				switch ($.urlParam('mbsC')) {
+					case 'bullpen':
+						document.getElementById('navi4').className = 'on';
+					break;
+					case 'kbotown':
+						document.getElementById('navi3').className = 'on';
+					break;
+					case 'mlbtown':
+						document.getElementById('navi2').className = 'on';
+					break;
+				}
+			}
 
-		//prerender
-		var target = document.head;
-		pr1 = document.createElement('link');
-		pr1.rel = 'prerender';
-		pr1.href = 'http://mlbpark.donga.com/mbs/articleL.php?mbsC=bullpen';
-		pr2 = document.createElement('link');
-		pr2.rel = 'prerender';
-		pr2.href = nLink;
-		pr3 = document.createElement('link');
-		pr3.rel = 'prerender';
-		pr3.href = pLink;
-		target.appendChild(pr1);
-		target.appendChild(pr2);
-		target.appendChild(pr3);
+			//replace with href of link
+			var elms = document.getElementsByTagName('a');
+			for (i=0; i<elms.length; i++) {
+				elms[i].href = elms[i].href.replace('articleVC', 'articleV');
+			}
+
+			//shotcut keys
+			var paging = document.getElementsByClassName('paging');
+			var $currentPage = $(paging).find('font');
+
+			$(paging).find('> img').remove();
+
+			var pLink = $currentPage[0].previousSibling.href;
+			var nLink = $currentPage[0].nextSibling.href;
+
+			if ((shortcutVar == '1') || (shortcutVar == null)) {
+				$(document).keyup(function(e){
+					if (loc.pathname !== '/mbs/commentV.php'){
+						if ($(e.target).is('input, textarea')) {
+							return;
+						}
+						if (e.which === 65) {
+							window.location.href = pLink;
+						}
+						if (e.which === 83) {
+							window.location.href = nLink;
+						}
+						if (e.which === 68) {
+							$(document.body).animate({scrollTop: $('table[height="31"]').offset().top}, 300);
+						}
+					}
+				});
+			}
+
+			//prerender
+			var target = document.head;
+			pr1 = document.createElement('link');
+			pr1.rel = 'prerender';
+			pr1.href = 'http://mlbpark.donga.com/mbs/articleL.php?mbsC=bullpen';
+			pr2 = document.createElement('link');
+			pr2.rel = 'prerender';
+			pr2.href = nLink;
+			pr3 = document.createElement('link');
+			pr3.rel = 'prerender';
+			pr3.href = pLink;
+			target.appendChild(pr1);
+			target.appendChild(pr2);
+			target.appendChild(pr3);
+		}
 
 		// Add a 'User Block' to User Menu
 		if (blockUserVar == '1' ) {
