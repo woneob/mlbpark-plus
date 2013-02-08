@@ -15,10 +15,10 @@ $(document).ready(function() {
 	$('.ad_left_w,.ad_right_w,script[src^="http://cad.donga.com/"],script[src^="http://mlbpark.donga.com/acecounter/"],iframe[src^="http://ar.donga.com/"],iframe[src^="http://idolpark.donga.com/"],iframe[src^="http://sports.donga.com/"],iframe[src="http://mlbpark.donga.com/mypage/memo_read.php"],iframe[src="http://mlbpark.donga.com/poll/score.html"]').remove();
 
 	//async load
-	$('script[src="./js/comm_js.js"]').attr('async','async');
+	document.querySelector('script[src="./js/comm_js.js"]').async = 'async';
 
 	//user toolbox remove
-	$(document).bind('click',function(){
+	$(document).on('click',function(){
 		$('div[id^="nik_"]').css('display','none');
 	});
 });
