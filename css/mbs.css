@@ -93,6 +93,7 @@ form[name="writeForm"] td[width="56"] a[href^="javascript:startRequest"] {displa
 #historyList table[width="100%"] td[width="30"] {width:40px !important;}
 #historyList table[width="100%"] td[width="326"] {display:none !important;}
 #historyList table[width="100%"] td[width="80"] {width:75px !important;text-align:left !important;}
+#historyList table[width="100%"] td.G12read {padding:0;}
 #historyList table[width="100%"] td.G12read a {color:#5a5a5a !important;}
 #historyLoading {padding:30px 0;}
 #historyLoading div {width:3px;height:20px;position:relative;margin:0 auto;display:block;-webkit-animation: rotateit 1.3s linear infinite;animation: rotateit 1.3s linear infinite;}
