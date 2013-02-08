@@ -511,8 +511,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		if (blockUserVar == '1' ) {
 			var userMenu = document.querySelectorAll('div[id^=nik_]');
 			for (var i = 0; i < userMenu.length; i++) {
-				var userNick = userMenu[i].nextSibling.textContent;
-				userMenu[i].getElementsByTagName('ul')[0].insertAdjacentHTML('beforeEnd','<li data-user="'+userNick+'">닉네임 차단</li>');
+				var t = userMenu[i];
+				var userNick = t.nextSibling.textContent;
+				t.getElementsByTagName('ul')[0].insertAdjacentHTML('beforeEnd','<li data-user="'+userNick+'">닉네임 차단</li>');
 			}
 
 			$('li[data-user]').on('click',function(){
