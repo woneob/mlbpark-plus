@@ -431,6 +431,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					complete: function() {
 						urlReplace();
 						replyButton();
+						addUserBlock();
 						cmtLoader.className = 'hide';
 					}
 				});
@@ -504,17 +505,18 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		target.appendChild(pr1);
 		target.appendChild(pr2);
 		target.appendChild(pr3);
-	});
 
-	$(window).load(function(){
 		// Add a 'User Block' to User Menu
 		if (blockUserVar == '1' ) {
-			var userMenu = document.querySelectorAll('div[id^=nik_]');
-			for (var i = 0; i < userMenu.length; i++) {
-				var t = userMenu[i];
-				var userNick = t.nextSibling.textContent;
-				t.getElementsByTagName('ul')[0].insertAdjacentHTML('beforeEnd','<li data-user="'+userNick+'">닉네임 차단</li>');
+			function addUserBlock(){
+				var userMenu = document.querySelectorAll('div[id^=nik_]');
+				for (var i = 0; i < userMenu.length; i++) {
+					var t = userMenu[i];
+					var userNick = t.nextSibling.textContent;
+					t.getElementsByTagName('ul')[0].insertAdjacentHTML('beforeEnd','<li data-user="'+userNick+'">닉네임 차단</li>');
+				}
 			}
+			addUserBlock();
 
 			$('li[data-user]').on('click',function(){
 				window.postMessage({
