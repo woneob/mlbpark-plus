@@ -96,8 +96,8 @@ td.A13oreng #search_text input.box2 {border:1px solid #ccc;padding:5px 6px;borde
 
 /* memo --------------------- */
 #memoAlarm {position:fixed;z-index:999999;right:10px;bottom:10px;padding:13px 10px 10px;background:rgba(250,250,250,.9);border:1px solid #999;border-color:#ccc #aaa #999;box-shadow:2px 2px 2px rgba(0,0,0,.1);border-radius:3px;-webkit-animation:myfirst .5s;cursor:default;}
-#memoAlarm h3 {margin-bottom:6px;font-size:14px;letter-spacing:-1px;font-family:Dotum, '돋움', sans-serif;color:#5a5a5a;}
-#memoAlarm p {display:-webkit-box;max-width:380px;margin-bottom:7px;padding:5px;border:1px solid #e3e3e3;line-height:1.5;background:#fff;color:#666;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;word-break:break-all;letter-spacing:-1px;}
+#memoAlarm h3 {margin-bottom:6px;font-size:14px;letter-spacing:-1px;font-family:Dotum, '돋움', sans-serif;color:#333;}
+#memoAlarm p {display:-webkit-box;max-width:380px;margin-bottom:7px;padding:5px;border:1px solid #e3e3e3;line-height:1.5;background:#fff;color:#666;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;word-break:break-all;font-size:12px;}
 #memoAlarm div {text-align:center;}
 #memoAlarm div a {display:inline-block;text-decoration:none;border:1px solid #ccc;border-color:#ddd #ccc #aaa;padding:4px 6px 3px;border-radius:2px;background:#fefefe;font-size:11px;letter-spacing:-1px;color:#666;}
 #memoAlarm div a:hover {border-color:#ccc #bbb #999;background-color:#fff;}

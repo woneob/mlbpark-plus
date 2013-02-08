@@ -15,9 +15,10 @@ function getCookie(name) {
 	return "";
 }
 
-if ($('#loginArea a:first-child').text() == '로그아웃'){
+var loginArea = document.getElementById('loginArea');
+var loginStatus = loginArea.firstElementChild.textContent;
+if (loginStatus === '로그아웃'){
 	var userId = getCookie("dongauserid");
-
 	$.ajax({
 		type: "GET",
 		url: 'http://mlbpark.donga.com/mypage/memo.php?id='+userId,
@@ -28,7 +29,7 @@ if ($('#loginArea a:first-child').text() == '로그아웃'){
 				var responseWrapper = $('<div />').append(response.replace(/<script(.|\s)*?\/script>/g, ''));
 				from = responseWrapper.find('tr:first-child td[height="25"] strong').text();
 				text = responseWrapper.find('textarea').text();
-				$('body').append(
+				document.body.insertAdjacentHTML('beforeEnd',
 					'<div id="memoAlarm">\n'+
 					'	<h3>'+from+' 쪽지가 도착했습니다.</h3>\n'+
 					'	<p>'+text+'</p>\n'+
