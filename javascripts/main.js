@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	//ScoreBoard load
-	$('.right_cont').append(
+	document.getElementsByClassName('right_cont')[0].insertAdjacentHTML('beforeEnd',
 		'<div id="score">\n' +
 		'	<div id="score_tab">\n' +
 		'		<ul>\n' +
@@ -61,5 +61,5 @@ $(document).ready(function() {
 	$('input[alt="로그인"]').attr('tabindex','4');
 
 	//mypage href fix
-	$('a[href="http://idolpark.donga.com/mypage/"]').attr('href','http://mlbpark.donga.com/mypage/');
+	document.querySelector('a[href="http://idolpark.donga.com/mypage/"]').href = 'http://mlbpark.donga.com/mypage/';
 });
