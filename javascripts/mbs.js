@@ -288,14 +288,16 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					var viewCmt = '<button type="button" class="btn_userCmt" title="이 글에 단 댓글 보기">?</button>';
 
 					for (var i = 0; i < cmtName.length; i++) {
+						var t = cmtName[i];
+
 						//highlight comment writer
-						if (cmtName[i].textContent === nickname) {
-							cmtName[i].className = 'me';
+						if (t.textContent === nickname) {
+							t.className = 'me';
 						}
 
 						//view userComment
 						if ((userCommentViewVar == '1') || (userCommentViewVar == null)) {
-							cmtName[i].insertAdjacentHTML('afterEnd',viewCmt);
+							t.insertAdjacentHTML('afterEnd',viewCmt);
 						}
 					}
 
