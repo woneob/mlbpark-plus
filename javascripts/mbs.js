@@ -457,56 +457,55 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 		}
 
-		if (locHref.indexOf('articleV.php') > -1) {
-			//replace with href of link
-			var elms = document.getElementsByTagName('a');
-			for (i=0; i<elms.length; i++) {
-				elms[i].href = elms[i].href.replace('articleVC', 'articleV');
-			}
-
-			//shotcut keys
-			var paging = document.getElementsByClassName('paging');
-			var $currentPage = $(paging).find('font');
-
-			$(paging).find('> img').remove();
-
-			var pLink = $currentPage[0].previousSibling.href;
-			var nLink = $currentPage[0].nextSibling.href;
-
-			if ((shortcutVar == '1') || (shortcutVar == null)) {
-				$(document).keyup(function(e){
-					if (loc.pathname !== '/mbs/commentV.php'){
-						if ($(e.target).is('input, textarea')) {
-							return;
-						}
-						if (e.which === 65) {
-							window.location.href = pLink;
-						}
-						if (e.which === 83) {
-							window.location.href = nLink;
-						}
-						if (e.which === 68) {
-							$(document.body).animate({scrollTop: $('table[height="31"]').offset().top}, 300);
-						}
-					}
-				});
-			}
-
-			//prerender
-			var target = document.head;
-			pr1 = document.createElement('link');
-			pr1.rel = 'prerender';
-			pr1.href = 'http://mlbpark.donga.com/mbs/articleL.php?mbsC=bullpen';
-			pr2 = document.createElement('link');
-			pr2.rel = 'prerender';
-			pr2.href = nLink;
-			pr3 = document.createElement('link');
-			pr3.rel = 'prerender';
-			pr3.href = pLink;
-			target.appendChild(pr1);
-			target.appendChild(pr2);
-			target.appendChild(pr3);
+		//replace with href of link
+		var elms = document.getElementsByTagName('a');
+		for (i=0; i<elms.length; i++) {
+			elms[i].href = elms[i].href.replace('articleVC', 'articleV');
 		}
+
+		//shotcut keys
+		var paging = document.getElementsByClassName('paging');
+		var $currentPage = $(paging).find('font');
+
+		$(paging).find('> img').remove();
+
+		var pLink = $currentPage[0].previousSibling.href;
+		var nLink = $currentPage[0].nextSibling.href;
+
+		if ((shortcutVar == '1') || (shortcutVar == null)) {
+			$(document).keyup(function(e){
+				if (loc.pathname !== '/mbs/commentV.php'){
+					if ($(e.target).is('input, textarea')) {
+						return;
+					}
+					if (e.which === 65) {
+						window.location.href = pLink;
+					}
+					if (e.which === 83) {
+						window.location.href = nLink;
+					}
+					if (e.which === 68) {
+						$(document.body).animate({scrollTop: $('table[height="31"]').offset().top}, 300);
+					}
+				}
+			});
+		}
+
+		//prerender
+		var target = document.head;
+		pr1 = document.createElement('link');
+		pr1.rel = 'prerender';
+		pr1.href = 'http://mlbpark.donga.com/mbs/articleL.php?mbsC=bullpen';
+		pr2 = document.createElement('link');
+		pr2.rel = 'prerender';
+		pr2.href = nLink;
+		pr3 = document.createElement('link');
+		pr3.rel = 'prerender';
+		pr3.href = pLink;
+		target.appendChild(pr1);
+		target.appendChild(pr2);
+		target.appendChild(pr3);
+
 
 		// Add a 'User Block' to User Menu
 		if (blockUserVar == '1' ) {
