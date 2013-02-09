@@ -21,7 +21,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		game: /디아|\[스타|프야매|lol|게임/i,
 		female: /여자|처자|ㅊㅈ|여친|녀 |여성/,
 		twitter: /(트윗|트위터)/,
-		warn: /(혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|혐오주의)/,
+		warn: /(혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|주의\))/,
 		adult: /(19금|\[19\] |\(19\)|주번나|성진국)/,
 		tv: /(swf|avi|플짤|영상|flv)/i,
 		vs: /(vs)/i,
