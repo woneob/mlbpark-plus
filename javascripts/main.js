@@ -47,18 +47,19 @@ $(document).ready(function() {
 	});
 
 	//equal height
-	$('.article_box, .right_cont').addClass('eHeight');
-	maxHeight = 0;
-	$('.eHeight').each(function() {
-		maxHeight = Math.max(maxHeight, $(this).outerHeight());
-	});
-	$('.eHeight').css({ height: maxHeight + 'px' });
+	var articleBox = document.getElementsByClassName('article_box')[0];
+	var rightCont = document.getElementsByClassName('right_cont')[0];
+	var articleBox_height = articleBox.offsetHeight;
+	var rightCont_height = rightCont.offsetHeight;
+	var maxHeight = Math.max(articleBox_height, rightCont_height);
+	articleBox.style.maxHeight = maxHeight + 'px';
+	rightCont.style.maxHeight = maxHeight + 'px';
 
 	//loginbox tabIndex
-	$('#bid').attr('tabindex','1');
-	$('#bpw').attr('tabindex','2');
-	$('#idremember').attr('tabindex','3');
-	$('input[alt="로그인"]').attr('tabindex','4');
+	document.getElementById('bid').setAttribute('tabindex','1');
+	document.getElementById('bpw').setAttribute('tabindex','2');
+	document.getElementById('idremember').setAttribute('tabindex','3');
+	document.querySelector('input[alt="로그인"]').setAttribute('tabindex','4');
 
 	//mypage href fix
 	document.querySelector('a[href="http://idolpark.donga.com/mypage/"]').href = 'http://mlbpark.donga.com/mypage/';
