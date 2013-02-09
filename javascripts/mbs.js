@@ -148,8 +148,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		if (noticeVar == '1') {
 			var cat = document.getElementsByClassName('A11gray');
 			for (var c = 0; c < cat.length; c++) {
-				if (cat[c].textContent === '공지') {
-					up(cat[c],5).className = 'displayNone';
+				var t = cat[c];
+				if (t.textContent === '공지') {
+					up(t,5).className = 'displayNone';
 				}
 			}
 		}
