@@ -15,7 +15,7 @@ function getCookie(name) {
 	return "";
 }
 
-if (window.location.href.indexOf('articleV.php') > -1) {
+if (window.location.pathname !== '/mbs/commentV.php') {
 	var loginArea = document.getElementById('loginArea');
 	var loginStatus = loginArea.firstElementChild.textContent;
 	if (loginStatus === '로그아웃'){
