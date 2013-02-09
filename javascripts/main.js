@@ -56,11 +56,18 @@ $(document).ready(function() {
 	rightCont.style.maxHeight = maxHeight + 'px';
 
 	//loginbox tabIndex
-	document.getElementById('bid').setAttribute('tabindex','1');
-	document.getElementById('bpw').setAttribute('tabindex','2');
-	document.getElementById('idremember').setAttribute('tabindex','3');
-	document.querySelector('input[alt="로그인"]').setAttribute('tabindex','4');
+	var loginBox = document.getElementById('preViewQue2');
+	if (loginBox.children[1].className == 'login') {
+		document.getElementById('bid').setAttribute('tabindex','1');
+		document.getElementById('bpw').setAttribute('tabindex','2');
+		document.getElementById('idremember').setAttribute('tabindex','3');
+		loginBox.querySelector('input[alt="로그인"]').setAttribute('tabindex','4');
+	}
 
 	//mypage href fix
-	document.querySelector('a[href="http://idolpark.donga.com/mypage/"]').href = 'http://mlbpark.donga.com/mypage/';
+	var mypageLink = document.querySelector('a[href="http://idolpark.donga.com/mypage/"]');
+	if (mypageLink) {
+		mypageLink.href = 'http://mlbpark.donga.com/mypage/';
+	}
+	
 });
