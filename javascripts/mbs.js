@@ -160,14 +160,15 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			if (blockUserVar == '1' ) {
 				var CmtNickEl = document.querySelectorAll('td[width="140"] a');
 				for (var i = 0; i < blockUserInputVar.length; i++) {
+					var t = blockUserInputVar[i];
 					for (var u = 0; u < nickEl.length; u++) {
-						if (nickEl[u].textContent === blockUserInputVar[i]) {
+						if (nickEl[u].textContent === t) {
 							up(nickEl[u],upCount).className = 'displayNone';
 						}
 					}
 
 					for (var u = 0; u < CmtNickEl.length; u++) {
-						if (CmtNickEl[u].textContent === blockUserInputVar[i]) {
+						if (CmtNickEl[u].textContent === t) {
 							up(CmtNickEl[u],7).className = 'displayNone';
 						}
 					}
