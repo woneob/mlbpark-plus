@@ -381,7 +381,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			urlReplace();
 
 			//reply button
-			var textarea = document.getElementsByName('line_content');
+			var textarea = document.getElementsByName('line_content')[0];
 
 			function replyButton(){
 				if ((replyVar == '1') || (replyVar == null)) {
@@ -389,14 +389,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					$(myArea).find('.G12').append(btn);
 					$('.btn_reply').on('click',function(){
 						var username = up(this,5).previousElementSibling.getElementsByTagName('a')[0].textContent;
-						if (!$.trim($(textarea).val())){
-							$(textarea).focus().val(username + '// ');
-						} else {
-							var question = confirm('아직 작성 중인 댓글이 있습니다.\n다시 작성하시겠습니까?');
-							if (question){
-								$(textarea).focus().val(username + '// ');
-							} return false; 
-						} return false;
+						if (textarea.value !== '' && !confirm('아직 작성 중인 댓글이 있습니다.\n다시 작성하시겠습니까?')){
+							return false;
+						}
+						textarea.focus();
+						textarea.value = username + '// ';
 					});
 				}
 			}
