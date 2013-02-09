@@ -438,26 +438,26 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			});
 		}
 
-		if (locHref.indexOf('articleV.php') > -1) {
-			//tab Navigation highlighter
-			if (locHref.indexOf('mbsW=search') > -1){
-				$.urlParam = function(name){
-					var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(locHref);
-					return results[1] || 0;
-				}
-				switch ($.urlParam('mbsC')) {
-					case 'bullpen':
-						document.getElementById('navi4').className = 'on';
-					break;
-					case 'kbotown':
-						document.getElementById('navi3').className = 'on';
-					break;
-					case 'mlbtown':
-						document.getElementById('navi2').className = 'on';
-					break;
-				}
+		//tab Navigation highlighter
+		if (locHref.indexOf('mbsW=search') > -1){
+			$.urlParam = function(name){
+				var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(locHref);
+				return results[1] || 0;
 			}
+			switch ($.urlParam('mbsC')) {
+				case 'bullpen':
+					document.getElementById('navi4').className = 'on';
+				break;
+				case 'kbotown':
+					document.getElementById('navi3').className = 'on';
+				break;
+				case 'mlbtown':
+					document.getElementById('navi2').className = 'on';
+				break;
+			}
+		}
 
+		if (locHref.indexOf('articleV.php') > -1) {
 			//replace with href of link
 			var elms = document.getElementsByTagName('a');
 			for (i=0; i<elms.length; i++) {
