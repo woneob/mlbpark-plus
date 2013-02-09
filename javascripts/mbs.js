@@ -179,7 +179,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		if (locHref.indexOf('V.php') > -1){
 			var myArea = document.getElementById('myArea');
 			var article = document.querySelector('.G13 > div[align="justify"]');
-			var userEl = document.querySelector ('div[id^="nik_"]');
+			var userEl = document.querySelector('div[id^="nik_"]');
 			var userId =  $(userEl).find('li:first-child').attr('onclick').match(/id=([^&]+)\'/)[1];
 			var nickname = userEl.nextSibling.textContent;
 
