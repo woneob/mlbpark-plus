@@ -193,13 +193,13 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 					if ($(myArea).find('.G12:Contains("COB")').length > 0) {
 						article.style.display = 'none';
-						article.insertAdjacentHTML('beforebegin', btn_cob);
+						article.insertAdjacentHTML('beforeBegin', btn_cob);
 					} else if ($(myArea).find('.G12:contains("비누")').length > 0) {
 						article.style.display = 'none';
-						article.insertAdjacentHTML('beforebegin', btn_soap);
+						article.insertAdjacentHTML('beforeBegin', btn_soap);
 					} else if(titIcon.warn.test(subject)) {
 						article.className = 'grayscale';
-						article.insertAdjacentHTML('beforebegin', btn_warn);
+						article.insertAdjacentHTML('beforeBegin', btn_warn);
 					}
 
 					$(document.getElementsByClassName('warnBtn')).on('click',function(){
@@ -213,11 +213,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				//add userId
-				userEl.nextSibling.insertAdjacentHTML('afterend','<span class="userIdVal">(' + userId + ')</span>');
+				userEl.nextSibling.insertAdjacentHTML('afterEnd','<span class="userIdVal">(' + userId + ')</span>');
 
 				//user history
 				if (userHistoryVar == '1') {
-					article.insertAdjacentHTML('afterend',
+					article.insertAdjacentHTML('afterEnd',
 					'<div id="history">\n'+
 					'	<div class="historyHead">\n'+
 					'		<h3><span>'+nickname+'<span>('+userId+')</span></span> 님의 최근 글</h3>\n'+
@@ -295,7 +295,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 					//view userComment
 					if ((userCommentViewVar == '1') || (userCommentViewVar == null)) {
-						cmtName[i].insertAdjacentHTML('afterend',viewCmt);
+						cmtName[i].insertAdjacentHTML('afterEnd',viewCmt);
 					}
 				}
 
@@ -403,7 +403,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			replyButton();
 
 			//comment refresh
-			myArea.insertAdjacentHTML('afterend','<div id="commentRefresh"><button type="button" id="btn_cmtLoad">최신 댓글 불러오기</button><span id="cmtLoader"></span>');
+			myArea.insertAdjacentHTML('afterEnd','<div id="commentRefresh"><button type="button" id="btn_cmtLoad">최신 댓글 불러오기</button><span id="cmtLoader"></span>');
 
 			var mbsC = document.getElementsByName('mbsC')[0].value;
 			var mbsIdx =  document.getElementsByName('mbsIdx')[0].value;
