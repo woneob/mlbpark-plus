@@ -73,6 +73,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		var listLink =  document.querySelectorAll('.G12read > a');
 		var loc = window.location;
 		var locHref = loc.href;
+		var path = loc.pathname;
 
 		// Repeat parentNode
 		function up(el, n) {
@@ -135,7 +136,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			return confirm("차단된 글을 열람하시겠습니까?");
 		})
 
-		if(loc.pathname == "/bbs/mlb_today.php"){
+		if(path == "/bbs/mlb_today.php"){
 			var nickEl = document.querySelectorAll('td[width="82"] font');
 			var upCount = '6';
 		} else {
@@ -180,7 +181,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var userId =  $(userEl).find('li:first-child').attr('onclick').match(/id=([^&]+)\'/)[1];
 			var nickname = userEl.nextSibling.textContent;
 
-			if (locHref.indexOf('articleV.php') > -1) {
+			if (path == '/mbs/articleV.php') {
 				//content blind
 				if ((blindVar == '1') || (blindVar === undefined)) {
 					var subject = document.getElementsByTagName('strong')[0].textContent;
@@ -408,7 +409,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var mbsC = document.getElementsByName('mbsC')[0].value;
 			var mbsIdx =  document.getElementsByName('mbsIdx')[0].value;
 
-			if (loc.pathname == '/mbs/commentV.php'){
+			if (path == '/mbs/commentV.php'){
 				var wday = document.getElementsByName('co_day')[0].value;
 			} else {
 				var wday = document.getElementsByName('wday')[0].value;
@@ -426,7 +427,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					success: function(data) {
 						$(myArea).html(data);
 						userBlock();
-						if (locHref.indexOf('articleV.php') > -1) {
+						if (path == '/mbs/articleV.php') {
 							commentUser();
 						}
 					},
@@ -476,7 +477,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		if ((shortcutVar == '1') || (shortcutVar == null)) {
 			$(document).keyup(function(e){
-				if (loc.pathname !== '/mbs/commentV.php'){
+				if (path !== '/mbs/commentV.php'){
 					if ($(e.target).is('input, textarea')) {
 						return;
 					}
