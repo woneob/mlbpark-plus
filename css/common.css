@@ -90,7 +90,7 @@ td.A13oreng select.box {padding:4px;border-color:#ccc;}
 td.A13oreng #search_text input.box2 {border:1px solid #ccc;padding:5px 6px;border-color:#ccc;font-size:12px;}
 
 /* footer --------------------- */
-#footer {margin:20px auto 0 !important;}
+#footer {margin:20px auto 0 !important;border-top-width:2px !important;}
 #footer .copy h2 {display:none !important;}
 #footer .footer_link a, #footer .footer_link .fot_tx {background:none !important;border-left:1px solid #bbb;}
 
