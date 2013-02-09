@@ -135,10 +135,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			return confirm("차단된 글을 열람하시겠습니까?");
 		})
 
-		$.expr[':'].Contains = function(a,i,m){
-			return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
-		};
-
 		if(loc.pathname == "/bbs/mlb_today.php"){
 			var nickEl = document.querySelectorAll('td[width="82"] font');
 			var upCount = '6';
@@ -191,6 +187,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					var btn_cob = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 COB가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
 					var btn_soap = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 비누가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
 					var btn_warn = '<div id="btn_color"class=\"warnBtn\"><span>경고 문구가 포함되어 본문을 흑백처리 합니다.</span> 원문을 보시려면 클릭하세요.</div>';
+
+					$.expr[':'].Contains = function(a,i,m){
+						return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
+					};
 
 					if ($(myArea).find('.G12:Contains("COB")').length > 0) {
 						article.style.display = 'none';
