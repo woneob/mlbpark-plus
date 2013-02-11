@@ -2,7 +2,7 @@
 
 /* video resize */
 td.G13 div[align="justify"] embed{max-width:100%;}
-td.G13 div[align="justify"] embed[src^="http://www.youtube.com/"],
+td.G13 div[align="justify"] embed[src*="youtube.com/"],
 td.G13 div[align="justify"] iframe[src^="http://www.youtube.com/"]{width:100% !important;height:480px !important;}
 td.G13 div[align="justify"] embed[src^="http://flvs.daum.net/flvPlayer.swf"] {width:100% !important;height:555px !important;}
 td.G13 div[align="justify"] embed[src^="http://v.nate.com/"]{width:100% !important;height:480px !important;}
