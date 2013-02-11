@@ -16,11 +16,29 @@ td[width="687"] > table[width="702"] td[width="383"] {width:auto !important;}
 td[width="687"] > table[width="702"] td[width="82"] {width:80px !important;font-size:12px;}
 td[width="687"] > table[width="702"] td[width="44"] {width:40px !important;}
 td[width="687"] > table[width="702"] td[width="66"] {width:100px !important;}
-td[width="687"] > table[width="702"] td[width="40"] {padding-right:15px !important;width:40px !important;}
+td[width="687"] > table[width="702"] td[width="40"].A12gray {padding-right:15px !important;width:40px !important;}
 td[width="687"] > table[width="702"] .picture {display:none;}
-table[width="99%"] td[width="82%"] {width:75% !important;}
-table[width="99%"] td[width="18%"] {width:25% !important;}
+td[width="468"] {width:auto !important;}
+td[width="234"] {width:auto !important;}
+table[width="99%"] td[width="32%"] {width:250px !important;}
+table[width="99%"] td[width="46%"] {width:auto !important;}
+table[width="99%"] td[width="11%"] {text-align:right;}
+table[width="99%"] td[width="82%"] {width:auto !important;}
+table[width="99%"] td[width="18%"] {width:auto !important;}
 table[width="99%"] td[width="18%"] .userIdVal {font-weight:normal;}
+@media screen and (max-width: 780px) {
+	td[width="687"] > table[height="31"] td[width="50"]{display:none;}
+	td[width="687"] > table[height="31"] td[width="140"] {width:100px !important;}
+	td[width="687"] > table[height="31"] td[width="70"] {width:60px !important;}
+	td[width="687"] > table[width="702"] tr[height="30"] > td[align="center"] > table[width="100%"] .A11gray {display:none;}
+	td[width="687"] > table[width="702"] td[width="44"] {display:none;}
+	td[width="687"] > table[width="702"] td[width="66"] {width:80px !important;}
+}
+@media screen and (max-width: 650px) {
+	td[width="687"] > table[height="31"] td[width="140"] {width:80px !important;}
+	td[width="687"] > table[height="31"] td[width="70"] {display:none;}
+	td[width="687"] > table[width="702"] td[width="66"] {display:none;}
+}
 
 /* today Best section */
 table[width="660"] {width:100% !important;}
