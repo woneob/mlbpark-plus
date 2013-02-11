@@ -24,6 +24,7 @@ table[width="99%"] td[width="32%"] {width:250px !important;}
 table[width="99%"] td[width="46%"] {width:auto !important;}
 table[width="99%"] td[width="11%"] {text-align:right;}
 table[width="99%"] td[width="82%"] {width:auto !important;}
+table[width="99%"] td[width="82%"] strong {font:bold 16px/1 Dotum,'돋움',sans-serif;color:#333;}
 table[width="99%"] td[width="18%"] {width:auto !important;}
 table[width="99%"] td[width="18%"] .userIdVal {font-weight:normal;}
 @media screen and (max-width: 780px) {
