@@ -92,7 +92,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var title = t.textContent;
 
 			// title icon
-			if ((titIconVar == '1' ) || (titIconVar === undefined)) {
+			if (titIconVar == '1' || titIconVar === undefined) {
 				for (key in titIcon) {
 					if(titIcon[key].test(title)) {
 						t.className = 'ico ico_' + key;
@@ -114,8 +114,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 
 			//title block
-			if (blockVar == '1' ) {
-				if (blockTypeVar == '1' ) {
+			if (blockVar == '1') {
+				if (blockTypeVar == '1') {
 					for(var b = 0; b < blockInputVar.length; b++) {
 						if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
 							t.textContent = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
@@ -160,7 +160,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		//user block
 		function userBlock(){
-			if (blockUserVar == '1' ) {
+			if (blockUserVar == '1') {
 				var CmtNickEl = container.querySelectorAll('td[width="140"] a');
 				for (var i = 0; i < blockUserInputVar.length; i++) {
 					var t = blockUserInputVar[i];
@@ -188,7 +188,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 			if (path == '/mbs/articleV.php') {
 				//content blind
-				if ((blindVar == '1') || (blindVar === undefined)) {
+				if (blindVar == '1' || blindVar === undefined) {
 					var subject = container.getElementsByTagName('strong')[0].textContent;
 					var btn_cob = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 COB가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
 					var btn_soap = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 비누가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
@@ -251,7 +251,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				//google search by image
-				if ((imageSearchVar == '1') || (imageSearchVar === undefined)) {
+				if (imageSearchVar == '1' || imageSearchVar === undefined) {
 					var images = article.getElementsByTagName('img');
 
 					window.onload = function(){
@@ -282,7 +282,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				//videoCss
-				if ((videoVar == '1') || (videoVar === undefined)) {
+				if (videoVar == '1' || videoVar === undefined) {
 					var vdoCss = document.createElement('link');
 					vdoCss.rel = 'stylesheet';
 					vdoCss.href = chrome.extension.getURL('/css/video.css');
@@ -302,12 +302,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						}
 
 						//view userComment
-						if ((userCommentViewVar == '1') || (userCommentViewVar == null)) {
+						if (userCommentViewVar == '1' || userCommentViewVar == null) {
 							t.insertAdjacentHTML('afterEnd',viewCmt);
 						}
 					}
 
-					if ((userCommentViewVar == '1') || (userCommentViewVar == null)) {
+					if (userCommentViewVar == '1' || userCommentViewVar == null) {
 						var btn_userCmt = myArea.querySelectorAll('.btn_userCmt');
 						$(btn_userCmt).on('click',function(){
 							var t = this;
@@ -393,7 +393,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var textarea = document.getElementsByName('line_content')[0];
 
 			function replyButton(){
-				if ((replyVar == '1') || (replyVar == null)) {
+				if (replyVar == '1' || replyVar == null) {
 					var btn = '<button type=\"button\" class=\"btn_reply\" title=\"답글 달기\">[답글]</button>';
 					$(myArea).find('.G12').append(btn);
 					$('.btn_reply').on('click',function(){
@@ -480,7 +480,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		var pLink = $currentPage[0].previousSibling.href;
 		var nLink = $currentPage[0].nextSibling.href;
 
-		if ((shortcutVar == '1') || (shortcutVar == null)) {
+		if (shortcutVar == '1' || shortcutVar == null) {
 			$(document).keyup(function(e){
 				if (path !== '/mbs/commentV.php'){
 					if ($(e.target).is('input, textarea')) {
@@ -516,7 +516,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 
 		// Add a 'User Block' to User Menu
-		if (blockUserVar == '1' ) {
+		if (blockUserVar == '1') {
 			function addUserBlock(){
 				var userMenu = document.querySelectorAll('div[id^=nik_]');
 				for (var i = 0; i < userMenu.length; i++) {
