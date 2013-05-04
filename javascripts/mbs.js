@@ -70,7 +70,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 	$(document).ready(function() {
 		var container = document.getElementById('container');
-		var listLink =  container.querySelectorAll('.G12read > a');
+		var listLink =  container.getElementsByClassName('G12read');
 		var loc = window.location;
 		var locHref = loc.href;
 		var path = loc.pathname;
@@ -88,7 +88,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 
 		for (var i = 0; i < listLink.length; i++) {
-			var t = listLink[i];
+			var t = listLink[i].childNodes[1];
 			var title = t.textContent;
 
 			// title icon
