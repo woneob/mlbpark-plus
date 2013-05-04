@@ -100,15 +100,13 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 
 			// team icon
-			if ((teamVar == '1' ) || (teamVar === undefined)) {
-				if (locHref.indexOf('mbsC=kbotown') > -1) {
-					for(name in team) {
-						var matched = team[name].regex.exec(title);
-						if(matched) {
-							t.textContent = title.replace(matched[1],'');
-							t.insertAdjacentHTML('beforeBegin','<em data-team="'+ name +'" onclick="location.href=\'/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=' + team[name].searchKeyword + '\'"></em>');
-							break;
-						}
+			if ((teamVar == '1' || teamVar === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
+				for(name in team) {
+					var matched = team[name].regex.exec(title);
+					if(matched) {
+						t.textContent = title.replace(matched[1],'');
+						t.insertAdjacentHTML('beforeBegin','<em data-team="'+ name +'" onclick="location.href=\'/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=' + team[name].searchKeyword + '\'"></em>');
+						break;
 					}
 				}
 			}
