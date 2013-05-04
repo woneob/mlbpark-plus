@@ -81,6 +81,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			return el;
 		}
 
+		if ((teamVar == '1' || teamVar === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
+			document.body.className = 'team_show';
+		}
+
 		for (var i = 0; i < listLink.length; i++) {
 			var t = listLink[i];
 			var title = t.textContent;
@@ -98,7 +102,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			// team icon
 			if ((teamVar == '1' ) || (teamVar === undefined)) {
 				if (locHref.indexOf('mbsC=kbotown') > -1) {
-					document.body.className = 'team_show';
 					for(name in team) {
 						var matched = team[name].regex.exec(title);
 						if(matched) {
