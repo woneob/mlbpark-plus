@@ -27,8 +27,8 @@
 .article_box .highlight_poll .video div {height:auto !important;padding:10px;background:#eee;border:1px solid #e3e3e3;}
 .article_box .highlight_poll .poll {position:absolute;top:150px;right:0;z-index:1;padding:0 10px !important;box-sizing:border-box;width:228px !important;height:auto !important;text-align:center;}
 .article_box .highlight_poll .poll h3 {padding:12px 0 6px 0 !important;text-align:left;;}
-.article_box .highlight_poll .poll dl {margin:0 0 5px;padding:3px 10px;background:#f9f9f9;text-align:left;border:1px solid #e9e9e9;}
-.article_box .highlight_poll .poll dt {display:block;font-size:12px !important;margin:0 !important;padding:3px 0 5px;border-bottom:1px solid #eee;}
+.article_box .highlight_poll .poll dl {margin:0 0 5px;padding:3px 0;text-align:left;border:1px solid #eee;border-width:1px 0;}
+.article_box .highlight_poll .poll dt {display:block;font-size:12px !important;margin:0 !important;padding:3px 0 5px;}
 .article_box .highlight_poll .poll dd {margin:0 !important;padding:5px 10px;}
 .article_box .highlight_poll .poll input[type='image'] {margin-right:2px;}
 .article_box .highlight_poll .poll label {vertical-align:middle;}
