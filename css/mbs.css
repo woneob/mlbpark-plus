@@ -189,3 +189,6 @@ rgba(0,0,0,.15),0 0 0 1px rgba(0,0,0,.2);}
 #modalForm {overflow:hidden;padding:0 10px;}
 #modalForm textarea {float:left;width:470px;padding:5px;border:1px solid #ccc;resize:vertical;border-radius:2px;}
 #modalForm button {float:right;width:75px;height:54px;border:1px solid #ccc;border-radius:2px;background:-webkit-linear-gradient(bottom, #fff 0, #f6f6f6 2px, #fff 80%);cursor:pointer;font:12px Dotum,'돋움',sans-serif;}
+
+/* Uchat fix */
+div[id^="uchat_"] {display:block !important;}
