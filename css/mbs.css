@@ -27,19 +27,6 @@ table[width="99%"] td[width="82%"] {width:auto !important;}
 table[width="99%"] td[width="82%"] strong {font:bold 16px/1 Dotum,'돋움',sans-serif;color:#333;}
 table[width="99%"] td[width="18%"] {width:auto !important;}
 table[width="99%"] td[width="18%"] .userIdVal {font-weight:normal;}
-@media screen and (max-width: 780px) {
-	td[width="687"] > table[height="31"] td[width="50"]{display:none;}
-	td[width="687"] > table[height="31"] td[width="140"] {width:100px !important;}
-	td[width="687"] > table[height="31"] td[width="70"] {width:60px !important;}
-	td[width="687"] > table[width="702"] tr[height="30"] > td[align="center"] > table[width="100%"] .A11gray {display:none;}
-	td[width="687"] > table[width="702"] td[width="44"] {display:none;}
-	td[width="687"] > table[width="702"] td[width="66"] {width:80px !important;}
-}
-@media screen and (max-width: 650px) {
-	td[width="687"] > table[height="31"] td[width="140"] {width:80px !important;}
-	td[width="687"] > table[height="31"] td[width="70"] {display:none;}
-	td[width="687"] > table[width="702"] td[width="66"] {display:none;}
-}
 
 /* today Best section */
 table[width="660"] {width:100% !important;}
