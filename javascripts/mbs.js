@@ -68,9 +68,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 	};
 
-
 	$(document).ready(function() {
-		var listLink =  document.querySelectorAll('.G12read > a');
+		var container = document.getElementById('container');
+		var listLink =  container.querySelectorAll('.G12read > a');
 		var loc = window.location;
 		var locHref = loc.href;
 		var path = loc.pathname;
@@ -132,21 +132,21 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 		}
 
-		$(document.getElementsByClassName('blockTitle')).on('click',function(){
+		$(container.getElementsByClassName('blockTitle')).on('click',function(){
 			return confirm("차단된 글을 열람하시겠습니까?");
 		})
 
 		if(path == "/bbs/mlb_today.php"){
-			var nickEl = document.querySelectorAll('td[width="82"] font');
+			var nickEl = container.querySelectorAll('td[width="82"] font');
 			var upCount = '6';
 		} else {
-			var nickEl = document.querySelectorAll('td[width="82"] a');
+			var nickEl = container.querySelectorAll('td[width="82"] a');
 			var upCount = '7';
 		}
 
 		//notice blind
 		if (noticeVar == '1') {
-			var cat = document.getElementsByClassName('A11gray');
+			var cat = container.getElementsByClassName('A11gray');
 			for (var c = 0; c < cat.length; c++) {
 				var t = cat[c];
 				if (t.textContent === '공지') {
@@ -158,7 +158,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		//user block
 		function userBlock(){
 			if (blockUserVar == '1' ) {
-				var CmtNickEl = document.querySelectorAll('td[width="140"] a');
+				var CmtNickEl = container.querySelectorAll('td[width="140"] a');
 				for (var i = 0; i < blockUserInputVar.length; i++) {
 					var t = blockUserInputVar[i];
 					for (var u = 0; u < nickEl.length; u++) {
@@ -178,15 +178,15 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		if (locHref.indexOf('V.php') > -1){
 			var myArea = document.getElementById('myArea');
-			var article = document.querySelector('.G13 > div[align="justify"]');
-			var userEl = document.querySelector('div[id^="nik_"]');
+			var article = container.querySelector('.G13 > div[align="justify"]');
+			var userEl = container.querySelector('div[id^="nik_"]');
 			var userId =  $(userEl).find('li:first-child').attr('onclick').match(/id=([^&]+)\'/)[1];
 			var nickname = userEl.nextSibling.textContent;
 
 			if (path == '/mbs/articleV.php') {
 				//content blind
 				if ((blindVar == '1') || (blindVar === undefined)) {
-					var subject = document.getElementsByTagName('strong')[0].textContent;
+					var subject = container.getElementsByTagName('strong')[0].textContent;
 					var btn_cob = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 COB가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
 					var btn_soap = '<div id="btn_show" class=\"warnBtn\"><span>댓글에 비누가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
 					var btn_warn = '<div id="btn_color"class=\"warnBtn\"><span>경고 문구가 포함되어 본문을 흑백처리 합니다.</span> 원문을 보시려면 클릭하세요.</div>';
@@ -206,7 +206,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						article.insertAdjacentHTML('beforeBegin', btn_warn);
 					}
 
-					$(document.getElementsByClassName('warnBtn')).on('click',function(){
+					$(container.getElementsByClassName('warnBtn')).on('click',function(){
 						this.className = 'displayNone';
 						if (this.id == 'btn_color') {
 							article.classList.remove('grayscale');
@@ -469,7 +469,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 
 		//shotcut keys
-		var paging = document.getElementsByClassName('paging');
+		var paging = container.getElementsByClassName('paging');
 		var $currentPage = $(paging).find('font');
 
 		$(paging).find('> img').remove();
