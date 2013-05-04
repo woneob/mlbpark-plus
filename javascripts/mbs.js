@@ -81,8 +81,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			return el;
 		}
 
+		// KBL bbs only
 		if ((teamVar == '1' || teamVar === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
 			document.body.className = 'team_show';
+			var teamSearchUrl = '/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=';
 		}
 
 		for (var i = 0; i < listLink.length; i++) {
@@ -105,7 +107,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					var matched = team[name].regex.exec(title);
 					if(matched) {
 						t.textContent = title.replace(matched[1],'');
-						t.insertAdjacentHTML('beforeBegin','<em data-team="'+ name +'" onclick="location.href=\'/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=' + team[name].searchKeyword + '\'"></em>');
+						t.insertAdjacentHTML('beforeBegin','<em data-team="'+ name +'" onclick="location.href=\''+ teamSearchUrl + team[name].searchKeyword + '\'"></em>');
 						break;
 					}
 				}
