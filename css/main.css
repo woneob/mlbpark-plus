@@ -32,6 +32,7 @@
 .article_box .highlight_poll .poll dd {margin:0 !important;padding:5px 10px;}
 .article_box .highlight_poll .poll input[type='image'] {margin-right:2px;}
 .article_box .highlight_poll .poll label {vertical-align:middle;}
+.article_box .highlight_poll iframe {display:none;}
 .article_box .news_cont {box-sizing:border-box;position:relative;width:37.7% !important;padding: 0 0 0 5px !important;}
 /* news list */
 .article_box .news_cont .news_list {position:absolute !important;width:310px !important;top:192px;border-bottom:none !important;}
