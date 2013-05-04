@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	//ScoreBoard load
-	document.getElementsByClassName('right_cont')[0].insertAdjacentHTML('beforeEnd',
+	document.getElementsByClassName('article_box')[0].insertAdjacentHTML('beforeEnd',
 		'<div id="score">\n' +
 		'	<div id="score_tab">\n' +
 		'		<ul>\n' +
@@ -45,15 +45,6 @@ $(document).ready(function() {
 		$(this.hash)[0].style.display ='block';
 		e.preventDefault();
 	});
-
-	//equal height
-	var articleBox = document.getElementsByClassName('article_box')[0];
-	var rightCont = document.getElementsByClassName('right_cont')[0];
-	var articleBox_height = articleBox.offsetHeight;
-	var rightCont_height = rightCont.offsetHeight;
-	var maxHeight = Math.max(articleBox_height, rightCont_height);
-	articleBox.style.maxHeight = maxHeight + 'px';
-	rightCont.style.maxHeight = maxHeight + 'px';
 
 	//loginbox tabIndex
 	var loginBox = document.getElementById('preViewQue2');
