@@ -139,14 +139,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 		}
 
-		if(path == '/bbs/mlb_today.php'){
-			var nickEl = container.querySelectorAll('td[width="82"] font');
-			var upCount = '6';
-		} else {
-			var nickEl = container.querySelectorAll('td[width="82"] a');
-			var upCount = '7';
-		}
-
 		//notice blind
 		if (noticeVar == '1') {
 			var cat = container.getElementsByClassName('A11gray');
@@ -156,6 +148,14 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					up(t,5).className = 'displayNone';
 				}
 			}
+		}
+
+		if(path == '/bbs/mlb_today.php'){
+			var nickEl = container.querySelectorAll('td[width="82"] font');
+			var upCount = '6';
+		} else {
+			var nickEl = container.querySelectorAll('td[width="82"] a');
+			var upCount = '7';
 		}
 
 		//user block
