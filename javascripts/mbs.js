@@ -136,10 +136,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 
 		$(container.getElementsByClassName('blockTitle')).on('click',function(){
-			return confirm("차단된 글을 열람하시겠습니까?");
+			return confirm('차단된 글을 열람하시겠습니까?');
 		})
 
-		if(path == "/bbs/mlb_today.php"){
+		if(path == '/bbs/mlb_today.php'){
 			var nickEl = container.querySelectorAll('td[width="82"] font');
 			var upCount = '6';
 		} else {
@@ -238,14 +238,14 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					);
 
 					$.ajax({
-						type: "GET",
+						type: 'GET',
 						url: 'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId,
 						cache: false,
 						success: function(response) {
 							$('#historyList').append($(response).find('td[bgcolor="#FFFFFF"] > table:nth-child(2)').html()).find('a[target]').removeAttr('target');
 						},
 						complete: function(){
-							$("#historyLoading").remove();
+							$('#historyLoading').remove();
 						}
 					});
 				}
@@ -261,7 +261,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							var height = t.clientHeight;
 
 							if (width && height > 50) {
-								var imageWrap = document.createElement("span");
+								var imageWrap = document.createElement('span');
 								imageWrap.className = 'iWrap';
 
 								var src = t.src;
@@ -312,7 +312,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						$(btn_userCmt).on('click',function(){
 							var t = this;
 							$.ajax({
-								type: "GET",
+								type: 'GET',
 								url: 'http://mlbpark.donga.com/mbs/commentRV.php?mbsC='+mbsC+'&comment_ymd='+wday+'&comment_idx='+mbsIdx,
 								cache: false,
 								success: function(response) {
@@ -353,7 +353,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 									$('#modalFormTextarea').on('click',function(){
 										if ($('#loginArea a:first-child').text() == '로그인'){
-											if (confirm("로그인 후 사용 가능합니다.\n로그인 페이지로 이동하시겠습니까?") == true){
+											if (confirm('로그인 후 사용 가능합니다.\n로그인 페이지로 이동하시겠습니까?') == true){
 												window.location = 'http://www.donga.com/members/login.php\?gourl=' + escape(locHref);
 											}
 										}
