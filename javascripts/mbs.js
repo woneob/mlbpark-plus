@@ -146,6 +146,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				var t = cat[c];
 				if (t.textContent === '공지') {
 					up(t,5).className = 'displayNone';
+				} else {
+					break;
 				}
 			}
 		}
