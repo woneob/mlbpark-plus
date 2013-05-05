@@ -60,5 +60,4 @@ $(document).ready(function() {
 	if (mypageLink) {
 		mypageLink.href = 'http://mlbpark.donga.com/mypage/';
 	}
-	
 });

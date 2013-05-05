@@ -19,11 +19,11 @@ if (window.location.pathname !== '/mbs/commentV.php') {
 	var loginArea = document.getElementById('loginArea');
 	var loginStatus = loginArea.firstElementChild.textContent;
 	if (loginStatus === '로그아웃'){
-		var userId = getCookie("dongauserid");
+		var userId = getCookie('dongauserid');
 		$.ajax({
-			type: "GET",
+			type: 'GET',
 			url: 'http://mlbpark.donga.com/mypage/memo.php?id='+userId,
-			dataType: "html",
+			dataType: 'html',
 			cache: false,
 			success: function(response) {
 				if (!(response.indexOf('정상적인 접근이 아닙니다') >= 0)){
