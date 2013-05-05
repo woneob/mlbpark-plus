@@ -524,16 +524,15 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					var userNick = t.nextSibling.textContent;
 					t.getElementsByTagName('ul')[0].insertAdjacentHTML('beforeEnd','<li data-user="'+userNick+'">닉네임 차단</li>');
 				}
+				$('li[data-user]').on('click',function(){
+					window.postMessage({
+						action:'userBlockDelivery',
+						user: this.getAttribute('data-user')
+					}, '*');
+					return false;
+				});
 			}
 			addUserBlock();
-
-			$('li[data-user]').on('click',function(){
-				window.postMessage({
-					action:'userBlockDelivery',
-					user: this.getAttribute('data-user')
-				}, '*');
-				return false;
-			});
 		}
 	});
 });
