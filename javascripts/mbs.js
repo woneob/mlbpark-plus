@@ -108,6 +108,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						t.textContent = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
 						t.className = 'blockTitle';
 						t.setAttribute('title','제목 : '+ title);
+						t.onclick = function(){
+							return confirm('차단된 글을 열람하시겠습니까?');
+						}
 						continue listLinkLoop;
 					}
 				}
@@ -135,10 +138,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 			}
 		}
-
-		$(container.getElementsByClassName('blockTitle')).on('click',function(){
-			return confirm('차단된 글을 열람하시겠습니까?');
-		})
 
 		if(path == '/bbs/mlb_today.php'){
 			var nickEl = container.querySelectorAll('td[width="82"] font');
