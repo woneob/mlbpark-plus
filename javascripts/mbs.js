@@ -87,9 +87,30 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var teamSearchUrl = '/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=';
 		}
 
-		for (var i = 0, listLinklen = listLink.length; i < listLinklen; i++) {
+		listLinkLoop: for (var i = 0, listLinklen = listLink.length; i < listLinklen; i++) {
 			var t = listLink[i].childNodes[1];
 			var title = t.textContent;
+
+			//title block
+			if (blockVar == '1' && blockTypeVar == '2') {
+				for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
+					if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+						up(t,6).className = 'displayNone';
+						continue listLinkLoop;
+					}
+				}
+			}
+
+			if (blockVar == '1' && blockTypeVar == '1') {
+				for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
+					if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+						t.textContent = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
+						t.className = 'blockTitle';
+						t.setAttribute('title','제목 : '+ title);
+						continue listLinkLoop;
+					}
+				}
+			}
 
 			// title icon
 			if (titIconVar == '1' || titIconVar === undefined) {
@@ -113,26 +134,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 			}
 
-			//title block
-			if (blockVar == '1') {
-				if (blockTypeVar == '1') {
-					for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
-						if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
-							t.textContent = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
-							t.className = 'blockTitle';
-							t.setAttribute('title','제목 : '+ title);
-							break;
-						}
-					}
-				} else {
-					for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
-						if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
-							up(t,6).className = 'displayNone';
-							break;
-						}
-					}
-				}
-			}
 		}
 
 		$(container.getElementsByClassName('blockTitle')).on('click',function(){
