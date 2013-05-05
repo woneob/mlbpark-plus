@@ -87,7 +87,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var teamSearchUrl = '/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=';
 		}
 
-		for (var i = 0; i < listLink.length; i++) {
+		for (var i = 0, listLinklen = listLink.length; i < listLinklen; i++) {
 			var t = listLink[i].childNodes[1];
 			var title = t.textContent;
 
@@ -116,7 +116,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			//title block
 			if (blockVar == '1') {
 				if (blockTypeVar == '1') {
-					for(var b = 0; b < blockInputVar.length; b++) {
+					for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
 						if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
 							t.textContent = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
 							t.className = 'blockTitle';
@@ -125,7 +125,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						}
 					}
 				} else {
-					for(var b = 0; b < blockInputVar.length; b++) {
+					for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
 						if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
 							up(t,6).className = 'displayNone';
 							break;
@@ -150,7 +150,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		//notice blind
 		if (noticeVar == '1') {
 			var cat = container.getElementsByClassName('A11gray');
-			for (var c = 0; c < cat.length; c++) {
+			for (var c = 0, catLen = cat.length; c < catLen; c++) {
 				var t = cat[c];
 				if (t.textContent === '공지') {
 					up(t,5).className = 'displayNone';
@@ -162,15 +162,15 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		function userBlock(){
 			if (blockUserVar == '1') {
 				var CmtNickEl = container.querySelectorAll('td[width="140"] a');
-				for (var i = 0; i < blockUserInputVar.length; i++) {
+				for (var i = 0, blockUserInputVarLen = blockUserInputVar.length; i < blockUserInputVarLen; i++) {
 					var t = blockUserInputVar[i];
-					for (var u = 0; u < nickEl.length; u++) {
+					for (var u = 0, nickElLen = nickEl.length; u < nickElLen; u++) {
 						if (nickEl[u].textContent === t) {
 							up(nickEl[u],upCount).className = 'displayNone';
 						}
 					}
 
-					for (var u = 0; u < CmtNickEl.length; u++) {
+					for (var u = 0, CmtNickElLen = CmtNickEl.length; u < CmtNickElLen; u++) {
 						if (CmtNickEl[u].textContent === t) {
 							up(CmtNickEl[u],7).className = 'displayNone';
 						}
@@ -255,7 +255,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					var images = article.getElementsByTagName('img');
 
 					window.onload = function(){
-						for (var i = 0; i < images.length; i++) {
+						for (var i = 0, imagesLen = images.length; i < imagesLen; i++) {
 							var t = images[i];
 							var width = t.clientWidth;
 							var height = t.clientHeight;
@@ -293,7 +293,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					var cmtName = myArea.querySelectorAll('td[width="140"] a');
 					var viewCmt = '<button type="button" class="btn_userCmt" title="이 글에 단 댓글 보기">?</button>';
 
-					for (var i = 0; i < cmtName.length; i++) {
+					for (var i = 0, cmtNameLen = cmtName.length; i < cmtNameLen; i++) {
 						var t = cmtName[i];
 
 						//highlight comment writer
@@ -467,7 +467,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		//replace with href of link
 		var elms = document.getElementsByTagName('a');
-		for (i=0; i<elms.length; i++) {
+		for (i = 0, elmsLen = elms.length; i < elmsLen; i++) {
 			elms[i].href = elms[i].href.replace('articleVC', 'articleV');
 		}
 
@@ -519,7 +519,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		if (blockUserVar == '1') {
 			function addUserBlock(){
 				var userMenu = document.querySelectorAll('div[id^=nik_]');
-				for (var i = 0; i < userMenu.length; i++) {
+				for (var i = 0, userMenuLen = userMenu.length; i < userMenuLen; i++) {
 					var t = userMenu[i];
 					var userNick = t.nextSibling.textContent;
 					t.getElementsByTagName('ul')[0].insertAdjacentHTML('beforeEnd','<li data-user="'+userNick+'">닉네임 차단</li>');
