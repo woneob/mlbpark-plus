@@ -87,7 +87,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var teamSearchUrl = '/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=';
 		}
 
-		listLinkLoop: for (var i = 0, listLinklen = listLink.length; i < listLinklen; i++) {
+		listLinkLoop:
+		for (var i = 0, listLinklen = listLink.length; i < listLinklen; i++) {
 			var t = listLink[i].childNodes[1];
 			var title = t.textContent;
 
@@ -133,7 +134,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					}
 				}
 			}
-
 		}
 
 		$(container.getElementsByClassName('blockTitle')).on('click',function(){
@@ -168,12 +168,14 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					for (var u = 0, nickElLen = nickEl.length; u < nickElLen; u++) {
 						if (nickEl[u].textContent === t) {
 							up(nickEl[u],upCount).className = 'displayNone';
+							break;
 						}
 					}
 
 					for (var u = 0, CmtNickElLen = CmtNickEl.length; u < CmtNickElLen; u++) {
 						if (CmtNickEl[u].textContent === t) {
 							up(CmtNickEl[u],7).className = 'displayNone';
+							break;
 						}
 					}
 				}
