@@ -68,18 +68,18 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 	};
 
+	// Repeat parentNode
+	function up(el, n) {
+		while(n-- && (el = el.parentNode));
+		return el;
+	}
+
 	$(document).ready(function() {
 		var container = document.getElementById('container');
 		var listLink =  container.getElementsByClassName('G12read');
 		var loc = window.location;
 		var locHref = loc.href;
 		var path = loc.pathname;
-
-		// Repeat parentNode
-		function up(el, n) {
-			while(n-- && (el = el.parentNode));
-			return el;
-		}
 
 		// KBL bbs only
 		if ((teamVar == '1' || teamVar === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
