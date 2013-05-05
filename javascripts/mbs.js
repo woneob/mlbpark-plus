@@ -187,7 +187,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var myArea = document.getElementById('myArea');
 			var article = container.querySelector('.G13 > div[align="justify"]');
 			var userEl = container.querySelector('div[id^="nik_"]');
-			var userId =  userEl.firstChild.firstChild.getAttribute('onclick').match(/id=([^&]+)\'/)[1];
+			var userId =  userEl.firstChild.firstChild.getAttribute('onclick').test(/id=([^&]+)\'/)[1];
 			var nickname = userEl.nextSibling.textContent;
 
 			if (path == '/mbs/articleV.php') {
