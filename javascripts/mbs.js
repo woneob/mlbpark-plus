@@ -75,118 +75,122 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	}
 
 	$(document).ready(function() {
-		var container = document.getElementById('container');
-		var listLink =  container.getElementsByClassName('G12read');
 		var loc = window.location;
 		var locHref = loc.href;
 		var path = loc.pathname;
 
-		// KBL bbs only
-		if ((teamVar == '1' || teamVar === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
-			document.body.className = 'team_show';
-			var teamSearchUrl = '/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=';
-		}
+		if (path !== '/mbs/commentV.php') {
+			var container = document.getElementById('container');
+			var listLink =  container.getElementsByClassName('G12read');
 
-		listLinkLoop:
-		for (var i = 0, listLinklen = listLink.length; i < listLinklen; i++) {
-			var t = listLink[i].childNodes[1];
-			var title = t.textContent;
-
-			//title block
-			if (blockVar == '1' && blockTypeVar == '2') {
-				for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
-					if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
-						up(t,6).className = 'displayNone';
-						continue listLinkLoop;
-					}
-				}
-			}
-
-			if (blockVar == '1' && blockTypeVar == '1') {
-				for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
-					if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
-						t.textContent = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
-						t.className = 'blockTitle';
-						t.setAttribute('title','제목 : '+ title);
-						t.onclick = function(){
-							return confirm('차단된 글을 열람하시겠습니까?');
-						}
-						continue listLinkLoop;
-					}
-				}
-			}
-
-			// title icon
-			if (titIconVar == '1' || titIconVar === undefined) {
-				for (key in titIcon) {
-					if(titIcon[key].test(title)) {
-						t.className = 'ico ico_' + key;
-						break;
-					}
-				}
-			}
-
-			// team icon
+			// KBL bbs only
 			if ((teamVar == '1' || teamVar === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
-				for(name in team) {
-					var matched = team[name].regex.exec(title);
-					if(matched) {
-						t.textContent = title.replace(matched[1],'');
-						t.insertAdjacentHTML('beforeBegin','<em data-team="'+ name +'" onclick="location.href=\''+ teamSearchUrl + team[name].searchKeyword + '\'"></em>');
+				document.body.className = 'team_show';
+				var teamSearchUrl = '/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=';
+			}
+
+			listLinkLoop:
+			for (var i = 0, listLinklen = listLink.length; i < listLinklen; i++) {
+				var t = listLink[i].childNodes[1];
+				var title = t.textContent;
+
+				//title block
+				if (blockVar == '1' && blockTypeVar == '2') {
+					for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
+						if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+							up(t,6).className = 'displayNone';
+							continue listLinkLoop;
+						}
+					}
+				}
+
+				if (blockVar == '1' && blockTypeVar == '1') {
+					for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
+						if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+							t.textContent = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
+							t.className = 'blockTitle';
+							t.setAttribute('title','제목 : '+ title);
+							t.onclick = function(){
+								return confirm('차단된 글을 열람하시겠습니까?');
+							}
+							continue listLinkLoop;
+						}
+					}
+				}
+
+				// title icon
+				if (titIconVar == '1' || titIconVar === undefined) {
+					for (key in titIcon) {
+						if(titIcon[key].test(title)) {
+							t.className = 'ico ico_' + key;
+							break;
+						}
+					}
+				}
+
+				// team icon
+				if ((teamVar == '1' || teamVar === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
+					for(name in team) {
+						var matched = team[name].regex.exec(title);
+						if(matched) {
+							t.textContent = title.replace(matched[1],'');
+							t.insertAdjacentHTML('beforeBegin','<em data-team="'+ name +'" onclick="location.href=\''+ teamSearchUrl + team[name].searchKeyword + '\'"></em>');
+							break;
+						}
+					}
+				}
+			}
+
+			//notice blind
+			if (noticeVar == '1') {
+				var cat = container.getElementsByClassName('A11gray');
+				for (var c = 0, catLen = cat.length; c < catLen; c++) {
+					var t = cat[c];
+					if (t.textContent === '공지') {
+						up(t,5).className = 'displayNone';
+					} else {
 						break;
 					}
 				}
 			}
-		}
 
-		//notice blind
-		if (noticeVar == '1') {
-			var cat = container.getElementsByClassName('A11gray');
-			for (var c = 0, catLen = cat.length; c < catLen; c++) {
-				var t = cat[c];
-				if (t.textContent === '공지') {
-					up(t,5).className = 'displayNone';
-				} else {
-					break;
-				}
+			if(path == '/bbs/mlb_today.php'){
+				var nickEl = container.querySelectorAll('td[width="82"] font');
+				var upCount = '6';
+			} else {
+				var nickEl = container.querySelectorAll('td[width="82"] a');
+				var upCount = '7';
 			}
-		}
 
-		if(path == '/bbs/mlb_today.php'){
-			var nickEl = container.querySelectorAll('td[width="82"] font');
-			var upCount = '6';
-		} else {
-			var nickEl = container.querySelectorAll('td[width="82"] a');
-			var upCount = '7';
-		}
-
-		//user block
-		function userBlock(){
-			if (blockUserVar == '1') {
-				var CmtNickEl = container.querySelectorAll('td[width="140"] a');
-				for (var i = 0, blockUserInputVarLen = blockUserInputVar.length; i < blockUserInputVarLen; i++) {
-					var t = blockUserInputVar[i];
-					for (var u = 0, nickElLen = nickEl.length; u < nickElLen; u++) {
-						if (nickEl[u].textContent === t) {
-							up(nickEl[u],upCount).className = 'displayNone';
-							break;
+			//user block
+			function userBlock(){
+				if (blockUserVar == '1') {
+					var CmtNickEl = container.querySelectorAll('td[width="140"] a');
+					for (var i = 0, blockUserInputVarLen = blockUserInputVar.length; i < blockUserInputVarLen; i++) {
+						var t = blockUserInputVar[i];
+						for (var u = 0, nickElLen = nickEl.length; u < nickElLen; u++) {
+							if (nickEl[u].textContent === t) {
+								up(nickEl[u],upCount).className = 'displayNone';
+								break;
+							}
 						}
-					}
 
-					for (var u = 0, CmtNickElLen = CmtNickEl.length; u < CmtNickElLen; u++) {
-						if (CmtNickEl[u].textContent === t) {
-							up(CmtNickEl[u],7).className = 'displayNone';
-							break;
+						for (var u = 0, CmtNickElLen = CmtNickEl.length; u < CmtNickElLen; u++) {
+							if (CmtNickEl[u].textContent === t) {
+								up(CmtNickEl[u],7).className = 'displayNone';
+								break;
+							}
 						}
 					}
 				}
-			}
-		}userBlock();
+			}userBlock();
+		}
+
 
 		if (locHref.indexOf('V.php') > -1){
 			var myArea = document.getElementById('myArea');
-			var article = container.querySelector('.G13 > div[align="justify"]');
-			var userEl = container.querySelector('div[id^="nik_"]');
+			var article = document.querySelector('.G13 > div[align="justify"]');
+			var userEl = document.querySelector('div[id^="nik_"]');
 			var userId =  userEl.firstChild.firstChild.getAttribute('onclick').match(/id=([^&]+)\'/)[1];
 			var nickname = userEl.nextSibling.textContent;
 
@@ -475,48 +479,50 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			elms[i].href = elms[i].href.replace('articleVC', 'articleV');
 		}
 
-		//shotcut keys
-		var paging = container.getElementsByClassName('paging');
-		var $currentPage = $(paging).find('font');
+		if (path !== '/mbs/commentV.php') {
+			//shotcut keys
+			var paging = container.getElementsByClassName('paging');
+			var $currentPage = $(paging).find('font');
 
-		$(paging).find('> img').remove();
+			$(paging).find('> img').remove();
 
-		var pLink = $currentPage[0].previousSibling.href;
-		var nLink = $currentPage[0].nextSibling.href;
+			var pLink = $currentPage[0].previousSibling.href;
+			var nLink = $currentPage[0].nextSibling.href;
 
-		if (shortcutVar == '1' || shortcutVar == null) {
-			$(document).keyup(function(e){
-				if (path !== '/mbs/commentV.php'){
-					if ($(e.target).is('input, textarea')) {
-						return;
+			if (shortcutVar == '1' || shortcutVar == null) {
+				$(document).keyup(function(e){
+					if (path !== '/mbs/commentV.php'){
+						if ($(e.target).is('input, textarea')) {
+							return;
+						}
+						if (e.which === 65) {
+							window.location.href = pLink;
+						}
+						if (e.which === 83) {
+							window.location.href = nLink;
+						}
+						if (e.which === 68) {
+							$(document.body).animate({scrollTop: $('table[height="31"]').offset().top}, 300);
+						}
 					}
-					if (e.which === 65) {
-						window.location.href = pLink;
-					}
-					if (e.which === 83) {
-						window.location.href = nLink;
-					}
-					if (e.which === 68) {
-						$(document.body).animate({scrollTop: $('table[height="31"]').offset().top}, 300);
-					}
-				}
-			});
+				});
+			}
+
+			//prerender
+			var target = document.head;
+			pr1 = document.createElement('link');
+			pr1.rel = 'prerender';
+			pr1.href = 'http://mlbpark.donga.com/mbs/articleL.php?mbsC=bullpen';
+			pr2 = document.createElement('link');
+			pr2.rel = 'prerender';
+			pr2.href = nLink;
+			pr3 = document.createElement('link');
+			pr3.rel = 'prerender';
+			pr3.href = pLink;
+			target.appendChild(pr1);
+			target.appendChild(pr2);
+			target.appendChild(pr3);
 		}
-
-		//prerender
-		var target = document.head;
-		pr1 = document.createElement('link');
-		pr1.rel = 'prerender';
-		pr1.href = 'http://mlbpark.donga.com/mbs/articleL.php?mbsC=bullpen';
-		pr2 = document.createElement('link');
-		pr2.rel = 'prerender';
-		pr2.href = nLink;
-		pr3 = document.createElement('link');
-		pr3.rel = 'prerender';
-		pr3.href = pLink;
-		target.appendChild(pr1);
-		target.appendChild(pr2);
-		target.appendChild(pr3);
 
 
 		// Add a 'User Block' to User Menu
