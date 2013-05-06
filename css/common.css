@@ -125,7 +125,7 @@ td.D11 font {position:relative;margin-right:5px;}
 td.D11 img {vertical-align:middle;} 
 font[color="666666"] {position:relative;}
 /* user information */
-div[id^="nik_"] {top:0;width:auto !important;background:#fff;margin:20px 0 0 !important;padding:5px 8px;font:normal 11px Dotum, '돋움', sans-serif;letter-spacing:-1px;color:#666;border-width:1px !important;box-shadow:1px 1px 1px rgba(0,0,0,.1);border-radius:3px;}
+div[id^="nik_"] {top:0;width:60px !important;background:#fff;margin:20px 0 0 !important;padding:5px 8px;font:normal 11px Dotum, '돋움', sans-serif;letter-spacing:-1px;color:#666;border-width:1px !important;box-shadow:1px 1px 1px rgba(0,0,0,.1);border-radius:3px;}
 div[id^="nik_"] ul {margin:0;padding:0;}
 div[id^="nik_"] li {list-style:none;padding:2px 0 !important;cursor:pointer;}
 div[id^="nik_"] li:hover {color:#111;}
