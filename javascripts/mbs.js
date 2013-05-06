@@ -163,38 +163,41 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 
 			//user block
-			function userBlock(){
-				if (blockUserVar == '1') {
-					var CmtNickEl = container.querySelectorAll('td[width="140"] a');
+			if (blockUserVar == '1') {
+				for (var u = 0, nickElLen = nickEl.length; u < nickElLen; u++) {
 					for (var i = 0, blockUserInputVarLen = blockUserInputVar.length; i < blockUserInputVarLen; i++) {
-						var t = blockUserInputVar[i];
-						for (var u = 0, nickElLen = nickEl.length; u < nickElLen; u++) {
-							if (nickEl[u].textContent === t) {
-								up(nickEl[u],upCount).className = 'displayNone';
-								break;
-							}
+						if (nickEl[u].textContent === blockUserInputVar[i]) {
+							up(nickEl[u],upCount).className = 'displayNone';
+							break;
 						}
+					}
+				}
+			}
+		}
 
-						for (var u = 0, CmtNickElLen = CmtNickEl.length; u < CmtNickElLen; u++) {
-							if (CmtNickEl[u].textContent === t) {
+		if (locHref.indexOf('V.php') > -1){
+			var myArea = document.getElementById('myArea');
+			var article = document.querySelector('.G13 > div[align="justify"]');
+			var userEl = document.querySelector('div[id^="nik_"]');
+
+			function userBlock_cmt(){
+				if (blockUserVar == '1') {
+					var CmtNickEl = document.querySelectorAll('td[width="140"] a');
+					for (var u = 0, CmtNickElLen = CmtNickEl.length; u < CmtNickElLen; u++) {
+						for (var i = 0, blockUserInputVarLen = blockUserInputVar.length; i < blockUserInputVarLen; i++) {
+							if (CmtNickEl[u].textContent === blockUserInputVar[i]) {
 								up(CmtNickEl[u],7).className = 'displayNone';
 								break;
 							}
 						}
 					}
 				}
-			}userBlock();
-		}
-
-
-		if (locHref.indexOf('V.php') > -1){
-			var myArea = document.getElementById('myArea');
-			var article = document.querySelector('.G13 > div[align="justify"]');
-			var userEl = document.querySelector('div[id^="nik_"]');
-			var userId =  userEl.firstChild.firstChild.getAttribute('onclick').match(/id=([^&]+)\'/)[1];
-			var nickname = userEl.nextSibling.textContent;
+			}userBlock_cmt();
 
 			if (path == '/mbs/articleV.php') {
+				var userId =  userEl.firstChild.firstChild.getAttribute('onclick').match(/id=([^&]+)\'/)[1];
+				var nickname = userEl.nextSibling.textContent;
+
 				//content blind
 				if (blindVar == '1' || blindVar === undefined) {
 					var subject = container.getElementsByTagName('strong')[0].textContent;
@@ -439,7 +442,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					},
 					success: function(data) {
 						$(myArea).html(data);
-						userBlock();
+						if (path !== '/mbs/articleL.php') {
+							userBlock_cmt();
+						}
 						if (path == '/mbs/articleV.php') {
 							commentUser();
 						}
