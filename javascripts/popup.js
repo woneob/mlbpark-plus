@@ -54,6 +54,13 @@ function bindEvent() {
 			}, '*');
 		}
 	});
+
+	$('.txtInput').keyup(function(event){
+		if(event.keyCode == 13){
+			$(this).next('button').click();
+		}
+	});
+
 	// 옵션 체크박스 - 모든 체크박스에 이벤트 바인딩
 	$(':checkbox').on('change', function(event) {
 		var $messageBox = $('#status #message');
