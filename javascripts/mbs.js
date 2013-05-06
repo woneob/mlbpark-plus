@@ -177,8 +177,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		if (locHref.indexOf('V.php') > -1){
 			var myArea = document.getElementById('myArea');
-			var article = document.querySelector('.G13 > div[align="justify"]');
-			var userEl = document.querySelector('div[id^="nik_"]');
 
 			function userBlock_cmt(){
 				if (blockUserVar == '1') {
@@ -195,6 +193,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}userBlock_cmt();
 
 			if (path == '/mbs/articleV.php') {
+				var article = document.querySelector('.G13 > div[align="justify"]');
+				var userEl = document.querySelector('div[id^="nik_"]');
 				var userId =  userEl.firstChild.firstChild.getAttribute('onclick').match(/id=([^&]+)\'/)[1];
 				var nickname = userEl.nextSibling.textContent;
 
