@@ -91,7 +91,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 			listLinkLoop:
 			for (var i = 0, listLinklen = listLink.length; i < listLinklen; i++) {
-				var t = listLink[i].childNodes[1];
+				if (path == '/bbs/mlb_today.php') {
+					var t = listLink[i].childNodes[0];
+				} else {
+					var t = listLink[i].childNodes[1];
+				}
 				var title = t.textContent;
 
 				//title block
