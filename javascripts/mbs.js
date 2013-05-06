@@ -519,20 +519,15 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 			//prerender
 			var target = document.head;
-			pr1 = document.createElement('link');
-			pr1.rel = 'prerender';
-			pr1.href = 'http://mlbpark.donga.com/mbs/articleL.php?mbsC=bullpen';
-			pr2 = document.createElement('link');
-			pr2.rel = 'prerender';
-			pr2.href = nLink;
-			pr3 = document.createElement('link');
-			pr3.rel = 'prerender';
-			pr3.href = pLink;
-			target.appendChild(pr1);
-			target.appendChild(pr2);
-			target.appendChild(pr3);
+			prNext = document.createElement('link');
+			prNext.rel = 'prerender';
+			prNext.href = nLink;
+			prPrev = document.createElement('link');
+			prPrev.rel = 'prerender';
+			prPrev.href = pLink;
+			target.appendChild(prNext);
+			target.appendChild(prPrev);
 		}
-
 
 		// Add a 'User Block' to User Menu
 		if (blockUserVar == '1') {
