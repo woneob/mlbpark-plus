@@ -1,4 +1,5 @@
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
+	var doc = document;
 	var titIconVar = response.titIcon,
 	teamVar = response.team,
 	blockVar = response.block,
@@ -74,18 +75,18 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		return el;
 	}
 
-	$(document).ready(function() {
+	$(doc).ready(function() {
 		var loc = window.location;
 		var locHref = loc.href;
 		var path = loc.pathname;
 
 		if (path !== '/mbs/commentV.php') {
-			var container = document.getElementById('container');
+			var container = doc.getElementById('container');
 			var listLink =  container.getElementsByClassName('G12read');
 
 			// KBL bbs only
 			if ((teamVar == '1' || teamVar === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
-				document.body.className = 'team_show';
+				doc.body.className = 'team_show';
 				var teamSearchUrl = '/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=';
 			}
 
@@ -180,11 +181,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 
 		if (locHref.indexOf('V.php') > -1){
-			var myArea = document.getElementById('myArea');
+			var myArea = doc.getElementById('myArea');
 
 			function userBlock_cmt(){
 				if (blockUserVar == '1') {
-					var CmtNickEl = document.querySelectorAll('td[width="140"] a');
+					var CmtNickEl = doc.querySelectorAll('td[width="140"] a');
 					for (var u = 0, CmtNickElLen = CmtNickEl.length; u < CmtNickElLen; u++) {
 						for (var i = 0, blockUserInputVarLen = blockUserInputVar.length; i < blockUserInputVarLen; i++) {
 							if (CmtNickEl[u].textContent === blockUserInputVar[i]) {
@@ -197,8 +198,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}userBlock_cmt();
 
 			if (path == '/mbs/articleV.php') {
-				var article = document.querySelector('.G13 > div[align="justify"]');
-				var userEl = document.querySelector('div[id^="nik_"]');
+				var article = doc.querySelector('.G13 > div[align="justify"]');
+				var userEl = doc.querySelector('div[id^="nik_"]');
 				var userId =  userEl.firstChild.firstChild.getAttribute('onclick').match(/id=([^&]+)\'/)[1];
 				var nickname = userEl.nextSibling.textContent;
 
@@ -276,7 +277,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							var height = t.clientHeight;
 
 							if (width && height > 50) {
-								var imageWrap = document.createElement('span');
+								var imageWrap = doc.createElement('span');
 								imageWrap.className = 'iWrap';
 
 								var src = t.src;
@@ -298,10 +299,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				//videoCss
 				if (videoVar == '1' || videoVar === undefined) {
-					var vdoCss = document.createElement('link');
+					var vdoCss = doc.createElement('link');
 					vdoCss.rel = 'stylesheet';
 					vdoCss.href = chrome.extension.getURL('/css/video.css');
-					document.head.appendChild(vdoCss);
+					doc.head.appendChild(vdoCss);
 				}
 
 				function commentUser(){
@@ -332,7 +333,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 								cache: false,
 								success: function(response) {
 									var selectUser = t.previousSibling.textContent;
-									document.body.insertAdjacentHTML('beforeEnd',
+									doc.body.insertAdjacentHTML('beforeEnd',
 										'<div id="commentModal">\n'+
 										'	<div id="commentModalMask"></div>\n'+
 										'	<div id="commentModalBox">\n'+
@@ -356,9 +357,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 									cmt = responseWrapper.find('a[title=" 에게 메모 보내기"]:contains("' + selectUser + '")'),
 									cmtVal = cmt.closest('td').nextAll();
 									var cmtCount = cmt.length;
-									var el_modal = document.getElementById('commentModalBox');
-									var el_cmtCount = document.getElementById('cmtCount');
-									var el_userCmtList = document.getElementById('userCmtList');
+									var el_modal = doc.getElementById('commentModalBox');
+									var el_cmtCount = doc.getElementById('cmtCount');
+									var el_userCmtList = doc.getElementById('userCmtList');
 
 									el_cmtCount.textContent = '(' + cmtCount + ')';
 									$(el_userCmtList).append(cmtVal);
@@ -383,7 +384,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							});
 						});
 
-						$(document.body).on('click','#commentModalMask,#commentModalClose',function(){
+						$(doc.body).on('click','#commentModalMask,#commentModalClose',function(){
 							$('#commentModal').remove();
 						});
 					}
@@ -405,7 +406,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			urlReplace();
 
 			//reply button
-			var textarea = document.getElementsByName('line_content')[0];
+			var textarea = doc.getElementsByName('line_content')[0];
 
 			function replyButton(){
 				if (replyVar == '1' || replyVar == null) {
@@ -426,17 +427,17 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			//comment refresh
 			myArea.insertAdjacentHTML('afterEnd','<div id="commentRefresh"><button type="button" id="btn_cmtLoad">최신 댓글 불러오기</button><span id="cmtLoader"></span>');
 
-			var mbsC = document.getElementsByName('mbsC')[0].value;
-			var mbsIdx =  document.getElementsByName('mbsIdx')[0].value;
+			var mbsC = doc.getElementsByName('mbsC')[0].value;
+			var mbsIdx =  doc.getElementsByName('mbsIdx')[0].value;
 
 			if (path == '/mbs/commentV.php'){
-				var wday = document.getElementsByName('co_day')[0].value;
+				var wday = doc.getElementsByName('co_day')[0].value;
 			} else {
-				var wday = document.getElementsByName('wday')[0].value;
+				var wday = doc.getElementsByName('wday')[0].value;
 			}
 
 			$('#btn_cmtLoad').on('click',function(){
-				var cmtLoader = document.getElementById('cmtLoader');
+				var cmtLoader = doc.getElementById('cmtLoader');
 				$.ajax({
 					type: 'post',
 					async: true,
@@ -471,19 +472,19 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 			switch ($.urlParam('mbsC')) {
 				case 'bullpen':
-					document.getElementById('navi4').className = 'on';
+					doc.getElementById('navi4').className = 'on';
 				break;
 				case 'kbotown':
-					document.getElementById('navi3').className = 'on';
+					doc.getElementById('navi3').className = 'on';
 				break;
 				case 'mlbtown':
-					document.getElementById('navi2').className = 'on';
+					doc.getElementById('navi2').className = 'on';
 				break;
 			}
 		}
 
 		//replace with href of link
-		var elms = document.getElementsByTagName('a');
+		var elms = doc.getElementsByTagName('a');
 		for (i = 0, elmsLen = elms.length; i < elmsLen; i++) {
 			elms[i].href = elms[i].href.replace('articleVC', 'articleV');
 		}
@@ -499,7 +500,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var nLink = $currentPage[0].nextSibling.href;
 
 			if (shortcutVar == '1' || shortcutVar == null) {
-				$(document).keyup(function(e){
+				$(doc).keyup(function(e){
 					if (path !== '/mbs/commentV.php'){
 						if ($(e.target).is('input, textarea')) {
 							return;
@@ -511,18 +512,18 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							window.location.href = nLink;
 						}
 						if (e.which === 68) {
-							$(document.body).animate({scrollTop: $('table[height="31"]').offset().top}, 300);
+							$(doc.body).animate({scrollTop: $('table[height="31"]').offset().top}, 300);
 						}
 					}
 				});
 			}
 
 			//prerender
-			var target = document.head;
-			prNext = document.createElement('link');
+			var target = doc.head;
+			prNext = doc.createElement('link');
 			prNext.rel = 'prerender';
 			prNext.href = nLink;
-			prPrev = document.createElement('link');
+			prPrev = doc.createElement('link');
 			prPrev.rel = 'prerender';
 			prPrev.href = pLink;
 			target.appendChild(prNext);
@@ -532,7 +533,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		// Add a 'User Block' to User Menu
 		if (blockUserVar == '1') {
 			function addUserBlock(){
-				var userMenu = document.querySelectorAll('div[id^=nik_]');
+				var userMenu = doc.querySelectorAll('div[id^=nik_]');
 				for (var i = 0, userMenuLen = userMenu.length; i < userMenuLen; i++) {
 					var t = userMenu[i];
 					var userNick = t.nextSibling.textContent;
