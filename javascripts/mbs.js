@@ -182,7 +182,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		if (locHref.indexOf('V.php') > -1){
 			var myArea = doc.getElementById('myArea');
-			var cmtTxt = myArea.querySelectorAll('.G12');
 
 			function userBlock_cmt(){
 				if (blockUserVar == '1') {
@@ -400,7 +399,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				replaceTxt1 = ' <a href="$1" target="_blank">$1</a>',
 				replaceTxt2 = ' <a href="http://$2" target="_blank">$2</a>';
 
-				$(cmtTxt).html(function(i, val) {
+				$(myArea).find('.G12').html(function(i, val) {
 					return val.replace(replacePattern1, replaceTxt1).replace(replacePattern2, replaceTxt2);
 				});
 			}
@@ -412,7 +411,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			function replyButton(){
 				if (replyVar == '1' || replyVar == null) {
 					var btn = '<button type=\"button\" class=\"btn_reply\" title=\"답글 달기\">[답글]</button>';
-					$(cmtTxt).append(btn);
+					$(myArea).find('.G12').append(btn);
 					$('.btn_reply').on('click',function(){
 						var username = up(this,5).previousElementSibling.getElementsByTagName('a')[0].textContent;
 						if (textarea.value !== '' && !confirm('아직 작성 중인 댓글이 있습니다.\n다시 작성하시겠습니까?')){
