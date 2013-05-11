@@ -44,7 +44,7 @@ table[width="660"] > tbody > tr:nth-child(3) table[width='200']{width:100% !impo
 table[width="660"] > tbody > tr:nth-child(3) table[width='200'] td {height:24px;vertical-align:middle !important;font-size:12px !important;}
 table[width="660"] > tbody > tr:nth-child(3) table[width='200'] td[width='32'] {padding-right:5px;}
 table[width="660"] > tbody > tr:nth-child(3) table[width='200'][style^='MARGIN']{table-layout:fixed;margin-top:10px !important;}
-table[width="660"] > tbody > tr:nth-child(3) table[width='200'][style^='MARGIN'] td[width='190'] {width:auto !important;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+table[width="660"] > tbody > tr:nth-child(3) table[width='200'][style^='MARGIN'] td[width='190'] {width:auto !important;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;letter-spacing:-1px;}
 table[width="660"] > tbody > tr:nth-child(3) table[width='200'] img[src$='maim_dot01.gif'] {margin-left:5px;}
 table[width="660"] > tbody > tr:nth-child(4) > td img {display:none;}
 table[width="660"][height="31"] td[width="340"] {width:auto !important;}

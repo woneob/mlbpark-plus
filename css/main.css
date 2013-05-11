@@ -120,5 +120,5 @@
 .today_wrap .tit_bar .tab_btn img {width:auto;height:26px;}
 .today_wrap .greatest_list {box-sizing:border-box;width:33.33% !important;height:205px !important;margin:0;padding: 0 13px !important;border:none !important;}
 .today_wrap .greatest_list h4 {padding-bottom:3px !important;border-bottom:1px solid #e3e3e3;margin-bottom:12px !important;}
-.today_wrap .greatest_list ul li {width:100% !important;margin:0 0 8px 0 !important;font-weight:normal !important;background:none !important;padding:0 !important;}
+.today_wrap .greatest_list ul li {width:100% !important;margin:0 0 8px 0 !important;font-weight:normal !important;background:none !important;padding:0 !important;letter-spacing:-1px;}
 .today_wrap .greatest_list ul li:first-child a {font-weight:bold;}
