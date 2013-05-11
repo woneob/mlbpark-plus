@@ -262,19 +262,18 @@ function save(){
 }
 
 $(window).load(function(){
-	$('#width').change(function(){
-		var $range = $('#range');
+	width.onchange = function(){
 		if (this.checked) {
-				$range.slideDown(200);
+			$(range).slideDown(200);
 		} else {
-				$range.slideUp(200);
+			$(range).slideUp(200);
 		}
-	});
+	}
 
-	$('#widthVal').change(function(){
+	widthVal.onchange = function(){
 		var newValue = this.value;
-		$('#slideCurrent').text(newValue);
-	});
+		slideCurrent.textContent = newValue;
+	}
 
 	block.onchange = function(){
 		if (this.checked) {
