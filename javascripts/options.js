@@ -276,10 +276,7 @@ $(window).load(function(){
 		$('#slideCurrent').text(newValue);
 	});
 
-	var blockEl = doc.getElementById('block');
-	var blockInfo = doc.getElementById('blockInfo');
-	var blockInput = doc.getElementById('blockInput');
-	blockEl.onchange = function(){
+	block.onchange = function(){
 		if (this.checked) {
 			$(blockInfo).slideDown(200);
 			$(blockInput).removeAttr('disabled');
@@ -289,10 +286,7 @@ $(window).load(function(){
 		}
 	}
 
-	var blockUserEl = doc.getElementById('blockUser');
-	var blockUserInfo = doc.getElementById('blockUserInfo');
-	var blockUserInput = doc.getElementById('blockUserInput');
-	blockUserEl.onchange = function(){
+	blockUser.onchange = function(){
 		if (this.checked) {
 			$(blockUserInfo).slideDown(200);
 			$(blockUserInput).removeAttr('disabled');
