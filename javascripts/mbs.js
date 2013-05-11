@@ -489,7 +489,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			elms[i].href = elms[i].href.replace('articleVC', 'articleV');
 		}
 
-		if (path !== '/mbs/commentV.php') {
+		if (path !== '/mbs/commentV.php' && path !== '/bbs/mlb_today.php') {
 			//shotcut keys
 			var paging = container.getElementsByClassName('paging');
 			var $currentPage = $(paging).find('font');
