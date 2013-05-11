@@ -108,7 +108,8 @@
 		"webRequestBlocking",
 		"http://*.donga.com/*",
 		"http://*.donga.com:8080/*",
-		"http://210.115.150.117/log/*"
+		"http://210.115.150.117/log/*",
+		"http://rtax.criteo.com/*"
 	],
 	"options_page": "options.html",
 	"manifest_version": 2,

@@ -33,7 +33,8 @@ chrome.webRequest.onBeforeRequest.addListener(
 			'http://mlbpark.donga.com/mypage/memo_read.php',
 			'http://www2.donga.com:8080/*',
 			'http://sports.donga.com/pictorial/*',
-			'http://dimg.donga.com/*'
+			'http://dimg.donga.com/*',
+			'http://rtax.criteo.com/*'
 		]
 	}, ["blocking"]
 );
