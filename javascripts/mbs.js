@@ -247,7 +247,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					'		<button type="button" onclick="MlbNewWindow2(\'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId +'\',\'550\',\'500\')">[더 보기]</button>\n' + 
 					'	</div>\n'+ 
 					'	<div id="historyLoading">\n'+
-					'		<div><span class="stick1"></span><span class="stick2"></span><span class="stick3"></span></div>\n'+
+					'		<span></span>\n'+
 					'	</div>\n'+
 					'	<div id="historyList"></div>\n'+
 					'</div>'
