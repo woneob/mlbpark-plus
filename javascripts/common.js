@@ -12,7 +12,7 @@ chrome.extension.sendMessage({action:'width'}, function(response) {
 
 $(document).ready(function() {
 	//remove items
-	$('.ad_left_w,.ad_right_w,script[src^="http://cad.donga.com/"],script[src^="http://mlbpark.donga.com/acecounter/"],iframe[src^="http://ar.donga.com/"],iframe[src^="http://idolpark.donga.com/"],iframe[src^="http://sports.donga.com/"],iframe[src="http://mlbpark.donga.com/mypage/memo_read.php"],iframe[src="http://mlbpark.donga.com/poll/score.html"]').remove();
+	$('.ad_left_w,.ad_left_w2,.ad_right_w,script[src^="http://cad.donga.com/"],script[src^="http://mlbpark.donga.com/acecounter/"],iframe[src^="http://ar.donga.com/"],iframe[src^="http://idolpark.donga.com/"],iframe[src^="http://sports.donga.com/"],iframe[src="http://mlbpark.donga.com/mypage/memo_read.php"],iframe[src="http://mlbpark.donga.com/poll/score.html"]').remove();
 
 	//user toolbox remove
 	$(document).on('click',function(){
