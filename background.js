@@ -10,7 +10,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 chrome.webRequest.onBeforeRequest.addListener(
 	function() {
-		return {redirectUrl:'about:blank'};
+		return {redirectUrl:'javascript:void(0)'};
 	}, {
 		urls:[
 			'http://idolpark.donga.com/*',
@@ -23,7 +23,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 chrome.webRequest.onBeforeRequest.addListener(
 	function() {
-		return {redirectUrl:'about:blank'};
+		return {redirectUrl:'javascript:void(0)'};
 	}, {
 		urls:[
 			'http://ar.donga.com/*',
