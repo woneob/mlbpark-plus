@@ -1,4 +1,14 @@
 chrome.webRequest.onBeforeRequest.addListener(
+	function(details){
+		if( details.url.indexOf('articleVC.php') !== -1) {
+			return {redirectUrl: details.url.replace('articleVC', 'articleV')};
+		}
+	},{
+		urls: ['http://mlbpark.donga.com/*']
+	}, ['blocking']
+);
+
+chrome.webRequest.onBeforeRequest.addListener(
 	function() {
 		return {redirectUrl:'about:blank'};
 	}, {

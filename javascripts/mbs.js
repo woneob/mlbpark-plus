@@ -484,12 +484,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 		}
 
-		//replace with href of link
-		var elms = doc.getElementsByTagName('a');
-		for (i = 0, elmsLen = elms.length; i < elmsLen; i++) {
-			elms[i].href = elms[i].href.replace('articleVC', 'articleV');
-		}
-
 		if (path !== '/mbs/commentV.php' && path !== '/bbs/mlb_today.php') {
 			//shotcut keys
 			var paging = container.getElementsByClassName('paging');
