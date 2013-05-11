@@ -1,223 +1,256 @@
+var doc = document;
+var optionName = [
+	'titIcon',
+	'team',
+	'blind',
+	'block',
+	'blockInfo',
+	'blockInput',
+	'blockType_1',
+	'blockType_2',
+	'blockUser',
+	'blockUserInfo',
+	'blockUserInput',
+	'userHistory',
+	'reply',
+	'userCommentView',
+	'video',
+	'imageSearch',
+	'passwd',
+	'notice',
+	'shortcut',
+	'width',
+	'widthVal',
+	'slideCurrent',
+	'range'
+];
+
+for (var k = 0; k < optionName.length; k++){
+	optionName[k] = doc.getElementById(optionName[k]);
+}
+
 function reset(){
-	document.getElementById('titIcon').checked = true ;
-	document.getElementById('team').checked = true ;
-	document.getElementById('blind').checked = true;
-	document.getElementById('block').checked = false;
-	document.getElementById('blockInfo').style.display = 'none';
-	document.getElementById('blockInput').value = '';
-	document.getElementById('blockType_1').checked = true;
-	document.getElementById('blockUser').checked = false;
-	document.getElementById('blockUserInfo').style.display = 'none';
-	document.getElementById('blockUserInput').value = '';
-	document.getElementById('userHistory').checked = false;
-	document.getElementById('reply').checked = true;
-	document.getElementById('userCommentView').checked = true;
-	document.getElementById('video').checked = true;
-	document.getElementById('imageSearch').checked = true;
-	document.getElementById('passwd').checked = false;
-	document.getElementById('notice').checked = false;
-	document.getElementById('shortcut').checked = true;
-	document.getElementById('width').checked = false;
-	document.getElementById('widthVal').value = '858';
-	document.getElementById('slideCurrent').innerText = '858';
-	document.getElementById('range').style.display = 'none';
+	titIcon.checked = true ;
+	team.checked = true ;
+	blind.checked = true;
+	block.checked = false;
+	blockInfo.style.display = 'none';
+	blockInput.value = '';
+	blockType_1.checked = true;
+	blockUser.checked = false;
+	blockUserInfo.style.display = 'none';
+	blockUserInput.value = '';
+	userHistory.checked = false;
+	reply.checked = true;
+	userCommentView.checked = true;
+	video.checked = true;
+	imageSearch.checked = true;
+	passwd.checked = false;
+	notice.checked = false;
+	shortcut.checked = true;
+	width.checked = false;
+	widthVal.value = '858';
+	slideCurrent.innerText = '858';
+	range.style.display = 'none';
 }
 
 function restore(){
 	if (localStorage['titIcon'] == 1 || localStorage['titIcon'] == null) {
-		document.getElementById('titIcon').checked = true;
+		titIcon.checked = true;
 	} else {
-		document.getElementById('titIcon').checked = false;
+		titIcon.checked = false;
 	}
 
 	if (localStorage['team'] == 1 || localStorage['team'] == null) {
-		document.getElementById('team').checked = true;
+		team.checked = true;
 	} else {
-		document.getElementById('team').checked = false;
+		team.checked = false;
 	}
 
 	if (localStorage['blind'] == 1 || localStorage['blind'] == null) {
-		document.getElementById('blind').checked = true;
+		blind.checked = true;
 	} else {
-		document.getElementById('blind').checked = false;
+		blind.checked = false;
 	}
 
 	if (localStorage['block'] == 0 || localStorage['block'] == null) {
-		document.getElementById('block').checked = false;
-		document.getElementById('blockInfo').style.display = 'none';
-		document.getElementById('blockInput').disabled = true;
+		block.checked = false;
+		blockInfo.style.display = 'none';
+		blockInput.disabled = true;
 	} else {
-		document.getElementById('block').checked = true;
-		document.getElementById('blockInfo').style.display = 'block';
-		document.getElementById('blockInput').disabled = false;
+		block.checked = true;
+		blockInfo.style.display = 'block';
+		blockInput.disabled = false;
 	}
 
 	if (!(localStorage['blockInput'] == null)) {
-		document.getElementById('blockInput').value = localStorage['blockInput'];
+		blockInput.value = localStorage['blockInput'];
 	} 
 
 	if (localStorage['blockType'] == '2') {
-		document.getElementById('blockType_2').checked = true;
+		blockType_2.checked = true;
 	} else {
-		document.getElementById('blockType_1').checked = true;
+		blockType_1.checked = true;
 	}
 
 	if (localStorage['blockUser'] == 0 || localStorage['blockUser'] == null) {
-		document.getElementById('blockUser').checked = false;
-		document.getElementById('blockUserInfo').style.display = 'none';
-		document.getElementById('blockUserInput').disabled = true;
+		blockUser.checked = false;
+		blockUserInfo.style.display = 'none';
+		blockUserInput.disabled = true;
 	} else {
-		document.getElementById('blockUser').checked = true;
-		document.getElementById('blockUserInfo').style.display = 'block';
-		document.getElementById('blockUserInput').disabled = false;
+		blockUser.checked = true;
+		blockUserInfo.style.display = 'block';
+		blockUserInput.disabled = false;
 	}
 
 	if (!(localStorage['blockUserInput'] == null)) {
-		document.getElementById('blockUserInput').value = localStorage['blockUserInput'];
+		blockUserInput.value = localStorage['blockUserInput'];
 	} 
 
 	if (localStorage['userHistory'] == 1) {
-		document.getElementById('userHistory').checked = true;
+		userHistory.checked = true;
 	} else {
-		document.getElementById('userHistory').checked = false;
+		userHistory.checked = false;
 	}
 
 	if (localStorage['reply'] == 1 || localStorage['reply'] == null) {
-		document.getElementById('reply').checked = true;
+		reply.checked = true;
 	} else {
-		document.getElementById('reply').checked = false;
+		reply.checked = false;
 	}
 
 	if (localStorage['userCommentView'] == 1 || localStorage['userCommentView'] == null) {
-		document.getElementById('userCommentView').checked = true;
+		userCommentView.checked = true;
 	} else {
-		document.getElementById('userCommentView').checked = false;
+		userCommentView.checked = false;
 	}
 
 	if (localStorage['video'] == 1 || localStorage['video'] == null) {
-		document.getElementById('video').checked = true;
+		video.checked = true;
 	} else {
-		document.getElementById('video').checked = false;
+		video.checked = false;
 	}
 
 	if (localStorage['imageSearch'] == 1 || localStorage['imageSearch'] == null) {
-		document.getElementById('imageSearch').checked = true;
+		imageSearch.checked = true;
 	} else {
-		document.getElementById('imageSearch').checked = false;
+		imageSearch.checked = false;
 	}
 
 	if (localStorage['passwd'] == 1) {
-		document.getElementById('passwd').checked = true;
+		passwd.checked = true;
 	} else {
-		document.getElementById('passwd').checked = false;
+		passwd.checked = false;
 	}
 
 	if (localStorage['notice'] == 1) {
-		document.getElementById('notice').checked = true;
+		notice.checked = true;
 	} else {
-		document.getElementById('notice').checked = false;
+		notice.checked = false;
 	}
 
 	if (localStorage['shortcut'] == 1 || localStorage['shortcut'] == null) {
-		document.getElementById('shortcut').checked = true;
+		shortcut.checked = true;
 	} else {
-		document.getElementById('shortcut').checked = false;
+		shortcut.checked = false;
 	}
 
 	if (localStorage['width'] == null) {
-		document.getElementById('width').checked = false;
-		document.getElementById('range').style.display = 'none';
-		document.getElementById('slideCurrent').innerText = '858';
+		width.checked = false;
+		range.style.display = 'none';
+		slideCurrent.innerText = '858';
 	} else if (localStorage['width'] == 0) {
-		document.getElementById('width').checked = false;
-		document.getElementById('range').style.display = 'none';
-		document.getElementById('slideCurrent').innerText = localStorage['widthVal'];
+		width.checked = false;
+		range.style.display = 'none';
+		slideCurrent.innerText = localStorage['widthVal'];
 	} else {
-		document.getElementById('width').checked = true;
-		document.getElementById('range').style.display = 'block';
-		document.getElementById('slideCurrent').innerText = localStorage['widthVal'];
+		width.checked = true;
+		range.style.display = 'block';
+		slideCurrent.innerText = localStorage['widthVal'];
 	}
 
 	if (localStorage['widthVal']) {
-		document.getElementById('widthVal').value = localStorage['widthVal'];
+		widthVal.value = localStorage['widthVal'];
 	}
 }
 
 function save(){
-	if (document.getElementById("titIcon").checked == true) {localStorage["titIcon"] = 1;}
+	if (titIcon.checked == true) {localStorage["titIcon"] = 1;}
 	else {localStorage["titIcon"] = 0;}
 
-	if (document.getElementById("team").checked == true) {localStorage["team"] = 1;}
+	if (team.checked == true) {localStorage["team"] = 1;}
 	else {localStorage["team"] = 0;}
 
-	if (document.getElementById("blind").checked == true) {localStorage["blind"] = 1;}
+	if (blind.checked == true) {localStorage["blind"] = 1;}
 	else {localStorage["blind"] = 0;}
 
-	if (document.getElementById("block").checked == true) {localStorage["block"] = 1;}
+	if (block.checked == true) {localStorage["block"] = 1;}
 	else {localStorage["block"] = 0;}
 
-	if (!(document.getElementById("blockInput").value.length == 0)) {
+	if (!(blockInput.value.length == 0)) {
 		// 설명을 위해 한 줄씩 적용 - 속도가 중요한 부분 아님
 		// point: 각 라인은 콤마로 끝나도록 수정되어야 함 - 화면의 차단하는 코드에서는 라인 구분 없이 콤마로만 구분
-		var blockInputVar = document.getElementById("blockInput").value
+		var blockInputVar = blockInput.value
 			.replace(/,[ \t]*\n/g, ',\n')	// 각 라인의 마지막 쉼표 뒤 공백/탭 제거
 			.replace(/(,*\n)+/g, ',\n')		// 연속된 쉼표 제거
 			.replace(/\n,+/g, '\n')			// 쉼표로 시작되는 라인 제거
 			.replace(/(^,+)|(,+$)/g, '');	// 맨 처음/마지막 쉼표 제거
 		localStorage["blockInput"] = blockInputVar;
-		document.getElementById("blockInput").value = localStorage["blockInput"];
+		blockInput.value = localStorage["blockInput"];
 	} else {
 		localStorage["blockInput"] = '';
 		localStorage["block"] = 0;
-		document.getElementById("block").checked = false;
+		block.checked = false;
 	}
 
-	if (document.getElementById("blockType_1").checked == true) {localStorage["blockType"] = 1;}
+	if (blockType_1.checked == true) {localStorage["blockType"] = 1;}
 	else {localStorage["blockType"] = 2;}
 
-	if (document.getElementById("blockUser").checked == true) {localStorage["blockUser"] = 1;}
+	if (blockUser.checked == true) {localStorage["blockUser"] = 1;}
 	else {localStorage["blockUser"] = 0;}
 
-	if (!(document.getElementById("blockUserInput").value.length == 0)) {
+	if (!(blockUserInput.value.length == 0)) {
 		// 설명을 위해 한 줄씩 적용 - 속도가 중요한 부분 아님
 		// point: 각 라인은 콤마로 끝나도록 수정되어야 함 - 화면의 차단하는 코드에서는 라인 구분 없이 콤마로만 구분
-		var blockUserInputVar = document.getElementById("blockUserInput").value
+		var blockUserInputVar = blockUserInput.value
 			.replace(/,\t*\n/g, ',\n')		// 각 라인의 마지막 쉼표 뒤 탭 제거
 			.replace(/(,*\n)+/g, ',\n')		// 연속된 쉼표 제거
 			.replace(/\n,+/g, '\n')			// 쉼표로 시작되는 라인 제거
 			.replace(/(^,+)|(,+$)/g, '');	// 맨 처음/마지막 쉼표 제거
 		localStorage["blockUserInput"] = blockUserInputVar;
-		document.getElementById("blockUserInput").value = localStorage["blockUserInput"];
-	} else {localStorage["blockUserInput"] = '';}
+		blockUserInput.value = localStorage["blockUserInput"];
+	} else {
+		localStorage["blockUserInput"] = '';
+	}
 
-	if (document.getElementById("userHistory").checked == true) {localStorage["userHistory"] = 1;}
+	if (userHistory.checked == true) {localStorage["userHistory"] = 1;}
 	else {localStorage["userHistory"] = 0;}
 
-	if (document.getElementById("reply").checked == true) {localStorage["reply"] = 1;}
+	if (reply.checked == true) {localStorage["reply"] = 1;}
 	else {localStorage["reply"] = 0;}
 
-	if (document.getElementById("userCommentView").checked == true) {localStorage["userCommentView"] = 1;}
+	if (userCommentView.checked == true) {localStorage["userCommentView"] = 1;}
 	else {localStorage["userCommentView"] = 0;}
 
-	if (document.getElementById("video").checked == true) {localStorage["video"] = 1;}
+	if (video.checked == true) {localStorage["video"] = 1;}
 	else {localStorage["video"] = 0;}
 
-	if (document.getElementById("imageSearch").checked == true) {localStorage["imageSearch"] = 1;}
+	if (imageSearch.checked == true) {localStorage["imageSearch"] = 1;}
 	else {localStorage["imageSearch"] = 0;}
 
-	if (document.getElementById("passwd").checked == true) {localStorage["passwd"] = 1;}
+	if (passwd.checked == true) {localStorage["passwd"] = 1;}
 	else {localStorage["passwd"] = 0;}
 
-	if (document.getElementById("notice").checked == true) {localStorage["notice"] = 1;}
+	if (notice.checked == true) {localStorage["notice"] = 1;}
 	else {localStorage["notice"] = 0;}
 
-	if (document.getElementById("shortcut").checked == true) {localStorage["shortcut"] = 1;}
+	if (shortcut.checked == true) {localStorage["shortcut"] = 1;}
 	else {localStorage["shortcut"] = 0;}
 
-	if (document.getElementById("width").checked == true) {localStorage["width"] = 1;}
+	if (width.checked == true) {localStorage["width"] = 1;}
 	else {localStorage["width"] = 0;}
 
-	localStorage['widthVal'] = document.getElementById("widthVal").value;
+	localStorage['widthVal'] = widthVal.value;
 
 	$('.saveMsg').remove();
 	$('#action').append('<span class="saveMsg">저장되었습니다.</span>');
