@@ -278,20 +278,20 @@ window.onload = function(){
 	block.onchange = function(){
 		if (this.checked) {
 			$(blockInfo).slideDown(200);
-			$(blockInput).removeAttr('disabled');
+			blockInput.removeAttribute('disabled');
 		} else {
 			$(blockInfo).slideUp(200);
-			$(blockInput).attr('disabled','disabled');
+			blockInput.setAttribute('disabled','disabled');
 		}
 	}
 
 	blockUser.onchange = function(){
 		if (this.checked) {
 			$(blockUserInfo).slideDown(200);
-			$(blockUserInput).removeAttr('disabled');
+			blockUserInput.removeAttribute('disabled');
 		} else {
 			$(blockUserInfo).slideUp(200);
-			$(blockUserInput).attr('disabled','disabled');
+			blockUserInput.setAttribute('disabled','disabled');
 		}
 	}
 
