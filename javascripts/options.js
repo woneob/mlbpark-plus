@@ -261,7 +261,7 @@ function save(){
 	}, 1000);
 }
 
-$(window).load(function(){
+window.onload = function(){
 	width.onchange = function(){
 		if (this.checked) {
 			$(range).slideDown(200);
@@ -299,4 +299,4 @@ $(window).load(function(){
 	var resetBtn = doc.getElementById('reset');
 	saveBtn.onclick = save;
 	resetBtn.onclick = reset;
-});
+};
