@@ -276,31 +276,31 @@ $(window).load(function(){
 		$('#slideCurrent').text(newValue);
 	});
 
-	$('#block').change(function(){
-		var $blockInfo = $('#blockInfo');
-		$blockInput = $('#blockInput');
-
+	var blockEl = doc.getElementById('block');
+	var blockInfo = doc.getElementById('blockInfo');
+	var blockInput = doc.getElementById('blockInput');
+	blockEl.onchange = function(){
 		if (this.checked) {
-			$blockInfo.slideDown(200);
-			$blockInput.removeAttr('disabled');
+			$(blockInfo).slideDown(200);
+			$(blockInput).removeAttr('disabled');
 		} else {
-			$blockInfo.slideUp(200);
-			$blockInput.attr('disabled','disabled');
+			$(blockInfo).slideUp(200);
+			$(blockInput).attr('disabled','disabled');
 		}
-	});
+	}
 
-	$('#blockUser').change(function(){
-		var $blockUserInfo = $('#blockUserInfo');
-		$blockUserInput = $('#blockUserInput');
-
+	var blockUserEl = doc.getElementById('blockUser');
+	var blockUserInfo = doc.getElementById('blockUserInfo');
+	var blockUserInput = doc.getElementById('blockUserInput');
+	blockUserEl.onchange = function(){
 		if (this.checked) {
-			$blockUserInfo.slideDown(200);
-			$blockUserInput.removeAttr('disabled');
+			$(blockUserInfo).slideDown(200);
+			$(blockUserInput).removeAttr('disabled');
 		} else {
-			$blockUserInfo.slideUp(200);
-			$blockUserInput.attr('disabled','disabled');
+			$(blockUserInfo).slideUp(200);
+			$(blockUserInput).attr('disabled','disabled');
 		}
-	});
+	}
 
 	var saveBtn = doc.getElementById('save');
 	var resetBtn = doc.getElementById('reset');
