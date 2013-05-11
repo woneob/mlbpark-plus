@@ -54,7 +54,7 @@ function reset(){
 	range.style.display = 'none';
 }
 
-function restore(){
+(function restore(){
 	if (localStorage['titIcon'] == 1 || localStorage['titIcon'] == null) {
 		titIcon.checked = true;
 	} else {
@@ -172,7 +172,7 @@ function restore(){
 	if (localStorage['widthVal']) {
 		widthVal.value = localStorage['widthVal'];
 	}
-}
+}());
 
 function save(){
 	if (titIcon.checked == true) {localStorage["titIcon"] = 1;}
@@ -262,8 +262,6 @@ function save(){
 }
 
 $(window).load(function(){
-	restore();
-
 	$('#width').change(function(){
 		var $range = $('#range');
 		if (this.checked) {
