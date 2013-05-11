@@ -302,11 +302,8 @@ $(window).load(function(){
 		}
 	});
 
-	$('.save').on('click',function(){
-		save();
-	});
-
-	$('.reset').on('click',function(){
-		reset();
-	});
+	var saveBtn = doc.getElementById('save');
+	var resetBtn = doc.getElementById('reset');
+	saveBtn.onclick = save;
+	resetBtn.onclick = reset;
 });
