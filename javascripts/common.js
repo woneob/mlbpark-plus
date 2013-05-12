@@ -11,6 +11,11 @@ chrome.extension.sendMessage({action:'width'}, function(response) {
 	}
 });
 
+//user toolbox remove
+doc.onclick = function(){
+	$('div[id^="nik_"]').css('display','none');
+}
+
 $(doc).ready(function() {
 	// Remove AD-Wrapper
 	var adContainer = doc.querySelectorAll('.ad_left_w,.ad_left_w2,.ad_right_w');
@@ -24,9 +29,4 @@ $(doc).ready(function() {
 		var t = adFrame[i];
 		t.parentNode.removeChild(t);
 	}
-
-	//user toolbox remove
-	$(doc).on('click',function(){
-		$('div[id^="nik_"]').css('display','none');
-	});
 });
