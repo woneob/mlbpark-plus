@@ -178,6 +178,43 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					}
 				}
 			}
+
+			if (blockVar == '1' && blockTypeVar == '2') {
+				var bestLink = doc.querySelectorAll('td[width="190"] a');
+				for(var i = 0; i < 21; i++){
+					var t = bestLink[i];
+					for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
+						if (t.textContent.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+							if (t.parentNode.tagName.toLowerCase() == 'strong'){
+								var upCount = 3;
+							} else {
+								var upCount = 2;
+							}
+							up(t,upCount).className = 'displayNone';
+							break;
+						}
+					}
+				}
+			}
+
+			if (blockVar == '1' && blockTypeVar == '1') {
+				var bestLink = doc.querySelectorAll('td[width="190"] a');
+				for(var i = 0; i < 21; i++){
+					var t = bestLink[i];
+					for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
+						if (t.textContent.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+							var title = t.textContent;
+							t.textContent = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
+							t.className = 'blockTitle';
+							t.setAttribute('title','제목 : '+ title);
+							t.onclick = function(){
+								return confirm('차단된 글을 열람하시겠습니까?');
+							}
+							break;
+						}
+					}
+				}
+			}
 		}
 
 		if (locHref.indexOf('V.php') > -1){
