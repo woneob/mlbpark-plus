@@ -175,74 +175,74 @@ function reset(){
 }());
 
 function save(){
-	if (titIcon.checked == true) {localStorage["titIcon"] = 1;}
-	else {localStorage["titIcon"] = 0;}
+	if (titIcon.checked == true) {localStorage['titIcon'] = 1;}
+	else {localStorage['titIcon'] = 0;}
 
-	if (team.checked == true) {localStorage["team"] = 1;}
-	else {localStorage["team"] = 0;}
+	if (team.checked == true) {localStorage['team'] = 1;}
+	else {localStorage['team'] = 0;}
 
-	if (blind.checked == true) {localStorage["blind"] = 1;}
-	else {localStorage["blind"] = 0;}
+	if (blind.checked == true) {localStorage['blind'] = 1;}
+	else {localStorage['blind'] = 0;}
 
-	if (block.checked == true) {localStorage["block"] = 1;}
-	else {localStorage["block"] = 0;}
+	if (block.checked == true) {localStorage['block'] = 1;}
+	else {localStorage['block'] = 0;}
 
 	if (!(blockInput.value.length == 0)) {
 		var blockInputVar = blockInput.value
 			.replace(/\n/g, '') // Remove Linebreak
 			.replace(/^[,\s]+|[,\s]+$/g, '') // Remove starting and ending commas
 			.replace(/,[,\s]*,/g, ','); // Remove 2 or more commas
-		localStorage["blockInput"] = blockInputVar;
-		blockInput.value = localStorage["blockInput"];
+		localStorage['blockInput'] = blockInputVar;
+		blockInput.value = localStorage['blockInput'];
 	} else {
-		localStorage["blockInput"] = '';
-		localStorage["block"] = 0;
+		localStorage['blockInput'] = '';
+		localStorage['block'] = 0;
 		block.checked = false;
 	}
 
-	if (blockType_1.checked == true) {localStorage["blockType"] = 1;}
-	else {localStorage["blockType"] = 2;}
+	if (blockType_1.checked == true) {localStorage['blockType'] = 1;}
+	else {localStorage['blockType'] = 2;}
 
-	if (blockUser.checked == true) {localStorage["blockUser"] = 1;}
-	else {localStorage["blockUser"] = 0;}
+	if (blockUser.checked == true) {localStorage['blockUser'] = 1;}
+	else {localStorage['blockUser'] = 0;}
 
 	if (!(blockUserInput.value.length == 0)) {
 		var blockUserInputVar = blockUserInput.value
 			.replace(/\n/g, '') // Remove Linebreak
 			.replace(/^[,\s]+|[,\s]+$/g, '') // Remove starting and ending commas
 			.replace(/,[,\s]*,/g, ','); // Remove 2 or more commas
-		localStorage["blockUserInput"] = blockUserInputVar;
-		blockUserInput.value = localStorage["blockUserInput"];
+		localStorage['blockUserInput'] = blockUserInputVar;
+		blockUserInput.value = localStorage['blockUserInput'];
 	} else {
-		localStorage["blockUserInput"] = '';
+		localStorage['blockUserInput'] = '';
 	}
 
-	if (userHistory.checked == true) {localStorage["userHistory"] = 1;}
-	else {localStorage["userHistory"] = 0;}
+	if (userHistory.checked == true) {localStorage['userHistory'] = 1;}
+	else {localStorage['userHistory'] = 0;}
 
-	if (reply.checked == true) {localStorage["reply"] = 1;}
-	else {localStorage["reply"] = 0;}
+	if (reply.checked == true) {localStorage['reply'] = 1;}
+	else {localStorage['reply'] = 0;}
 
-	if (userCommentView.checked == true) {localStorage["userCommentView"] = 1;}
-	else {localStorage["userCommentView"] = 0;}
+	if (userCommentView.checked == true) {localStorage['userCommentView'] = 1;}
+	else {localStorage['userCommentView'] = 0;}
 
-	if (video.checked == true) {localStorage["video"] = 1;}
-	else {localStorage["video"] = 0;}
+	if (video.checked == true) {localStorage['video'] = 1;}
+	else {localStorage['video'] = 0;}
 
-	if (imageSearch.checked == true) {localStorage["imageSearch"] = 1;}
-	else {localStorage["imageSearch"] = 0;}
+	if (imageSearch.checked == true) {localStorage['imageSearch'] = 1;}
+	else {localStorage['imageSearch'] = 0;}
 
-	if (passwd.checked == true) {localStorage["passwd"] = 1;}
-	else {localStorage["passwd"] = 0;}
+	if (passwd.checked == true) {localStorage['passwd'] = 1;}
+	else {localStorage['passwd'] = 0;}
 
-	if (notice.checked == true) {localStorage["notice"] = 1;}
-	else {localStorage["notice"] = 0;}
+	if (notice.checked == true) {localStorage['notice'] = 1;}
+	else {localStorage['notice'] = 0;}
 
-	if (shortcut.checked == true) {localStorage["shortcut"] = 1;}
-	else {localStorage["shortcut"] = 0;}
+	if (shortcut.checked == true) {localStorage['shortcut'] = 1;}
+	else {localStorage['shortcut'] = 0;}
 
-	if (width.checked == true) {localStorage["width"] = 1;}
-	else {localStorage["width"] = 0;}
+	if (width.checked == true) {localStorage['width'] = 1;}
+	else {localStorage['width'] = 0;}
 
 	localStorage['widthVal'] = widthVal.value;
 
