@@ -29,7 +29,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 	}, {
 		urls:[
 			'http://dimg.donga.com/acecounter/*',
-			'http://dimg.donga.com/carriage/SPORTS/files/pictorial_mpark/*',
+			'http://dimg.donga.com/carriage/SPORTS/*',
 			'http://pagead2.googlesyndication.com/*',
 			'http://www.gstatic.com/*',
 			'http://rtax.criteo.com/*'
