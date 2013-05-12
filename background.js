@@ -16,8 +16,24 @@ chrome.webRequest.onBeforeRequest.addListener(
 			'http://idolpark.donga.com/*',
 			'http://sports.donga.com/*',
 			'http://mlbpark.donga.com/poll/*',
-			'http://openapi.donga.com/SPORTS/suggestion'
+			'http://openapi.donga.com/SPORTS/suggestion',
+			'http://*.doubleclick.net/*',
+			'http://mlbpark.donga.com/mypage/memo_read.php'
 		], types: ['sub_frame']
+	}, ['blocking']
+);
+
+chrome.webRequest.onBeforeRequest.addListener(
+	function() {
+		return {redirectUrl:'javascript:void(0)'};
+	}, {
+		urls:[
+			'http://dimg.donga.com/acecounter/*',
+			'http://dimg.donga.com/carriage/SPORTS/files/pictorial_mpark/*',
+			'http://pagead2.googlesyndication.com/*',
+			'http://www.gstatic.com/*',
+			'http://rtax.criteo.com/*'
+		], types: ['script']
 	}, ['blocking']
 );
 
@@ -30,11 +46,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 			'http://cad.donga.com/*',
 			'http://mlbpark.donga.com/acecounter/*',
 			'http://210.115.150.117/log/*',
-			'http://mlbpark.donga.com/mypage/memo_read.php',
-			'http://www2.donga.com:8080/*',
-			'http://sports.donga.com/pictorial/*',
-			'http://dimg.donga.com/*',
-			'http://rtax.criteo.com/*'
+			'http://www2.donga.com:8080/*'
 		]
 	}, ["blocking"]
 );

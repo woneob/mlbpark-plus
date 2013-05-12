@@ -109,7 +109,10 @@
 		"http://*.donga.com/*",
 		"http://*.donga.com:8080/*",
 		"http://210.115.150.117/log/*",
-		"http://rtax.criteo.com/*"
+		"http://*.doubleclick.net/*",
+		"http://rtax.criteo.com/*",
+		"http://pagead2.googlesyndication.com/*",
+		"http://www.gstatic.com/*"
 	],
 	"options_page": "options.html",
 	"manifest_version": 2,
