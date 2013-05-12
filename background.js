@@ -143,6 +143,14 @@ function storeDefaultOptionValueIfNotExists() {
 	if(null == localStorage['widthVal']) localStorage['widthVal'] = 858;
 }
 
+function blockKeywordTrim(storage, storageVar) {
+	if (localStorage[storage]){
+		var storageVar = localStorage[storage];
+		console.log(storageVar);
+		localStorage[storage] = storageVar.replace(/\n/g, '').replace(/^[,\s]+|[,\s]+$/g, '').replace(/,[,\s]*,/g, ',');
+	}
+}
+
 function onMessage(request, sender, sendResponse) {
 	switch (request.action){
 		case 'mbs':
@@ -183,5 +191,7 @@ function onMessage(request, sender, sendResponse) {
 		break;
 	}
 }
-chrome.extension.onMessage.addListener(onMessage);
 storeDefaultOptionValueIfNotExists();
+blockKeywordTrim('blockInput', 'blockInputVal');
+blockKeywordTrim('blockUserInput', 'blockUserInputVal');
+chrome.extension.onMessage.addListener(onMessage);
