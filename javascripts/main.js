@@ -1,17 +1,18 @@
+var scoreTpl = 
+'<div id="score">\n' +
+'	<div id="score_tab">\n' +
+'		<ul>\n' +
+'			<li class="tab1"><a href="#score_rank" class="selected">프로야구순위</a></li>\n' +
+'			<li class="tab2"><a href="#score_result">지난경기결과</a></li>\n' +
+'		</ul>\n' +
+'	</div>\n' +
+'	<div id="score_rank" style="display:block;"></div>\n' +
+'	<div id="score_result" style="display:none;"></div>\n' +
+'</div>\n';
+
 $(document).ready(function() {
 	//ScoreBoard load
-	document.getElementsByClassName('article_box')[0].insertAdjacentHTML('beforeEnd',
-		'<div id="score">\n' +
-		'	<div id="score_tab">\n' +
-		'		<ul>\n' +
-		'			<li class="tab1"><a href="#score_rank" class="selected">프로야구순위</a></li>\n' +
-		'			<li class="tab2"><a href="#score_result">지난경기결과</a></li>\n' +
-		'		</ul>\n' +
-		'	</div>\n' +
-		'	<div id="score_rank" style="display:block;"></div>\n' +
-		'	<div id="score_result" style="display:none;"></div>\n' +
-		'</div>\n'
-	);
+	document.getElementsByClassName('article_box')[0].insertAdjacentHTML('beforeEnd', scoreTpl);
 	$.get('http://mlbpark.donga.com/poll/score.html', function(response){
 		var responseWrapper = $('<div />').append(response.replace(/<script(.|\s)*?\/script>/g, ''));
 
@@ -21,11 +22,11 @@ $(document).ready(function() {
 
 		//controller
 		var $controller = $('a[href^="javascript:onclick=show_tab"]');
-		$tab = $('#score_result > div');
+		var $tab = $('#score_result > div');
 
 		$controller.on('click',function(e){
-			var el = $(this).attr('href').match(/[0-9]/);
-			if ((el > 0) && (el <= 7)){
+			var el = this.getAttribute('href').match(/[0-9]/);
+			if (el > 0 && el <= 7){
 				$tab.css('display','none');
 				$('#tab' + el).css('display','block');
 			}
