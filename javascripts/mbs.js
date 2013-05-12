@@ -179,38 +179,42 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 			}
 
-			if (blockVar == '1' && blockTypeVar == '2') {
+			if (blockVar == '1') {
 				var bestLink = doc.querySelectorAll('td[width="190"] a');
-				for(var i = 0; i < 21; i++){
-					var t = bestLink[i];
-					for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
-						if (t.textContent.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
-							if (t.parentNode.tagName.toLowerCase() == 'strong'){
-								var upCount = 3;
-							} else {
-								var upCount = 2;
+				var bestLinkLen = bestLink.length;
+				var blockInputVarLen = bestLink.length;
+
+				if (bestLinkLen > 0 && blockTypeVar == '2') {
+					for(var i = 0; i < bestLinkLen; i++){
+						var t = bestLink[i];
+						for(var b = 0; b < blockInputVarLen; b++) {
+							if (t.textContent.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+								if (t.parentNode.tagName.toLowerCase() == 'strong'){
+									var upCount = 3;
+								} else {
+									var upCount = 2;
+								}
+								up(t,upCount).className = 'displayNone';
+								break;
 							}
-							up(t,upCount).className = 'displayNone';
-							break;
 						}
 					}
 				}
-			}
 
-			if (blockVar == '1' && blockTypeVar == '1') {
-				var bestLink = doc.querySelectorAll('td[width="190"] a');
-				for(var i = 0; i < 21; i++){
-					var t = bestLink[i];
-					for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
-						if (t.textContent.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
-							var title = t.textContent;
-							t.textContent = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
-							t.className = 'blockTitle';
-							t.setAttribute('title','제목 : '+ title);
-							t.onclick = function(){
-								return confirm('차단된 글을 열람하시겠습니까?');
+				if (bestLinkLen > 0 && blockTypeVar == '1') {
+					for(var i = 0; i < 21; i++){
+						var t = bestLink[i];
+						for(var b = 0; b < bestLinkLen; b++) {
+							if (t.textContent.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+								var title = t.textContent;
+								t.textContent = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
+								t.className = 'blockTitle';
+								t.setAttribute('title','제목 : '+ title);
+								t.onclick = function(){
+									return confirm('차단된 글을 열람하시겠습니까?');
+								}
+								break;
 							}
-							break;
 						}
 					}
 				}
