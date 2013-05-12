@@ -188,13 +188,10 @@ function save(){
 	else {localStorage["block"] = 0;}
 
 	if (!(blockInput.value.length == 0)) {
-		// 설명을 위해 한 줄씩 적용 - 속도가 중요한 부분 아님
-		// point: 각 라인은 콤마로 끝나도록 수정되어야 함 - 화면의 차단하는 코드에서는 라인 구분 없이 콤마로만 구분
 		var blockInputVar = blockInput.value
-			.replace(/,[ \t]*\n/g, ',\n')	// 각 라인의 마지막 쉼표 뒤 공백/탭 제거
-			.replace(/(,*\n)+/g, ',\n')		// 연속된 쉼표 제거
-			.replace(/\n,+/g, '\n')			// 쉼표로 시작되는 라인 제거
-			.replace(/(^,+)|(,+$)/g, '');	// 맨 처음/마지막 쉼표 제거
+			.replace(/\n/g, '') // Remove Linebreak
+			.replace(/^[,\s]+|[,\s]+$/g, '') // Remove starting and ending commas
+			.replace(/,[,\s]*,/g, ','); // Remove 2 or more commas
 		localStorage["blockInput"] = blockInputVar;
 		blockInput.value = localStorage["blockInput"];
 	} else {
@@ -210,13 +207,10 @@ function save(){
 	else {localStorage["blockUser"] = 0;}
 
 	if (!(blockUserInput.value.length == 0)) {
-		// 설명을 위해 한 줄씩 적용 - 속도가 중요한 부분 아님
-		// point: 각 라인은 콤마로 끝나도록 수정되어야 함 - 화면의 차단하는 코드에서는 라인 구분 없이 콤마로만 구분
 		var blockUserInputVar = blockUserInput.value
-			.replace(/,\t*\n/g, ',\n')		// 각 라인의 마지막 쉼표 뒤 탭 제거
-			.replace(/(,*\n)+/g, ',\n')		// 연속된 쉼표 제거
-			.replace(/\n,+/g, '\n')			// 쉼표로 시작되는 라인 제거
-			.replace(/(^,+)|(,+$)/g, '');	// 맨 처음/마지막 쉼표 제거
+			.replace(/\n/g, '') // Remove Linebreak
+			.replace(/^[,\s]+|[,\s]+$/g, '') // Remove starting and ending commas
+			.replace(/,[,\s]*,/g, ','); // Remove 2 or more commas
 		localStorage["blockUserInput"] = blockUserInputVar;
 		blockUserInput.value = localStorage["blockUserInput"];
 	} else {
