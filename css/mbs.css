@@ -34,7 +34,7 @@ table[width="660"] > tbody > tr:first-child img[src="http://image.donga.com/mlbp
 table[width="660"] > tbody > tr:first-child img[src="http://image.donga.com/mlbpark/img200807/main_tai_05b.gif"] {display:none;}
 table[width="660"] > tbody > tr:nth-child(2) img[src="http://image.donga.com/mlbpark/img200807/main_line660_01.gif"] {display:none;}
 table[width="660"] > tbody > tr:nth-child(3) > td {background:none !important;}
-table[width="660"] > tbody > tr:nth-child(3) table[width='640'] {width:100% !important;border-top:1px solid #ccc;table-layout:fixed;}
+table[width="660"] > tbody > tr:nth-child(3) table[width='640'] {width:100% !important;min-height:130px;border-top:1px solid #ccc;table-layout:fixed;}
 table[width="660"] > tbody > tr:nth-child(3) td[width='1'] {display:none;}
 table[width="660"] > tbody > tr:nth-child(3) td[width='214'] {width:33.3333% !important;}
 table[width="660"] > tbody > tr:nth-child(3) td[width='230'] {width:auto !important;}
