@@ -286,7 +286,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				//add userId
-				userEl.nextSibling.insertAdjacentHTML('afterEnd','<span class="userIdVal">(' + userId + ')</span>');
+				var idEl = doc.createElement('span');
+				idEl.className = 'userIdVal';
+				idEl.textContent = '(' + userId + ')';
+				userEl.parentNode.appendChild(idEl);
 
 				//user history
 				if (userHistoryVar == '1') {
