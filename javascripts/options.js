@@ -196,8 +196,6 @@ function save(){
 		blockInput.value = localStorage['blockInput'];
 	} else {
 		localStorage['blockInput'] = '';
-		localStorage['block'] = 0;
-		block.checked = false;
 	}
 
 	if (blockType_1.checked == true) {localStorage['blockType'] = 1;}
