@@ -47,6 +47,48 @@ $(document).ready(function() {
 		e.preventDefault();
 	});
 
+	chrome.extension.sendMessage({action:'main'}, function(response) {
+		var blockVar = response.block,
+		blockInputVar = response.blockInput,
+		blockTypeVar = response.blockType;
+
+		if (blockVar == '1') {
+			var bestLink = doc.querySelectorAll('.greatest_list a');
+			var bestLinkLen = bestLink.length;
+			var blockInputVarLen = blockInputVar.length;
+
+			if (bestLinkLen > 0 && blockTypeVar == '2') {
+				for(var i = 0; i < bestLinkLen; i++){
+					var t = bestLink[i];
+					for(var b = 0; b < blockInputVarLen; b++) {
+						if (t.textContent.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+							t.parentNode.className = 'displayNone';
+							break;
+						}
+					}
+				}
+			}
+
+			if (bestLinkLen > 0 && blockTypeVar == '1') {
+				for(var i = 0; i < bestLinkLen; i++){
+					var t = bestLink[i];
+					for(var b = 0; b < bestLinkLen; b++) {
+						if (t.textContent.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+							var title = t.textContent;
+							t.textContent = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
+							t.className = 'blockTitle';
+							t.setAttribute('title','제목 : '+ title);
+							t.onclick = function(){
+								return confirm('차단된 글을 열람하시겠습니까?');
+							}
+							break;
+						}
+					}
+				}
+			}
+		}
+	});
+
 	//loginbox tabIndex
 	var loginBox = document.getElementById('preViewQue2');
 	if (loginBox.children[1].className == 'login') {

@@ -122,3 +122,4 @@
 .today_wrap .greatest_list h4 {padding-bottom:3px !important;border-bottom:1px solid #e3e3e3;margin-bottom:12px !important;}
 .today_wrap .greatest_list ul li {width:100% !important;margin:0 0 8px 0 !important;font-weight:normal !important;background:none !important;padding:0 !important;letter-spacing:-1px;}
 .today_wrap .greatest_list ul li:first-child a {font-weight:bold;}
+.today_wrap .greatest_list .blockTitle {color:#aaa;}

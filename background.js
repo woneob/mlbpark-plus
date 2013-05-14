@@ -172,6 +172,13 @@ function onMessage(request, sender, sendResponse) {
 				imageSearch: localStorage['imageSearch']
 			});
 		break;
+		case 'main':
+			sendResponse({
+				block: localStorage['block'],
+				blockInput: localStorage['blockInput'].toLowerCase().split(/[ \t\n]*,[ \t\n]*/),
+				blockType: localStorage['blockType']
+			});
+		break;
 		case 'width':
 			sendResponse({
 				width: localStorage['width'],
