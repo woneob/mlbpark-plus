@@ -360,7 +360,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				function commentUser(){
 					var cmtName = myArea.querySelectorAll('td[width="140"] a');
-					var viewCmt = '<button type="button" class="btn_userCmt" title="이 글에 단 댓글 보기">?</button>';
 
 					for (var i = 0, cmtNameLen = cmtName.length; i < cmtNameLen; i++) {
 						var t = cmtName[i];
@@ -372,7 +371,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 						//view userComment
 						if (userCommentViewVar == '1' || userCommentViewVar == null) {
-							t.insertAdjacentHTML('afterEnd',viewCmt);
+							var viewCmt = doc.createElement('button');
+							viewCmt.type = 'button';
+							viewCmt.className = 'btn_userCmt',
+							viewCmt.title = '이 글에 단 댓글 보기';
+							viewCmt.textContent = '?';
+							t.parentNode.appendChild(viewCmt);
 						}
 					}
 
