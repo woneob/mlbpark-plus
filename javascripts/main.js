@@ -52,7 +52,7 @@ $(document).ready(function() {
 		blockInputVar = response.blockInput,
 		blockTypeVar = response.blockType;
 
-		if (blockVar == '1') {
+		if (blockVar == '1' && blockInputVar[0] !== '') {
 			var bestLink = doc.querySelectorAll('.greatest_list a');
 			var bestLinkLen = bestLink.length;
 			var blockInputVarLen = blockInputVar.length;

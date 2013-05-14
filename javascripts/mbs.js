@@ -100,7 +100,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				var title = t.textContent;
 
 				//title block
-				if (blockVar == '1' && blockTypeVar == '2') {
+				if (blockVar == '1' && blockTypeVar == '2' && blockInputVar[0] !== '') {
 					for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
 						if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
 							up(t,6).className = 'displayNone';
@@ -109,7 +109,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					}
 				}
 
-				if (blockVar == '1' && blockTypeVar == '1') {
+				if (blockVar == '1' && blockTypeVar == '1' && blockInputVar[0] !== '') {
 					for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
 						if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
 							t.textContent = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
@@ -179,7 +179,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 			}
 
-			if (blockVar == '1') {
+			if (blockVar == '1' && blockInputVar[0] !== '') {
 				var bestLink = doc.querySelectorAll('td[width="190"] a');
 				var bestLinkLen = bestLink.length;
 				var blockInputVarLen = blockInputVar.length;
