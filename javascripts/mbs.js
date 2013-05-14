@@ -138,8 +138,17 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					for(name in team) {
 						var matched = team[name].regex.exec(title);
 						if(matched) {
+							var label = doc.createElement('em');
+							label.setAttribute('data-team', name);
+							label.title = name;
+							label.idx = name;
+							label.onclick = function(j){
+								return function (){
+									location.href= teamSearchUrl + team[j].searchKeyword;
+								}
+							}(name);
 							t.textContent = title.replace(matched[1],'');
-							t.insertAdjacentHTML('beforeBegin','<em data-team="'+ name +'" onclick="location.href=\''+ teamSearchUrl + team[name].searchKeyword + '\'"></em>');
+							t.parentNode.insertBefore(label, t);
 							break;
 						}
 					}
