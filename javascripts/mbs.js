@@ -202,7 +202,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				if (bestLinkLen > 0 && blockTypeVar == '1') {
-					for(var i = 0; i < 21; i++){
+					for(var i = 0; i < bestLinkLen; i++){
 						var t = bestLink[i];
 						for(var b = 0; b < blockInputVarLen; b++) {
 							if (t.textContent.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
