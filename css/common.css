@@ -103,6 +103,7 @@ td.A13oreng td[background$="suceh_03.gif"] td {float:left;}
 
 td.A13oreng select.box {padding:4px;border-color:#ccc;}
 td.A13oreng #search_text input.box2 {border:1px solid #ccc;padding:5px 6px;border-color:#ccc;font-size:12px;}
+#search_opt select.box {width:290px;}
 
 /* footer --------------------- */
 #footer {margin:20px auto 0 !important;border-top-width:2px !important;}
