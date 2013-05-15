@@ -1,5 +1,65 @@
+var doc = document;
+var loc = window.location;
+var locHref = loc.href;
+var path = loc.pathname;
+var titIcon = {
+	game: /디아|\[스타|프야매|lol|게임/i,
+	female: /여자|처자|ㅊㅈ|여친|녀 |여성/,
+	twitter: /(트윗|트위터)/,
+	warn: /(혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|주의\))/,
+	adult: /(19금|\[19\] |\(19\)|주번나|성진국)/,
+	tv: /(swf|avi|플짤|영상|flv)/i,
+	vs: /(vs)/i,
+	music: /(브금|bgm|음악|가수|노래|뮤직)/i,
+	question: /(질문|요\?|여\?|죠\?|나요)/,
+	img: /(짤방|jpg|gif|jyp)/i,
+	mobile: /(맛폰)/
+}, team = {
+	kia: {
+		regex: /(\[기아\]\s?|\[kia\]\s?)/i,
+		searchKeyword: 'kia+OR+%B1%E2%BE%C6'
+	},
+	nexen: {
+		regex: /(\[넥센\]\s?)/,
+		searchKeyword: '%B3%D8%BC%BE'
+	},
+	doosan: {
+		regex: /(\[두산\]\s?)/,
+		searchKeyword: '%B5%CE%BB%EA'
+	},
+	lotte: {
+		regex: /(\[롯데\]\s?)/,
+		searchKeyword: '%B7%D4%B5%A5'
+	},
+	samsung: {
+		regex: /(\[삼성\]\s?)/,
+		searchKeyword: '%BB%EF%BC%BA'
+	},
+	sk: {
+		regex: /(\[sk\]\s?)/i,
+		searchKeyword: 'sk+OR+%BF%A1%BD%BA%C4%C9%C0%CC'
+	},
+	nc: {
+		regex: /(\[엔씨\]\s?|\[nc\]\s?)/i,
+		searchKeyword: 'nc+OR+%BF%A3%BE%BE'
+	},
+	lg: {
+		regex: /(\[엘지\]\s?|\[lg\]\s?)/i,
+		searchKeyword: 'lg+OR+%BF%A4%C1%F6'
+	},
+	hanwha: {
+		regex: /(\[한화\]\s?)/,
+		searchKeyword: '%C7%D1%C8%AD'
+	}
+};
+
+// Repeat parentNode
+function up(el, n) {
+	while(n-- && (el = el.parentNode));
+	return el;
+}
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
-	var doc = document;
 	var titIconVar = response.titIcon,
 	teamVar = response.team,
 	blockVar = response.block,
@@ -16,70 +76,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	shortcutVar = response.shortcut,
 	imageSearchVar = response.imageSearch;
 
-	// title icon & team icon
-	// 순서대로 먼저 매칭되는 것을 사용
-	var titIcon = {
-		game: /디아|\[스타|프야매|lol|게임/i,
-		female: /여자|처자|ㅊㅈ|여친|녀 |여성/,
-		twitter: /(트윗|트위터)/,
-		warn: /(혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|주의\))/,
-		adult: /(19금|\[19\] |\(19\)|주번나|성진국)/,
-		tv: /(swf|avi|플짤|영상|flv)/i,
-		vs: /(vs)/i,
-		music: /(브금|bgm|음악|가수|노래|뮤직)/i,
-		question: /(질문|요\?|여\?|죠\?|나요)/,
-		img: /(짤방|jpg|gif|jyp)/i,
-		mobile: /(맛폰)/
-	}, team = {
-		kia: {
-			regex: /(\[기아\]\s?|\[kia\]\s?)/i,
-			searchKeyword: 'kia+OR+%B1%E2%BE%C6'
-		},
-		nexen: {
-			regex: /(\[넥센\]\s?)/,
-			searchKeyword: '%B3%D8%BC%BE'
-		},
-		doosan: {
-			regex: /(\[두산\]\s?)/,
-			searchKeyword: '%B5%CE%BB%EA'
-		},
-		lotte: {
-			regex: /(\[롯데\]\s?)/,
-			searchKeyword: '%B7%D4%B5%A5'
-		},
-		samsung: {
-			regex: /(\[삼성\]\s?)/,
-			searchKeyword: '%BB%EF%BC%BA'
-		},
-		sk: {
-			regex: /(\[sk\]\s?)/i,
-			searchKeyword: 'sk+OR+%BF%A1%BD%BA%C4%C9%C0%CC'
-		},
-		nc: {
-			regex: /(\[엔씨\]\s?|\[nc\]\s?)/i,
-			searchKeyword: 'nc+OR+%BF%A3%BE%BE'
-		},
-		lg: {
-			regex: /(\[엘지\]\s?|\[lg\]\s?)/i,
-			searchKeyword: 'lg+OR+%BF%A4%C1%F6'
-		},
-		hanwha: {
-			regex: /(\[한화\]\s?)/,
-			searchKeyword: '%C7%D1%C8%AD'
-		}
-	};
-
-	// Repeat parentNode
-	function up(el, n) {
-		while(n-- && (el = el.parentNode));
-		return el;
-	}
-
 	$(doc).ready(function() {
-		var loc = window.location;
-		var locHref = loc.href;
-		var path = loc.pathname;
-
 		if (path !== '/mbs/commentV.php') {
 			var container = doc.getElementById('container');
 			var listLink =  container.getElementsByClassName('G12read');
