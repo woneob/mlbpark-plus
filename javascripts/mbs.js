@@ -232,6 +232,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		if (locHref.indexOf('V.php') > -1){
 			var myArea = doc.getElementById('myArea');
+			var cmtTxt = doc.querySelectorAll('.G12');
+			var cmtTxtLen = cmtTxt.length;
 
 			function userBlock_cmt(){
 				if (blockUserVar == '1') {
@@ -466,17 +468,26 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var textarea = doc.getElementsByName('line_content')[0];
 
 			function replyButton(){
-				if (replyVar == '1' || replyVar == null) {
-					var btn = '<button type=\"button\" class=\"btn_reply\" title=\"답글 달기\">[답글]</button>';
-					$(myArea).find('.G12').append(btn);
-					$('.btn_reply').on('click',function(){
-						var username = up(this,5).previousElementSibling.getElementsByTagName('a')[0].textContent;
-						if (textarea.value !== '' && !confirm('아직 작성 중인 댓글이 있습니다.\n다시 작성하시겠습니까?')){
-							return false;
-						}
-						textarea.focus();
-						textarea.value = username + '// ';
-					});
+				if ((replyVar == '1' || replyVar == null) && cmtTxtLen > 0) {
+					for (var i = 0; i < cmtTxtLen; i++) {
+						var replyBtn = doc.createElement('button');
+						replyBtn.type = 'button';
+						replyBtn.className = 'btn_reply';
+						replyBtn.title = '답글 달기';
+						replyBtn.textContent = '[답글]';
+						replyBtn.idx = i;
+						replyBtn.onclick = function(j){
+							return function(){
+								if (textarea.value !== '' && !confirm('아직 작성 중인 댓글이 있습니다.\n다시 작성하시겠습니까?')){
+									return false;
+								}
+								var cmtUsername = up(cmtTxt[j],5).children[0].getElementsByTagName('a')[0].textContent;
+								textarea.focus();
+								textarea.value = cmtUsername + '// ';
+							}
+						}(i);
+						cmtTxt[i].appendChild(replyBtn);
+					}
 				}
 			}
 			replyButton();
