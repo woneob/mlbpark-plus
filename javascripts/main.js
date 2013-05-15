@@ -1,3 +1,4 @@
+var doc = document;
 var scoreTpl = 
 '<div id="score">\n' +
 '	<div id="score_tab">\n' +
@@ -10,9 +11,9 @@ var scoreTpl =
 '	<div id="score_result" style="display:none;"></div>\n' +
 '</div>\n';
 
-$(document).ready(function() {
+$(doc).ready(function() {
 	//ScoreBoard load
-	document.getElementsByClassName('article_box')[0].insertAdjacentHTML('beforeEnd', scoreTpl);
+	doc.getElementsByClassName('article_box')[0].insertAdjacentHTML('beforeEnd', scoreTpl);
 	$.get('http://mlbpark.donga.com/poll/score.html', function(response){
 		var responseWrapper = $('<div />').append(response.replace(/<script(.|\s)*?\/script>/g, ''));
 
@@ -35,10 +36,10 @@ $(document).ready(function() {
 	});
 
 	//scoreBoard tab
-	var scoreRank = document.getElementById('score_rank');
-	var scoreReslut = document.getElementById('score_result');
+	var scoreRank = doc.getElementById('score_rank');
+	var scoreReslut = doc.getElementById('score_result');
 
-	$(document.body).on('click','#score_tab a', function(e){
+	$(doc.body).on('click','#score_tab a', function(e){
 		$('#score_tab a').removeClass('selected');
 		this.className = 'selected';
 		scoreRank.style.display = 'none';
@@ -90,16 +91,16 @@ $(document).ready(function() {
 	});
 
 	//loginbox tabIndex
-	var loginBox = document.getElementById('preViewQue2');
+	var loginBox = doc.getElementById('preViewQue2');
 	if (loginBox.children[1].className == 'login') {
-		document.getElementById('bid').setAttribute('tabindex','1');
-		document.getElementById('bpw').setAttribute('tabindex','2');
-		document.getElementById('idremember').setAttribute('tabindex','3');
+		doc.getElementById('bid').setAttribute('tabindex','1');
+		doc.getElementById('bpw').setAttribute('tabindex','2');
+		doc.getElementById('idremember').setAttribute('tabindex','3');
 		loginBox.querySelector('input[alt="로그인"]').setAttribute('tabindex','4');
 	}
 
 	//mypage href fix
-	var mypageLink = document.querySelector('a[href="http://idolpark.donga.com/mypage/"]');
+	var mypageLink = doc.querySelector('a[href="http://idolpark.donga.com/mypage/"]');
 	if (mypageLink) {
 		mypageLink.href = 'http://mlbpark.donga.com/mypage/';
 	}
