@@ -466,7 +466,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var textarea = doc.getElementsByName('line_content')[0];
 
 			function replyButton(){
-				var cmtTxt = doc.querySelectorAll('.G12');
+				var cmtTxt = myArea.querySelectorAll('.G12');
 				var cmtTxtLen = cmtTxt.length;
 				if ((replyVar == '1' || replyVar == null) && cmtTxtLen > 0) {
 					for (var i = 0; i < cmtTxtLen; i++) {
