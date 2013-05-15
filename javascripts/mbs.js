@@ -530,7 +530,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					complete: function() {
 						urlReplace();
 						replyButton();
-						addUserBlock();
+						addUserBlock(myArea);
 						cmtLoader.className = 'hide';
 					}
 				});
@@ -601,8 +601,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		// Add a 'User Block' to User Menu
 		if (blockUserVar == '1') {
-			function addUserBlock(){
-				var userMenu = doc.querySelectorAll('div[id^=nik_]');
+			function addUserBlock(scop){
+				var userMenu = scop.querySelectorAll('div[id^=nik_]');
 				for (var i = 0, userMenuLen = userMenu.length; i < userMenuLen; i++) {
 					var t = userMenu[i];
 					var userNick = t.nextSibling.innerText;
@@ -616,7 +616,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					return false;
 				});
 			}
-			addUserBlock();
+			addUserBlock(doc);
 		}
 	});
 });
