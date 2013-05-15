@@ -14,31 +14,32 @@ var scoreTpl =
 $(doc).ready(function() {
 	//ScoreBoard load
 	doc.getElementsByClassName('article_box')[0].insertAdjacentHTML('beforeEnd', scoreTpl);
+	var scoreRank = doc.getElementById('score_rank');
+	var scoreReslut = doc.getElementById('score_result');
+
 	$.get('http://mlbpark.donga.com/poll/score.html', function(response){
 		var responseWrapper = $('<div />').append(response.replace(/<script(.|\s)*?\/script>/g, ''));
-
-		$('#score_rank').append(responseWrapper.find('.scoreBoard'));
-		$('#score_result').append(responseWrapper.find('#baseball2 div[id^="tab"]'));
-		$('#tab7').css('display','block');
+		$(scoreRank).html(responseWrapper.find('.scoreBoard'));
+		$(scoreReslut).html(responseWrapper.find('#baseball2 div[id^="tab"]'));
 
 		//controller
-		var $controller = $('a[href^="javascript:onclick=show_tab"]');
-		var $tab = $('#score_result > div');
+		var controller = scoreReslut.querySelectorAll('a[href^="javascript:onclick=show_tab"]');
+		var page = scoreReslut.children;
+		page[0].style.display = 'block';
 
-		$controller.on('click',function(e){
+		$(controller).on('click',function(e){
 			var el = this.getAttribute('href').match(/[0-9]/);
 			if (el > 0 && el <= 7){
-				$tab.css('display','none');
-				$('#tab' + el).css('display','block');
+				for (var p = 0; p < page.length; p++){
+					page[p].style.display = 'none';
+				}
+				page[-(el-7)].style.display = 'block';
 			}
 			e.preventDefault();
 		});
 	});
 
 	//scoreBoard tab
-	var scoreRank = doc.getElementById('score_rank');
-	var scoreReslut = doc.getElementById('score_result');
-
 	$(doc.body).on('click','#score_tab a', function(e){
 		$('#score_tab a').removeClass('selected');
 		this.className = 'selected';
