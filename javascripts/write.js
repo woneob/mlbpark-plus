@@ -1,7 +1,4 @@
 $(document).ready(function() {
-	$('#gmEditor').contents().find('body').css({
-		padding:'8px',
-		fontSize:'13px',
-		lineHeight:'1.6'
-	});
+	var editorEl = document.getElementById('gmEditor');
+	editorEl.contentDocument.body.style.cssText = 'padding:8px;font-size:13px;line-height:1.6;';
 });
