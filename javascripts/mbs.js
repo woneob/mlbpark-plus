@@ -493,8 +493,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			replyButton();
 
 			//comment refresh
-			myArea.insertAdjacentHTML('afterEnd','<div id="commentRefresh"><button type="button" id="btn_cmtLoad">최신 댓글 불러오기</button><span id="cmtLoader"></span>');
-
 			var mbsC = doc.getElementsByName('mbsC')[0].value;
 			var mbsIdx =  doc.getElementsByName('mbsIdx')[0].value;
 
@@ -504,8 +502,18 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				var wday = doc.getElementsByName('wday')[0].value;
 			}
 
-			$('#btn_cmtLoad').on('click',function(){
-				var cmtLoader = doc.getElementById('cmtLoader');
+			var cmtRefreshBtn = doc.createElement('div');
+			var cmtLoadBtn = doc.createElement('button');
+			var cmtLoader = doc.createElement('span');
+			cmtRefreshBtn.id = 'commentRefresh';
+			cmtLoadBtn.id = 'btn_cmtLoad';
+			cmtLoadBtn.type = 'button';
+			cmtLoadBtn.textContent = '최신 댓글 불러오기';
+			cmtLoader.id = 'cmtLoader';
+			cmtRefreshBtn.appendChild(cmtLoadBtn);
+			cmtRefreshBtn.appendChild(cmtLoader);
+
+			cmtLoadBtn.onclick = function(){
 				$.ajax({
 					type: 'post',
 					async: true,
@@ -529,7 +537,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						cmtLoader.className = 'hide';
 					}
 				});
-			});
+			}
+
+			myArea.parentNode.insertBefore(cmtRefreshBtn, myArea.nextSibling);
 		}
 
 		//tab Navigation highlighter
