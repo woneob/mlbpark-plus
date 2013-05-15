@@ -97,7 +97,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				} else {
 					var t = listLink[i].childNodes[1];
 				}
-				var title = t.textContent;
+				var title = t.innerText;
 
 				//title block
 				if (blockVar == '1' && blockTypeVar == '2' && blockInputVar[0] !== '') {
@@ -112,7 +112,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				if (blockVar == '1' && blockTypeVar == '1' && blockInputVar[0] !== '') {
 					for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
 						if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
-							t.textContent = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
+							t.innerText = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
 							t.className = 'blockTitle';
 							t.setAttribute('title','제목 : '+ title);
 							t.onclick = function(){
@@ -147,7 +147,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 									location.href= teamSearchUrl + team[j].searchKeyword;
 								}
 							}(name);
-							t.textContent = title.replace(matched[1],'');
+							t.innerText = title.replace(matched[1],'');
 							t.parentNode.insertBefore(label, t);
 							break;
 						}
@@ -180,7 +180,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			if (blockUserVar == '1') {
 				for (var u = 0, nickElLen = nickEl.length; u < nickElLen; u++) {
 					for (var i = 0, blockUserInputVarLen = blockUserInputVar.length; i < blockUserInputVarLen; i++) {
-						if (nickEl[u].textContent === blockUserInputVar[i]) {
+						if (nickEl[u].innerText === blockUserInputVar[i]) {
 							up(nickEl[u],upCount).className = 'displayNone';
 							break;
 						}
@@ -197,7 +197,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					for(var i = 0; i < bestLinkLen; i++){
 						var t = bestLink[i];
 						for(var b = 0; b < blockInputVarLen; b++) {
-							if (t.textContent.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+							if (t.innerText.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
 								if (t.parentNode.tagName.toLowerCase() == 'strong'){
 									var upCount = 3;
 								} else {
@@ -214,9 +214,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					for(var i = 0; i < bestLinkLen; i++){
 						var t = bestLink[i];
 						for(var b = 0; b < blockInputVarLen; b++) {
-							if (t.textContent.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
-								var title = t.textContent;
-								t.textContent = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
+							if (t.innerText.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+								var title = t.innerText;
+								t.innerText = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
 								t.className = 'blockTitle';
 								t.setAttribute('title','제목 : '+ title);
 								t.onclick = function(){
@@ -238,7 +238,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					var CmtNickEl = doc.querySelectorAll('td[width="140"] a');
 					for (var u = 0, CmtNickElLen = CmtNickEl.length; u < CmtNickElLen; u++) {
 						for (var i = 0, blockUserInputVarLen = blockUserInputVar.length; i < blockUserInputVarLen; i++) {
-							if (CmtNickEl[u].textContent === blockUserInputVar[i]) {
+							if (CmtNickEl[u].innerText === blockUserInputVar[i]) {
 								up(CmtNickEl[u],7).className = 'displayNone';
 								break;
 							}
@@ -251,11 +251,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				var article = doc.querySelector('.G13 > div[align="justify"]');
 				var userEl = doc.querySelector('div[id^="nik_"]');
 				var userId =  userEl.firstChild.firstChild.getAttribute('onclick').match(/id=([^&]+)\'/)[1];
-				var nickname = userEl.nextSibling.textContent;
+				var nickname = userEl.nextSibling.innerText;
 
 				//content blind
 				if (blindVar == '1' || blindVar === undefined) {
-					var subject = container.getElementsByTagName('strong')[0].textContent;
+					var subject = container.getElementsByTagName('strong')[0].innerText;
 					var btn_cob = '<div id="btn_show" class="warnBtn"><span>댓글에 COB가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
 					var btn_soap = '<div id="btn_show" class="warnBtn"><span>댓글에 비누가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
 					var btn_warn = '<div id="btn_color" class="warnBtn"><span>경고 문구가 포함되어 본문을 흑백처리 합니다.</span> 원문을 보시려면 클릭하세요.</div>';
@@ -288,7 +288,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				//add userId
 				var idEl = doc.createElement('span');
 				idEl.className = 'userIdVal';
-				idEl.textContent = '(' + userId + ')';
+				idEl.innerText = '(' + userId + ')';
 				userEl.parentNode.appendChild(idEl);
 
 				//user history
@@ -365,7 +365,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						var t = cmtName[i];
 
 						//highlight comment writer
-						if (t.textContent === nickname) {
+						if (t.innerText === nickname) {
 							t.className = 'me';
 						}
 
@@ -375,7 +375,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							viewCmt.type = 'button';
 							viewCmt.className = 'btn_userCmt',
 							viewCmt.title = '이 글에 단 댓글 보기';
-							viewCmt.textContent = '?';
+							viewCmt.innerText = '?';
 							t.parentNode.appendChild(viewCmt);
 						}
 					}
@@ -389,7 +389,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 								url: 'http://mlbpark.donga.com/mbs/commentRV.php?mbsC='+mbsC+'&comment_ymd='+wday+'&comment_idx='+mbsIdx,
 								cache: false,
 								success: function(response) {
-									var selectUser = t.previousSibling.textContent;
+									var selectUser = t.previousSibling.innerText;
 									doc.body.insertAdjacentHTML('beforeEnd',
 										'<div id="commentModal">\n'+
 										'	<div id="commentModalMask"></div>\n'+
@@ -418,7 +418,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 									var el_cmtCount = doc.getElementById('cmtCount');
 									var el_userCmtList = doc.getElementById('userCmtList');
 
-									el_cmtCount.textContent = '(' + cmtCount + ')';
+									el_cmtCount.innerText = '(' + cmtCount + ')';
 									$(el_userCmtList).append(cmtVal);
 
 									var vPosition = el_modal.offsetHeight*-.5;
@@ -474,14 +474,14 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						replyBtn.type = 'button';
 						replyBtn.className = 'btn_reply';
 						replyBtn.title = '답글 달기';
-						replyBtn.textContent = '[답글]';
+						replyBtn.innerText = '[답글]';
 						replyBtn.idx = i;
 						replyBtn.onclick = function(j){
 							return function(){
 								if (textarea.value !== '' && !confirm('아직 작성 중인 댓글이 있습니다.\n다시 작성하시겠습니까?')){
 									return false;
 								}
-								var cmtUsername = up(cmtTxt[j],5).children[0].getElementsByTagName('a')[0].textContent;
+								var cmtUsername = up(cmtTxt[j],5).children[0].getElementsByTagName('a')[0].innerText;
 								textarea.focus();
 								textarea.value = cmtUsername + '// ';
 							}
@@ -508,7 +508,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			cmtRefreshBtn.id = 'commentRefresh';
 			cmtLoadBtn.id = 'btn_cmtLoad';
 			cmtLoadBtn.type = 'button';
-			cmtLoadBtn.textContent = '최신 댓글 불러오기';
+			cmtLoadBtn.innerText = '최신 댓글 불러오기';
 			cmtLoader.id = 'cmtLoader';
 			cmtRefreshBtn.appendChild(cmtLoadBtn);
 			cmtRefreshBtn.appendChild(cmtLoader);
@@ -608,7 +608,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				var userMenu = doc.querySelectorAll('div[id^=nik_]');
 				for (var i = 0, userMenuLen = userMenu.length; i < userMenuLen; i++) {
 					var t = userMenu[i];
-					var userNick = t.nextSibling.textContent;
+					var userNick = t.nextSibling.innerText;
 					t.getElementsByTagName('ul')[0].insertAdjacentHTML('beforeEnd','<li data-user="'+userNick+'">닉네임 차단</li>');
 				}
 				$('li[data-user]').on('click',function(){
