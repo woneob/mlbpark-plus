@@ -10,7 +10,7 @@ var titIcon = doc.getElementById('titIcon'),
 	userHistory = doc.getElementById('userHistory'),
 	messageBox = doc.getElementById('message');
 
-function restore() {
+(function restore() {
 	if (localStorage['titIcon'] == 1 || localStorage['titIcon'] == null) {
 		titIcon.checked = true;
 	}
@@ -35,9 +35,9 @@ function restore() {
 	for (var i=0; i < checkedEl.length; i++) {
 		checkedEl[i].parentNode.classList.add('checked');
 	}
-}
+}());
 
-function bindEvent() {
+(function bindEvent() {
 	titleBlockBtn.onclick = function(){
 		var blockVar = titleBlockInput.value;
 		if ('' != blockVar) {
@@ -76,15 +76,12 @@ function bindEvent() {
 		}
 		saveCpmplete('저장되었습니다.');
 	});
-}
+}());
 
 $(doc).ready(function(){
 	chrome.management.get(chrome.i18n.getMessage('@@extension_id'), function(result) {
 		doc.getElementById('version').innerText = 'ver. ' + result.version;
 	});
-
-	restore();
-	bindEvent();
 });
 
 window.addEventListener('message', function(event) {
@@ -97,7 +94,6 @@ window.addEventListener('message', function(event) {
 				$('#' + event.data.input).val('');
 				if(response.result) {
 					saveCpmplete('저장되었습니다.');
-					restore();
 				} else {
 					saveCpmplete(response.message);
 				}
