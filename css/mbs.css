@@ -86,7 +86,7 @@ form[name="writeForm"] td[width="56"] a[href^="javascript:startRequest"] {displa
 #history .historyHead h3 {display:inline-block;margin-right:4px;font-weight:normal;letter-spacing:-1px;white-space:nowrap;}
 #history .historyHead h3 span {font-weight:bold;;letter-spacing:0;}
 #history .historyHead h3 span span {font-weight:normal;color:#666;}
-#history .historyHead button {background:none;border:none;font:11px Dotum, '돋움', sans-serif;letter-spacing:-1px;word-spacing:-1px;color:#888;cursor:pointer;}
+#history .historyHead button {margin-left:5px;background:none;border:none;font:11px Dotum, '돋움', sans-serif;letter-spacing:-1px;word-spacing:-1px;color:#888;cursor:pointer;}
 #history .historyHead button:hover {color:#5a5a5a;text-decoration:underline;}
 #historyList table {display:block;width:100% !important;}
 #historyList > table > tbody > tr:nth-child(odd) {display:none !important;}
