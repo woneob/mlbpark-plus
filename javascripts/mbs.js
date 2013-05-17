@@ -620,8 +620,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				var userMenu = scop.querySelectorAll('div[id^=nik_]');
 				for (var i = 0, userMenuLen = userMenu.length; i < userMenuLen; i++) {
 					var t = userMenu[i];
-					var userNick = t.nextSibling.innerText;
-					t.getElementsByTagName('ul')[0].insertAdjacentHTML('beforeEnd','<li data-user="'+userNick+'">닉네임 차단</li>');
+					var blockLiEl = doc.createElement('li');
+					blockLiEl.setAttribute('data-user', t.nextSibling.innerText);
+					blockLiEl.innerText = '닉네임 차단';
+
+					t.getElementsByTagName('ul')[0].appendChild(blockLiEl);
 				}
 				$('li[data-user]').on('click',function(){
 					window.postMessage({
