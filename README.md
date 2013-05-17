@@ -57,7 +57,9 @@ Option|Description|Default
 
 ## Update
 크롬 확장프로그램은 인터넷이 연결되어있을경우 자동으로 업데이트 됩니다.<br />
-수동 업데이트가 필요할 경우, 확장프로그램 페이지로 접속하여 **지금 확장프로그램 업데이트** 버튼(개발자 모드 항목이 채크되어야 노출됨)을 클릭하시면 됩니다.
+수동 업데이트가 필요할 경우, 확장프로그램 페이지로 접속하여 **지금 확장프로그램 업데이트** 버튼(개발자 모드 항목이 채크되어야 노출됨)을 클릭하시면 됩니다.<br />
+[확장프로그램 업데이트 방법 보기](https://github.com/woneob/MLBPARK-PLUS/wiki/%ED%99%95%EC%9E%A5%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8-%EB%B0%A9%EB%B2%95)
+
 
 * MLBPARK PLUS 릴리즈 내역은 [Changelog](https://github.com/woneob/MLBPARK-PLUS/wiki/Changelog) 페이지에서 확인하실 수 있습니다.
 * 구글 웹스토어에서 설치하지 않고 직접 설치하신 경우에는 업데이트가 되지 않습니다.
