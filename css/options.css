@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+html {background:#fff;}
+body {padding-top:20px;font:12px/1.4 Dotum,'돋움',sans-serif;color:#4c4c4c;overflow-y:scroll;}
+#container {width:540px;margin:0 auto;}
+header {position:relative;margin-bottom:5px;}
+header h1 {width:224px;height:38px;margin:0;background:url(/images/logo.png) no-repeat;text-indent:-9999px;}
+header a {position:absolute;right:7px;top:17px;color:#666;text-decoration:none;}
+header a:hover {text-decoration:underline;}
+article {padding:10px 15px;border-width:1px;border-style:solid;border-color:#e6e6e6 #ddd #ccc #e3e3e3;border-radius:5px;background:#f8f8f8;box-shadow:inset 0 1px 0 #fff,1px 1px 1px #eee;}
+.desc {margin-bottom:10px;border-bottom:1px solid #ccc;}
+.desc strong {letter-spacing:-1px;}
+.form {padding-bottom:5px;border-bottom:1px dotted #ddd;}
+.row {position:relative;padding:8px 0 8px 30px;letter-spacing:-1px;}
+.row input[type="checkbox"] {position:absolute;left:7px;top:10px;margin:0;}
+.row input[type="text"] {width:300px;font:12px Dotum, '돋움', sans-serif;color:#444;padding:3px;}
+.row textarea {width:452px;height:50px;border-color:#ccc;resize:vertical;font:12px/1.4 Dotum, '돋움', sans-serif;color:#444;padding:3px;}
+.row label {display:inline-block;font-weight:bold;}
+.row span {display:block;font-size:11px;line-height:1.6;color:#888;letter-spacing:-1px;}
+#widthVal {width:300px;}
+#slideCurrent {letter-spacing:0;vertical-align:7px;}
+#slideCurrent:after {content:' px';color:#888;}
+.toggleBox {margin-top:5px;background:#f1f1f1;border:1px solid #e1e1e1;padding:5px;}
+#blockInfo .blockType {padding:8px 10px 0;}
+#blockInfo p {margin:0;padding:2px 0;}
+#blockInfo p label {font-weight:normal;vertical-align:-3px;}
+#blockInfo p input {vertical-align:middle;margin:0 2px 0 0;color:#666;}
+#action {position:relative;border-top:1px dotted #fff;padding:10px 0 10px 27px;}
+#action .save {font:12px Dotum,'돋움',sans-serif;color:#4c4c4c;padding:3px 5px;}
+#action .reset {position:absolute;top:15px;right:0;border:none;background:none;text-decoration:underline;font-size:11px;color:#999;cursor:pointer;}
+#action .reset:hover {color:#5a5a5a;}
+#action .saveMsg {padding-left:15px;background:url(/images/check.png) no-repeat 0 0;line-height:16px;}
+footer {padding:8px 0;font-size:11px;color:#999;text-align:center;}
+footer a {color:#999;text-decoration:none;}
+footer a:hover {color:#666;text-decoration:underline;}
