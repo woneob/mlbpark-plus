@@ -1,5 +1,3 @@
-// extension 정보를 담는다.
-var extensionInfo;
 
 /**
  * 저장된 내용을 가져와서 화면에 보여준다. 활성화 항목만 체크 표시.
@@ -77,8 +75,7 @@ function bindEvent() {
 $(document).ready(function(){
 	// extension 정보를 가져와서 버전을 보여준다.
 	chrome.management.get(chrome.i18n.getMessage('@@extension_id'), function(result) {
-		extensionInfo = result;
-		document.getElementById('version').textContent = 'ver. ' + extensionInfo.version;
+		document.getElementById('version').innerText = 'ver. ' + result.version;
 	});
 
 	restore();
