@@ -37,6 +37,17 @@ var titIcon = doc.getElementById('titIcon'),
 	}
 }());
 
+var timeout;
+
+function saveCpmplete(message){
+	messageBox.innerText = message;
+	messageBox.style.display = 'block';
+
+	timeout = setTimeout(function() {
+		messageBox.style.display = 'none';
+	}, 1000);
+}
+
 (function bindEvent() {
 	titleBlockBtn.onclick = function(){
 		var blockVar = titleBlockInput.value;
@@ -74,6 +85,7 @@ var titIcon = doc.getElementById('titIcon'),
 			localStorage[this.id] = 0;
 			this.parentNode.classList.remove('checked');
 		}
+		clearTimeout(timeout);
 		saveCpmplete('저장되었습니다.');
 	});
 }());
@@ -100,13 +112,5 @@ window.addEventListener('message', function(event) {
 			});
 		break;
 	}
+	clearTimeout(timeout);
 }, false);
-
-function saveCpmplete(message){
-	messageBox.innerText = message;
-	messageBox.style.display = 'block';
-
-	setTimeout(function() {
-		messageBox.style.display = 'none';
-	}, 1000);
-}
