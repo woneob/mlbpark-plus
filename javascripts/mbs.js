@@ -295,20 +295,16 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					var historyEl = doc.createElement('div');
 					var historyHeadEl = doc.createElement('div');
 					var historyTitleEl = doc.createElement('h3');
-					var historyNickEl = doc.createElement('span');
-					var historyUserIdEl = doc.createElement('span')
 					var historyMoreBtn = doc.createElement('button');
 					var historyListEl = doc.createElement('div');
 					historyEl.id = 'history';
 					historyHeadEl.className = 'historyHead';
-					historyNickEl.innerText = nickname;
-					historyUserIdEl.innerText = '(' + userId + ') 님의 최근 글';
+					historyTitleEl.innerText = nickname;
+					historyTitleEl.title = userId;
 					historyMoreBtn.type = 'button';
 					historyMoreBtn.innerText = '[더 보기]';
 					historyMoreBtn.setAttribute('onclick','MlbNewWindow2(\'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid='+userId+'\',\'550\',\'500\')');
 					historyListEl.id = 'historyList';
-					historyNickEl.appendChild(historyUserIdEl);
-					historyTitleEl.appendChild(historyNickEl);
 					historyHeadEl.appendChild(historyTitleEl);
 					historyHeadEl.appendChild(historyMoreBtn);
 					historyEl.appendChild(historyHeadEl);
