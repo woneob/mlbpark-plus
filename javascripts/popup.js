@@ -1,7 +1,4 @@
 
-/**
- * 저장된 내용을 가져와서 화면에 보여준다. 활성화 항목만 체크 표시.
- */
 function restore() {
 	if (localStorage['titIcon'] == 1 || localStorage['titIcon'] == null) document.getElementById('titIcon').checked = true;
 	if (localStorage['team'] == 1 || localStorage['team'] == null) document.getElementById('team').checked = true;
@@ -15,9 +12,6 @@ function restore() {
 	}
 }
 
-/**
- * 화면에 이벤트를 바인딩 시킨다.
- */
 function bindEvent() {
 	// 제목 차단
 	var titleBlockInput = document.getElementById('blockInput');
@@ -55,7 +49,6 @@ function bindEvent() {
 		}
 	});
 
-	// 옵션 체크박스 - 모든 체크박스에 이벤트 바인딩
 	$(':checkbox').on('change', function(event) {
 		var $messageBox = $('#message');
 		if (this.checked) {
@@ -83,7 +76,6 @@ $(document).ready(function(){
 });
 
 window.addEventListener('message', function(event) {
-	// We only accept messages from ourselves
 	if (window != event.source) return;
 
 	switch(event.data.action) {
