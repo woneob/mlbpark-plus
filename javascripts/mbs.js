@@ -327,25 +327,34 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 					window.onload = function(){
 						for (var i = 0, imagesLen = images.length; i < imagesLen; i++) {
-							var t = images[i];
-							var width = t.clientWidth;
-							var height = t.clientHeight;
+							var img = images[i];
+							var width = img.clientWidth;
+							var height = img.clientHeight;
 
 							if (width && height > 50) {
-								var imageWrap = doc.createElement('span');
-								imageWrap.className = 'iWrap';
-
-								var src = t.src;
+								var src = img.src;
 								if(src.substr(0,7) != 'http://') {
 									var src = 'http://mlbpark.donga.com' + src;
 								}
 
-								var btn_iSearch = '<a href="https://www.google.com/searchbyimage?image_url='+ src +'" class="btn_iSearch" target="_blank" title="구글에서 이미지 검색"></a>';
+								var btn_iSearch = doc.createElement('a');
+								btn_iSearch.href = 'https://www.google.com/searchbyimage?image_url='+ src;
+								btn_iSearch.className = 'btn_iSearch';
+								btn_iSearch.target = '_blank';
+								btn_iSearch.title = '구글에서 이미지 검색';
 
-								if (t.parentNode.tagName.toLowerCase() == 'a') {
-									$(t.parentNode).wrap(imageWrap).after(btn_iSearch);
+								var imageWrap = doc.createElement('span');
+								imageWrap.className = 'iWrap';
+
+								if (img.parentNode.tagName.toLowerCase() == 'a') {
+									var wrapImg = img.parentNode;
+									wrapImg.parentNode.insertBefore(imageWrap, wrapImg);
+									imageWrap.appendChild(wrapImg);
+									imageWrap.appendChild(btn_iSearch);
 								} else {
-									$(t).wrap(imageWrap).after(btn_iSearch);
+									img.parentNode.insertBefore(imageWrap,img);
+									imageWrap.appendChild(img);
+									imageWrap.appendChild(btn_iSearch);
 								}
 							}
 						}
