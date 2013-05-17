@@ -571,6 +571,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var nLink = $currentPage[0].nextSibling.href;
 
 			if (shortcutVar == '1' || shortcutVar == null) {
+				var lisEl = doc.querySelector('table[height="31"]');
+
+
 				$(doc).keyup(function(e){
 					if (path !== '/mbs/commentV.php'){
 						if ($(e.target).is('input, textarea')) {
@@ -583,7 +586,17 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							window.location.href = nLink;
 						}
 						if (e.which === 68) {
-							$(doc.body).animate({scrollTop: $('table[height="31"]').offset().top}, 300);
+							var lisElTop = lisEl.getBoundingClientRect().top + window.pageYOffset;
+							var currentTop = doc.body.scrollTop;
+							var topVal = lisElTop - currentTop;
+
+							doc.body.style.cssText = '-webkit-transform:translate(0, '+ topVal +'px)';
+							window.scroll(0,lisElTop);
+							doc.body.style.cssText = '-webkit-transform:translate(0,0);transition:-webkit-transform .7s ease;';
+
+							$(doc.body).on('webkitTransitionEnd transitionend', function(){
+								doc.body.style.transition = 'none';
+							});
 						}
 					}
 				});
