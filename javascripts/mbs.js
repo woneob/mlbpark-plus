@@ -592,7 +592,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 							doc.body.style.cssText = '-webkit-transform:translate(0, '+ topVal +'px)';
 							window.scroll(0,lisElTop);
-							doc.body.style.cssText = '-webkit-transform:translate(0,0);transition:-webkit-transform .7s ease;';
+							doc.body.style.cssText = '-webkit-transform:translate(0,0);transition:-webkit-transform .5s ease;';
 
 							$(doc.body).on('webkitTransitionEnd transitionend', function(){
 								doc.body.style.transition = 'none';
