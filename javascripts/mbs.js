@@ -262,10 +262,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					};
 
 					if ($(myArea).find('.G12:Contains("COB")').length > 0) {
-						article.style.display = 'none';
+						article.className = 'blind';
 						article.insertAdjacentHTML('beforeBegin', btn_cob);
 					} else if ($(myArea).find('.G12:contains("비누")').length > 0) {
-						article.style.display = 'none';
+						article.className = 'blind';
 						article.insertAdjacentHTML('beforeBegin', btn_soap);
 					} else if(titIcon.warn.test(subject)) {
 						article.className = 'grayscale';
@@ -277,7 +277,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						if (this.id == 'btn_color') {
 							article.classList.remove('grayscale');
 						} else {
-							$(article).slideDown(300);
+							var articleHeight = article.offsetHeight;
+							article.style.maxHeight = articleHeight + 'px';
+							article.className += ' slide';
 						}
 					});
 				}

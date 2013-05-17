@@ -63,6 +63,8 @@ table[width="660"] td[width="510"][height="50"] td a {margin:0 5px;}
 td[width="687"] > table[width="702"]:nth-child(4) td[height="44"] {border-top:1px solid #ccc;border-bottom:1px solid #eee;}
 #container > table[width="980"] > tbody > tr[valign=top] > td[width="687"] > table[width="702"]:nth-child(4) > tbody > tr:nth-child(3) > td[background] {padding-top:5px;background:#f8f8f8 !important;border:1px solid #eee; !important;}
 td[width="687"] > table[width="702"] > tbody > tr:nth-child(3) table[width="702"] {width:100% !important;}
+td.G13 > div[align="justify"].blind {position:absolute;visibility:hidden; -webkit-transition:max-height .5s ease;overflow:hidden;}
+td.G13 > div[align="justify"].slide {position:static;visibility:visible;}
 
 /* refrash button */
 form[name="writeForm"] td[width="56"] a[href^="javascript:startRequest"] {display:none;}
