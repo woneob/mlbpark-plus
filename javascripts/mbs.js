@@ -253,9 +253,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				//content blind
 				if (blindVar == '1' || blindVar === undefined) {
 					var subject = container.getElementsByTagName('strong')[0].innerText;
-					var btn_cob = '<div id="btn_show" class="warnBtn"><span>댓글에 COB가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
-					var btn_soap = '<div id="btn_show" class="warnBtn"><span>댓글에 비누가 포함된 글 입니다.</span> 본문을 보시려면 클릭하세요.</div>';
-					var btn_warn = '<div id="btn_color" class="warnBtn"><span>경고 문구가 포함되어 본문을 흑백처리 합니다.</span> 원문을 보시려면 클릭하세요.</div>';
 
 					$.expr[':'].Contains = function(a,i,m){
 						return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
@@ -263,13 +260,32 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 					if ($(myArea).find('.G12:Contains("COB")').length > 0) {
 						article.className = 'blind';
-						article.insertAdjacentHTML('beforeBegin', btn_cob);
+						var btn_cob = doc.createElement('div');
+						var btn_cobTit = doc.createElement('span');
+						btn_cob.className = 'warnBtn';
+						btn_cobTit.innerText = '댓글에 COB가 포함된 글 입니다.';
+						btn_cob.innerText = ' 본문을 보시려면 클릭하세요.';
+						btn_cob.insertBefore(btn_cobTit, btn_cob.firstChild);
+						article.insertAdjacentElement('beforeBegin', btn_cob);
 					} else if ($(myArea).find('.G12:contains("비누")').length > 0) {
 						article.className = 'blind';
-						article.insertAdjacentHTML('beforeBegin', btn_soap);
+						var btn_soap = doc.createElement('div');
+						var btn_soapTit = doc.createElement('span');
+						btn_soap.className = 'warnBtn';
+						btn_soapTit.innerText = '댓글에 비누가 포함된 글 입니다';
+						btn_soap.innerText = ' 본문을 보시려면 클릭하세요.';
+						btn_soap.insertBefore(btn_soapTit, btn_soap.firstChild);
+						article.insertAdjacentElement('beforeBegin', btn_soap);
 					} else if(titIcon.warn.test(subject)) {
 						article.className = 'grayscale';
-						article.insertAdjacentHTML('beforeBegin', btn_warn);
+						var btn_warn = doc.createElement('div');
+						var btn_warnTit = doc.createElement('span');
+						btn_warn.id = 'btn_color';
+						btn_warn.className = 'warnBtn';
+						btn_warnTit.innerText = '경고 문구가 포함되어 본문을 흑백처리 합니다.';
+						btn_warn.innerText = ' 원문을 보시려면 클릭하세요.';
+						btn_warn.insertBefore(btn_warnTit, btn_warn.firstChild);
+						article.insertAdjacentElement('beforeBegin', btn_warn);
 					}
 
 					$(container.getElementsByClassName('warnBtn')).on('click',function(){
