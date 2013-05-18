@@ -12,7 +12,7 @@
 		{
 			"matches": ["http://mlbpark.donga.com/*"]
 			,"css":["css/common.css"]
-			,"js":["javascripts/jquery-2.0.0.min.js","javascripts/common.js"]
+			,"js":["javascripts/jquery-2.0.0.custom.min.js","javascripts/common.js"]
 			,"run_at": "document_start"
 		},
 		{
@@ -22,7 +22,7 @@
 			,"run_at": "document_start"
 		},
 		{
-			"matches": [ 
+			"matches": [
 				"http://mlbpark.donga.com/mbs/articleL.php*",
 				"http://mlbpark.donga.com/mbs/articleV.php*",
 				"http://mlbpark.donga.com/bbs/mlb_today.php*",
@@ -33,7 +33,7 @@
 			,"js":["javascripts/mbs.js"]
 		},
 		{
-			"matches": [ 
+			"matches": [
 				"http://mlbpark.donga.com/bbs/list.php*",
 				"http://mlbpark.donga.com/bbs/view.php*"
 			]
@@ -41,7 +41,7 @@
 			,"css":["css/bbs.css"]
 		},
 		{
-			"matches": [ 
+			"matches": [
 				"http://mlbpark.donga.com/mbs/articleW.php*",
 				"http://mlbpark.donga.com/mbs/articleM.php*",
 				"http://mlbpark.donga.com/bbs/write.php*"
@@ -51,7 +51,7 @@
 			,"js":["javascripts/write.js"]
 		},
 		{
-			"matches": [ 
+			"matches": [
 				"http://mlbpark.donga.com/mypage/",
 				"http://mlbpark.donga.com/mypage/my_scrap.php*",
 				"http://mlbpark.donga.com/mypage/my_message.php*",
@@ -61,7 +61,7 @@
 			,"css":["css/mypage.css"]
 		},
 		{
-			"matches": [ 
+			"matches": [
 				"http://mlbpark.donga.com/mypage/my_bulletin.php*",
 				"http://mlbpark.donga.com/mbs/my_bulletin.php*",
 				"http://mlbpark.donga.com/mypage/my_send_message.php*"
@@ -71,7 +71,7 @@
 			,"js":["javascripts/my_bulletin.js"]
 		},
 		{
-			"matches": [ 
+			"matches": [
 				"https://secure.donga.com/membership/real_for_member.php*"
 			]
 			,"run_at":"document_start"
@@ -130,7 +130,7 @@
 		"images/team.png",
 		"images/tit_login.png",
 		"images/userIcon.gif",
-		"javascripts/jquery-2.0.0.min.js",
+		"javascripts/jquery-2.0.0.custom.min.js",
 		"javascripts/common.js",
 		"javascripts/common_idle.js",
 		"javascripts/main.js",
