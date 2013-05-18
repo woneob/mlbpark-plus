@@ -34,11 +34,11 @@ function reset(){
 	team.checked = true ;
 	blind.checked = true;
 	block.checked = false;
-	blockInfo.style.display = 'none';
+	blockInfo.classList.add('hide');
 	blockInput.value = '';
 	blockType_1.checked = true;
 	blockUser.checked = false;
-	blockUserInfo.style.display = 'none';
+	blockUserInfo.classList.add('hide');
 	blockUserInput.value = '';
 	userHistory.checked = false;
 	reply.checked = true;
@@ -51,7 +51,7 @@ function reset(){
 	width.checked = false;
 	widthVal.value = '858';
 	slideCurrent.innerText = '858';
-	range.style.display = 'none';
+	range.classList.add('hide');
 }
 
 (function restore(){
@@ -75,11 +75,11 @@ function reset(){
 
 	if (localStorage['block'] == 0 || localStorage['block'] == null) {
 		block.checked = false;
-		blockInfo.style.display = 'none';
+		blockInfo.classList.add('hide');
 		blockInput.disabled = true;
 	} else {
 		block.checked = true;
-		blockInfo.style.display = 'block';
+		blockInfo.classList.remove('hide');
 		blockInput.disabled = false;
 	}
 
@@ -95,11 +95,11 @@ function reset(){
 
 	if (localStorage['blockUser'] == 0 || localStorage['blockUser'] == null) {
 		blockUser.checked = false;
-		blockUserInfo.style.display = 'none';
+		blockUserInfo.classList.add('hide');
 		blockUserInput.disabled = true;
 	} else {
 		blockUser.checked = true;
-		blockUserInfo.style.display = 'block';
+		blockUserInfo.classList.remove('hide');
 		blockUserInput.disabled = false;
 	}
 
@@ -157,15 +157,15 @@ function reset(){
 
 	if (localStorage['width'] == null) {
 		width.checked = false;
-		range.style.display = 'none';
+		range.classList.add('hide');
 		slideCurrent.innerText = '858';
 	} else if (localStorage['width'] == 0) {
 		width.checked = false;
-		range.style.display = 'none';
+		range.classList.add('hide');
 		slideCurrent.innerText = localStorage['widthVal'];
 	} else {
 		width.checked = true;
-		range.style.display = 'block';
+		range.classList.remove('hide');
 		slideCurrent.innerText = localStorage['widthVal'];
 	}
 
@@ -244,21 +244,39 @@ function save(){
 
 	localStorage['widthVal'] = widthVal.value;
 
-	$('.saveMsg').remove();
-	$('#action').append('<span class="saveMsg">저장되었습니다.</span>');
-	setTimeout(function() {
-		$('.saveMsg').fadeOut('slow',function(){
-			$(this).remove();
-		});
+	saveComplete('저장되었습니다.');
+}
+
+function removeSaveMsg(){
+	var saveMsg = doc.getElementById('saveMsg');
+	if (saveMsg){
+		saveMsg.parentNode.removeChild(saveMsg);
+	}
+}
+
+var timeout;
+function saveComplete(message){
+	removeSaveMsg();
+
+	actionEl = doc.getElementById('action');
+	saveMsg = doc.createElement('span');
+	saveMsg.id = 'saveMsg';
+	saveMsg.innerText = message;
+	actionEl.appendChild(saveMsg);
+
+	clearTimeout(timeout);
+	timeout = setTimeout(function(){
+		actionEl.removeChild(saveMsg);
 	}, 1000);
 }
 
 window.onload = function(){
 	width.onchange = function(){
+		console.log(11)
 		if (this.checked) {
-			$(range).slideDown(200);
+			range.classList.remove('hide');
 		} else {
-			$(range).slideUp(200);
+			range.classList.add('hide');
 		}
 	}
 
@@ -269,20 +287,20 @@ window.onload = function(){
 
 	block.onchange = function(){
 		if (this.checked) {
-			$(blockInfo).slideDown(200);
+			blockInfo.classList.remove('hide');
 			blockInput.removeAttribute('disabled');
 		} else {
-			$(blockInfo).slideUp(200);
+			blockInfo.classList.add('hide');
 			blockInput.setAttribute('disabled','disabled');
 		}
 	}
 
 	blockUser.onchange = function(){
 		if (this.checked) {
-			$(blockUserInfo).slideDown(200);
+			blockUserInfo.classList.remove('hide');
 			blockUserInput.removeAttribute('disabled');
 		} else {
-			$(blockUserInfo).slideUp(200);
+			blockUserInfo.classList.add('hide');
 			blockUserInput.setAttribute('disabled','disabled');
 		}
 	}

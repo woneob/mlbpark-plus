@@ -21,6 +21,7 @@ article {padding:10px 15px;border-width:1px;border-style:solid;border-color:#e6e
 #slideCurrent {letter-spacing:0;vertical-align:7px;}
 #slideCurrent:after {content:' px';color:#888;}
 .toggleBox {margin-top:5px;background:#f1f1f1;border:1px solid #e1e1e1;padding:5px;}
+.toggleBox.hide {display:none;}
 #blockInfo .blockType {padding:8px 10px 0;}
 #blockInfo p {margin:0;padding:2px 0;}
 #blockInfo p label {font-weight:normal;vertical-align:-3px;}
@@ -29,7 +30,7 @@ article {padding:10px 15px;border-width:1px;border-style:solid;border-color:#e6e
 #action .save {font:12px Dotum,'돋움',sans-serif;color:#4c4c4c;padding:3px 5px;}
 #action .reset {position:absolute;top:15px;right:0;border:none;background:none;text-decoration:underline;font-size:11px;color:#999;cursor:pointer;}
 #action .reset:hover {color:#5a5a5a;}
-#action .saveMsg {padding-left:15px;background:url(/images/check.png) no-repeat 0 0;line-height:16px;}
+#saveMsg {padding-left:15px;background:url(/images/check.png) no-repeat 0 0;line-height:16px;}
 footer {padding:8px 0;font-size:11px;color:#999;text-align:center;}
 footer a {color:#999;text-decoration:none;}
 footer a:hover {color:#666;text-decoration:underline;}
