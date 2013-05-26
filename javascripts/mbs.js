@@ -87,7 +87,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 			// KBL bbs only
 			if ((teamVar == '1' || teamVar === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
-				doc.body.className = 'team_show';
+				doc.body.id = 'team_show';
 				var teamSearchUrl = '/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=';
 			}
 
