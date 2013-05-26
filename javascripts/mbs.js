@@ -370,12 +370,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 									var wrapImg = img.parentNode;
 									wrapImg.parentNode.insertBefore(imageWrap, wrapImg);
 									imageWrap.appendChild(wrapImg);
-									imageWrap.appendChild(btn_iSearch);
 								} else {
 									img.parentNode.insertBefore(imageWrap,img);
 									imageWrap.appendChild(img);
-									imageWrap.appendChild(btn_iSearch);
 								}
+
+								imageWrap.appendChild(btn_iSearch);
 							}
 						}
 					};
