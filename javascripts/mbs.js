@@ -603,7 +603,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var nLink = $currentPage[0].nextSibling.href;
 
 			if (shortcutVar == '1' || shortcutVar == null) {
-				var lisEl = doc.querySelector('table[height="31"]');
+				var listEl = doc.querySelector('table[height="31"]');
 
 
 				$(doc).keyup(function(e){
@@ -618,12 +618,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							window.location.href = nLink;
 						}
 						if (e.which === 68) {
-							var lisElTop = lisEl.getBoundingClientRect().top + window.pageYOffset;
+							var listElTop = listEl.getBoundingClientRect().top + window.pageYOffset;
 							var currentTop = doc.body.scrollTop;
-							var topVal = lisElTop - currentTop;
+							var topVal = listElTop - currentTop;
 
 							doc.body.style.cssText = '-webkit-transform:translate(0, '+ topVal +'px)';
-							window.scroll(0,lisElTop);
+							window.scroll(0,listElTop);
 							doc.body.style.cssText = '-webkit-transform:translate(0,0);transition:-webkit-transform .5s ease;';
 
 							$(doc.body).on('webkitTransitionEnd transitionend', function(){
