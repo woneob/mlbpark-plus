@@ -55,8 +55,12 @@ var titIcon = {
 
 // Repeat parentNode
 function up(el, n) {
-	while(n-- && (el = el.parentNode));
-	return el;
+	var parent = el;
+	for(var i = 0; i < n; i++) {
+		parent = parent.parentNode;
+	}
+
+	return parent;
 }
 
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
