@@ -126,7 +126,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				// title icon
 				if (titIconVar == '1' || titIconVar === undefined) {
-					for (key in titIcon) {
+					for (var key in titIcon) {
 						if(titIcon[key].test(title)) {
 							t.className = 'ico ico_' + key;
 							break;
@@ -136,7 +136,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				// team icon
 				if ((teamVar == '1' || teamVar === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
-					for(name in team) {
+					for(var name in team) {
 						var matched = team[name].regex.exec(title);
 						if(matched) {
 							var label = doc.createElement('em');
