@@ -1,5 +1,6 @@
 var doc = document;
-var titIcon = doc.getElementById('titIcon'),
+var notice = doc.getElementById('notice'),
+	titIcon = doc.getElementById('titIcon'),
 	team = doc.getElementById('team'),
 	block = doc.getElementById('block'),
 	titleBlockInput = doc.getElementById('blockInput'),
@@ -11,6 +12,10 @@ var titIcon = doc.getElementById('titIcon'),
 	messageBox = doc.getElementById('message');
 
 (function restore() {
+	if (localStorage['notice'] == 1) {
+		notice.checked = true;
+	}
+
 	if (localStorage['titIcon'] == 1 || localStorage['titIcon'] == null) {
 		titIcon.checked = true;
 	}
