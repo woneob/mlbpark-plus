@@ -76,9 +76,9 @@ function blockTitlteFn(request, sender) {
 	}
 
 	// 기존 설정된 차단 키워드가 있는지 확인
-	if(!blockVar || 0 > blockVar.search(new RegExp('(,|^)' + title.replace(/([\[\]\(\)])/g, '\\$1') + '(,|$)'))) {
+	if(!blockVar || 0 > blockVar.search(new RegExp('(;|^)' + title.replace(/([\[\]\(\)])/g, '\\$1') + '(;|$)'))) {
 		if(!blockVar) localStorage["blockInput"] = title;
-		else localStorage["blockInput"] = blockVar + ',' + title;
+		else localStorage["blockInput"] = blockVar + ';' + title;
 		return {
 			result: true,
 			title: title
@@ -105,9 +105,9 @@ function blockUserFn(request, sender) {
 	}
 
 	// 기존 설정된 차단 닉네임이 있는지 확인
-	if(!blockUserVar || 0 > blockUserVar.search(new RegExp('(,|^)' + user.replace(/([\[\]\(\)])/g, '\\$1') + '(,|$)'))) {
+	if(!blockUserVar || 0 > blockUserVar.search(new RegExp('(;|^)' + user.replace(/([\[\]\(\)])/g, '\\$1') + '(;|$)'))) {
 		if(!blockUserVar) localStorage["blockUserInput"] = user;
-		else localStorage["blockUserInput"] = blockUserVar + ',' + user;
+		else localStorage["blockUserInput"] = blockUserVar + ';' + user;
 		return {
 			result: true,
 			user: user
@@ -147,7 +147,7 @@ function blockKeywordTrim(storage, storageVar) {
 	if (localStorage[storage]){
 		var storageVar = localStorage[storage];
 		console.log(storageVar);
-		localStorage[storage] = storageVar.replace(/\n/g, '').replace(/^[,\s]+|[,\s]+$/g, '').replace(/,[,\s]*,/g, ',');
+		localStorage[storage] = storageVar.replace(/\n/g, '').replace(/^[;\s]+|[;\s]+$/g, '').replace(/;[;\s]*;/g, ';');
 	}
 }
 
@@ -159,10 +159,10 @@ function onMessage(request, sender, sendResponse) {
 				team: localStorage['team'],
 				blind: localStorage['blind'],
 				block: localStorage['block'],
-				blockInput: localStorage['blockInput'].toLowerCase().split(/[ \t\n]*,[ \t\n]*/),
+				blockInput: localStorage['blockInput'].toLowerCase().split(/[ \t\n]*;[ \t\n]*/),
 				blockType: localStorage['blockType'],
 				blockUser: localStorage['blockUser'],
-				blockUserInput: localStorage['blockUserInput'].split(/\n*,\n*/),
+				blockUserInput: localStorage['blockUserInput'].split(/\n*;\n*/),
 				userHistory: localStorage["userHistory"],
 				reply: localStorage['reply'],
 				userCommentView: localStorage['userCommentView'],
@@ -175,7 +175,7 @@ function onMessage(request, sender, sendResponse) {
 		case 'main':
 			sendResponse({
 				block: localStorage['block'],
-				blockInput: localStorage['blockInput'].toLowerCase().split(/[ \t\n]*,[ \t\n]*/),
+				blockInput: localStorage['blockInput'].toLowerCase().split(/[ \t\n]*;[ \t\n]*/),
 				blockType: localStorage['blockType']
 			});
 		break;

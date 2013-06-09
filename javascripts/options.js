@@ -190,8 +190,8 @@ function save(){
 	if (!(blockInput.value.length == 0)) {
 		var blockInputVar = blockInput.value
 			.replace(/\n/g, '') // Remove Linebreak
-			.replace(/^[,\s]+|[,]+$/g, '') // Remove starting and ending commas
-			.replace(/,[,\s]*,/g, ','); // Remove 2 or more commas
+			.replace(/^[;\s]+|[;]+$/g, '') // Remove starting and ending semicolons
+			.replace(/;[;\s]*;/g, ';'); // Remove 2 or more semicolons
 		localStorage['blockInput'] = blockInputVar;
 		blockInput.value = localStorage['blockInput'];
 	} else {
@@ -207,8 +207,8 @@ function save(){
 	if (!(blockUserInput.value.length == 0)) {
 		var blockUserInputVar = blockUserInput.value
 			.replace(/\n/g, '') // Remove Linebreak
-			.replace(/^[,\s]+|[,]+$/g, '') // Remove starting and ending commas
-			.replace(/,[,\s]*,/g, ','); // Remove 2 or more commas
+			.replace(/^[;\s]+|[;]+$/g, '') // Remove starting and ending semicolons
+			.replace(/;[;\s]*;/g, ';'); // Remove 2 or more semicolons
 		localStorage['blockUserInput'] = blockUserInputVar;
 		blockUserInput.value = localStorage['blockUserInput'];
 	} else {
