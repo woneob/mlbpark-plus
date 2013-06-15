@@ -64,7 +64,7 @@ function up(el, n) {
 }
 
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
-	var titIconVar = response.titIcon,
+	var titIcon = response.titIcon,
 	teamVar = response.team,
 	blockVar = response.block,
 	blockInputVar = response.blockInput,
@@ -125,7 +125,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				// title icon
-				if (titIconVar == '1' || titIconVar === undefined) {
+				if (titIcon == '1' || titIcon === undefined) {
 					for (var key in titIcons) {
 						if(titIcons[key].test(title)) {
 							t.className = 'ico ico_' + key;
