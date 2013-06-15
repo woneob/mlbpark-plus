@@ -2,7 +2,7 @@ var doc = document;
 var loc = window.location;
 var locHref = loc.href;
 var path = loc.pathname;
-var titIcon = {
+var titIcons = {
 	game: /디아|\[스타|프야매|lol|게임/i,
 	female: /여자|처자|ㅊㅈ|여친|녀 |여성/,
 	twitter: /(트윗|트위터)/,
@@ -126,8 +126,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				// title icon
 				if (titIconVar == '1' || titIconVar === undefined) {
-					for (var key in titIcon) {
-						if(titIcon[key].test(title)) {
+					for (var key in titIcons) {
+						if(titIcons[key].test(title)) {
 							t.className = 'ico ico_' + key;
 							break;
 						}
@@ -280,7 +280,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						btn_soap.innerText = ' 본문을 보시려면 클릭하세요.';
 						btn_soap.insertBefore(btn_soapTit, btn_soap.firstChild);
 						article.insertAdjacentElement('beforeBegin', btn_soap);
-					} else if(titIcon.warn.test(subject)) {
+					} else if(titIcons.warn.test(subject)) {
 						article.className = 'grayscale';
 						var btn_warn = doc.createElement('div');
 						var btn_warnTit = doc.createElement('span');
