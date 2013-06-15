@@ -14,7 +14,7 @@ var titIcons = {
 	question: /(질문|요\?|여\?|죠\?|나요)/,
 	img: /(짤방|jpg|gif|jyp)/i,
 	mobile: /(맛폰)/
-}, team = {
+}, teams = {
 	kia: {
 		regex: /(\[기아\]\s?|\[kia\]\s?)/i,
 		searchKeyword: 'kia+OR+%B1%E2%BE%C6'
@@ -136,8 +136,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				// team icon
 				if ((teamVar == '1' || teamVar === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
-					for(var name in team) {
-						var matched = team[name].regex.exec(title);
+					for(var name in teams) {
+						var matched = teams[name].regex.exec(title);
 						if(matched) {
 							var label = doc.createElement('em');
 							label.setAttribute('data-team', name);
@@ -145,7 +145,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							label.idx = name;
 							label.onclick = function(j){
 								return function (){
-									location.href= teamSearchUrl + team[j].searchKeyword;
+									location.href= teamSearchUrl + teams[j].searchKeyword;
 								}
 							}(name);
 							t.innerText = title.replace(matched[1],'');
