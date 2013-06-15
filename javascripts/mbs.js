@@ -65,7 +65,7 @@ function up(el, n) {
 
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	var titIcon = response.titIcon,
-	teamVar = response.team,
+	team = response.team,
 	blockVar = response.block,
 	blockInputVar = response.blockInput,
 	blockTypeVar = response.blockType,
@@ -86,7 +86,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var listLink =  container.getElementsByClassName('G12read');
 
 			// KBL bbs only
-			if ((teamVar == '1' || teamVar === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
+			if ((team == '1' || team === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
 				doc.body.id = 'team_show';
 				var teamSearchUrl = '/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=';
 			}
@@ -135,7 +135,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				// team icon
-				if ((teamVar == '1' || teamVar === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
+				if ((team == '1' || team === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
 					for(var k in teams) {
 						var matched = teams[k].teamName.exec(title);
 						if(matched) {
