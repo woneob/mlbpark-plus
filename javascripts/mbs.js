@@ -16,39 +16,39 @@ var titIcons = {
 	mobile: /(맛폰)/
 }, teams = {
 	kia: {
-		regex: /(\[기아\]\s?|\[kia\]\s?)/i,
+		teamName: /(\[기아\]\s?|\[kia\]\s?)/i,
 		searchKeyword: 'kia+OR+%B1%E2%BE%C6'
 	},
 	nexen: {
-		regex: /(\[넥센\]\s?)/,
+		teamName: /(\[넥센\]\s?)/,
 		searchKeyword: '%B3%D8%BC%BE'
 	},
 	doosan: {
-		regex: /(\[두산\]\s?)/,
+		teamName: /(\[두산\]\s?)/,
 		searchKeyword: '%B5%CE%BB%EA'
 	},
 	lotte: {
-		regex: /(\[롯데\]\s?)/,
+		teamName: /(\[롯데\]\s?)/,
 		searchKeyword: '%B7%D4%B5%A5'
 	},
 	samsung: {
-		regex: /(\[삼성\]\s?)/,
+		teamName: /(\[삼성\]\s?)/,
 		searchKeyword: '%BB%EF%BC%BA'
 	},
 	sk: {
-		regex: /(\[sk\]\s?)/i,
+		teamName: /(\[sk\]\s?)/i,
 		searchKeyword: 'sk+OR+%BF%A1%BD%BA%C4%C9%C0%CC'
 	},
 	nc: {
-		regex: /(\[엔씨\]\s?|\[nc\]\s?)/i,
+		teamName: /(\[엔씨\]\s?|\[nc\]\s?)/i,
 		searchKeyword: 'nc+OR+%BF%A3%BE%BE'
 	},
 	lg: {
-		regex: /(\[엘지\]\s?|\[lg\]\s?)/i,
+		teamName: /(\[엘지\]\s?|\[lg\]\s?)/i,
 		searchKeyword: 'lg+OR+%BF%A4%C1%F6'
 	},
 	hanwha: {
-		regex: /(\[한화\]\s?)/,
+		teamName: /(\[한화\]\s?)/,
 		searchKeyword: '%C7%D1%C8%AD'
 	}
 };
@@ -136,18 +136,16 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				// team icon
 				if ((teamVar == '1' || teamVar === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
-					for(var name in teams) {
-						var matched = teams[name].regex.exec(title);
+					for(var k in teams) {
+						var matched = teams[k].teamName.exec(title);
 						if(matched) {
 							var label = doc.createElement('em');
-							label.setAttribute('data-team', name);
-							label.title = name;
-							label.idx = name;
+							label.setAttribute('data-team', k);
 							label.onclick = function(j){
 								return function (){
 									location.href= teamSearchUrl + teams[j].searchKeyword;
 								}
-							}(name);
+							}(k);
 							t.innerText = title.replace(matched[1],'');
 							t.parentNode.insertBefore(label, t);
 							break;
