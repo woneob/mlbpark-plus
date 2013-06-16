@@ -333,8 +333,15 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						type: 'GET',
 						url: 'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId,
 						cache: false,
+						timeout: 5000,
 						success: function(response){
 							$(historyListEl).append($(response).find('td[bgcolor="#FFFFFF"] > table:nth-child(2)')[0].outerHTML).find('a[target]').removeAttr('target');
+						},
+						error: function(xhr, textStatus, errorThrown){
+							var errorEl = doc.createElement('p');
+							errorEl.id = 'errerMessage';
+							errorEl.innerText = '오류가 발생하여 최근 글을 불러올 수 없습니다. ';
+							historyListEl.appendChild(errorEl);
 						}
 					});
 				}
