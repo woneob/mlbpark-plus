@@ -234,7 +234,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 			function userBlock_cmt(){
 				if (opt_userBlock == '1') {
-					var CmtNickEl = doc.querySelectorAll('td[width="140"] a');
+					var CmtNickEl = doc.querySelectorAll('td[width="140"] > font > a');
 					for (var u = 0, CmtNickElLen = CmtNickEl.length; u < CmtNickElLen; u++) {
 						for (var i = 0; i < opt_userBlockKeywordsLen; i++) {
 							if (CmtNickEl[u].innerText === opt_userBlockKeywords[i]) {
