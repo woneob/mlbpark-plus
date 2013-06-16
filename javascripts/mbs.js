@@ -84,6 +84,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	opt_imageSearch = opt.imageSearch;
 
 	$(doc).ready(function() {
+		if (path == '/bbs/mlb_today.php') {
+			var listLinkCount = 0;
+		} else {
+			var listLinkCount = 1;
+		}
+
 		if (path !== '/mbs/commentV.php') {
 			var container = doc.getElementById('container');
 			var listLink =  container.getElementsByClassName('G12read');
@@ -96,11 +102,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 			listLinkLoop:
 			for (var i = 0, listLinklen = listLink.length; i < listLinklen; i++) {
-				if (path == '/bbs/mlb_today.php') {
-					var t = listLink[i].childNodes[0];
-				} else {
-					var t = listLink[i].childNodes[1];
-				}
+				var t = listLink[i].childNodes[listLinkCount];
 				var title = t.innerText;
 
 				//title block
