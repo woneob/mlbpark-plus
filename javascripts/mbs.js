@@ -90,11 +90,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 			if (path == '/bbs/mlb_today.php') {
 				var listLinkCount = 0;
-				var nickEl = container.querySelectorAll('td[width="82"] font');
+				var nickEl = container.querySelectorAll('td[width="82"] > font');
 				var upCount = 6;
 			} else {
 				var listLinkCount = 1;
-				var nickEl = container.querySelectorAll('td[width="82"] a');
+				var nickEl = container.querySelectorAll('td[width="82"] > font > a');
 				var upCount = 7;
 			}
 
