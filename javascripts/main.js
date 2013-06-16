@@ -50,20 +50,26 @@ $(doc).ready(function() {
 	});
 
 	chrome.extension.sendMessage({action:'main'}, function(response) {
+		var opt = response;
+		var opt_titleBlock = opt.titleBlock,
+		opt_titleBlockKeywords = opt.titleBlockKeywords,
+		opt_titleBlockKeywordsLen = opt_titleBlockKeywords.length,
+		opt_titleBlockType = opt.titleBlockType;
+
+
 		var blockVar = response.block,
 		blockInputVar = response.blockInput,
 		blockTypeVar = response.blockType;
 
-		if (blockVar == '1' && blockInputVar[0] !== '') {
+		if (opt_titleBlock == '1' && opt_titleBlockKeywords[0] !== '') {
 			var bestLink = doc.querySelectorAll('.greatest_list a');
 			var bestLinkLen = bestLink.length;
-			var blockInputVarLen = blockInputVar.length;
 
-			if (bestLinkLen > 0 && blockTypeVar == '2') {
+			if (opt_titleBlockType == '2') {
 				for(var i = 0; i < bestLinkLen; i++){
 					var t = bestLink[i];
-					for(var b = 0; b < blockInputVarLen; b++) {
-						if (t.innerText.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+					for(var b = 0; b < opt_titleBlockKeywordsLen; b++) {
+						if (t.innerText.toLowerCase().indexOf(opt_titleBlockKeywords[b]) !== -1) {
 							t.parentNode.className = 'displayNone';
 							break;
 						}
@@ -71,13 +77,13 @@ $(doc).ready(function() {
 				}
 			}
 
-			if (bestLinkLen > 0 && blockTypeVar == '1') {
+			if (opt_titleBlockType == '1') {
 				for(var i = 0; i < bestLinkLen; i++){
 					var t = bestLink[i];
-					for(var b = 0; b < bestLinkLen; b++) {
-						if (t.innerText.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+					for(var b = 0; b < opt_titleBlockKeywordsLen; b++) {
+						if (t.innerText.toLowerCase().indexOf(opt_titleBlockKeywords[b]) !== -1) {
 							var title = t.innerText;
-							t.innerText = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
+							t.innerText = '차단 키워드('+ opt_titleBlockKeywords[b] +')가 포함된 글 입니다';
 							t.className = 'blockTitle';
 							t.setAttribute('title','제목 : '+ title);
 							t.onclick = function(){

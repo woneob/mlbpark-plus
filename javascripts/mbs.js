@@ -64,21 +64,24 @@ function up(el, n) {
 }
 
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
-	var titIcon = response.titIcon,
-	team = response.team,
-	blockVar = response.block,
-	blockInputVar = response.blockInput,
-	blockTypeVar = response.blockType,
-	blockUserVar = response.blockUser,
-	blockUserInputVar = response.blockUserInput,
-	blindVar = response.blind,
-	userHistoryVar = response.userHistory,
-	replyVar = response.reply,
-	userCommentViewVar = response.userCommentView,
-	videoVar = response.video,
-	noticeVar = response.notice,
-	shortcutVar = response.shortcut,
-	imageSearchVar = response.imageSearch;
+	var opt = response;
+	var opt_titleIcon = opt.titleIcon,
+	opt_teamIcon = opt.teamIcon,
+	opt_titleBlock = opt.titleBlock,
+	opt_titleBlockKeywords = opt.titleBlockKeywords,
+	opt_titleBlockKeywordsLen = opt_titleBlockKeywords.length,
+	opt_titleBlockType = opt.titleBlockType,
+	opt_userBlock = opt.userBlock,
+	opt_userBlockKeywords = opt.userBlockKeywords,
+	opt_userBlockKeywordsLen = opt_userBlockKeywords.length,
+	opt_blind = opt.blind,
+	opt_userHistory = opt.userHistory,
+	opt_reply = opt.reply,
+	opt_userCommentView = opt.userCommentView,
+	opt_videoResize = opt.videoResize,
+	opt_noticeBlock = opt.noticeBlock,
+	opt_shortcut = opt.shortcut,
+	opt_imageSearch = opt.imageSearch;
 
 	$(doc).ready(function() {
 		if (path !== '/mbs/commentV.php') {
@@ -86,7 +89,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var listLink =  container.getElementsByClassName('G12read');
 
 			// KBL bbs only
-			if ((team == '1' || team === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
+			if ((opt_teamIcon == '1' || opt_teamIcon === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
 				doc.body.id = 'team_show';
 				var teamSearchUrl = '/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=';
 			}
@@ -101,19 +104,19 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				var title = t.innerText;
 
 				//title block
-				if (blockVar == '1' && blockTypeVar == '2' && blockInputVar[0] !== '') {
-					for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
-						if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+				if (opt_titleIcon == '1' && opt_titleBlockType == '2' && opt_titleBlockKeywords[0] !== '') {
+					for(var b = 0; b < opt_titleBlockKeywordsLen; b++) {
+						if (title.toLowerCase().indexOf(opt_titleBlockKeywords[b]) !== -1) {
 							up(t,6).className = 'displayNone';
 							continue listLinkLoop;
 						}
 					}
 				}
 
-				if (blockVar == '1' && blockTypeVar == '1' && blockInputVar[0] !== '') {
-					for(var b = 0, blockInputVarLen = blockInputVar.length; b < blockInputVarLen; b++) {
-						if (title.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
-							t.innerText = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
+				if (opt_titleIcon == '1' && opt_titleBlockType == '1' && opt_titleBlockKeywords[0] !== '') {
+					for(var b = 0; b < opt_titleBlockKeywordsLen; b++) {
+						if (title.toLowerCase().indexOf(opt_titleBlockKeywords[b]) !== -1) {
+							t.innerText = '차단 키워드('+ opt_titleBlockKeywords[b] +')가 포함된 글 입니다';
 							t.className = 'blockTitle';
 							t.setAttribute('title','제목 : '+ title);
 							t.onclick = function(){
@@ -125,7 +128,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				// title icon
-				if (titIcon == '1' || titIcon === undefined) {
+				if (opt_titleIcon == '1' || opt_titleIcon === undefined) {
 					for (var key in titIcons) {
 						if(titIcons[key].test(title)) {
 							t.className = 'ico ico_' + key;
@@ -135,7 +138,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				// team icon
-				if ((team == '1' || team === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
+				if ((opt_teamIcon == '1' || opt_teamIcon === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
 					for(var k in teams) {
 						var matched = teams[k].teamName.exec(title);
 						if(matched) {
@@ -155,7 +158,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 
 			//notice blind
-			if (noticeVar == '1') {
+			if (opt_noticeBlock == '1') {
 				var cat = container.getElementsByClassName('A11gray');
 				for (var c = 0, catLen = cat.length; c < catLen; c++) {
 					var t = cat[c];
@@ -176,10 +179,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 
 			//user block
-			if (blockUserVar == '1') {
+			if (opt_userBlock == '1') {
 				for (var u = 0, nickElLen = nickEl.length; u < nickElLen; u++) {
-					for (var i = 0, blockUserInputVarLen = blockUserInputVar.length; i < blockUserInputVarLen; i++) {
-						if (nickEl[u].innerText === blockUserInputVar[i]) {
+					for (var i = 0; i < opt_userBlockKeywordsLen; i++) {
+						if (nickEl[u].innerText === opt_userBlockKeywords[i]) {
 							up(nickEl[u],upCount).className = 'displayNone';
 							break;
 						}
@@ -187,16 +190,15 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 			}
 
-			if (blockVar == '1' && blockInputVar[0] !== '') {
+			if (opt_titleBlock == '1' && opt_titleBlockKeywords[0] !== '') {
 				var bestLink = doc.querySelectorAll('td[width="190"] a');
 				var bestLinkLen = bestLink.length;
-				var blockInputVarLen = blockInputVar.length;
 
-				if (bestLinkLen > 0 && blockTypeVar == '2') {
+				if (bestLinkLen > 0 && opt_titleBlockType == '2') {
 					for(var i = 0; i < bestLinkLen; i++){
 						var t = bestLink[i];
-						for(var b = 0; b < blockInputVarLen; b++) {
-							if (t.innerText.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+						for(var b = 0; b < opt_titleBlockKeywordsLen; b++) {
+							if (t.innerText.toLowerCase().indexOf(opt_titleBlockKeywords[b]) !== -1) {
 								if (t.parentNode.tagName.toLowerCase() == 'strong'){
 									var upCount = 3;
 								} else {
@@ -209,13 +211,13 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					}
 				}
 
-				if (bestLinkLen > 0 && blockTypeVar == '1') {
+				if (bestLinkLen > 0 && opt_titleBlockType == '1') {
 					for(var i = 0; i < bestLinkLen; i++){
 						var t = bestLink[i];
-						for(var b = 0; b < blockInputVarLen; b++) {
-							if (t.innerText.toLowerCase().indexOf(blockInputVar[b]) !== -1) {
+						for(var b = 0; b < opt_titleBlockKeywordsLen; b++) {
+							if (t.innerText.toLowerCase().indexOf(opt_titleBlockKeywords[b]) !== -1) {
 								var title = t.innerText;
-								t.innerText = '차단 키워드('+ blockInputVar[b] +')가 포함된 글 입니다';
+								t.innerText = '차단 키워드('+ opt_titleBlockKeywords[b] +')가 포함된 글 입니다';
 								t.className = 'blockTitle';
 								t.setAttribute('title','제목 : '+ title);
 								t.onclick = function(){
@@ -233,11 +235,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var myArea = doc.getElementById('myArea');
 
 			function userBlock_cmt(){
-				if (blockUserVar == '1') {
+				if (opt_userBlock == '1') {
 					var CmtNickEl = doc.querySelectorAll('td[width="140"] a');
 					for (var u = 0, CmtNickElLen = CmtNickEl.length; u < CmtNickElLen; u++) {
-						for (var i = 0, blockUserInputVarLen = blockUserInputVar.length; i < blockUserInputVarLen; i++) {
-							if (CmtNickEl[u].innerText === blockUserInputVar[i]) {
+						for (var i = 0; i < opt_userBlockKeywordsLen; i++) {
+							if (CmtNickEl[u].innerText === opt_userBlockKeywords[i]) {
 								up(CmtNickEl[u],7).className = 'displayNone';
 								break;
 							}
@@ -253,7 +255,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				var nickname = userEl.nextSibling.innerText;
 
 				//content blind
-				if (blindVar == '1' || blindVar === undefined) {
+				if (opt_blind == '1' || opt_blind === undefined) {
 					var subject = container.getElementsByTagName('strong')[0].innerText;
 
 					$.expr[':'].Contains = function(a,i,m){
@@ -309,7 +311,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				userEl.parentNode.appendChild(idEl);
 
 				//user history
-				if (userHistoryVar == '1') {
+				if (opt_userHistory == '1') {
 					var historyEl = doc.createElement('div');
 					var historyHeadEl = doc.createElement('div');
 					var historyTitleEl = doc.createElement('h3');
@@ -340,7 +342,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				//google search by image
-				if (imageSearchVar == '1' || imageSearchVar === undefined) {
+				if (opt_imageSearch == '1' || opt_imageSearch === undefined) {
 					var images = article.getElementsByTagName('img');
 
 					window.onload = function(){
@@ -380,7 +382,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				//videoCss
-				if (videoVar == '1' || videoVar === undefined) {
+				if (opt_videoResize == '1' || opt_videoResize === undefined) {
 					var vdoCss = doc.createElement('link');
 					vdoCss.rel = 'stylesheet';
 					vdoCss.href = chrome.extension.getURL('/css/video.css');
@@ -399,7 +401,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						}
 
 						//view userComment
-						if (userCommentViewVar == '1' || userCommentViewVar == null) {
+						if (opt_userCommentView == '1' || opt_userCommentView == null) {
 							var viewCmt = doc.createElement('button');
 							viewCmt.type = 'button';
 							viewCmt.className = 'btn_userCmt',
@@ -409,7 +411,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						}
 					}
 
-					if (userCommentViewVar == '1' || userCommentViewVar == null) {
+					if (opt_userCommentView == '1' || opt_userCommentView == null) {
 						var btn_userCmt = myArea.querySelectorAll('.btn_userCmt');
 						$(btn_userCmt).on('click',function(){
 							var t = this;
@@ -497,7 +499,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			function replyButton(){
 				var cmtTxt = myArea.querySelectorAll('.G12');
 				var cmtTxtLen = cmtTxt.length;
-				if ((replyVar == '1' || replyVar == null) && cmtTxtLen > 0) {
+				if ((opt_reply == '1' || opt_reply == null) && cmtTxtLen > 0) {
 					for (var i = 0; i < cmtTxtLen; i++) {
 						var replyBtn = doc.createElement('button');
 						replyBtn.type = 'button';
@@ -600,7 +602,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var pLink = $currentPage[0].previousSibling.href;
 			var nLink = $currentPage[0].nextSibling.href;
 
-			if (shortcutVar == '1' || shortcutVar == null) {
+			if (opt_shortcut == '1' || opt_shortcut == null) {
 				var listEl = doc.querySelector('table[height="31"]');
 
 
@@ -645,7 +647,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 
 		// Add a 'User Block' to User Menu
-		if (blockUserVar == '1') {
+		if (opt_userBlock == '1') {
 			function addUserBlock(scop){
 				var userMenu = scop.querySelectorAll('div[id^=nik_]');
 				for (var i = 0, userMenuLen = userMenu.length; i < userMenuLen; i++) {

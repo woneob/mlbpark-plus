@@ -155,28 +155,28 @@ function onMessage(request, sender, sendResponse) {
 	switch (request.action){
 		case 'mbs':
 			sendResponse({
-				titIcon: localStorage['titIcon'],
-				team: localStorage['team'],
+				titleIcon: localStorage['titIcon'],
+				teamIcon: localStorage['team'],
 				blind: localStorage['blind'],
-				block: localStorage['block'],
-				blockInput: localStorage['blockInput'].toLowerCase().split(/[ \t\n]*;[ \t\n]*/),
-				blockType: localStorage['blockType'],
-				blockUser: localStorage['blockUser'],
-				blockUserInput: localStorage['blockUserInput'].split(/\n*;\n*/),
+				titleBlock: localStorage['block'],
+				titleBlockKeywords: localStorage['blockInput'].toLowerCase().split(/[ \t\n]*;[ \t\n]*/),
+				titleBlockType: localStorage['blockType'],
+				userBlock: localStorage['blockUser'],
+				userBlockKeywords: localStorage['blockUserInput'].split(/\n*;\n*/),
 				userHistory: localStorage["userHistory"],
 				reply: localStorage['reply'],
 				userCommentView: localStorage['userCommentView'],
-				video: localStorage['video'],
-				notice: localStorage['notice'],
+				videoResize: localStorage['video'],
+				noticeBlock: localStorage['notice'],
 				shortcut: localStorage['shortcut'],
 				imageSearch: localStorage['imageSearch']
 			});
 		break;
 		case 'main':
 			sendResponse({
-				block: localStorage['block'],
-				blockInput: localStorage['blockInput'].toLowerCase().split(/[ \t\n]*;[ \t\n]*/),
-				blockType: localStorage['blockType']
+				titleBlock: localStorage['block'],
+				titleBlockKeywords: localStorage['blockInput'].toLowerCase().split(/[ \t\n]*;[ \t\n]*/),
+				titleBlockType: localStorage['blockType']
 			});
 		break;
 		case 'width':
