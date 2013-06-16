@@ -333,8 +333,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						type: 'GET',
 						url: 'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId,
 						cache: false,
-						success: function(response) {
-							$(historyListEl).append($(response).find('td[bgcolor="#FFFFFF"] > table:nth-child(2)').html()).find('a[target]').removeAttr('target');
+						success: function(response){
+							$(historyListEl).append($(response).find('td[bgcolor="#FFFFFF"] > table:nth-child(2)')[0].outerHTML).find('a[target]').removeAttr('target');
 						}
 					});
 				}
