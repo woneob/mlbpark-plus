@@ -84,15 +84,19 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	opt_imageSearch = opt.imageSearch;
 
 	$(doc).ready(function() {
-		if (path == '/bbs/mlb_today.php') {
-			var listLinkCount = 0;
-		} else {
-			var listLinkCount = 1;
-		}
-
 		if (path !== '/mbs/commentV.php') {
 			var container = doc.getElementById('container');
 			var listLink =  container.getElementsByClassName('G12read');
+
+			if (path == '/bbs/mlb_today.php') {
+				var listLinkCount = 0;
+				var nickEl = container.querySelectorAll('td[width="82"] font');
+				var upCount = 6;
+			} else {
+				var listLinkCount = 1;
+				var nickEl = container.querySelectorAll('td[width="82"] a');
+				var upCount = 7;
+			}
 
 			// KBL bbs only
 			if ((opt_teamIcon == '1' || opt_teamIcon === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
@@ -170,14 +174,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						break;
 					}
 				}
-			}
-
-			if(path == '/bbs/mlb_today.php'){
-				var nickEl = container.querySelectorAll('td[width="82"] font');
-				var upCount = '6';
-			} else {
-				var nickEl = container.querySelectorAll('td[width="82"] a');
-				var upCount = '7';
 			}
 
 			//user block
