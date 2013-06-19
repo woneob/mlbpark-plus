@@ -249,7 +249,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			if (path == '/mbs/articleV.php') {
 				var article = doc.querySelector('.G13 > div[align="justify"]');
 				var userEl = doc.querySelector('div[id^="nik_"]');
-				var userId =  userEl.firstChild.firstChild.getAttribute('onclick').match(/id=([^&]+)\'/)[1];
+				var userId =  userEl.children[0].children[0].getAttribute('onclick').match(/id=([^&]+)\'/)[1];
 				var nickname = userEl.nextSibling.innerText;
 
 				//content blind
