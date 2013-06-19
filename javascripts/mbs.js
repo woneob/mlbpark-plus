@@ -655,7 +655,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				for (var i = 0, userMenuLen = userMenu.length; i < userMenuLen; i++) {
 					var t = userMenu[i];
 					var blockLiEl = doc.createElement('li');
-					blockLiEl.setAttribute('data-user', t.nextSibling.innerText);
+					blockLiEl.setAttribute('data-user', t.nextElementSibling.innerText);
 					blockLiEl.innerText = '닉네임 차단';
 
 					t.getElementsByTagName('ul')[0].appendChild(blockLiEl);
