@@ -110,7 +110,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				var title = t.innerText;
 
 				//title block
-				if (opt_titleIcon == '1' && opt_titleBlockType == '2' && opt_titleBlockKeywords[0] !== '') {
+				if (opt_titleBlock == '1' && opt_titleBlockType == '2' && opt_titleBlockKeywords[0] !== '') {
 					for(var b = 0; b < opt_titleBlockKeywordsLen; b++) {
 						if (title.toLowerCase().indexOf(opt_titleBlockKeywords[b]) !== -1) {
 							up(t,6).className = 'displayNone';
@@ -119,7 +119,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					}
 				}
 
-				if (opt_titleIcon == '1' && opt_titleBlockType == '1' && opt_titleBlockKeywords[0] !== '') {
+				if (opt_titleBlock == '1' && opt_titleBlockType == '1' && opt_titleBlockKeywords[0] !== '') {
 					for(var b = 0; b < opt_titleBlockKeywordsLen; b++) {
 						if (title.toLowerCase().indexOf(opt_titleBlockKeywords[b]) !== -1) {
 							t.innerText = '차단 키워드('+ opt_titleBlockKeywords[b] +')가 포함된 글 입니다';
