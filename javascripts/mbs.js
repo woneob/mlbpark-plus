@@ -483,6 +483,89 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					}
 				}
 				commentUser();
+
+				// View voter
+				(function viewVoter(){
+					var voterGroud = doc.querySelector('td.D11[width="117"]');
+
+					var child;
+					while (child = voterGroud.lastChild) {
+						voterGroud.removeChild(child);
+					}
+
+					var voterListFrag = doc.createDocumentFragment();
+
+					var viewVoterBtn = doc.createElement('span');
+					viewVoterBtn.id = 'viewVoter';
+					viewVoterBtn.innerText = '추천인 보기';
+
+					var voterList = doc.createElement('div');
+					voterList.id = 'voterList';
+					voterList.style.display = 'none';
+					voterList.addEventListener('click',function(e){
+						e.stopPropagation();
+					});
+
+					var voterListHead = doc.createElement('header');
+					voterListHead.className = 'voterListHead';
+
+					var voterListHeadding = doc.createElement('h3');
+					voterListHeadding.innerText = '추천한 사람들';
+
+					var voterListClose = doc.createElement('span');
+					voterListClose.id = 'voterListClose';
+					voterListClose.innerText = 'X';
+					voterListClose.addEventListener('click', function(){
+						voterList.style.display = 'none';
+					});
+
+					var voterOl = doc.createElement('ol');
+
+					voterListHead.appendChild(voterListHeadding);
+					voterListHead.appendChild(voterListClose);
+					voterList.appendChild(voterListHead);
+					voterList.appendChild(voterOl);
+
+					voterListFrag.appendChild(viewVoterBtn);
+					voterListFrag.appendChild(voterList);
+
+					voterGroud.appendChild(voterListFrag);
+
+					viewVoterBtn.addEventListener('click', function(e){
+						e.stopPropagation();
+						if (voterOl.childElementCount == 0) {
+							$.ajax({
+								type: 'GET',
+								url: 'http://mlbpark.donga.com/mbs/articleVoteList.php?bbs='+ mbsC +'&article_id=' + mbsIdx,
+								async: true,
+								cache: false,
+								success: function(data){
+									if(data === ''){
+										var emptyMsg = doc.createElement('li');
+										emptyMsg.className = 'emptyMsg';
+										emptyMsg.innerText = '아직 추천한 사람이 없습니다';
+										voterOl.appendChild(emptyMsg);
+									} else {
+										voterOl.innerHTML = data;
+										if (opt_userBlock == '1') {
+											var voterListLi = voterOl.querySelectorAll('li');
+											for(var x = 0, len = voterListLi.length; x < len; x++){
+												var t = voterListLi[x];
+												for (var i = 0; i < opt_userBlockKeywordsLen; i++) {
+													if(t.innerText === opt_userBlockKeywords[i]){
+														t.className = 'blockUser';
+														break;
+													}
+												}
+											}
+										}
+									}
+								}
+							});
+						}
+						voterList.style.display = 'block';
+					});
+				}());
 			}
 
 			//text URL replacement

@@ -13,7 +13,7 @@ chrome.extension.sendMessage({action:'width'}, function(response) {
 
 //user toolbox remove
 doc.onclick = function(){
-	var userMenu = doc.querySelectorAll('div[id^="nik_"]');
+	var userMenu = doc.querySelectorAll('div[id^="nik_"], #voterList');
 	for (var i = 0, userMenuLen = userMenu.length; i < userMenuLen; i++){
 		userMenu[i].style.display = 'none';
 	}
