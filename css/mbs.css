@@ -65,7 +65,7 @@ td.D11[width="117"] > a {display:none;}
 td.D11[width="117"] #recom_pop {display:none;}
 td.D11[width="76"] {text-align:right;}
 #viewVoter {float:right;padding:4px 10px 3px;color:#666;background:#fff;border-width:1px;border-style:solid;border-color:#e6e6e6 #ddd #bcbcbc;border-radius:3px;background-image:-webkit-linear-gradient(top,#fff,#f3f3f3 94%, #fff);box-shadow:0 1px 1px rgba(0,0,0,.02);font-family:Dotum;letter-spacing:-1px;text-shadow:0 1px 0 #fff;cursor:pointer;}
-#voterList {display:none;position:absolute;top:35px;z-index:100;right:5px;padding:3px;width:170px;background:#fff;border:1px solid #ffa500;border-radius:5px;box-shadow:rgba(0,0,0,.1) 1px 1px 1px;cursor:default;}
+#voterList {display:none;position:absolute;top:35px;z-index:1000000;right:5px;padding:3px;width:170px;background:#fff;border:1px solid #ffa500;border-radius:5px;box-shadow:rgba(0,0,0,.1) 1px 1px 1px;cursor:default;}
 #voterList.show {display:block;}
 #voterList .voterListHead {position:relative;padding:5px;margin-bottom:3px;border-bottom:1px solid #ddd;}
 #voterList .voterListHead h3 {color:#5a5a5a;}
