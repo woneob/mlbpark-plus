@@ -175,7 +175,7 @@ input.box2:focus {outline:none;}
 .btn_iSearch {position:absolute;right:3px;bottom:3px;width:26px;height:26px;overflow:hidden;background:url("chrome-extension://__MSG_@@extension_id__/images/btn_iSearch.png") no-repeat;}
 .btn_iSearch:hover {background-position:0 -26px;}
 a[href^="javascript:userInfo"] {white-space:pre-wrap;word-break:break-all;}
-.grayscale {-webkit-filter:grayscale(1);}
+.grayscale {-webkit-filter:grayscale(1) blur(1px);}
 
 /* comment modal */
 .btn_userCmt {width:15px;height:15px;vertical-align:middle;margin-left:2px;background:url('chrome-extension://__MSG_@@extension_id__/images/comment.png') no-repeat;border:none;text-indent:-9999px;cursor:pointer;}
