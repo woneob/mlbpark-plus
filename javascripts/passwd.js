@@ -10,7 +10,7 @@ chrome.extension.sendMessage({action:'passwd'}, function(response) {
 			if( results == null ) {
 				return '';
 			} else {
-				return decodeURIComponent(results[1].replace(/\+/g, ' '));
+				return decodeURIComponent(results[1].replace(/\+/g, ' ').replace(/%25/gi, '%'));
 			}
 		}
 		window.location = getParameterByName('gourl');
