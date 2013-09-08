@@ -174,6 +174,8 @@ input.box2:focus {outline:none;}
 .iWrap {display:inline-block;position:relative;}
 .btn_iSearch {position:absolute;right:3px;bottom:3px;width:26px;height:26px;overflow:hidden;background:url("chrome-extension://__MSG_@@extension_id__/images/btn_iSearch.png") no-repeat;}
 .btn_iSearch:hover {background-position:0 -26px;}
+.imgOnerror {width:40%;margin:0 auto;padding:5px 0;background:#fff;border-radius:5px;border:1px solid #ddd;text-align:center;}
+.imgOnerror a {font:11px Dotum,sans-serif;color:#888 !important;letter-spacing:-1px;}
 a[href^="javascript:userInfo"] {white-space:pre-wrap;word-break:break-all;}
 .grayscale {-webkit-filter:grayscale(1) blur(1px);}
 
