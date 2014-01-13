@@ -27,7 +27,7 @@ $(doc).ready(function() {
 	}
 
 	// Remove Ad-Frame
-	var adFrame = doc.querySelectorAll('iframe[src*="donga.com"]');
+	var adFrame = doc.querySelectorAll('iframe[src*="donga.com"], #ADhead1');
 	for (var i = 0, adFrameLen = adFrame.length; i < adFrameLen; i++){
 		var t = adFrame[i];
 		t.parentNode.removeChild(t);

@@ -147,3 +147,4 @@ iframe[src^="http://idolpark.donga.com/"],
 iframe[src^="http://sports.donga.com/"],
 iframe[src="http://mlbpark.donga.com/mypage/memo_read.php"]{display:none !important;}
 .head_ad {display:none;}
+#ADhead1 {display:none !important;}
