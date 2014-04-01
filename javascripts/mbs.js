@@ -360,7 +360,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							var width = img.clientWidth;
 							var height = img.clientHeight;
 
-						    if (!img.complete || typeof img.naturalWidth == "undefined" || img.naturalWidth == 0) {
+						    if (!img.complete || typeof img.naturalWidth == "undefined" || img.naturalWidth === 0) {
 						    	img.className = 'displayNone';
 
 						    	var imgOnerror = document.createElement('div');
