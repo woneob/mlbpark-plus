@@ -131,7 +131,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							t.setAttribute('title','제목 : '+ title);
 							t.onclick = function(){
 								return confirm('차단된 글을 열람하시겠습니까?');
-							}
+							};
 							continue listLinkLoop;
 						}
 					}
@@ -157,7 +157,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							label.onclick = function(j){
 								return function (){
 									location.href= teamSearchUrl + teams[j].searchKeyword;
-								}
+								};
 							}(k);
 							t.innerText = title.replace(matched[1],'');
 							t.parentNode.insertBefore(label, t);
@@ -224,7 +224,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 								t.setAttribute('title','제목 : '+ title);
 								t.onclick = function(){
 									return confirm('차단된 글을 열람하시겠습니까?');
-								}
+								};
 								break;
 							}
 						}
@@ -628,7 +628,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 								var cmtUsername = up(cmtTxt[j],5).children[0].getElementsByTagName('a')[0].innerText;
 								textarea.focus();
 								textarea.value = cmtUsername + '// ';
-							}
+							};
 						}(i);
 						cmtTxt[i].appendChild(replyBtn);
 					}
@@ -678,7 +678,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						cmtLoader.className = 'loaderHide';
 					}
 				});
-			}
+			};
 
 			myArea.parentNode.insertBefore(cmtLoader, myArea.nextSibling);
 		}
@@ -688,7 +688,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			$.urlParam = function(name){
 				var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(locHref);
 				return results[1] || 0;
-			}
+			};
 			switch ($.urlParam('mbsC')) {
 				case 'bullpen':
 					doc.getElementById('navi4').className = 'on';
