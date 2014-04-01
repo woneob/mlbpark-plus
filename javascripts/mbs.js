@@ -180,11 +180,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				var cat = container.getElementsByClassName('A11gray');
 				for (var c = 0, catLen = cat.length; c < catLen; c++) {
 					var t = cat[c];
-					if (t.textContent === '공지') {
-						up(t,5).className = 'displayNone';
-					} else {
-						break;
-					}
+					if(t.textContent !== '공지') break;
+					up(t,5).className = 'displayNone';
 				}
 			}
 
