@@ -88,14 +88,18 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var container = doc.getElementById('container');
 			var listLink =  container.getElementsByClassName('G12read');
 
+			var listLinkCount;
+			var nickEl;
+			var upCount;
+
 			if (path == '/bbs/mlb_today.php') {
-				var listLinkCount = 0;
-				var nickEl = container.querySelectorAll('td[width="82"] > font');
-				var upCount = 6;
+				listLinkCount = 0;
+				nickEl = container.querySelectorAll('td[width="82"] > font');
+				upCount = 6;
 			} else {
-				var listLinkCount = 1;
-				var nickEl = container.querySelectorAll('td[width="82"] > font > a');
-				var upCount = 7;
+				listLinkCount = 1;
+				nickEl = container.querySelectorAll('td[width="82"] > font > a');
+				upCount = 7;
 			}
 
 			// KBL bbs only
