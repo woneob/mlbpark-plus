@@ -83,7 +83,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	opt_shortcut = opt.shortcut,
 	opt_imageSearch = opt.imageSearch;
 
-	$(doc).ready(function() {
+	doc.addEventListener('DOMContentLoaded', function(){
 		if (path !== '/mbs/commentV.php') {
 			var container = doc.getElementById('container');
 			var listLink =  container.getElementsByClassName('G12read');
@@ -774,7 +774,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 			addUserBlock(doc);
 		}
-	});
+	}, false);
 });
 
 window.addEventListener('message', function(event) {
