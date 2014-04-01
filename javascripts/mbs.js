@@ -63,6 +63,19 @@ function up(el, n) {
 	return parent;
 }
 
+function blockedTitleConfirm(e){
+	if(!confirm('차단된 글을 열람하시겠습니까?')){
+		e.preventDefault();	
+	}
+}
+
+function blockedTitle(elem, originTitle, keyword){
+	elem.innerText = '차단 키워드('+ keyword +')가 포함된 글 입니다';
+	elem.className = 'blockTitle';
+	elem.title = '제목: ' + originTitle;
+	elem.addEventListener('click', blockedTitleConfirm, false);
+}
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	var opt = response;
 	var opt_titleIcon = opt.titleIcon,
@@ -126,12 +139,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				if (opt_titleBlock == '1' && opt_titleBlockType == '1' && opt_titleBlockKeywords[0] !== '') {
 					for(var b = 0; b < opt_titleBlockKeywordsLen; b++) {
 						if (title.toLowerCase().indexOf(opt_titleBlockKeywords[b]) !== -1) {
-							t.innerText = '차단 키워드('+ opt_titleBlockKeywords[b] +')가 포함된 글 입니다';
-							t.className = 'blockTitle';
-							t.setAttribute('title','제목 : '+ title);
-							t.onclick = function(){
-								return confirm('차단된 글을 열람하시겠습니까?');
-							};
+							blockedTitle(t, title, opt_titleBlockKeywords[b]);
 							continue listLinkLoop;
 						}
 					}
