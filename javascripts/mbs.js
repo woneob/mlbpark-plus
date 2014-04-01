@@ -223,13 +223,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						var t = bestLink[i];
 						for(var b = 0; b < opt_titleBlockKeywordsLen; b++) {
 							if (t.innerText.toLowerCase().indexOf(opt_titleBlockKeywords[b]) !== -1) {
-								var title = t.innerText;
-								t.innerText = '차단 키워드('+ opt_titleBlockKeywords[b] +')가 포함된 글 입니다';
-								t.className = 'blockTitle';
-								t.setAttribute('title','제목 : '+ title);
-								t.onclick = function(){
-									return confirm('차단된 글을 열람하시겠습니까?');
-								};
+								blockedTitle(t, t.innerText, opt_titleBlockKeywords[b]);
 								break;
 							}
 						}
