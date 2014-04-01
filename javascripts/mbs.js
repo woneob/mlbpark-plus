@@ -384,7 +384,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							if (width && height > 50) {
 								var src = img.src;
 								if(src.substr(0,7) != 'http://') {
-									var src = 'http://mlbpark.donga.com' + src;
+									src = 'http://mlbpark.donga.com' + src;
 								}
 
 								var btn_iSearch = doc.createElement('a');
