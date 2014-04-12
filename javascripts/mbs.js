@@ -652,12 +652,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			//comment refresh
 			var mbsC = doc.getElementsByName('mbsC')[0].value;
 			var mbsIdx =  doc.getElementsByName('mbsIdx')[0].value;
-
-			if (path == '/mbs/commentV.php'){
-				var wday = doc.getElementsByName('co_day')[0].value;
-			} else {
-				var wday = doc.getElementsByName('wday')[0].value;
-			}
+			var wdayKey = (path == '/mbs/commentV.php') ? 'co_day' : 'wday';
+			var wday = doc.getElementsByName(wdayKey)[0].value;
 
 			var cmtLoader = doc.createElement('div');
 			var cmtLoadBtn = doc.createElement('button');
