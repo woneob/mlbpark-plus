@@ -373,16 +373,16 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							var width = img.clientWidth;
 							var height = img.clientHeight;
 
-						    if (!img.complete || typeof img.naturalWidth == "undefined" || img.naturalWidth === 0) {
-						    	img.className = 'displayNone';
+							if (!img.complete || typeof img.naturalWidth == "undefined" || img.naturalWidth === 0) {
+								img.className = 'displayNone';
 
-						    	var imgOnerror = document.createElement('div');
-						    	imgOnerror.className = 'imgOnerror';
+								var imgOnerror = doc.createElement('div');
+								imgOnerror.className = 'imgOnerror';
 
-						    	var imgOnerrorTitle = document.createElement('h3');
-						    	imgOnerrorTitle.innerText = '이미지 로드 실패';
+								var imgOnerrorTitle = doc.createElement('h3');
+								imgOnerrorTitle.innerText = '이미지 로드 실패';
 
-								var imgOnerrorLink = document.createElement('a');
+								var imgOnerrorLink = doc.createElement('a');
 								imgOnerrorLink.href = img.src;
 								imgOnerrorLink.target = '_blank';
 								imgOnerrorLink.innerHTML = '외부 링크가 차단된 이미지일 수 있습니다.<br>클릭 후 주소입력창에서 엔터 키를 눌러보세요';
