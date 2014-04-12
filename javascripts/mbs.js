@@ -77,6 +77,52 @@ function blockedTitle(elem, originTitle, keyword){
 	elem.addEventListener('click', blockedTitleConfirm, false);
 }
 
+function createBlindButton(keyword, target){
+	var containerClassName,
+		buttonId,
+		buttonText1,
+		buttonText2;
+
+	if (keyword === 'warn') {
+		containerClassName = 'grayscale';
+		buttonId = 'btn_color';
+		buttonText1 = '경고 문구가 포함되어 본문을 흑백처리 합니다.';
+		buttonText2 = ' 원문을 보시려면 클릭하세요.';
+	} else {
+		containerClassName = 'blind';
+		buttonId = 'btn_blind';
+		buttonText1 = '댓글에 '+ keyword + '가 포함된 글 입니다.';
+		buttonText2 = ' 본문을 보시려면 클릭하세요.';
+	}
+
+	var buttonClick = function(){
+		this.className = 'displayNone';
+
+		if (keyword === 'warn') {
+			target.classList.remove('grayscale');
+		} else {
+			target.style.maxHeight = target.offsetHeight + 'px';
+			target.className += ' slide';
+		}
+	};
+
+	target.className = containerClassName;
+
+	var btnTitle = doc.createElement('span');
+	btnTitle.innerText = buttonText1;
+
+	var btnText = doc.createTextNode(buttonText2);
+	var button = doc.createElement('div');
+
+	button.id = buttonId;
+	button.className = 'warnBtn';
+	button.appendChild(btnTitle);
+	button.appendChild(btnText);
+	button.addEventListener('click', buttonClick, false);
+
+	target.insertAdjacentElement('beforeBegin', button);
+}
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	var opt = response;
 	var opt_titleIcon = opt.titleIcon,
@@ -265,45 +311,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					};
 
 					if ($(myArea).find('.G12:Contains("COB")').length > 0) {
-						article.className = 'blind';
-						var btn_cob = doc.createElement('div');
-						var btn_cobTit = doc.createElement('span');
-						btn_cob.className = 'warnBtn';
-						btn_cobTit.innerText = '댓글에 COB가 포함된 글 입니다.';
-						btn_cob.innerText = ' 본문을 보시려면 클릭하세요.';
-						btn_cob.insertBefore(btn_cobTit, btn_cob.firstChild);
-						article.insertAdjacentElement('beforeBegin', btn_cob);
+						createBlindButton('COB', article);
 					} else if ($(myArea).find('.G12:contains("비누")').length > 0) {
-						article.className = 'blind';
-						var btn_soap = doc.createElement('div');
-						var btn_soapTit = doc.createElement('span');
-						btn_soap.className = 'warnBtn';
-						btn_soapTit.innerText = '댓글에 비누가 포함된 글 입니다';
-						btn_soap.innerText = ' 본문을 보시려면 클릭하세요.';
-						btn_soap.insertBefore(btn_soapTit, btn_soap.firstChild);
-						article.insertAdjacentElement('beforeBegin', btn_soap);
+						createBlindButton('비누', article);
 					} else if(titIcons.warn.test(subject)) {
-						article.className = 'grayscale';
-						var btn_warn = doc.createElement('div');
-						var btn_warnTit = doc.createElement('span');
-						btn_warn.id = 'btn_color';
-						btn_warn.className = 'warnBtn';
-						btn_warnTit.innerText = '경고 문구가 포함되어 본문을 흑백처리 합니다.';
-						btn_warn.innerText = ' 원문을 보시려면 클릭하세요.';
-						btn_warn.insertBefore(btn_warnTit, btn_warn.firstChild);
-						article.insertAdjacentElement('beforeBegin', btn_warn);
+						createBlindButton('warn', article);
 					}
-
-					$(container.getElementsByClassName('warnBtn')).on('click',function(){
-						this.className = 'displayNone';
-						if (this.id == 'btn_color') {
-							article.classList.remove('grayscale');
-						} else {
-							var articleHeight = article.offsetHeight;
-							article.style.maxHeight = articleHeight + 'px';
-							article.className += ' slide';
-						}
-					});
 				}
 
 				//add userId
