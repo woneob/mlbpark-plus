@@ -1,5 +1,6 @@
 var doc = document;
-var loc = window.location;
+var win = window;
+var loc = win.location;
 var locHref = loc.href;
 var path = loc.pathname;
 var titIcons = {
@@ -353,7 +354,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				if (opt_imageSearch == '1' || opt_imageSearch === undefined) {
 					var images = article.getElementsByTagName('img');
 
-					window.onload = function(){
+					win.onload = function(){
 						for (var i = 0, imagesLen = images.length; i < imagesLen; i++) {
 							var img = images[i];
 							var width = img.clientWidth;
@@ -487,7 +488,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 									$('#modalFormTextarea').on('click',function(){
 										if ($('#loginArea a:first-child').text() == '로그인'){
 											if (confirm('로그인 후 사용 가능합니다.\n로그인 페이지로 이동하시겠습니까?') == true){
-												window.location = 'http://www.donga.com/members/login.php\?gourl=' + escape(locHref);
+												win.location = 'http://www.donga.com/members/login.php\?gourl=' + escape(locHref);
 											}
 										}
 									});
@@ -732,7 +733,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							var topVal = listElTop - currentTop;
 
 							doc.body.style.cssText = '-webkit-transform:translate(0, '+ topVal +'px)';
-							window.scroll(0,listElTop);
+							win.scroll(0,listElTop);
 							doc.body.style.cssText = '-webkit-transform:translate(0,0);transition:-webkit-transform .5s ease;';
 
 							$(doc.body).on('webkitTransitionEnd transitionend', function(){
@@ -767,8 +768,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 					t.getElementsByTagName('ul')[0].appendChild(blockLiEl);
 				}
-				$('li[data-user]').on('click',function(){
-					window.postMessage({
+				$('li[data-user]').on('click', function(){
+					win.postMessage({
 						action:'userBlockDelivery',
 						user: this.getAttribute('data-user')
 					}, '*');
@@ -780,13 +781,17 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	}, false);
 });
 
-window.addEventListener('message', function(event) {
+win.addEventListener('message', function(event) {
 	// We only accept messages from ourselves
-	if (window != event.source) return;
+	if (win != event.source) return;
 
 	switch(event.data.action) {
 		case 'userBlockDelivery' :
-			chrome.extension.sendMessage({action:event.data.action, data:event.data}, function(response) {
+			chrome.extension.sendMessage({
+				action: event.data.action,
+				data: event.data
+			},
+			function(response) {
 				if(response.result) {
 					alert('"' + response.user + '" 님을 닉네임 차단에 등록했습니다.');
 					location.reload();
