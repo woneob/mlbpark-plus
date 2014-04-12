@@ -146,7 +146,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	doc.addEventListener('DOMContentLoaded', function(){
 		if (path !== '/mbs/commentV.php') {
 			var container = doc.getElementById('container');
-			var listLink =  container.getElementsByClassName('G12read');
+			var listLink = container.getElementsByClassName('G12read');
 
 			var listLinkCount;
 			var nickEl;
@@ -288,7 +288,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					for (var u = 0, CmtNickElLen = CmtNickEl.length; u < CmtNickElLen; u++) {
 						for (var i = 0; i < opt_userBlockKeywordsLen; i++) {
 							if (CmtNickEl[u].innerText === opt_userBlockKeywords[i]) {
-								up(CmtNickEl[u],7).className = 'displayNone';
+								up(CmtNickEl[u], 7).className = 'displayNone';
 								break;
 							}
 						}
@@ -392,7 +392,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 
 								img.insertAdjacentElement('afterEnd', imgOnerror);
-						    }
+							}
 
 							if (width && height > 50) {
 								var src = img.src;
@@ -698,6 +698,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(locHref);
 				return results[1] || 0;
 			};
+
 			switch ($.urlParam('mbsC')) {
 				case 'bullpen':
 					doc.getElementById('navi4').className = 'on';
@@ -749,7 +750,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							});
 						break;
 					}
-
 				}, false);
 			}
 
