@@ -444,7 +444,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						}
 
 						//view userComment
-						if (opt_userCommentView == '1' || opt_userCommentView == null) {
+						if (opt_userCommentView == '1' || opt_userCommentView === null) {
 							var viewCmt = doc.createElement('button');
 							viewCmt.type = 'button';
 							viewCmt.className = 'btn_userCmt',
@@ -454,7 +454,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						}
 					}
 
-					if (opt_userCommentView == '1' || opt_userCommentView == null) {
+					if (opt_userCommentView == '1' || opt_userCommentView === null) {
 						var btn_userCmt = myArea.querySelectorAll('.btn_userCmt');
 						$(btn_userCmt).on('click',function(){
 							var t = this;
@@ -500,7 +500,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 									$('#modalFormTextarea').on('click',function(){
 										if ($('#loginArea a:first-child').text() == '로그인'){
-											if (confirm('로그인 후 사용 가능합니다.\n로그인 페이지로 이동하시겠습니까?') == true){
+											if (confirm('로그인 후 사용 가능합니다.\n로그인 페이지로 이동하시겠습니까?') === true){
 												win.location = 'http://www.donga.com/members/login.php\?gourl=' + escape(locHref);
 											}
 										}
@@ -571,7 +571,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 					viewVoterBtn.addEventListener('click', function(e){
 						e.stopPropagation();
-						if (voterOl.childElementCount == 0) {
+						if (voterOl.childElementCount === 0) {
 							$.ajax({
 								type: 'GET',
 								url: 'http://mlbpark.donga.com/mbs/articleVoteList.php?bbs='+ mbsC +'&article_id=' + mbsIdx,
@@ -625,7 +625,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			function replyButton(){
 				var cmtTxt = myArea.querySelectorAll('.G12');
 				var cmtTxtLen = cmtTxt.length;
-				if ((opt_reply == '1' || opt_reply == null) && cmtTxtLen > 0) {
+				if ((opt_reply == '1' || opt_reply === null) && cmtTxtLen > 0) {
 					for (var i = 0; i < cmtTxtLen; i++) {
 						var replyBtn = doc.createElement('button');
 						replyBtn.type = 'button';
@@ -725,7 +725,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var pLink = $currentPage[0].previousSibling.href;
 			var nLink = $currentPage[0].nextSibling.href;
 
-			if (opt_shortcut == '1' || opt_shortcut == null) {
+			if (opt_shortcut == '1' || opt_shortcut === null) {
 				var listEl = doc.querySelector('table[height="31"]');
 
 				doc.addEventListener('keyup', function(e) {
