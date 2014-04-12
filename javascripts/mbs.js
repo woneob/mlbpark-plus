@@ -715,20 +715,19 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			if (opt_shortcut == '1' || opt_shortcut == null) {
 				var listEl = doc.querySelector('table[height="31"]');
 
+				doc.addEventListener('keyup', function(e) {
+					if (path === '/mbs/commentV.php') return;
+					if ($(e.target).is('input, textarea')) return;
 
-				$(doc).keyup(function(e){
-					if (path !== '/mbs/commentV.php'){
-						if ($(e.target).is('input, textarea')) {
-							return;
-						}
-						if (e.which === 65) {
-							window.location.href = pLink;
-						}
-						if (e.which === 83) {
-							window.location.href = nLink;
-						}
-						if (e.which === 68) {
-							var listElTop = listEl.getBoundingClientRect().top + window.pageYOffset;
+					switch(e.which) {
+						case 65:
+							win.location.href = pLink;
+						break;
+						case 83:
+							win.location.href = nLink;
+						break;
+						case 68:
+							var listElTop = listEl.getBoundingClientRect().top + win.pageYOffset;
 							var currentTop = doc.body.scrollTop;
 							var topVal = listElTop - currentTop;
 
@@ -739,9 +738,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							$(doc.body).on('webkitTransitionEnd transitionend', function(){
 								doc.body.style.transition = 'none';
 							});
-						}
+						break;
 					}
-				});
+
+				}, false);
 			}
 
 			//prerender
