@@ -35,30 +35,19 @@ function showMessage(message) {
 	})();
 }
 
+function postMessagenger(inputElem, actionName) {
+	var input = formElements[inputElem];
+
+	if (!input.value.trim()) return;
+
+	window.postMessage({
+		action: actionName,
+		content: input.value,
+		inputName: input.id
+	}, '*');
+}
+
 (function bindEvent() {
-	formElements.blockBtn.addEventListener('click', function(){
-		var input = formElements.blockInput;
-
-		if (!input.value.trim()) return;
-
-		window.postMessage({
-			action: 'titleBlockDelivery',
-			content: input.value,
-			inputName: input.id
-		}, '*');
-	}, false);
-
-	formElements.blockUserBtn.addEventListener('click', function(){
-		var input = formElements.blockUserInput;
-		if (!input.value.trim()) return;
-
-		window.postMessage({
-			action: 'userBlockDelivery',
-			content: input.value,
-			inputName: input.id
-		}, '*');
-	}, false);
-
 	$('.txtInput').keyup(function(event){
 		if(event.keyCode == 13){
 			$(this).next('button').click();
@@ -75,6 +64,14 @@ function showMessage(message) {
 
 doc.addEventListener('DOMContentLoaded', function() {
 	restore();
+
+	formElements.blockBtn.addEventListener('click', function() {
+		postMessagenger('blockInput', 'titleBlockDelivery');
+	}, false);
+
+	formElements.blockUserBtn.addEventListener('click', function() {
+		postMessagenger('blockUserInput', 'userBlockDelivery');
+	}, false);
 
 	chrome.management.get(chrome.i18n.getMessage('@@extension_id'), function(result) {
 		doc.getElementById('version').innerText = 'ver. ' + result.version;
