@@ -13,7 +13,8 @@ var titIcons = {
 	question: /(질문|요\?|여\?|죠\?|나요)/,
 	img: /(짤방|jpg|gif|jyp)/i,
 	mobile: /(맛폰)/
-}, teams = {
+}
+var teams = {
 	kia: {
 		teamName: /(\[기아\]\s?|\[kia\]\s?)/i,
 		searchKeyword: 'kia+OR+%B1%E2%BE%C6'
