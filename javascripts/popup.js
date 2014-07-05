@@ -63,7 +63,7 @@ function pressEnter(selector) {
 }
 
 function checkboxChange() {
-	var checkboxes = doc.querySelectorAll(':checkbox');
+	var checkboxes = doc.querySelectorAll('[type="checkbox"]');
 
 	var changer = function() {
 		ls[this.name] = this.checked;
