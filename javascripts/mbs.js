@@ -142,7 +142,6 @@ function Options(res) {
 	this.isEnableImageSearch = res.isEnableImageSearch === 'true';
 }
 
-
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	var o = new Options(response);
 
@@ -790,24 +789,25 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	}, false);
 });
 
-win.addEventListener('message', function(event) {
-	// We only accept messages from ourselves
-	if (win != event.source) return;
+win.addEventListener('message', function(e) {
+	if (win != e.source) return;
 
-	switch(event.data.action) {
+	switch(e.data.action) {
 		case 'userBlockDelivery' :
-			chrome.extension.sendMessage({
-				action: event.data.action,
-				data: event.data
-			},
-			function(response) {
-				if(response.result) {
-					alert('"' + response.user + '" 님을 닉네임 차단에 등록했습니다.');
-					location.reload();
-				} else {
-					alert('닉네임 차단을 실패했습니다.\n' + response.message);
+			chrome.extension.sendMessage(
+				{
+					action: e.data.action,
+					data: e.data
+				},
+				function(response) {
+					if(response.result) {
+						alert('"' + response.user + '" 님을 닉네임 차단에 등록했습니다.');
+						location.reload();
+					} else {
+						alert('닉네임 차단을 실패했습니다.\n' + response.message);
+					}
 				}
-			});
+			);
 		break;
 	}
 }, false);
