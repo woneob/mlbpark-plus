@@ -1,12 +1,16 @@
 var doc = document;
+
 chrome.extension.sendMessage({action:'width'}, function(response) {
-	var widthVar = response.width,
-	widthValVar = response.widthVal;
+	var o = {
+		isEnableContainerWidth: response.isEnableContainerWidth === 'true',
+		containerWith: response.containerWith
+	};
 
 	//custom container width
-	if (widthVar == '1') {
+	if (o.isEnableContainerWidth) {
 		var customWidth = doc.createElement('style'); 
-		customWidth.appendChild(doc.createTextNode('#wrap {max-width:' + widthValVar + 'px !important;}'));
+		var customStyle = doc.createTextNode('#wrap {max-width:' + o.containerWith + 'px !important;}');
+		customWidth.appendChild(customStyle);
 		doc.documentElement.insertBefore(customWidth);
 	}
 });

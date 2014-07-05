@@ -11,6 +11,13 @@ var scoreTpl =
 '	<div id="score_result" style="display:none;"></div>\n' +
 '</div>\n';
 
+function Options(res) {
+	this.isBlockArticle = res.isBlockArticle === 'true';
+	this.blockKeywords = res.blockKeywords;
+	this.blockKeywordLength = this.blockKeywords.length;
+	this.blockType = res.blockType;
+}
+
 $(doc).ready(function() {
 	//ScoreBoard load
 	doc.getElementsByClassName('article_box')[0].insertAdjacentHTML('beforeEnd', scoreTpl);
@@ -50,26 +57,17 @@ $(doc).ready(function() {
 	});
 
 	chrome.extension.sendMessage({action:'main'}, function(response) {
-		var opt = response;
-		var opt_titleBlock = opt.titleBlock,
-		opt_titleBlockKeywords = opt.titleBlockKeywords,
-		opt_titleBlockKeywordsLen = opt_titleBlockKeywords.length,
-		opt_titleBlockType = opt.titleBlockType;
+		var o = new Options(response);
 
-
-		var blockVar = response.block,
-		blockInputVar = response.blockInput,
-		blockTypeVar = response.blockType;
-
-		if (opt_titleBlock == '1' && opt_titleBlockKeywords[0] !== '') {
+		if (o.isBlockArticle && o.blockKeywordLength) {
 			var bestLink = doc.querySelectorAll('.greatest_list a');
 			var bestLinkLen = bestLink.length;
 
-			if (opt_titleBlockType == '2') {
+			if (o.blockType == 'hidden') {
 				for(var i = 0; i < bestLinkLen; i++){
 					var t = bestLink[i];
-					for(var b = 0; b < opt_titleBlockKeywordsLen; b++) {
-						if (t.innerText.toLowerCase().indexOf(opt_titleBlockKeywords[b]) !== -1) {
+					for(var b = 0; b < o.blockKeywordLength; b++) {
+						if (t.innerText.toLowerCase().indexOf(o.blockKeywords[b]) !== -1) {
 							t.parentNode.className = 'displayNone';
 							break;
 						}
@@ -77,13 +75,13 @@ $(doc).ready(function() {
 				}
 			}
 
-			if (opt_titleBlockType == '1') {
+			if (o.blockType == 'replace') {
 				for(var i = 0; i < bestLinkLen; i++){
 					var t = bestLink[i];
-					for(var b = 0; b < opt_titleBlockKeywordsLen; b++) {
-						if (t.innerText.toLowerCase().indexOf(opt_titleBlockKeywords[b]) !== -1) {
+					for(var b = 0; b < o.blockKeywordLength; b++) {
+						if (t.innerText.toLowerCase().indexOf(o.blockKeywords[b]) !== -1) {
 							var title = t.innerText;
-							t.innerText = '차단 키워드('+ opt_titleBlockKeywords[b] +')가 포함된 글 입니다';
+							t.innerText = '차단 키워드('+ o.blockKeywords[b] +')가 포함된 글 입니다';
 							t.className = 'blockTitle';
 							t.setAttribute('title','제목 : '+ title);
 							t.onclick = function(){

@@ -123,25 +123,29 @@ function createBlindButton(keyword, target){
 	target.insertAdjacentElement('beforeBegin', button);
 }
 
+function Options(res) {
+	this.isShowTitleIcon = res.isShowTitleIcon === 'true';
+	this.isShowTeamIcon = res.isShowTeamIcon === 'true';
+	this.isBlindContent = res.isBlindContent === 'true';
+	this.isBlockArticle = res.isBlockArticle === 'true';
+	this.blockKeywords = res.blockKeywords;
+	this.blockKeywordslength = this.blockKeywords.length;
+	this.blockType = res.blockType;
+	this.isBlockNickname = res.isBlockNickname === 'true';
+	this.blockNicknames = res.blockNicknames;
+	this.blockNicknamesLength = this.blockNicknames.length;
+	this.isShowUserHistory = res.isShowUserHistory === 'true';
+	this.isInsertReplyButton = res.isInsertReplyButton === 'true';
+	this.isEnableCommentView = res.isEnableCommentView === 'true';
+	this.isResizeVideo = res.isResizeVideo === 'true';
+	this.isBlockNotice = res.isBlockNotice === 'true';
+	this.isEnableShortcutKey = res.isEnableShortcutKey === 'true';
+	this.isEnableImageSearch = res.isEnableImageSearch === 'true';
+}
+
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
-	var opt = response;
-	var opt_titleIcon = opt.titleIcon,
-	opt_teamIcon = opt.teamIcon,
-	opt_titleBlock = opt.titleBlock,
-	opt_titleBlockKeywords = opt.titleBlockKeywords,
-	opt_titleBlockKeywordsLen = opt_titleBlockKeywords.length,
-	opt_titleBlockType = opt.titleBlockType,
-	opt_userBlock = opt.userBlock,
-	opt_userBlockKeywords = opt.userBlockKeywords,
-	opt_userBlockKeywordsLen = opt_userBlockKeywords.length,
-	opt_blind = opt.blind,
-	opt_userHistory = opt.userHistory,
-	opt_reply = opt.reply,
-	opt_userCommentView = opt.userCommentView,
-	opt_videoResize = opt.videoResize,
-	opt_noticeBlock = opt.noticeBlock,
-	opt_shortcut = opt.shortcut,
-	opt_imageSearch = opt.imageSearch;
+	var o = new Options(response);
 
 	doc.addEventListener('DOMContentLoaded', function(){
 		if (path !== '/mbs/commentV.php') {
@@ -162,10 +166,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				upCount = 7;
 			}
 
+			var teamSearchUrl = '/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=';
+
 			// KBL bbs only
-			if ((opt_teamIcon == '1' || opt_teamIcon === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
+			if (o.isShowTeamIcon && locHref.indexOf('mbsC=kbotown') > -1) {
 				doc.body.id = 'team_show';
-				var teamSearchUrl = '/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=';
 			}
 
 			listLinkLoop:
@@ -174,26 +179,26 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				var title = t.innerText;
 
 				//title block
-				if (opt_titleBlock == '1' && opt_titleBlockType == '2' && opt_titleBlockKeywords[0] !== '') {
-					for(var b = 0; b < opt_titleBlockKeywordsLen; b++) {
-						if (title.toLowerCase().indexOf(opt_titleBlockKeywords[b]) !== -1) {
-							up(t,6).className = 'displayNone';
+				if (o.isBlockArticle && o.blockType === 'hidden' && o.blockKeywordslength) {
+					for(var b = 0; b < o.blockKeywordslength; b++) {
+						if (title.toLowerCase().indexOf(o.blockKeywords[b]) !== -1) {
+							up(t, 6).className = 'displayNone';
 							continue listLinkLoop;
 						}
 					}
 				}
 
-				if (opt_titleBlock == '1' && opt_titleBlockType == '1' && opt_titleBlockKeywords[0] !== '') {
-					for(var b = 0; b < opt_titleBlockKeywordsLen; b++) {
-						if (title.toLowerCase().indexOf(opt_titleBlockKeywords[b]) !== -1) {
-							blockedTitle(t, title, opt_titleBlockKeywords[b]);
+				if (o.isBlockArticle && o.blockType === 'replace' && o.blockKeywordslength) {
+					for(var b = 0; b < o.blockKeywordslength; b++) {
+						if (title.toLowerCase().indexOf(o.blockKeywords[b]) !== -1) {
+							blockedTitle(t, title, o.blockKeywords[b]);
 							continue listLinkLoop;
 						}
 					}
 				}
 
 				// title icon
-				if (opt_titleIcon == '1' || opt_titleIcon === undefined) {
+				if (o.isShowTitleIcon) {
 					for (var key in titIcons) {
 						if(titIcons[key].test(title)) {
 							t.className = 'ico ico_' + key;
@@ -203,7 +208,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				// team icon
-				if ((opt_teamIcon == '1' || opt_teamIcon === undefined) && locHref.indexOf('mbsC=kbotown') > -1) {
+				if (o.isShowTeamIcon && locHref.indexOf('mbsC=kbotown') > -1) {
 					for(var k in teams) {
 						var matched = teams[k].teamName.exec(title);
 						if(matched) {
@@ -223,7 +228,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 
 			//notice blind
-			if (opt_noticeBlock == '1') {
+			if (o.isBlockNotice) {
 				var cat = container.getElementsByClassName('A11gray');
 				for (var c = 0, catLen = cat.length; c < catLen; c++) {
 					var t = cat[c];
@@ -233,10 +238,10 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 
 			//user block
-			if (opt_userBlock == '1') {
+			if (o.isBlockNickname) {
 				for (var u = 0, nickElLen = nickEl.length; u < nickElLen; u++) {
-					for (var i = 0; i < opt_userBlockKeywordsLen; i++) {
-						if (nickEl[u].innerText === opt_userBlockKeywords[i]) {
+					for (var i = 0; i < o.blockNicknamesLength; i++) {
+						if (nickEl[u].innerText === o.blockNicknames[i]) {
 							up(nickEl[u],upCount).className = 'displayNone';
 							break;
 						}
@@ -244,20 +249,16 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 			}
 
-			if (opt_titleBlock == '1' && opt_titleBlockKeywords[0] !== '') {
+			if (o.isBlockArticle && o.blockKeywordslength) {
 				var bestLink = doc.querySelectorAll('td[width="190"] a');
 				var bestLinkLen = bestLink.length;
 
-				if (bestLinkLen > 0 && opt_titleBlockType == '2') {
+				if (bestLinkLen > 0 && o.blockType == 'hidden') {
 					for(var i = 0; i < bestLinkLen; i++){
 						var t = bestLink[i];
-						for(var b = 0; b < opt_titleBlockKeywordsLen; b++) {
-							if (t.innerText.toLowerCase().indexOf(opt_titleBlockKeywords[b]) !== -1) {
-								if (t.parentNode.tagName.toLowerCase() == 'strong'){
-									var upCount = 3;
-								} else {
-									var upCount = 2;
-								}
+						for(var b = 0; b < o.blockKeywordslength; b++) {
+							if (t.innerText.toLowerCase().indexOf(o.blockKeywords[b]) !== -1) {
+								var upCount = t.parentNode.tagName.toLowerCase() == 'strong' ? 3 : 2;
 								up(t,upCount).className = 'displayNone';
 								break;
 							}
@@ -265,12 +266,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					}
 				}
 
-				if (bestLinkLen > 0 && opt_titleBlockType == '1') {
+				if (bestLinkLen > 0 && o.blockType == 'replace') {
 					for(var i = 0; i < bestLinkLen; i++){
 						var t = bestLink[i];
-						for(var b = 0; b < opt_titleBlockKeywordsLen; b++) {
-							if (t.innerText.toLowerCase().indexOf(opt_titleBlockKeywords[b]) !== -1) {
-								blockedTitle(t, t.innerText, opt_titleBlockKeywords[b]);
+						for(var b = 0; b < o.blockKeywordslength; b++) {
+							if (t.innerText.toLowerCase().indexOf(o.blockKeywords[b]) !== -1) {
+								blockedTitle(t, t.innerText, o.blockKeywords[b]);
 								break;
 							}
 						}
@@ -283,11 +284,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var myArea = doc.getElementById('myArea');
 
 			function userBlock_cmt(){
-				if (opt_userBlock == '1') {
+				if (o.isBlockNickname) {
 					var CmtNickEl = doc.querySelectorAll('td[width="140"] > font > a');
 					for (var u = 0, CmtNickElLen = CmtNickEl.length; u < CmtNickElLen; u++) {
-						for (var i = 0; i < opt_userBlockKeywordsLen; i++) {
-							if (CmtNickEl[u].innerText === opt_userBlockKeywords[i]) {
+						for (var i = 0; i < o.blockNicknamesLength; i++) {
+							if (CmtNickEl[u].innerText === o.blockNicknames[i]) {
 								up(CmtNickEl[u], 7).className = 'displayNone';
 								break;
 							}
@@ -303,7 +304,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				var nickname = userEl.nextElementSibling.innerText;
 
 				//content blind
-				if (opt_blind == '1' || opt_blind === undefined) {
+				if (o.isBlindContent) {
 					var subject = container.getElementsByTagName('strong')[0].innerText;
 
 					$.expr[':'].Contains = function(a,i,m){
@@ -326,7 +327,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				userEl.parentNode.appendChild(idEl);
 
 				//user history
-				if (opt_userHistory == '1') {
+				if (o.isShowUserHistory) {
 					var historyEl = doc.createElement('div');
 					var historyHeadEl = doc.createElement('div');
 					var historyTitleEl = doc.createElement('h3');
@@ -364,7 +365,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				//google search by image
-				if (opt_imageSearch == '1' || opt_imageSearch === undefined) {
+				if (o.isEnableImageSearch) {
 					var images = article.getElementsByTagName('img');
 
 					win.onload = function(){
@@ -425,7 +426,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				//videoCss
-				if (opt_videoResize == '1' || opt_videoResize === undefined) {
+				if (o.isResizeVideo) {
 					var vdoCss = doc.createElement('link');
 					vdoCss.rel = 'stylesheet';
 					vdoCss.href = chrome.extension.getURL('/css/video.css');
@@ -444,7 +445,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						}
 
 						//view userComment
-						if (opt_userCommentView == '1' || opt_userCommentView === null) {
+						if (o.isEnableCommentView) {
 							var viewCmt = doc.createElement('button');
 							viewCmt.type = 'button';
 							viewCmt.className = 'btn_userCmt',
@@ -454,7 +455,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						}
 					}
 
-					if (opt_userCommentView == '1' || opt_userCommentView === null) {
+					if (o.isEnableCommentView) {
 						var btn_userCmt = myArea.querySelectorAll('.btn_userCmt');
 						$(btn_userCmt).on('click',function(){
 							var t = this;
@@ -585,12 +586,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 										voterOl.appendChild(emptyMsg);
 									} else {
 										voterOl.innerHTML = data;
-										if (opt_userBlock == '1') {
+										if (o.isBlockNickname) {
 											var voterListLi = voterOl.querySelectorAll('li');
 											for(var x = 0, len = voterListLi.length; x < len; x++){
 												var t = voterListLi[x];
-												for (var i = 0; i < opt_userBlockKeywordsLen; i++) {
-													if(t.innerText === opt_userBlockKeywords[i]){
+												for (var i = 0; i < o.blockNicknamesLength; i++) {
+													if(t.innerText === o.blockNicknames[i]){
 														t.className = 'blockUser';
 														break;
 													}
@@ -625,7 +626,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			function replyButton(){
 				var cmtTxt = myArea.querySelectorAll('.G12');
 				var cmtTxtLen = cmtTxt.length;
-				if ((opt_reply == '1' || opt_reply === null) && cmtTxtLen > 0) {
+				if (o.isInsertReplyButton && cmtTxtLen > 0) {
 					for (var i = 0; i < cmtTxtLen; i++) {
 						var replyBtn = doc.createElement('button');
 						replyBtn.type = 'button';
@@ -722,7 +723,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			var pLink = $currentPage[0].previousSibling.href;
 			var nLink = $currentPage[0].nextSibling.href;
 
-			if (opt_shortcut == '1' || opt_shortcut === null) {
+			if (o.isEnableShortcutKey) {
 				var listEl = doc.querySelector('table[height="31"]');
 
 				doc.addEventListener('keyup', function(e) {
@@ -766,7 +767,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		}
 
 		// Add a 'User Block' to User Menu
-		if (opt_userBlock == '1') {
+		if (o.isBlockNickname) {
 			function addUserBlock(scop){
 				var userMenu = scop.querySelectorAll('div[id^=nik_]');
 				for (var i = 0, userMenuLen = userMenu.length; i < userMenuLen; i++) {

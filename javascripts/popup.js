@@ -1,50 +1,24 @@
 var doc = document;
-var notice = doc.getElementById('notice'),
-	titIcon = doc.getElementById('titIcon'),
-	team = doc.getElementById('team'),
-	block = doc.getElementById('block'),
-	titleBlockInput = doc.getElementById('blockInput'),
-	titleBlockBtn = doc.getElementById('blockBtn'),
-	blockUser = doc.getElementById('blockUser'),
-	userBlockInput = doc.getElementById('blockUserInput'),
-	userBlockBtn = doc.getElementById('blockUserBtn'),
-	userHistory = doc.getElementById('userHistory'),
-	messageBox = doc.getElementById('message');
+var form = doc.forms.popupForm;
+var formElements = form.elements;
+var formElementLength = formElements.length;
+var ls = localStorage;
 
-(function restore() {
-	if (localStorage['notice'] == 1) {
-		notice.checked = true;
-	}
+function restore() {
+	for (var i = 0; i < formElementLength; i++) {
+		var thisElem = formElements[i];
 
-	if (localStorage['titIcon'] == 1 || localStorage['titIcon'] == null) {
-		titIcon.checked = true;
+		if (ls[thisElem.name] === 'true') {
+			thisElem.checked = true;
+			thisElem.parentNode.classList.add('checked');
+		}
 	}
-
-	if (localStorage['team'] == 1 || localStorage['team'] == null) {
-		team.checked = true;
-	}
-
-	if (localStorage['block'] == 1) {
-		block.checked = true;
-	}
-
-	if (localStorage['blockUser'] == 1) {
-		blockUser.checked = true;
-	}
-
-	if (localStorage['userHistory'] == 1) {
-		userHistory.checked = true;
-	}
-
-	var checkedEl = doc.querySelectorAll(':checked');
-	for (var i=0; i < checkedEl.length; i++) {
-		checkedEl[i].parentNode.classList.add('checked');
-	}
-}());
+}
 
 var timeout;
 
 function saveCpmplete(message){
+	var messageBox = doc.getElementById('message');
 	messageBox.innerText = message;
 	messageBox.style.display = 'block';
 
@@ -54,27 +28,28 @@ function saveCpmplete(message){
 }
 
 (function bindEvent() {
-	titleBlockBtn.onclick = function(){
-		var blockVar = titleBlockInput.value;
-		if ('' != blockVar) {
-			window.postMessage({
-				action: 'titleBlockDelivery',
-				title: blockVar,
-				input: 'blockInput'
-			}, '*');
-		}
-	}
+	formElements.blockBtn.addEventListener('click', function(){
+		var input = formElements.blockInput;
 
-	userBlockBtn.onclick = function(){
-		var blockUserVar = userBlockInput.value;
-		if('' != blockUserVar) {
-			window.postMessage({
-				action:'userBlockDelivery',
-				user: blockUserVar,
-				input: 'blockUserInput'
-			}, '*');
-		}
-	}
+		if (!input.value.trim()) return;
+
+		window.postMessage({
+			action: 'titleBlockDelivery',
+			title: input.value,
+			inputName: input.id
+		}, '*');
+	}, false);
+
+	formElements.blockUserBtn.addEventListener('click', function(){
+		var input = formElements.blockUserInput;
+		if (!input.value.trim()) return;
+
+		window.postMessage({
+			action: 'userBlockDelivery',
+			user: input.value,
+			inputName: input.id
+		}, '*');
+	}, false);
 
 	$('.txtInput').keyup(function(event){
 		if(event.keyCode == 13){
@@ -83,19 +58,17 @@ function saveCpmplete(message){
 	});
 
 	$(':checkbox').on('change', function(event) {
-		if (this.checked) {
-			localStorage[this.id] = 1;
-			this.parentNode.classList.add('checked');
-		} else {
-			localStorage[this.id] = 0;
-			this.parentNode.classList.remove('checked');
-		}
+		ls[this.name] = this.checked;
+		this.parentNode.classList.toggle('checked');
+
 		clearTimeout(timeout);
 		saveCpmplete('저장되었습니다.');
 	});
 }());
 
 $(doc).ready(function(){
+	restore();
+
 	chrome.management.get(chrome.i18n.getMessage('@@extension_id'), function(result) {
 		doc.getElementById('version').innerText = 'ver. ' + result.version;
 	});
@@ -108,7 +81,8 @@ window.addEventListener('message', function(event) {
 		case 'titleBlockDelivery' :
 		case 'userBlockDelivery' :
 			chrome.extension.sendMessage({action:event.data.action, data:event.data}, function(response) {
-				$('#' + event.data.input).val('');
+				formElements[event.data.inputName].value = '';
+
 				if(response.result) {
 					saveCpmplete('저장되었습니다.');
 				} else {
