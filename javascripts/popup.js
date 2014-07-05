@@ -16,15 +16,23 @@ function restore() {
 }
 
 var timeout;
+function showMessage(message) {
+	var messageBox = doc.getElementById('message'),
 
-function saveCpmplete(message){
-	var messageBox = doc.getElementById('message');
-	messageBox.innerText = message;
-	messageBox.style.display = 'block';
+	show = function() {
+		messageBox.innerText = message;
+		messageBox.style.display = 'block';
+	},
 
-	timeout = setTimeout(function() {
-		messageBox.style.display = 'none';
-	}, 1000);
+	hide = function() {
+		messageBox.removeAttribute('style');
+	},
+
+	init = (function() {
+		show();
+		clearTimeout(timeout);
+		timeout = setTimeout(hide, 1000);
+	})();
 }
 
 (function bindEvent() {
@@ -35,7 +43,7 @@ function saveCpmplete(message){
 
 		window.postMessage({
 			action: 'titleBlockDelivery',
-			title: input.value,
+			content: input.value,
 			inputName: input.id
 		}, '*');
 	}, false);
@@ -46,7 +54,7 @@ function saveCpmplete(message){
 
 		window.postMessage({
 			action: 'userBlockDelivery',
-			user: input.value,
+			content: input.value,
 			inputName: input.id
 		}, '*');
 	}, false);
@@ -61,8 +69,7 @@ function saveCpmplete(message){
 		ls[this.name] = this.checked;
 		this.parentNode.classList.toggle('checked');
 
-		clearTimeout(timeout);
-		saveCpmplete('저장되었습니다.');
+		showMessage('저장되었습니다.');
 	});
 }());
 
@@ -74,22 +81,27 @@ $(doc).ready(function(){
 	});
 });
 
-window.addEventListener('message', function(event) {
-	if (window != event.source) return;
+window.addEventListener('message', function(e) {
+	if (window != e.source) return;
 
-	switch(event.data.action) {
-		case 'titleBlockDelivery' :
-		case 'userBlockDelivery' :
-			chrome.extension.sendMessage({action:event.data.action, data:event.data}, function(response) {
-				formElements[event.data.inputName].value = '';
+	switch(e.data.action) {
+		case 'titleBlockDelivery':
+		case 'userBlockDelivery':
+			chrome.extension.sendMessage(
+				{
+					action: e.data.action,
+					data: e.data
+				},
+				function(response) {
+					formElements[e.data.inputName].value = '';
 
-				if(response.result) {
-					saveCpmplete('저장되었습니다.');
-				} else {
-					saveCpmplete(response.message);
+					if(response.result) {
+						showMessage('저장되었습니다.');
+					} else {
+						showMessage(response.message);
+					}
 				}
-			});
+			);
 		break;
 	}
-	clearTimeout(timeout);
 }, false);

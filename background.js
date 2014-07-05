@@ -87,64 +87,47 @@ chrome.webRequest.onBeforeRequest.addListener(
 	['blocking']
 );
 
-// 제목 차단 키워드 등록 - 사용자 차단과 거의 동일(bad smell, 비슷한게 또 추가되면 refactoring 필요)
-function blockTitlteFn(request, sender) {
-	var title = request.data.title;
-	var blockVar = ls.blockKeywords;
+String.prototype.postposition = function(str1, str2) { 
+	return ((this.charCodeAt(this.length - 1) - 0xAC00) % 28 ? str1 : str2);
+}; 
 
-	if(!title) {
-		return {
-			result: false,
-			title: title,
-			message: '알 수 없는 키워드(' + title + ') 입니다.'
-		};
+function blocker(req, sender, storageName) {
+	var content = req.data.content.trim().replace(/^[;\s]+|[;]+$/g, '').replace(/;[;\s]*;/g, ';');
+	var localData = ls[storageName];
+	var matchExp = new RegExp('(;|^)' + content.replace(/([\[\]\(\)])/g, '\\$1') + '(;|$)');
+	var label;
+
+	switch (storageName) {
+		case 'blockKeywords': label = '단어'; break;
+		case 'blockNicknames': label = '닉네임'; break;
+		default: label = '키워드';
 	}
 
-	// 기존 설정된 차단 키워드가 있는지 확인
-	if(!blockVar || 0 > blockVar.search(new RegExp('(;|^)' + title.replace(/([\[\]\(\)])/g, '\\$1') + '(;|$)'))) {
-		if(!blockVar) ls.blockKeywords = title;
-		else ls.blockKeywords = blockVar + ';' + title;
-		return {
-			result: true,
-			title: title
-		};
-	} else {
-		return {
-			result: false,
-			title: title,
-			message: '키워드 "' + title + '"는 이미 차단되어 있습니다.'
-		};
-	}
-};
+	var obj = {
+		result: false,
+		content: content,
+		message: null
+	};
 
-// 사용자 차단 등록 - 제목 키워드 차단과 거의 동일(bad smell, 비슷한게 또 추가되면 refactoring 필요)
-function blockUserFn(request, sender) {
-	var user = request.data.user;
-	var blockUserVar = ls.blockNicknames;
-	if(!user) {
-		return {
-			result: false,
-			user: user,
-			message: '알 수 없는 닉네임(' + user + ') 입니다.'
-		};
+	if (!content) {
+		obj.message = 'error (' + content + ')';
+		return obj;
 	}
 
-	// 기존 설정된 차단 닉네임이 있는지 확인
-	if(!blockUserVar || 0 > blockUserVar.search(new RegExp('(;|^)' + user.replace(/([\[\]\(\)])/g, '\\$1') + '(;|$)'))) {
-		if(!blockUserVar) ls.blockNicknames = user;
-		else ls.blockNicknames = blockUserVar + ';' + user;
-		return {
-			result: true,
-			user: user
-		};
-	} else {
-		return {
-			result: false,
-			user: user,
-			message: '"' + user + '" 님은 이미 차단되어 있습니다.'
-		};
+	if (localData.search(matchExp) > 0) {
+		obj.message = '"' + content + '"';
+		obj.message += content.postposition('은', '는');
+		obj.message += ' 이미 차단된 ' + label + ' 입니다.';
+		return obj;
 	}
-};
+
+	localData += localData ? ';' : '';
+	localData += content;
+	ls[storageName] = localData;
+	obj.result = true;
+
+	return obj;
+}
 
 function keywordTrim(arr) {
 	return arr.replace(/\n/g, '').replace(/^[;\s]+|[;\s]+$/g, '').replace(/;[;\s]*;/g, ';');
@@ -217,7 +200,7 @@ function nicknameSplitter(arr) {
 }
 
 function onMessage(request, sender, sendResponse) {
-	switch (request.action){
+	switch (request.action) {
 		case 'mbs':
 			sendResponse({
 				isShowTitleIcon: ls.isShowTitleIcon,
@@ -236,31 +219,31 @@ function onMessage(request, sender, sendResponse) {
 				isEnableShortcutKey: ls.isEnableShortcutKey,
 				isEnableImageSearch: ls.isEnableImageSearch
 			});
-		break;
+			break;
 		case 'main':
 			sendResponse({
 				isBlockArticle: ls.isBlockArticle,
 				blockKeywords: keywordSplitter(ls.blockKeywords),
 				blockType: ls.blockType
 			});
-		break;
+			break;
 		case 'width':
 			sendResponse({
 				isEnableContainerWidth: ls.isEnableContainerWidth,
 				containerWith: ls.containerWith
 			});
-		break;
+			break;
 		case 'passwd':
 			sendResponse({
 				isSkipPasswordChange: ls.isSkipPasswordChange
 			});
-		break;
+			break;
 		case 'titleBlockDelivery':
-			sendResponse(blockTitlteFn(request, sender));
-		break;
+			sendResponse(blocker(request, sender, 'blockKeywords'));
+			break;
 		case 'userBlockDelivery':
-			sendResponse(blockUserFn(request, sender));
-		break;
+			sendResponse(blocker(request, sender, 'blockNicknames'));
+			break;
 	}
 }
 
