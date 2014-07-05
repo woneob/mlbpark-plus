@@ -62,6 +62,21 @@ function pressEnter(selector) {
 	}
 }
 
+function checkboxChange() {
+	var checkboxes = doc.querySelectorAll(':checkbox');
+
+	var changer = function() {
+		ls[this.name] = this.checked;
+		this.parentNode.classList.toggle('checked');
+
+		showMessage('저장되었습니다.');
+	};
+
+	for (var i = 0, len = checkboxes.length; i < len; i++) {
+		checkboxes[i].addEventListener('change', changer, false);
+	}
+}
+
 doc.addEventListener('DOMContentLoaded', function() {
 	restore();
 
@@ -69,13 +84,7 @@ doc.addEventListener('DOMContentLoaded', function() {
 	postMessagenger(formElements.blockUserBtn, 'blockUserInput', 'userBlockDelivery');
 
 	pressEnter('.keywordInput');
-
-	$(':checkbox').on('change', function(event) {
-		ls[this.name] = this.checked;
-		this.parentNode.classList.toggle('checked');
-
-		showMessage('저장되었습니다.');
-	});
+	checkboxChange();
 
 	chrome.management.get(chrome.i18n.getMessage('@@extension_id'), function(result) {
 		doc.getElementById('version').innerText = 'ver. ' + result.version;
