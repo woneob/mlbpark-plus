@@ -47,20 +47,18 @@ function postMessagenger(inputElem, actionName) {
 	}, '*');
 }
 
-(function bindEvent() {
-	$('.txtInput').keyup(function(event){
-		if(event.keyCode == 13){
-			$(this).next('button').click();
+function pressEnter(selector) {
+	var txtInputs = doc.querySelectorAll(selector);
+	var press = function(e) {
+		if (e.keyCode == 13) {
+			this.nextElementSibling.click();
 		}
-	});
+	};
 
-	$(':checkbox').on('change', function(event) {
-		ls[this.name] = this.checked;
-		this.parentNode.classList.toggle('checked');
-
-		showMessage('저장되었습니다.');
-	});
-}());
+	for (var i = 0, len = txtInputs.length; i < len; i++) {
+		txtInputs[i].addEventListener('keyup', press, false);
+	}
+}
 
 doc.addEventListener('DOMContentLoaded', function() {
 	restore();
@@ -72,6 +70,15 @@ doc.addEventListener('DOMContentLoaded', function() {
 	formElements.blockUserBtn.addEventListener('click', function() {
 		postMessagenger('blockUserInput', 'userBlockDelivery');
 	}, false);
+
+	pressEnter('.keywordInput');
+
+	$(':checkbox').on('change', function(event) {
+		ls[this.name] = this.checked;
+		this.parentNode.classList.toggle('checked');
+
+		showMessage('저장되었습니다.');
+	});
 
 	chrome.management.get(chrome.i18n.getMessage('@@extension_id'), function(result) {
 		doc.getElementById('version').innerText = 'ver. ' + result.version;
