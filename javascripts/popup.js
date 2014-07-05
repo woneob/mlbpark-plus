@@ -73,13 +73,13 @@ function showMessage(message) {
 	});
 }());
 
-$(doc).ready(function(){
+doc.addEventListener('DOMContentLoaded', function() {
 	restore();
 
 	chrome.management.get(chrome.i18n.getMessage('@@extension_id'), function(result) {
 		doc.getElementById('version').innerText = 'ver. ' + result.version;
 	});
-});
+}, false);
 
 window.addEventListener('message', function(e) {
 	if (window != e.source) return;
