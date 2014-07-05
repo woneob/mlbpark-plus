@@ -1,68 +1,90 @@
 var ls = localStorage;
 
 chrome.webRequest.onBeforeRequest.addListener(
-	function(details){
-		if( details.url.indexOf('articleVC.php') !== -1) {
-			return {redirectUrl: details.url.replace('articleVC', 'articleV')};
+	function(details) {
+		if (details.url.indexOf('articleVC.php') !== -1) {
+			return {
+				redirectUrl: details.url.replace('articleVC', 'articleV')
+			};
 		}
-	},{
+	},
+	{
 		urls: ['http://mlbpark.donga.com/*']
-	}, ['blocking']
+	},
+	['blocking']
 );
 
 chrome.webRequest.onBeforeRequest.addListener(
 	function() {
-		return {redirectUrl:'javascript:void(0)'};
-	}, {
-		urls:[
+		return {
+			redirectUrl: 'javascript:void(0)'
+		};
+	},
+	{
+		urls: [
 			'http://idolpark.donga.com/*',
 			'http://sports.donga.com/*',
 			'http://mlbpark.donga.com/poll/*',
 			'http://openapi.donga.com/SPORTS/suggestion',
 			'http://*.doubleclick.net/*',
 			'http://mlbpark.donga.com/mypage/memo_read.php'
-		], types: ['sub_frame']
-	}, ['blocking']
+		],
+		types: ['sub_frame']
+	},
+	['blocking']
 );
 
 chrome.webRequest.onBeforeRequest.addListener(
 	function() {
-		return {redirectUrl:'javascript:void(0)'};
-	}, {
-		urls:[
+		return {
+			redirectUrl: 'javascript:void(0)'
+		};
+	},
+	{
+		urls: [
 			'http://dimg.donga.com/acecounter/*',
 			'http://dimg.donga.com/carriage/SPORTS/*',
 			'http://pagead2.googlesyndication.com/*',
 			'http://www.gstatic.com/*',
 			'http://rtax.criteo.com/*'
-		], types: ['script']
-	}, ['blocking']
+		],
+		types: ['script']
+	},
+	['blocking']
 );
 
 chrome.webRequest.onBeforeRequest.addListener(
 	function() {
-		return {redirectUrl:'javascript:void(0)'};
-	}, {
-		urls:[
+		return {
+			redirectUrl: 'javascript:void(0)'
+		};
+	},
+	{
+		urls: [
 			'http://ar.donga.com/*',
 			'http://cad.donga.com/*',
 			'http://mlbpark.donga.com/acecounter/*',
 			'http://210.115.150.117/log/*',
 			'http://www2.donga.com:8080/*'
 		]
-	}, ["blocking"]
+	},
+	['blocking']
 );
 
 chrome.webRequest.onBeforeRequest.addListener(
 	function() {
-		return {redirectUrl:chrome.extension.getURL('/images/userIcon.gif')};
-	}, {
-		urls:[
+		return {
+			redirectUrl: chrome.extension.getURL('/images/userIcon.gif')
+		};
+	},
+	{
+		urls: [
 			'http://mlbpark.donga.com/data/',
 			'http://mlbpark.donga.com/data/emoticon/0.gif',
 			'http://mlbpark.donga.com/data/emoticon/1.gif'
 		]
-	}, ['blocking']
+	},
+	['blocking']
 );
 
 // 제목 차단 키워드 등록 - 사용자 차단과 거의 동일(bad smell, 비슷한게 또 추가되면 refactoring 필요)
