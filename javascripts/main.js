@@ -1,4 +1,3 @@
-var doc = document;
 var scoreTpl = 
 '<div id="score">\n' +
 '	<div id="score_tab">\n' +

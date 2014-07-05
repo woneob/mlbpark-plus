@@ -1,4 +1,5 @@
 var doc = document;
+var win = window;
 
 chrome.extension.sendMessage({action:'width'}, function(response) {
 	var o = {

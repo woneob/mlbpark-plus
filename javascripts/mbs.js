@@ -1,5 +1,3 @@
-var doc = document;
-var win = window;
 var loc = win.location;
 var locHref = loc.href;
 var path = loc.pathname;
