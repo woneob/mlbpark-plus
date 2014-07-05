@@ -35,16 +35,18 @@ function showMessage(message) {
 	})();
 }
 
-function postMessagenger(inputElem, actionName) {
+function postMessagenger(elem, inputElem, actionName) {
 	var input = formElements[inputElem];
 
-	if (!input.value.trim()) return;
+	elem.addEventListener('click', function() {
+		if (!input.value.trim()) return;
 
-	window.postMessage({
-		action: actionName,
-		content: input.value,
-		inputName: input.id
-	}, '*');
+		window.postMessage({
+			action: actionName,
+			content: input.value,
+			inputName: input.id
+		}, '*');
+	}, false);
 }
 
 function pressEnter(selector) {
@@ -63,13 +65,8 @@ function pressEnter(selector) {
 doc.addEventListener('DOMContentLoaded', function() {
 	restore();
 
-	formElements.blockBtn.addEventListener('click', function() {
-		postMessagenger('blockInput', 'titleBlockDelivery');
-	}, false);
-
-	formElements.blockUserBtn.addEventListener('click', function() {
-		postMessagenger('blockUserInput', 'userBlockDelivery');
-	}, false);
+	postMessagenger(formElements.blockBtn, 'blockInput', 'titleBlockDelivery');
+	postMessagenger(formElements.blockUserBtn, 'blockUserInput', 'userBlockDelivery');
 
 	pressEnter('.keywordInput');
 
