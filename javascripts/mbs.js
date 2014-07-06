@@ -63,13 +63,13 @@ function up(el, n) {
 	return parent;
 }
 
-function blockedTitleConfirm(e){
-	if(!confirm('차단된 글을 열람하시겠습니까?')){
-		e.preventDefault();	
-	}
-}
-
 function blockedTitle(elem, originTitle, keyword){
+	var blockedTitleConfirm = function(e){
+		if(!confirm('차단된 글을 열람하시겠습니까?')){
+			e.preventDefault();
+		}
+	};
+
 	elem.innerText = '차단 키워드('+ keyword +')가 포함된 글 입니다';
 	elem.className = 'blockTitle';
 	elem.title = '제목: ' + originTitle;
@@ -124,15 +124,15 @@ function createBlindButton(keyword, target){
 
 function Options(res) {
 	this.isShowTitleIcon = res.isShowTitleIcon === 'true';
-	this.isShowTeamIcon = res.isShowTeamIcon === 'true';
+	this.isShowTeamIcon = res.isShowTeamIcon === 'true' && locHref.indexOf('mbsC=kbotown') > -1;
 	this.isBlindContent = res.isBlindContent === 'true';
-	this.isBlockArticle = res.isBlockArticle === 'true';
 	this.blockKeywords = res.blockKeywords;
 	this.blockKeywordslength = this.blockKeywords.length;
+	this.isBlockArticle = res.isBlockArticle === 'true' && this.blockKeywordslength;
 	this.blockType = res.blockType;
-	this.isBlockNickname = res.isBlockNickname === 'true';
 	this.blockNicknames = res.blockNicknames;
 	this.blockNicknamesLength = this.blockNicknames.length;
+	this.isBlockNickname = res.isBlockNickname === 'true';
 	this.isShowUserHistory = res.isShowUserHistory === 'true';
 	this.isInsertReplyButton = res.isInsertReplyButton === 'true';
 	this.isEnableCommentView = res.isEnableCommentView === 'true';
@@ -142,140 +142,150 @@ function Options(res) {
 	this.isEnableImageSearch = res.isEnableImageSearch === 'true';
 }
 
+function subjectLoop(links, linkDepth) {
+	var teamSearchUrl = '/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=';
+
+	var subjectBlocker = {
+		hidden: function(t) {
+			up(t, 6).className = 'displayNone';
+		},
+		replace: function(t, title, keyword) {
+			blockedTitle(t, title, keyword);
+		}
+	};
+
+	var createTeamIcon = function(t, k, matchKeyword) {
+		var label = doc.createElement('a');
+		label.href = teamSearchUrl + teams[k].searchKeyword;
+		label.className = 'teamIcon';
+		label.setAttribute('data-team', k);
+		t.innerText = title.replace(matchKeyword, '');
+		t.parentNode.insertBefore(label, t);
+	};
+
+	listLinkLoop:
+	for (var i = 0, len = links.length; i < len; i++) {
+		var t = links[i].childNodes[linkDepth];
+		var title = t.innerText.toLowerCase();
+
+		// block subject
+		if (o.isBlockArticle) {
+			for (var b = 0; b < o.blockKeywordslength; b++) {
+				var keyword = o.blockKeywords[b];
+
+				if (title.indexOf(keyword) !== -1) {
+					subjectBlocker[o.blockType](t, title, keyword);
+					continue listLinkLoop;
+				}
+			}
+		}
+
+		// title icon
+		if (o.isShowTitleIcon) {
+			for (var key in titIcons) {
+				if (titIcons[key].test(title)) {
+					t.className = 'ico ico_' + key;
+					break;
+				}
+			}
+		}
+
+		// team icon
+		if (o.isShowTeamIcon) {
+			for (var k in teams) {
+				var matched = teams[k].teamName.exec(title);
+				if (matched) {
+					createTeamIcon(t, k, matched[1]);
+					break;
+				}
+			}
+		}
+	}
+}
+
+function categoryLoop() {
+	//notice blind
+	if (!o.isBlockNotice) return;
+
+	var cat = container.getElementsByClassName('A11gray');
+	for (var i = 0, len = cat.length; i < len; i++) {
+		var t = cat[i];
+		if(t.textContent !== '공지') break;
+		up(t, 5).className = 'displayNone';
+	}
+}
+
+function nicknameLoop(nickEl, upCount) {
+	//user block
+	if (!o.isBlockNickname) return;
+
+	for (var i = 0, len = nickEl.length; i < len; i++) {
+		if (o.blockNicknames.indexOf(nickEl[i].text) > -1) {
+			up(nickEl[i], upCount).className = 'displayNone';
+		}
+	}
+}
+
+function bestArticleLoop() {
+	if (!o.isBlockArticle) return;
+
+	var bestLink = doc.querySelectorAll('td[width="190"] a');
+	var bestLinkLen = bestLink.length;
+
+	var blocker = {
+		hidden: function(t) {
+			var upCount = t.parentNode.tagName == 'STRONG' ? 3 : 2;
+			up(t, upCount).className = 'displayNone';
+		},
+		replace: function(t, title, keyword) {
+			blockedTitle(t, title, o.blockKeywords[b]);
+		}
+	};
+
+	for (var i = 0; i < bestLinkLen; i++) {
+		var t = bestLink[i];
+		var title = t.text.toLowerCase();
+
+		for (var b = 0; b < o.blockKeywordslength; b++) {
+			if (title.indexOf(o.blockKeywords[b]) !== -1) {
+				blocker[o.blockType](t, title, o.blockKeywords[b]);
+				break;
+			}
+		}
+	}
+}
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
-	var o = new Options(response);
+	o = new Options(response);
 
 	doc.addEventListener('DOMContentLoaded', function(){
 		if (path !== '/mbs/commentV.php') {
 			var container = doc.getElementById('container');
 			var listLink = container.getElementsByClassName('G12read');
 
-			var listLinkCount;
+			var linkDepth;
 			var nickEl;
 			var upCount;
 
 			if (path == '/bbs/mlb_today.php') {
-				listLinkCount = 0;
+				linkDepth = 0;
 				nickEl = container.querySelectorAll('td[width="82"] > font');
 				upCount = 6;
 			} else {
-				listLinkCount = 1;
+				linkDepth = 1;
 				nickEl = container.querySelectorAll('td[width="82"] > font > a');
 				upCount = 7;
 			}
 
-			var teamSearchUrl = '/mbs/articleL.php?mbsC=kbotown&mbsW=search&keyword=';
-
 			// KBL bbs only
-			if (o.isShowTeamIcon && locHref.indexOf('mbsC=kbotown') > -1) {
+			if (o.isShowTeamIcon) {
 				doc.body.id = 'team_show';
 			}
 
-			listLinkLoop:
-			for (var i = 0, listLinklen = listLink.length; i < listLinklen; i++) {
-				var t = listLink[i].childNodes[listLinkCount];
-				var title = t.innerText;
-
-				//title block
-				if (o.isBlockArticle && o.blockType === 'hidden' && o.blockKeywordslength) {
-					for(var b = 0; b < o.blockKeywordslength; b++) {
-						if (title.toLowerCase().indexOf(o.blockKeywords[b]) !== -1) {
-							up(t, 6).className = 'displayNone';
-							continue listLinkLoop;
-						}
-					}
-				}
-
-				if (o.isBlockArticle && o.blockType === 'replace' && o.blockKeywordslength) {
-					for(var b = 0; b < o.blockKeywordslength; b++) {
-						if (title.toLowerCase().indexOf(o.blockKeywords[b]) !== -1) {
-							blockedTitle(t, title, o.blockKeywords[b]);
-							continue listLinkLoop;
-						}
-					}
-				}
-
-				// title icon
-				if (o.isShowTitleIcon) {
-					for (var key in titIcons) {
-						if(titIcons[key].test(title)) {
-							t.className = 'ico ico_' + key;
-							break;
-						}
-					}
-				}
-
-				// team icon
-				if (o.isShowTeamIcon && locHref.indexOf('mbsC=kbotown') > -1) {
-					for(var k in teams) {
-						var matched = teams[k].teamName.exec(title);
-						if(matched) {
-							var label = doc.createElement('em');
-							label.setAttribute('data-team', k);
-							label.onclick = function(j){
-								return function (){
-									location.href= teamSearchUrl + teams[j].searchKeyword;
-								};
-							}(k);
-							t.innerText = title.replace(matched[1],'');
-							t.parentNode.insertBefore(label, t);
-							break;
-						}
-					}
-				}
-			}
-
-			//notice blind
-			if (o.isBlockNotice) {
-				var cat = container.getElementsByClassName('A11gray');
-				for (var c = 0, catLen = cat.length; c < catLen; c++) {
-					var t = cat[c];
-					if(t.textContent !== '공지') break;
-					up(t,5).className = 'displayNone';
-				}
-			}
-
-			//user block
-			if (o.isBlockNickname) {
-				for (var u = 0, nickElLen = nickEl.length; u < nickElLen; u++) {
-					for (var i = 0; i < o.blockNicknamesLength; i++) {
-						if (nickEl[u].innerText === o.blockNicknames[i]) {
-							up(nickEl[u],upCount).className = 'displayNone';
-							break;
-						}
-					}
-				}
-			}
-
-			if (o.isBlockArticle && o.blockKeywordslength) {
-				var bestLink = doc.querySelectorAll('td[width="190"] a');
-				var bestLinkLen = bestLink.length;
-
-				if (bestLinkLen > 0 && o.blockType == 'hidden') {
-					for(var i = 0; i < bestLinkLen; i++){
-						var t = bestLink[i];
-						for(var b = 0; b < o.blockKeywordslength; b++) {
-							if (t.innerText.toLowerCase().indexOf(o.blockKeywords[b]) !== -1) {
-								var upCount = t.parentNode.tagName.toLowerCase() == 'strong' ? 3 : 2;
-								up(t,upCount).className = 'displayNone';
-								break;
-							}
-						}
-					}
-				}
-
-				if (bestLinkLen > 0 && o.blockType == 'replace') {
-					for(var i = 0; i < bestLinkLen; i++){
-						var t = bestLink[i];
-						for(var b = 0; b < o.blockKeywordslength; b++) {
-							if (t.innerText.toLowerCase().indexOf(o.blockKeywords[b]) !== -1) {
-								blockedTitle(t, t.innerText, o.blockKeywords[b]);
-								break;
-							}
-						}
-					}
-				}
-			}
+			subjectLoop(listLink, linkDepth);
+			categoryLoop()
+			nicknameLoop(nickEl, upCount);
+			bestArticleLoop();
 		}
 
 		if (locHref.indexOf('V.php') > -1){

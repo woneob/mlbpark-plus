@@ -151,16 +151,16 @@ form[name="writeForm"] td[width="56"] a[href^="javascript:startRequest"] {displa
 
 /* team */
 #team_show .G12read {padding-left:54px;}
-.G12read em {position:absolute;display:inline-block;margin:1px 0 0 -54px;width:48px;height:17px;overflow:hidden;background:url('chrome-extension://__MSG_@@extension_id__/images/team.png') no-repeat;cursor:pointer;}
-.G12read em:hover {opacity:.8;}
-em[data-team="nexen"] {background-position:0 -17px !important;}
-em[data-team="doosan"] {background-position:0 -34px !important;}
-em[data-team="lotte"] {background-position:0 -51px !important;}
-em[data-team="samsung"] {background-position:0 -68px !important;}
-em[data-team="sk"] {background-position:0 -85px !important;}
-em[data-team="lg"] {background-position:0 -102px !important;}
-em[data-team="hanwha"] {background-position:0 -119px !important;}
-em[data-team="nc"] {background-position:0 -136px !important;}
+.G12read .teamIcon {position:absolute;display:inline-block;margin:1px 0 0 -54px;width:48px;height:17px;overflow:hidden;background:url('chrome-extension://__MSG_@@extension_id__/images/team.png') no-repeat;cursor:pointer;}
+.G12read .teamIcon:hover {opacity:.8;}
+.teamIcon[data-team="nexen"] {background-position:0 -17px !important;}
+.teamIcon[data-team="doosan"] {background-position:0 -34px !important;}
+.teamIcon[data-team="lotte"] {background-position:0 -51px !important;}
+.teamIcon[data-team="samsung"] {background-position:0 -68px !important;}
+.teamIcon[data-team="sk"] {background-position:0 -85px !important;}
+.teamIcon[data-team="lg"] {background-position:0 -102px !important;}
+.teamIcon[data-team="hanwha"] {background-position:0 -119px !important;}
+.teamIcon[data-team="nc"] {background-position:0 -136px !important;}
 
 /* extra */
 .warnBtn {position:relative;top:-20px;display:inline-block;background:#fff;padding:6px 10px 5px;color:#555;font:12px 'Gulim';cursor:pointer;border-width:1px;border-style:solid;border-color:#e7e7e7 #c3c3c3 #bfbfbf #d8d8d8;box-shadow:1px 1px 1px rgba(0,0,0,.1);border-radius:5px;}
