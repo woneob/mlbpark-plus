@@ -469,7 +469,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							var t = this;
 							$.ajax({
 								type: 'GET',
-								url: 'http://mlbpark.donga.com/mbs/commentRV.php?mbsC='+mbsC+'&comment_ymd='+wday+'&comment_idx='+mbsIdx,
+								url: 'http://mlbpark.donga.com/mbs/commentRV.php',
+								data: {
+									mbsC: mbsC,
+									comment_ymd: wday,
+									comment_idx: mbsIdx
+								},
 								cache: false,
 								success: function(response) {
 									var selectUser = t.previousSibling.innerText;
