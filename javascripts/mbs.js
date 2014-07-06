@@ -583,7 +583,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						if (voterOl.childElementCount === 0) {
 							$.ajax({
 								type: 'GET',
-								url: 'http://mlbpark.donga.com/mbs/articleVoteList.php?bbs='+ mbsC +'&article_id=' + mbsIdx,
+								url: 'http://mlbpark.donga.com/mbs/articleVoteList.php',
+								data: {
+									bbs: mbsC,
+									article_id: mbsIdx
+								},
 								async: true,
 								cache: false,
 								success: function(data){
