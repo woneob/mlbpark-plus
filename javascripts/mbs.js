@@ -357,7 +357,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 					$.ajax({
 						type: 'GET',
-						url: 'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid=' + userId,
+						url: 'http://mlbpark.donga.com/mypage/my_bulletin2011.php',
+						data: {mbsUid: userId},
 						cache: false,
 						timeout: 5000,
 						success: function(response){
@@ -685,7 +686,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				$.ajax({
 					type: 'post',
 					async: true,
-					url: 'http://mlbpark.donga.com/mbs/commentRV.php?mbsC='+mbsC+'&comment_ymd='+wday+'&comment_idx='+mbsIdx,
+					url: 'http://mlbpark.donga.com/mbs/commentRV.php',
+					data: {
+						mbsC: mbsC,
+						comment_ymd: wday,
+						comment_idx: mbsIdx
+					},
 					beforeSend: function() {
 						cmtLoader.className = 'loaderShow';
 					},
