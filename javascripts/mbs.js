@@ -255,6 +255,21 @@ function bestArticleLoop() {
 	}
 }
 
+function userBlock_cmt(){
+	if (o.isBlockNickname) {
+		var CmtNickEl = doc.querySelectorAll('td[width="140"] > font > a');
+
+		for (var u = 0, len = CmtNickEl.length; u < len; u++) {
+			for (var i = 0; i < o.blockNicknamesLength; i++) {
+				if (CmtNickEl[u].innerText === o.blockNicknames[i]) {
+					up(CmtNickEl[u], 7).className = 'displayNone';
+					break;
+				}
+			}
+		}
+	}
+}
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	o = new Options(response);
 
@@ -291,19 +306,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		if (locHref.indexOf('V.php') > -1){
 			var myArea = doc.getElementById('myArea');
 
-			function userBlock_cmt(){
-				if (o.isBlockNickname) {
-					var CmtNickEl = doc.querySelectorAll('td[width="140"] > font > a');
-					for (var u = 0, CmtNickElLen = CmtNickEl.length; u < CmtNickElLen; u++) {
-						for (var i = 0; i < o.blockNicknamesLength; i++) {
-							if (CmtNickEl[u].innerText === o.blockNicknames[i]) {
-								up(CmtNickEl[u], 7).className = 'displayNone';
-								break;
-							}
-						}
-					}
-				}
-			}userBlock_cmt();
+			userBlock_cmt();
 
 			if (path == '/mbs/articleV.php') {
 				var article = doc.querySelector('.G13 > div[align="justify"]');
