@@ -270,6 +270,30 @@ function userBlock_cmt(){
 	}
 }
 
+function addUserBlock(scop){
+	var userMenu = scop.querySelectorAll('div[id^=nik_]');
+
+	var userBlockClick = function(nickname) {
+		win.postMessage({
+			action: 'userBlockDelivery',
+			content: nickname
+		}, '*');
+	};
+
+	var insertMenu = function(t) {
+		var nickname = t.nextElementSibling.innerText;
+		var blockLiEl = doc.createElement('li');
+		blockLiEl.innerText = '닉네임 차단';
+		blockLiEl.addEventListener('click', userBlockClick.bind(null, nickname), false);
+
+		t.getElementsByTagName('ul')[0].appendChild(blockLiEl);
+	};
+
+	for (var i = 0, len = userMenu.length; i < len; i++) {
+		insertMenu(userMenu[i]);
+	}
+}
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	o = new Options(response);
 
@@ -794,24 +818,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 		// Add a 'User Block' to User Menu
 		if (o.isBlockNickname) {
-			function addUserBlock(scop){
-				var userMenu = scop.querySelectorAll('div[id^=nik_]');
-				for (var i = 0, userMenuLen = userMenu.length; i < userMenuLen; i++) {
-					var t = userMenu[i];
-					var blockLiEl = doc.createElement('li');
-					blockLiEl.setAttribute('data-user', t.nextElementSibling.innerText);
-					blockLiEl.innerText = '닉네임 차단';
-
-					t.getElementsByTagName('ul')[0].appendChild(blockLiEl);
-				}
-				$('li[data-user]').on('click', function(){
-					win.postMessage({
-						action:'userBlockDelivery',
-						user: this.getAttribute('data-user')
-					}, '*');
-					return false;
-				});
-			}
 			addUserBlock(doc);
 		}
 	}, false);
