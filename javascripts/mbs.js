@@ -835,10 +835,10 @@ win.addEventListener('message', function(e) {
 				},
 				function(response) {
 					if(response.result) {
-						alert('"' + response.user + '" 님을 닉네임 차단에 등록했습니다.');
+						alert('"' + response.content + '" 님을 닉네임 차단에 등록했습니다.');
 						location.reload();
 					} else {
-						alert('닉네임 차단을 실패했습니다.\n' + response.message);
+						alert('닉네임 차단을 실패했습니다.\n' + response.content);
 					}
 				}
 			);
