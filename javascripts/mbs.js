@@ -294,6 +294,51 @@ function addUserBlock(scop){
 	}
 }
 
+function showUserHistory(nickname, userId, article) {
+	var historyTitleEl = doc.createElement('h3');
+	historyTitleEl.innerText = nickname;
+	historyTitleEl.title = userId;
+
+	var historyMoreBtn = doc.createElement('button');
+	historyMoreBtn.type = 'button';
+	historyMoreBtn.innerText = '[더 보기]';
+	historyMoreBtn.setAttribute('onclick','MlbNewWindow2(\'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid='+userId+'\',\'550\',\'500\')');
+
+	var historyHeadEl = doc.createElement('div');
+	historyHeadEl.className = 'historyHead';
+	historyHeadEl.appendChild(historyTitleEl);
+	historyHeadEl.appendChild(historyMoreBtn);
+
+	var historyListEl = doc.createElement('div');
+	historyListEl.id = 'historyList';
+
+	var historyEl = doc.createElement('div');
+	historyEl.id = 'history';
+	historyEl.appendChild(historyHeadEl);
+	historyEl.appendChild(historyListEl);
+
+	article.insertAdjacentElement('afterEnd',historyEl);
+
+	$.ajax({
+		type: 'GET',
+		url: 'http://mlbpark.donga.com/mypage/my_bulletin2011.php',
+		data: {mbsUid: userId},
+		cache: false,
+		timeout: 5000,
+		success: function(response){
+			$(historyListEl).append($(response).find('td[bgcolor="#FFFFFF"] > table:nth-child(2)')[0].outerHTML)
+				.find('a[target]')
+				.removeAttr('target');
+		},
+		error: function(xhr, textStatus, errorThrown){
+			var errorEl = doc.createElement('p');
+			errorEl.id = 'errerMessage';
+			errorEl.innerText = '오류가 발생하여 최근 글을 불러올 수 없습니다. ';
+			historyListEl.appendChild(errorEl);
+		}
+	});
+}
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	o = new Options(response);
 
@@ -363,41 +408,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				//user history
 				if (o.isShowUserHistory) {
-					var historyEl = doc.createElement('div');
-					var historyHeadEl = doc.createElement('div');
-					var historyTitleEl = doc.createElement('h3');
-					var historyMoreBtn = doc.createElement('button');
-					var historyListEl = doc.createElement('div');
-					historyEl.id = 'history';
-					historyHeadEl.className = 'historyHead';
-					historyTitleEl.innerText = nickname;
-					historyTitleEl.title = userId;
-					historyMoreBtn.type = 'button';
-					historyMoreBtn.innerText = '[더 보기]';
-					historyMoreBtn.setAttribute('onclick','MlbNewWindow2(\'http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid='+userId+'\',\'550\',\'500\')');
-					historyListEl.id = 'historyList';
-					historyHeadEl.appendChild(historyTitleEl);
-					historyHeadEl.appendChild(historyMoreBtn);
-					historyEl.appendChild(historyHeadEl);
-					historyEl.appendChild(historyListEl);
-					article.insertAdjacentElement('afterEnd',historyEl);
-
-					$.ajax({
-						type: 'GET',
-						url: 'http://mlbpark.donga.com/mypage/my_bulletin2011.php',
-						data: {mbsUid: userId},
-						cache: false,
-						timeout: 5000,
-						success: function(response){
-							$(historyListEl).append($(response).find('td[bgcolor="#FFFFFF"] > table:nth-child(2)')[0].outerHTML).find('a[target]').removeAttr('target');
-						},
-						error: function(xhr, textStatus, errorThrown){
-							var errorEl = doc.createElement('p');
-							errorEl.id = 'errerMessage';
-							errorEl.innerText = '오류가 발생하여 최근 글을 불러올 수 없습니다. ';
-							historyListEl.appendChild(errorEl);
-						}
-					});
+					showUserHistory(nickname, userId, article);
 				}
 
 				//google search by image
