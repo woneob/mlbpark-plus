@@ -339,6 +339,17 @@ function showUserHistory(nickname, userId, article) {
 	});
 }
 
+function prerender(arr) {
+	var target = doc.head;
+
+	for (var i = 0, len = arr.length; i < len; i++) {
+		var elem = doc.createElement('link');
+		elem.rel = 'prerender';
+		elem.href = arr[i];
+		target.appendChild(elem);
+	}
+}
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	o = new Options(response);
 
@@ -816,15 +827,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 
 			//prerender
-			var target = doc.head;
-			prNext = doc.createElement('link');
-			prNext.rel = 'prerender';
-			prNext.href = nLink;
-			prPrev = doc.createElement('link');
-			prPrev.rel = 'prerender';
-			prPrev.href = pLink;
-			target.appendChild(prNext);
-			target.appendChild(prPrev);
+			prerender([nLink, pLink]);
 		}
 
 		// Add a 'User Block' to User Menu
