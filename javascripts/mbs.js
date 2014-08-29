@@ -765,26 +765,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			myArea.parentNode.insertBefore(cmtLoader, myArea.nextSibling);
 		}
 
-		//tab Navigation highlighter
-		if (locHref.indexOf('mbsW=search') > -1){
-			$.urlParam = function(name){
-				var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(locHref);
-				return results[1] || 0;
-			};
-
-			switch ($.urlParam('mbsC')) {
-				case 'bullpen':
-					doc.getElementById('navi4').className = 'on';
-				break;
-				case 'kbotown':
-					doc.getElementById('navi3').className = 'on';
-				break;
-				case 'mlbtown':
-					doc.getElementById('navi2').className = 'on';
-				break;
-			}
-		}
-
 		if (path !== '/mbs/commentV.php' && path !== '/bbs/mlb_today.php') {
 			//shotcut keys
 			var paging = container.getElementsByClassName('paging');
