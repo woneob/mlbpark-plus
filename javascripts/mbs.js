@@ -350,6 +350,19 @@ function prerender(arr) {
 	}
 }
 
+String.prototype.urlReplace = function() {
+	// http://, https://, ftp://
+	var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
+
+	// www. sans http:// or https://
+	var pseudoUrlPattern = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+
+	return this
+		.replace(urlPattern, '<a href="$&" target="_blank">$&</a>')
+		.replace(pseudoUrlPattern, '$1<a href="http://$2" target="_blank">$2</a>');
+};
+
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	o = new Options(response);
 
@@ -675,17 +688,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 
 			//text URL replacement
-			function urlReplace(){
-				var replacePattern1 = /\s(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
-				replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/ig,
-				replaceTxt1 = ' <a href="$1" target="_blank">$1</a>',
-				replaceTxt2 = ' <a href="http://$2" target="_blank">$2</a>';
-
-				$(myArea).find('.G12').html(function(i, val) {
-					return val.replace(replacePattern1, replaceTxt1).replace(replacePattern2, replaceTxt2);
-				});
-			}
-			urlReplace();
+			$(myArea).find('.G12').html(function(i, val) {
+				return val.replace(val, val.urlReplace());
+			});
 
 			//reply button
 			var textarea = doc.getElementsByName('line_content')[0];
@@ -754,7 +759,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 						}
 					},
 					complete: function() {
-						urlReplace();
+						$(myArea).find('.G12').html(function(i, val) {
+							return val.replace(val, val.urlReplace());
+						});
 						replyButton();
 						addUserBlock(myArea);
 						cmtLoader.className = 'loaderHide';
