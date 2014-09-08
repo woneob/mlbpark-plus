@@ -363,17 +363,37 @@ String.prototype.urlReplace = function() {
 };
 
 
+$.expr[':'].Contains = function(a,i,m){
+	return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
+};
+
+function blibdContent(subject, article, myArea) {
+	if(titIcons.warn.test(subject)) {
+		createBlindButton('warn', article);
+		return;
+	}
+
+	var $myArea = $(myArea);
+
+	if ($myArea.find('.G12:Contains("COB")').length > 0) {
+		createBlindButton('COB', article);
+	} else if ($myArea.find('.G12:contains("비누")').length > 0) {
+		createBlindButton('비누', article);
+	}
+}
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	o = new Options(response);
 
 	doc.addEventListener('DOMContentLoaded', function(){
-		if (path !== '/mbs/commentV.php') {
-			var container = doc.getElementById('container');
-			var listLink = container.getElementsByClassName('G12read');
+		var container =  doc.getElementById('container');
+		var listLink;
+		var linkDepth;
+		var nickEl;
+		var upCount;
 
-			var linkDepth;
-			var nickEl;
-			var upCount;
+		if (path !== '/mbs/commentV.php') {
+			listLink = container.getElementsByClassName('G12read');
 
 			if (path == '/bbs/mlb_today.php') {
 				linkDepth = 0;
@@ -396,32 +416,27 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			bestArticleLoop();
 		}
 
-		if (locHref.indexOf('V.php') > -1){
-			var myArea = doc.getElementById('myArea');
+		var myArea;
+		var subject;
+		var article;
+		var userEl;
+		var userId;;
+		var nickname;
 
+		if (locHref.indexOf('V.php') > -1){
+			myArea = doc.getElementById('myArea');
 			userBlock_cmt();
 
 			if (path == '/mbs/articleV.php') {
-				var article = doc.querySelector('.G13 > div[align="justify"]');
-				var userEl = doc.querySelector('div[id^="nik_"]');
-				var userId =  userEl.children[0].children[0].getAttribute('onclick').match(/id=([^&]+)\'/)[1];
-				var nickname = userEl.nextElementSibling.innerText;
+				subject = container.getElementsByTagName('strong')[0].innerText;
+				article = doc.querySelector('.G13 > div[align="justify"]');
+				userEl = doc.querySelector('div[id^="nik_"]');
+				userId =  userEl.children[0].children[0].getAttribute('onclick').match(/id=([^&]+)\'/)[1];
+				nickname = userEl.nextElementSibling.innerText;
 
 				//content blind
 				if (o.isBlindContent) {
-					var subject = container.getElementsByTagName('strong')[0].innerText;
-
-					$.expr[':'].Contains = function(a,i,m){
-						return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
-					};
-
-					if ($(myArea).find('.G12:Contains("COB")').length > 0) {
-						createBlindButton('COB', article);
-					} else if ($(myArea).find('.G12:contains("비누")').length > 0) {
-						createBlindButton('비누', article);
-					} else if(titIcons.warn.test(subject)) {
-						createBlindButton('warn', article);
-					}
+					blibdContent(subject, article, myArea);
 				}
 
 				//add userId
@@ -829,8 +844,7 @@ win.addEventListener('message', function(e) {
 
 	switch(e.data.action) {
 		case 'userBlockDelivery' :
-			chrome.extension.sendMessage(
-				{
+			chrome.extension.sendMessage({
 					action: e.data.action,
 					data: e.data
 				},
