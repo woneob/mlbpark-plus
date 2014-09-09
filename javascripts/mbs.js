@@ -389,6 +389,78 @@ function showUserId(userEl, userId) {
 	userEl.parentNode.appendChild(idEl);
 }
 
+function imageSearch(images) {
+	var img;
+	var width;
+	var height;
+	var src;
+
+	var brokenImage = function() {
+		img.className = 'displayNone';
+
+		var imgOnerror = doc.createElement('div');
+		imgOnerror.className = 'imgOnerror';
+
+		var imgOnerrorTitle = doc.createElement('h3');
+		imgOnerrorTitle.innerText = '이미지 로드 실패';
+
+		var imgOnerrorLink = doc.createElement('a');
+		imgOnerrorLink.href = img.src;
+		imgOnerrorLink.target = '_blank';
+		imgOnerrorLink.innerHTML = '외부 링크가 차단된 이미지일 수 있습니다.<br>클릭 후 주소입력창에서 엔터 키를 눌러보세요';
+
+		imgOnerror.appendChild(imgOnerrorTitle);
+		imgOnerror.appendChild(imgOnerrorLink);
+
+		img.insertAdjacentElement('afterEnd', imgOnerror);
+	}
+
+	var insertButton = function(img) {
+		src = img.src;
+		if(src.substr(0,7) != 'http://') {
+			src = 'http://mlbpark.donga.com' + src;
+		}
+
+		var btn_iSearch = doc.createElement('a');
+		btn_iSearch.href = 'https://www.google.com/searchbyimage?image_url=' + src;
+		btn_iSearch.className = 'btn_iSearch';
+		btn_iSearch.target = '_blank';
+		btn_iSearch.title = '구글에서 이미지 검색';
+
+		var imageWrap = doc.createElement('span');
+		imageWrap.className = 'iWrap';
+
+		if (img.parentNode.tagName == 'A') {
+			img.parentNode.parentNode.insertBefore(imageWrap, img.parentNode);
+			imageWrap.appendChild(img.parentNode);
+		} else {
+			img.parentNode.insertBefore(imageWrap, img);
+			imageWrap.appendChild(img);
+		}
+
+		imageWrap.appendChild(btn_iSearch);
+	}
+
+	win.onload = function(){
+		for (var i = 0, imagesLen = images.length; i < imagesLen; i++) {
+			img = images[i];
+			width = img.clientWidth;
+			height = img.clientHeight;
+
+			if (!img.complete || typeof img.naturalWidth == 'undefined' || img.naturalWidth === 0) {
+				brokenImage(img)
+				continue;
+			}
+
+			if (width && height < 50) {
+				continue;
+			}
+
+			insertButton(img);
+		}
+	};
+}
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	o = new Options(response);
 
@@ -429,6 +501,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		var userEl;
 		var userId;;
 		var nickname;
+		var images;
 
 		if (locHref.indexOf('V.php') > -1){
 			myArea = doc.getElementById('myArea');
@@ -456,63 +529,8 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				//google search by image
 				if (o.isEnableImageSearch) {
-					var images = article.getElementsByTagName('img');
-
-					win.onload = function(){
-						for (var i = 0, imagesLen = images.length; i < imagesLen; i++) {
-							var img = images[i];
-							var width = img.clientWidth;
-							var height = img.clientHeight;
-
-							if (!img.complete || typeof img.naturalWidth == "undefined" || img.naturalWidth === 0) {
-								img.className = 'displayNone';
-
-								var imgOnerror = doc.createElement('div');
-								imgOnerror.className = 'imgOnerror';
-
-								var imgOnerrorTitle = doc.createElement('h3');
-								imgOnerrorTitle.innerText = '이미지 로드 실패';
-
-								var imgOnerrorLink = doc.createElement('a');
-								imgOnerrorLink.href = img.src;
-								imgOnerrorLink.target = '_blank';
-								imgOnerrorLink.innerHTML = '외부 링크가 차단된 이미지일 수 있습니다.<br>클릭 후 주소입력창에서 엔터 키를 눌러보세요';
-
-								imgOnerror.appendChild(imgOnerrorTitle);
-								imgOnerror.appendChild(imgOnerrorLink);
-
-
-								img.insertAdjacentElement('afterEnd', imgOnerror);
-							}
-
-							if (width && height > 50) {
-								var src = img.src;
-								if(src.substr(0,7) != 'http://') {
-									src = 'http://mlbpark.donga.com' + src;
-								}
-
-								var btn_iSearch = doc.createElement('a');
-								btn_iSearch.href = 'https://www.google.com/searchbyimage?image_url='+ src;
-								btn_iSearch.className = 'btn_iSearch';
-								btn_iSearch.target = '_blank';
-								btn_iSearch.title = '구글에서 이미지 검색';
-
-								var imageWrap = doc.createElement('span');
-								imageWrap.className = 'iWrap';
-
-								if (img.parentNode.tagName.toLowerCase() == 'a') {
-									var wrapImg = img.parentNode;
-									wrapImg.parentNode.insertBefore(imageWrap, wrapImg);
-									imageWrap.appendChild(wrapImg);
-								} else {
-									img.parentNode.insertBefore(imageWrap,img);
-									imageWrap.appendChild(img);
-								}
-
-								imageWrap.appendChild(btn_iSearch);
-							}
-						}
-					};
+					images = article.getElementsByTagName('img');
+					imageSearch(images);
 				}
 
 				//videoCss
