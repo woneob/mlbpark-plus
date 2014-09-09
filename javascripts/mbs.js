@@ -416,9 +416,13 @@ function imageSearch(images) {
 	}
 
 	var insertButton = function(img) {
-		src = img.src;
-		if(src.substr(0,7) != 'http://') {
-			src = 'http://mlbpark.donga.com' + src;
+		var imageUrl = new URL(img.src);
+		var oldDir = imageUrl.pathname.substr(0, 5);
+
+		if (imageUrl.hostname === 'imgpark.donga.com' && oldDir === '/mbs/') {
+			src = 'http://image.donga.com/mlbpark/' + imageUrl.pathname.replace(oldDir, '');
+		} else {
+			src = img.src
 		}
 
 		var btn_iSearch = doc.createElement('a');
