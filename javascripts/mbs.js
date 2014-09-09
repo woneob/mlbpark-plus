@@ -382,6 +382,13 @@ function blibdContent(subject, article, myArea) {
 	}
 }
 
+function showUserId(userEl, userId) {
+	var idEl = doc.createElement('span');
+	idEl.className = 'userIdVal';
+	idEl.innerText = '(' + userId + ')';
+	userEl.parentNode.appendChild(idEl);
+}
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	o = new Options(response);
 
@@ -440,10 +447,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				}
 
 				//add userId
-				var idEl = doc.createElement('span');
-				idEl.className = 'userIdVal';
-				idEl.innerText = '(' + userId + ')';
-				userEl.parentNode.appendChild(idEl);
+				showUserId(userEl, userId);
 
 				//user history
 				if (o.isShowUserHistory) {
