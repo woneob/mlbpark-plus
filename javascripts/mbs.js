@@ -465,6 +465,13 @@ function imageSearch(images) {
 	};
 }
 
+function resizeVideo() {
+	var vdoCss = doc.createElement('link');
+	vdoCss.rel = 'stylesheet';
+	vdoCss.href = chrome.extension.getURL('/css/video.css');
+	doc.head.appendChild(vdoCss);
+}
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	o = new Options(response);
 
@@ -539,10 +546,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 				//videoCss
 				if (o.isResizeVideo) {
-					var vdoCss = doc.createElement('link');
-					vdoCss.rel = 'stylesheet';
-					vdoCss.href = chrome.extension.getURL('/css/video.css');
-					doc.head.appendChild(vdoCss);
+					resizeVideo();
 				}
 
 				function commentUser(){
