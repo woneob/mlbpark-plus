@@ -13,7 +13,7 @@ var titIcons = {
 	question: /(질문|요\?|여\?|죠\?|나요)/,
 	img: /(짤방|jpg|gif|jyp)/i,
 	mobile: /(맛폰)/
-}
+};
 var teams = {
 	kia: {
 		teamName: /(\[기아\]\s?|\[kia\]\s?)/i,
@@ -413,7 +413,7 @@ function imageSearch(images) {
 		imgOnerror.appendChild(imgOnerrorLink);
 
 		img.insertAdjacentElement('afterEnd', imgOnerror);
-	}
+	};
 
 	var insertButton = function(img) {
 		var imageUrl = new URL(img.src);
@@ -422,7 +422,7 @@ function imageSearch(images) {
 		if (imageUrl.hostname === 'imgpark.donga.com' && oldDir === '/mbs/') {
 			src = 'http://image.donga.com/mlbpark/' + imageUrl.pathname.replace(oldDir, '');
 		} else {
-			src = img.src
+			src = img.src;
 		}
 
 		var btn_iSearch = doc.createElement('a');
@@ -443,7 +443,7 @@ function imageSearch(images) {
 		}
 
 		imageWrap.appendChild(btn_iSearch);
-	}
+	};
 
 	win.onload = function(){
 		for (var i = 0, imagesLen = images.length; i < imagesLen; i++) {
@@ -452,7 +452,7 @@ function imageSearch(images) {
 			height = img.clientHeight;
 
 			if (!img.complete || typeof img.naturalWidth == 'undefined' || img.naturalWidth === 0) {
-				brokenImage(img)
+				brokenImage(img);
 				continue;
 			}
 
@@ -677,7 +677,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 
 			subjectLoop(listLink, linkDepth);
-			categoryLoop()
+			categoryLoop();
 			nicknameLoop(nickEl, upCount);
 			bestArticleLoop();
 		}
@@ -686,7 +686,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		var subject;
 		var article;
 		var userEl;
-		var userId;;
+		var userId;
 		var nickname;
 		var images;
 
