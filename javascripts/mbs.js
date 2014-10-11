@@ -270,15 +270,15 @@ function userBlock_cmt(){
 	}
 }
 
-function addUserBlock(scop){
-	var userMenu = scop.querySelectorAll('div[id^=nik_]');
-
-	var userBlockClick = function(nickname) {
+function userBlockClick(nickname) {
 		win.postMessage({
 			action: 'userBlockDelivery',
 			content: nickname
 		}, '*');
-	};
+}
+
+function addUserBlock(scop){
+	var userMenu = scop.querySelectorAll('div[id^=nik_]');
 
 	var insertMenu = function(t) {
 		var nickname = t.nextElementSibling.innerText;
@@ -472,6 +472,182 @@ function resizeVideo() {
 	doc.head.appendChild(vdoCss);
 }
 
+function viewVoter(mbsC, mbsIdx, container){
+	var voterGroud = doc.querySelector('td.D11[width="117"]');
+
+	var child;
+	while (true) {
+		child = voterGroud.lastChild;
+
+		if (!child) break;
+		voterGroud.removeChild(child);
+	}
+
+	var removeUserMenu = function() {
+		var userMenuElems = doc.getElementsByClassName('userMenu');
+
+		for (var i = 0, len = userMenuElems.length; i < len; i++) {
+			userMenuElems[i].remove();
+		}
+	};
+
+	var createUserMenu = function(e) {
+		removeUserMenu();
+
+		var userId = this.getElementsByTagName('em')[0].textContent.trim();
+		var nickname = this.firstChild.textContent.trim();
+		var menu = [
+			{
+				name: '쪽지보내기',
+				action: 'MlbNewWindow("http://mlbpark.donga.com/mypage/memo_write.php?mode=send&id='+ userId +'")'
+			},
+			{
+				name: '자기소개',
+				action: 'MlbNewWindow2("http://mlbpark.donga.com/mbs/userIntroV.php?mbsUid='+ userId +'", "530", "390")'
+			},
+			{
+				name: '등급확인',
+				action: 'UserAja("'+ userId +'","G")'
+			},
+			{
+				name: '가입일',
+				action: 'UserAja("'+ userId +'","R")'
+			},
+			{
+				name: '게시물보기',
+				action: 'MlbNewWindow2("http://mlbpark.donga.com/mypage/my_bulletin2011.php?mbsUid='+ userId +'", "550", "500")'
+			}
+		];
+
+		var ul = doc.createElement('ul');
+		ul.className = 'userMenu';
+
+		var liFrag = doc.createDocumentFragment();
+		var li;
+
+		for (var i = 0, len = menu.length; i < len; i++) {
+			li = doc.createElement('li');
+			li.setAttribute('onclick', menu[i].action);
+			li.textContent = menu[i].name;
+			li.addEventListener('click',removeUserMenu, false);
+			liFrag.appendChild(li);
+		}
+
+		if (o.isBlockNickname) {
+			li = doc.createElement('li');
+			li.textContent = '닉네임 차단';
+			li.addEventListener('click', function() {
+				userBlockClick(nickname);
+				removeUserMenu();
+			}, false);
+			liFrag.appendChild(li);
+		}
+
+		ul.appendChild(liFrag);
+		ul.style.top = e.pageY + 10 +'px';
+		ul.style.left = e.pageX + 10 + 'px';
+
+		doc.body.appendChild(ul);
+		win.addEventListener('resize', removeUserMenu, false);
+	};
+
+	var voterList;
+	var voterOl;
+
+	var loadList = function(callback) {
+		var listFrag = doc.createDocumentFragment();
+
+		$.ajax('http://mlbpark.donga.com/mbs/articleVoteList.php', {
+			type: 'GET',
+			data: {
+				bbs: mbsC,
+				article_id: mbsIdx
+			},
+			success: function(data){
+				if(data === ''){
+					var emptyMsg = doc.createElement('li');
+					emptyMsg.className = 'emptyMsg';
+					emptyMsg.innerText = '아직 추천한 사람이 없습니다';
+					listFrag.appendChild(emptyMsg);
+				} else {
+					var regexp = /<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g;
+					var dataArray = data.match(regexp);
+					var elem;
+					var userNick;
+
+					for (var i = 0, len = dataArray.length; i < len; i++) {
+						elem = doc.createElement('ul');
+						elem.innerHTML = dataArray[i];
+						elem = elem.firstChild;
+						userNick = elem.firstChild.textContent;
+
+						if (o.isBlockNickname && o.blockNicknames.indexOf(userNick) > -1) {
+							elem.className = 'blockUser';
+						}
+
+						elem.addEventListener('click', createUserMenu, false);
+						listFrag.appendChild(elem);
+					}
+				}
+			},
+			complete: function() {
+				callback(listFrag);
+			}
+		});
+	};
+
+	var createContents = function() {
+		var voterListHeadding = doc.createElement('h3');
+		voterListHeadding.innerText = '추천한 사람들';
+
+		var voterListClose = doc.createElement('span');
+		voterListClose.id = 'voterListClose';
+		voterListClose.innerText = 'X';
+		voterListClose.addEventListener('click', function(){
+			voterList.style.display = 'none';
+			removeUserMenu();
+		});
+
+		var voterListHead = doc.createElement('header');
+		voterListHead.className = 'voterListHead';
+		voterListHead.appendChild(voterListHeadding);
+		voterListHead.appendChild(voterListClose);
+
+		voterOl = doc.createElement('ol');
+		loadList(function(res) {
+			voterOl.appendChild(res);
+		});
+
+		voterList = doc.createElement('div');
+		voterList.id = 'voterList';
+		voterList.appendChild(voterListHead);
+		voterList.appendChild(voterOl);
+		voterList.addEventListener('click', function(e){
+			e.stopPropagation();
+		});
+
+		voterGroud.appendChild(voterList);
+	};
+
+	var isLoaded = false;
+
+	var viewVoterBtn = doc.createElement('span');
+	viewVoterBtn.id = 'viewVoter';
+	viewVoterBtn.innerText = '추천인 보기';
+	viewVoterBtn.addEventListener('click', function(e) {
+		e.stopPropagation();
+
+		if (!isLoaded) {
+			createContents();
+			isLoaded = true;
+		}
+
+		voterList.style.display = voterList.style.display === 'block' ? 'none': 'block';
+	}, false);
+
+	voterGroud.appendChild(viewVoterBtn);
+}
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	o = new Options(response);
 
@@ -514,8 +690,19 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		var nickname;
 		var images;
 
+		var mbsC;
+		var mbsIdx;
+		var wdayKey;
+		var wday;
+
 		if (locHref.indexOf('V.php') > -1){
 			myArea = doc.getElementById('myArea');
+
+			mbsC = doc.getElementsByName('mbsC')[0].value;
+			mbsIdx =  doc.getElementsByName('mbsIdx')[0].value;
+			wdayKey = (path == '/mbs/commentV.php') ? 'co_day' : 'wday';
+			wday = doc.getElementsByName(wdayKey)[0].value;
+
 			userBlock_cmt();
 
 			if (path == '/mbs/articleV.php') {
@@ -645,91 +832,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				commentUser();
 
 				// View voter
-				(function viewVoter(){
-					var voterGroud = doc.querySelector('td.D11[width="117"]');
-
-					var child;
-					while (child = voterGroud.lastChild) {
-						voterGroud.removeChild(child);
-					}
-
-					var voterListFrag = doc.createDocumentFragment();
-
-					var viewVoterBtn = doc.createElement('span');
-					viewVoterBtn.id = 'viewVoter';
-					viewVoterBtn.innerText = '추천인 보기';
-
-					var voterList = doc.createElement('div');
-					voterList.id = 'voterList';
-					voterList.style.display = 'none';
-					voterList.addEventListener('click',function(e){
-						e.stopPropagation();
-					});
-
-					var voterListHead = doc.createElement('header');
-					voterListHead.className = 'voterListHead';
-
-					var voterListHeadding = doc.createElement('h3');
-					voterListHeadding.innerText = '추천한 사람들';
-
-					var voterListClose = doc.createElement('span');
-					voterListClose.id = 'voterListClose';
-					voterListClose.innerText = 'X';
-					voterListClose.addEventListener('click', function(){
-						voterList.style.display = 'none';
-					});
-
-					var voterOl = doc.createElement('ol');
-
-					voterListHead.appendChild(voterListHeadding);
-					voterListHead.appendChild(voterListClose);
-					voterList.appendChild(voterListHead);
-					voterList.appendChild(voterOl);
-
-					voterListFrag.appendChild(viewVoterBtn);
-					voterListFrag.appendChild(voterList);
-
-					voterGroud.appendChild(voterListFrag);
-
-					viewVoterBtn.addEventListener('click', function(e){
-						e.stopPropagation();
-						if (voterOl.childElementCount === 0) {
-							$.ajax({
-								type: 'GET',
-								url: 'http://mlbpark.donga.com/mbs/articleVoteList.php',
-								data: {
-									bbs: mbsC,
-									article_id: mbsIdx
-								},
-								async: true,
-								cache: false,
-								success: function(data){
-									if(data === ''){
-										var emptyMsg = doc.createElement('li');
-										emptyMsg.className = 'emptyMsg';
-										emptyMsg.innerText = '아직 추천한 사람이 없습니다';
-										voterOl.appendChild(emptyMsg);
-									} else {
-										voterOl.innerHTML = data;
-										if (o.isBlockNickname) {
-											var voterListLi = voterOl.querySelectorAll('li');
-											for(var x = 0, len = voterListLi.length; x < len; x++){
-												var t = voterListLi[x];
-												for (var i = 0; i < o.blockNicknamesLength; i++) {
-													if(t.innerText === o.blockNicknames[i]){
-														t.className = 'blockUser';
-														break;
-													}
-												}
-											}
-										}
-									}
-								}
-							});
-						}
-						voterList.style.display = 'block';
-					});
-				}());
+				viewVoter(mbsC, mbsIdx, container);
 			}
 
 			//text URL replacement
@@ -768,11 +871,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			replyButton();
 
 			//comment refresh
-			var mbsC = doc.getElementsByName('mbsC')[0].value;
-			var mbsIdx =  doc.getElementsByName('mbsIdx')[0].value;
-			var wdayKey = (path == '/mbs/commentV.php') ? 'co_day' : 'wday';
-			var wday = doc.getElementsByName(wdayKey)[0].value;
-
 			var cmtLoader = doc.createElement('div');
 			var cmtLoadBtn = doc.createElement('button');
 			cmtLoader.id = 'cmtLoader';
