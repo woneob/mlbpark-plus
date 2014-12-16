@@ -817,6 +817,32 @@ function commentLoop(nickname, mbsC, wday, mbsIdx) {
 	}
 }
 
+function replyButton(textarea){
+	var cmtTxt = myArea.querySelectorAll('.G12');
+	var cmtTxtLen = cmtTxt.length;
+	if (o.isInsertReplyButton && cmtTxtLen > 0) {
+		for (var i = 0; i < cmtTxtLen; i++) {
+			var replyBtn = doc.createElement('button');
+			replyBtn.type = 'button';
+			replyBtn.className = 'btn_reply';
+			replyBtn.title = '답글 달기';
+			replyBtn.innerText = '[답글]';
+			replyBtn.idx = i;
+			replyBtn.onclick = function(j){
+				return function(){
+					if (textarea.value !== '' && !confirm('아직 작성 중인 댓글이 있습니다.\n다시 작성하시겠습니까?')){
+						return false;
+					}
+					var cmtUsername = up(cmtTxt[j],5).children[0].getElementsByTagName('a')[0].innerText;
+					textarea.focus();
+					textarea.value = cmtUsername + '// ';
+				};
+			}(i);
+			cmtTxt[i].appendChild(replyBtn);
+		}
+	}
+}
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	o = new Options(response);
 
@@ -917,33 +943,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 			//reply button
 			var textarea = doc.getElementsByName('line_content')[0];
-
-			function replyButton(){
-				var cmtTxt = myArea.querySelectorAll('.G12');
-				var cmtTxtLen = cmtTxt.length;
-				if (o.isInsertReplyButton && cmtTxtLen > 0) {
-					for (var i = 0; i < cmtTxtLen; i++) {
-						var replyBtn = doc.createElement('button');
-						replyBtn.type = 'button';
-						replyBtn.className = 'btn_reply';
-						replyBtn.title = '답글 달기';
-						replyBtn.innerText = '[답글]';
-						replyBtn.idx = i;
-						replyBtn.onclick = function(j){
-							return function(){
-								if (textarea.value !== '' && !confirm('아직 작성 중인 댓글이 있습니다.\n다시 작성하시겠습니까?')){
-									return false;
-								}
-								var cmtUsername = up(cmtTxt[j],5).children[0].getElementsByTagName('a')[0].innerText;
-								textarea.focus();
-								textarea.value = cmtUsername + '// ';
-							};
-						}(i);
-						cmtTxt[i].appendChild(replyBtn);
-					}
-				}
-			}
-			replyButton();
+			replyButton(textarea);
 
 			//comment refresh
 			var cmtLoader = doc.createElement('div');
