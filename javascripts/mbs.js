@@ -794,7 +794,7 @@ function commentLoop(nickname, mbsC, wday, mbsIdx) {
 	var createCmtViewBtn = function() {
 		var viewCmt = doc.createElement('button');
 		viewCmt.type = 'button';
-		viewCmt.className = 'btn_userCmt',
+		viewCmt.className = 'btn_userCmt';
 		viewCmt.title = '이 글에 단 댓글 보기';
 		viewCmt.innerText = '?';
 		viewCmt.addEventListener('click', commentLoad, false);
