@@ -728,6 +728,15 @@ function commentLoop(nickname, mbsC, wday, mbsIdx) {
 		modalTextareaEl.setAttribute('autocomplete', 'off');
 		modalTextareaEl.value = selectUser + '// ';
 
+		if (!readCookie('mlbuserid')) {
+			modalTextareaEl.readOnly = true;
+			modalTextareaEl.addEventListener('click', function() {
+				if (confirm('로그인 후 사용 가능합니다.\n로그인 페이지로 이동하시겠습니까?')) {
+					win.location = 'http://www.donga.com/members/login.php?gourl=' + escape(locHref);
+				}
+			}, true);
+		}
+
 		var modalSubmitBtn = doc.createElement('button');
 		modalSubmitBtn.type = 'submit';
 		modalSubmitBtn.textContent = '댓글 등록';
