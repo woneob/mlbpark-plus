@@ -4,15 +4,15 @@ var path = loc.pathname;
 var titIcons = {
 	game: /디아|\[스타|프야매|lol|게임/i,
 	female: /여자|처자|ㅊㅈ|여친|녀 |여성/,
-	twitter: /(트윗|트위터)/,
-	warn: /(혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|주의\))/,
-	adult: /(19금|\[19\] |\(19\)|주번나|성진국)/,
-	tv: /(swf|avi|플짤|영상|flv)/i,
+	twitter: /트윗|트위터/,
+	warn: /혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|주의\)/,
+	adult: /19금|\[19\] |\(19\)|주번나|성진국/,
+	tv: /swf|avi|플짤|영상|flv/i,
 	vs: /(vs)/i,
-	music: /(브금|bgm|음악|가수|노래|뮤직)/i,
-	question: /(질문|요\?|여\?|죠\?|나요)/,
-	img: /(짤방|jpg|gif|jyp)/i,
-	mobile: /(맛폰)/
+	music: /브금|bgm|음악|가수|노래|뮤직/i,
+	question: /질문|요\?|여\?|죠\?|나요/,
+	img: /짤방|jpg|gif|jyp/i,
+	mobile: /맛폰/
 };
 var teams = {
 	kia: {
@@ -788,6 +788,7 @@ function commentLoop(nickname, mbsC, wday, mbsIdx) {
 			complete: function() {
 				t.classList.remove('userCmtLoading');
 			}
+		});
 	};
 
 	var createCmtViewBtn = function() {
