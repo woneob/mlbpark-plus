@@ -817,9 +817,21 @@ function commentLoop(nickname, mbsC, wday, mbsIdx) {
 	}
 }
 
-function replyButton(textarea){
+function replyButton(textarea, myArea){
 	var cmtTxt = myArea.querySelectorAll('.G12');
 	var cmtTxtLen = cmtTxt.length;
+	var buttonClick = function() {
+		if (textarea.value !== '' && !confirm('아직 작성 중인 댓글이 있습니다.\n다시 작성하시겠습니까?')){
+			return false;
+		}
+
+		var thisId = this.dataset.idx;
+
+		var cmtUsername = up(cmtTxt[thisId], 5).children[0].getElementsByTagName('a')[0].innerText;
+		textarea.focus();
+		textarea.value = cmtUsername + '// ';
+	};
+
 	if (o.isInsertReplyButton && cmtTxtLen > 0) {
 		for (var i = 0; i < cmtTxtLen; i++) {
 			var replyBtn = doc.createElement('button');
@@ -827,17 +839,8 @@ function replyButton(textarea){
 			replyBtn.className = 'btn_reply';
 			replyBtn.title = '답글 달기';
 			replyBtn.innerText = '[답글]';
-			replyBtn.idx = i;
-			replyBtn.onclick = function(j){
-				return function(){
-					if (textarea.value !== '' && !confirm('아직 작성 중인 댓글이 있습니다.\n다시 작성하시겠습니까?')){
-						return false;
-					}
-					var cmtUsername = up(cmtTxt[j],5).children[0].getElementsByTagName('a')[0].innerText;
-					textarea.focus();
-					textarea.value = cmtUsername + '// ';
-				};
-			}(i);
+			replyBtn.dataset.idx = i;
+			replyBtn.addEventListener('click', buttonClick, false);
 			cmtTxt[i].appendChild(replyBtn);
 		}
 	}
@@ -943,7 +946,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 			//reply button
 			var textarea = doc.getElementsByName('line_content')[0];
-			replyButton(textarea);
+			replyButton(textarea, myArea);
 
 			//comment refresh
 			var cmtLoader = doc.createElement('div');
