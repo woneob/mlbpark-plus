@@ -788,7 +788,6 @@ function commentLoop(nickname, mbsC, wday, mbsIdx) {
 			complete: function() {
 				t.classList.remove('userCmtLoading');
 			}
-		})
 	};
 
 	var createCmtViewBtn = function() {
