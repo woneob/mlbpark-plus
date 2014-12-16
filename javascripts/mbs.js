@@ -63,6 +63,10 @@ function up(el, n) {
 	return parent;
 }
 
+function readCookie(key) {
+	return (doc.cookie.match('(^|; )' + key + '=([^;]*)') || 0)[2];
+}
+
 function blockedTitle(elem, originTitle, keyword){
 	var blockedTitleConfirm = function(e){
 		if(!confirm('차단된 글을 열람하시겠습니까?')){
