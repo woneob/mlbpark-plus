@@ -271,10 +271,10 @@ function userBlock_cmt(){
 }
 
 function userBlockClick(nickname) {
-		win.postMessage({
-			action: 'userBlockDelivery',
-			content: nickname
-		}, '*');
+	win.postMessage({
+		action: 'userBlockDelivery',
+		content: nickname
+	}, '*');
 }
 
 function addUserBlock(scop){
@@ -648,6 +648,162 @@ function viewVoter(mbsC, mbsIdx, container){
 	voterGroud.appendChild(viewVoterBtn);
 }
 
+function commentLoop(nickname, mbsC, wday, mbsIdx) {
+	var cmtName = myArea.querySelectorAll('td[width="140"] a');
+
+	var removeModal = function() {
+		var modal = doc.getElementsByClassName('commentModal');
+		for (var i = 0, len = modal.length; i < len; i++) {
+			modal[i].remove();
+		}
+	};
+
+	var createModal = function(t, res) {
+		removeModal();
+
+		var selectUser = t.previousSibling.innerText;
+		var resWrapper = doc.createElement('div');
+		resWrapper.innerHTML = res.replace(/<script(.|\s)*?\/script>/g, '');
+
+		var $cmt = $(resWrapper).find('a[title=" 에게 메모 보내기"]:contains("' + selectUser + '")');
+		var cmtCount = $cmt.length;
+		var commentFrag = doc.createDocumentFragment();
+
+		$cmt.each(function(i, v) {
+			var parsedHTML = $(this).closest('td').nextAll();
+
+			var content = doc.createElement('div');
+			content.className = 'content';
+			content.innerHTML = parsedHTML[0].querySelector('.G12').innerHTML.trim();
+
+			var datetime = doc.createElement('span');
+			datetime.className = 'datetime';
+			datetime.innerHTML = parsedHTML[1].querySelector('font[color="666666"]').innerHTML.trim();
+
+			var li = doc.createElement('li');
+			li.appendChild(content);
+			li.appendChild(datetime);
+			commentFrag.appendChild(li);
+		});
+
+		var userEl = doc.createElement('string');
+		userEl.textContent = selectUser;
+
+		var h3Text = doc.createTextNode(' 님이 이 글에 남긴 댓글');
+
+		var cmtCountEl = doc.createElement('span');
+		cmtCountEl.id = 'cmtCount';
+		cmtCountEl.textContent = ['(', cmtCount, ')'].join('');
+
+		var h3El = doc.createElement('h3');
+		h3El.appendChild(userEl);
+		h3El.appendChild(h3Text);
+		h3El.appendChild(cmtCountEl);
+
+		var closeBtnEl = doc.createElement('button');
+		closeBtnEl.type = 'button';
+		closeBtnEl.id = 'commentModalClose';
+		closeBtnEl.title = '닫기';
+		closeBtnEl.textContent = 'close';
+		closeBtnEl.addEventListener('click', removeModal, false);
+
+		var modalHeadEl = doc.createElement('div');
+		modalHeadEl.id = 'modalHead';
+		modalHeadEl.appendChild(h3El);
+		modalHeadEl.appendChild(closeBtnEl);
+
+		var cmtList = doc.createElement('ul');
+		cmtList.id = 'userCmtList';
+		cmtList.appendChild(commentFrag);
+
+		var modalTextareaEl = doc.createElement('textarea');
+		modalTextareaEl.id = 'modalFormTextarea';
+		modalTextareaEl.name = 'line_content';
+		modalTextareaEl.cols = 75;
+		modalTextareaEl.rows = 3;
+		modalTextareaEl.setAttribute('autocomplete', 'off');
+		modalTextareaEl.value = selectUser + '// ';
+
+		var modalSubmitBtn = doc.createElement('button');
+		modalSubmitBtn.type = 'submit';
+		modalSubmitBtn.textContent = '댓글 등록';
+
+		var modalForm = doc.createElement('form');
+		modalForm.id = 'modalForm';
+		modalForm.name = 'writeForm2';
+		modalForm.method = 'post';
+		modalForm.action = 'commentWE.php';
+		modalForm.appendChild(modalTextareaEl);
+		modalForm.appendChild(modalSubmitBtn);
+
+		var commentModalMaskEl = doc.createElement('div');
+		commentModalMaskEl.id = 'commentModalMask';
+		commentModalMaskEl.addEventListener('click', removeModal, false);
+
+		var commentModalBoxEl = doc.createElement('div');
+		commentModalBoxEl.id = 'commentModalBox';
+		commentModalBoxEl.appendChild(modalHeadEl);
+		commentModalBoxEl.appendChild(cmtList);
+		commentModalBoxEl.appendChild(modalForm);
+
+		var commentModalEl = doc.createElement('div');
+		commentModalEl.id = 'commentModal';
+		commentModalEl.className = 'commentModal';
+		commentModalEl.appendChild(commentModalMaskEl);
+		commentModalEl.appendChild(commentModalBoxEl);
+
+		doc.body.insertAdjacentElement('beforeEnd', commentModalEl);
+	};
+
+	var commentLoad = function() {
+		var t = this;
+
+		$.ajax('http://mlbpark.donga.com/mbs/commentRV.php', {
+			type: 'GET',
+			data: {
+				mbsC: mbsC,
+				comment_ymd: wday,
+				comment_idx: mbsIdx
+			},
+			cache: false,
+			beforeSend: function() {
+				t.classList.add('userCmtLoading');
+			},
+			success: function(res) {
+				createModal(t, res);
+			},
+			complete: function() {
+				t.classList.remove('userCmtLoading');
+			}
+		})
+	};
+
+	var createCmtViewBtn = function() {
+		var viewCmt = doc.createElement('button');
+		viewCmt.type = 'button';
+		viewCmt.className = 'btn_userCmt',
+		viewCmt.title = '이 글에 단 댓글 보기';
+		viewCmt.innerText = '?';
+		viewCmt.addEventListener('click', commentLoad, false);
+
+		return viewCmt;
+	};
+
+	for (var i = 0, len = cmtName.length; i < len; i++) {
+		var t = cmtName[i];
+
+		//highlight comment writer
+		if (t.innerText === nickname) {
+			t.className = 'me';
+		}
+
+		//view userComment
+		if (o.isEnableCommentView) {
+			t.parentNode.appendChild(createCmtViewBtn());
+		}
+	}
+}
+
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	o = new Options(response);
 
@@ -689,7 +845,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		var userId;
 		var nickname;
 		var images;
-
 		var mbsC;
 		var mbsIdx;
 		var wdayKey;
@@ -736,100 +891,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 					resizeVideo();
 				}
 
-				function commentUser(){
-					var cmtName = myArea.querySelectorAll('td[width="140"] a');
-
-					for (var i = 0, cmtNameLen = cmtName.length; i < cmtNameLen; i++) {
-						var t = cmtName[i];
-
-						//highlight comment writer
-						if (t.innerText === nickname) {
-							t.className = 'me';
-						}
-
-						//view userComment
-						if (o.isEnableCommentView) {
-							var viewCmt = doc.createElement('button');
-							viewCmt.type = 'button';
-							viewCmt.className = 'btn_userCmt',
-							viewCmt.title = '이 글에 단 댓글 보기';
-							viewCmt.innerText = '?';
-							t.parentNode.appendChild(viewCmt);
-						}
-					}
-
-					if (o.isEnableCommentView) {
-						var btn_userCmt = myArea.querySelectorAll('.btn_userCmt');
-						$(btn_userCmt).on('click',function(){
-							var t = this;
-							$.ajax({
-								type: 'GET',
-								url: 'http://mlbpark.donga.com/mbs/commentRV.php',
-								data: {
-									mbsC: mbsC,
-									comment_ymd: wday,
-									comment_idx: mbsIdx
-								},
-								cache: false,
-								success: function(response) {
-									var selectUser = t.previousSibling.innerText;
-									doc.body.insertAdjacentHTML('beforeEnd',
-										'<div id="commentModal">\n'+
-										'	<div id="commentModalMask"></div>\n'+
-										'	<div id="commentModalBox">\n'+
-										'		<div id="modalHead">\n'+
-										'			<h3><strong>'+selectUser+'</strong> 님이 이 글에 남긴 댓글 <span id="cmtCount"></span></h3>\n'+
-										'			<button type="button" id="commentModalClose" title="닫기">close</button>\n'+
-										'		</div>\n'+
-										'		<div id="userCmtList"></div>\n'+
-										'		<form id="modalForm" name="writeForm2" method="post" action="commentWE.php">\n'+
-										'			<input type="hidden" name="mbsC" value="'+mbsC+'" />\n'+
-										'			<input type="hidden" name="mbsIdx" value="'+mbsIdx+'" />\n'+
-										'			<input type="hidden" name="wday" value="'+wday+'" />\n'+
-										'			<textarea id="modalFormTextarea" name="line_content" cols="75" rows="3" autocomplete="off">'+selectUser+'// </textarea>\n'+
-										'			<button type="submit">댓글 등록</button>\n'+
-										'		</form>\n'+
-										'	</div>\n'+
-										'</div>\n'
-									);
-
-									var responseWrapper = $('<div />').append(response.replace(/<script(.|\s)*?\/script>/g, '')),
-									cmt = responseWrapper.find('a[title=" 에게 메모 보내기"]:contains("' + selectUser + '")'),
-									cmtVal = cmt.closest('td').nextAll();
-									var cmtCount = cmt.length;
-									var el_modal = doc.getElementById('commentModalBox');
-									var el_cmtCount = doc.getElementById('cmtCount');
-									var el_userCmtList = doc.getElementById('userCmtList');
-
-									el_cmtCount.innerText = '(' + cmtCount + ')';
-									$(el_userCmtList).append(cmtVal);
-
-									var vPosition = el_modal.offsetHeight*-.5;
-									el_modal.style.marginTop = vPosition + 'px';
-
-									$('#modalFormTextarea').on('click',function(){
-										if ($('#loginArea a:first-child').text() == '로그인'){
-											if (confirm('로그인 후 사용 가능합니다.\n로그인 페이지로 이동하시겠습니까?') === true){
-												win.location = 'http://www.donga.com/members/login.php\?gourl=' + escape(locHref);
-											}
-										}
-									});
-								},
-								beforeSend : function(){
-									t.classList.add('userCmtLoading');
-								},
-								complete: function(){
-									t.classList.remove('userCmtLoading');
-								}
-							});
-						});
-
-						$(doc.body).on('click','#commentModalMask,#commentModalClose',function(){
-							$('#commentModal').remove();
-						});
-					}
-				}
-				commentUser();
+				commentLoop(nickname, mbsC, wday, mbsIdx);
 
 				// View voter
 				viewVoter(mbsC, mbsIdx, container);
