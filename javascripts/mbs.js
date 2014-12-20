@@ -976,14 +976,14 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							userBlock_cmt();
 						}
 						if (path == '/mbs/articleV.php') {
-							commentUser();
+							commentLoop(nickname, mbsC, wday, mbsIdx);
 						}
 					},
 					complete: function() {
 						$(myArea).find('.G12').html(function(i, val) {
 							return val.replace(val, val.urlReplace());
 						});
-						replyButton();
+						replyButton(textarea, myArea);
 						addUserBlock(myArea);
 						cmtLoader.className = 'loaderHide';
 					}
