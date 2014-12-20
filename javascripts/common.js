@@ -22,7 +22,7 @@ doc.onclick = function(){
 	for (var i = 0, userMenuLen = userMenu.length; i < userMenuLen; i++){
 		userMenu[i].style.display = 'none';
 	}
-}
+};
 
 $(doc).ready(function() {
 	// Remove AD-Wrapper
