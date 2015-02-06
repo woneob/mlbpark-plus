@@ -90,6 +90,8 @@ td.D11[width="76"] {text-align:right;}
 .userMenu li + li {margin-top:3px;}
 
 td[width="687"] > table[width="702"]:nth-child(4) td[height="44"] {border-top:1px solid #ccc;border-bottom:1px solid #eee;}
+td[width="687"] > table[width="702"]:nth-of-type(2):not([background]) {border: 1px solid #eee;}
+td[width="687"] > table[width="702"]:nth-of-type(2):not([background]) td[background$="sub_line_702bg.gif"] {padding-top:5px;border-top:1px solid #f6f6f6;background-color: #f9f9f9 !important;}
 #container > table[width="980"] > tbody > tr[valign=top] > td[width="687"] > table[width="702"]:nth-child(4) > tbody > tr:nth-child(3) > td[background] {padding-top:5px;background:#f8f8f8 !important;border:1px solid #eee; !important;}
 td[width="687"] > table[width="702"] > tbody > tr:nth-child(3) table[width="702"] {width:100% !important;}
 td.G13 > div[align="justify"].blind {position:absolute;visibility:hidden;-webkit-transition:max-height .5s ease;overflow:hidden;}
