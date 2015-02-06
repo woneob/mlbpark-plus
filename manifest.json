@@ -72,7 +72,7 @@
 		},
 		{
 			"matches": [
-				"https://secure.donga.com/membership/real_for_member.php*"
+				"https://secure.donga.com/n/membership/change_pw.php*"
 			]
 			,"run_at":"document_start"
 			,"js":["javascripts/passwd.js"]
