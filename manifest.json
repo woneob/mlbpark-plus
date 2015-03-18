@@ -1,7 +1,7 @@
 {
 	"name": "MLBPARK PLUS",
 	"description": "MLBPARK 확장프로그램입니다.",
-	"version": "4.0",
+	"version": "5.0.0",
 	"icons": {
 		"16": "images/icon_16.png",
 		"32": "images/icon_32.png",
@@ -12,7 +12,7 @@
 		{
 			"matches": ["http://mlbpark.donga.com/*"]
 			,"css":["css/common.css"]
-			,"js":["javascripts/jquery-2.0.0.custom.min.js","javascripts/common.js"]
+			,"js":["javascripts/jquery-2.1.1.min.js","javascripts/common.js"]
 			,"run_at": "document_start"
 		},
 		{
@@ -72,7 +72,7 @@
 		},
 		{
 			"matches": [
-				"https://secure.donga.com/membership/real_for_member.php*"
+				"https://secure.donga.com/n/membership/change_pw.php*"
 			]
 			,"run_at":"document_start"
 			,"js":["javascripts/passwd.js"]
@@ -117,7 +117,6 @@
 	"options_page": "options.html",
 	"manifest_version": 2,
 	"web_accessible_resources": [
-		"images/btn_iSearch.png",
 		"images/btn_reply.png",
 		"images/check.png",
 		"images/close.png",
@@ -131,7 +130,7 @@
 		"images/team.png",
 		"images/tit_login.png",
 		"images/userIcon.gif",
-		"javascripts/jquery-2.0.0.custom.min.js",
+		"javascripts/jquery-2.1.1.min.js",
 		"javascripts/common.js",
 		"javascripts/common_idle.js",
 		"javascripts/main.js",

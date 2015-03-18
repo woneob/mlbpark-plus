@@ -1,18 +1,19 @@
-chrome.extension.sendMessage({action:'passwd'}, function(response) {
-	var passwdVar = response.passwd;
+function getParameterByName(val) {
+	var result;
+	var tmp = [];
+	location.search.substr(1).split('&').forEach(function(item) {
+		tmp = item.split('=');
 
-	if (passwdVar == '1') {
-		function getParameterByName(name) {
-			name = name.replace(/[\[]/,'\\\[').replace(/[\]]/,'\\\]');
-			var regexS = '[\\?&]' + name + '=([^&#]*)';
-			var regex = new RegExp(regexS);
-			var results = regex.exec( window.location.href );
-			if( results == null ) {
-				return '';
-			} else {
-				return decodeURIComponent(results[1].replace(/\+/g, ' ').replace(/%25/gi, '%'));
-			}
-		}
+		if (tmp[0] === val) {
+			result = decodeURIComponent(tmp[1]);
+		} 
+	});
+
+	return result;
+}
+
+chrome.extension.sendMessage({action:'passwd'}, function(response) {
+	if (response.isSkipPasswordChange === 'true') {
 		window.location = getParameterByName('gourl');
 	}
 });

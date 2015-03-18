@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
+<meta charset="utf-8">
 <title>MLBPARK PLUS OPTIONS</title>
-<link rel="stylesheet" href="./css/options.css" />
+<link rel="stylesheet" href="./css/options.css">
 </head>
 <body>
 <section id="container">
@@ -14,129 +14,125 @@
 	<article>
 		<div class="desc">
 			<p><strong>MLBPARK PLUS</strong> 옵션 설정 페이지 입니다.</p>
-			<p>옵션 항목은 과도하게 사용할 경우 느려질 수 있으니 반드시 필요에 의해서만 사용해주시고<br />사용하지 않는 항목들은 비활성화 시켜주시기 바랍니다.</p>
+			<p>옵션 항목은 과도하게 사용할 경우 느려질 수 있으니 반드시 필요에 의해서만 사용해주시고<br>사용하지 않는 항목들은 비활성화 시켜주시기 바랍니다.</p>
 		</div>
-		<div class="form">
-			<div class="row">
-				<input type="checkbox" id="titIcon" checked="checked" />
-				<label for="titIcon">제목 아이콘 사용</label>
-				<span>게시물 목록의 제목 중 지정된 키워드를 포함한 제목 앞에 아이콘을 표시합니다.</span>
-				<span>MLB타운, 한국야구타운, BULLPEN, TODAY베스트 페이지에만 적용됩니다.</span>
-			</div>
-			<div class="row">
-				<input type="checkbox" id="team" checked="checked" />
-				<label for="team">팀 아이콘 사용</label>
-				<span>제목 말머리에 프로야구 팀이 입력되있으면 해당 팀 아이콘을 제목 앞에 표시합니다.</span>
-				<span>한국야구타운 페이지에만 적용됩니다.</span>
-			</div>
-			<div class="row">
-				<input type="checkbox" id="blind" checked="checked" /> 
-				<label for="blind">본문 차단 사용</label>
-				<span>댓글 내용에 지정된 키워드가 있을 경우 본문을 가리고 경고문구를 보여줍니다.</span>
-				<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
-			</div>
-			<div class="row">
-				<input type="checkbox" id="block" />
-				<label for="block">제목 차단 사용</label>
-				<span>목록 제목에 지정된 키워드가 있을 경우 해당 제목을 노출시키지 않거나 무시하도록 도와줍니다.</span>
-				<span>MLB타운, 한국야구타운, BULLPEN, TODAY베스트 페이지의 게시물과 하단의 베스트 글 목록에만 적용됩니다.</span>
-				<div id="blockInfo" class="toggleBox">
-					<textarea id="blockInput" rows="3" cols="40" placeholder="차단 키워드 입력"></textarea>
-					<span>* 키워드를 <strong>세미콜론</strong>으로 구분해서 입력합니다. 예) 여자친구;소개팅</span>
-					<span>* 알파벳 키워드는 대, 소문자를 구분하지 않고 적용됩니다.</span>
-					<span>* 띄어쓰기 까지 차단 키워드로 설정되니 공백 입력을 주의하세요.</span>
-					<span>* 차단 키워드 수가 많을 수록 성능이 저하될 수 있으니 유의해 주시기 바랍니다.</span>
-					<div class="blockType">
-						<p>
-							<input type="radio" id="blockType_1" name="blockType" value="1" />
-							<label for="blockType_1">제목을 <strong>차단 문구로 변경</strong>하여 스스로 스킵하기</label>
-						</p>
-						<p>
-							<input type="radio" id="blockType_2" name="blockType" value="2" />
-							<label for="blockType_2">목록에서 <strong>제거</strong>하여 노출시키지 않기</label>
-						</p>
+		<form name="form">
+			<div class="form">
+				<div class="row">
+					<input type="checkbox" id="showTitleIcon" name="isShowTitleIcon" checked="checked">
+					<label for="showTitleIcon">제목 아이콘 사용</label>
+					<span>게시물 목록의 제목 중 지정된 키워드를 포함한 제목 앞에 아이콘을 표시합니다.</span>
+					<span>MLB타운, 한국야구타운, BULLPEN, TODAY베스트 페이지에만 적용됩니다.</span>
+				</div>
+				<div class="row">
+					<input type="checkbox" id="showTeamIcon" name="isShowTeamIcon" checked="checked">
+					<label for="showTeamIcon">팀 아이콘 사용</label>
+					<span>제목 말머리에 프로야구 팀이 입력되있으면 해당 팀 아이콘을 제목 앞에 표시합니다.</span>
+					<span>한국야구타운 페이지에만 적용됩니다.</span>
+				</div>
+				<div class="row">
+					<input type="checkbox" id="blindContent" name="isBlindContent" checked="checked"> 
+					<label for="blindContent">본문 차단 사용</label>
+					<span>댓글 내용에 지정된 키워드가 있을 경우 본문을 가리고 경고문구를 보여줍니다.</span>
+					<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
+				</div>
+				<div class="row">
+					<input type="checkbox" id="blockArticle" name="isBlockArticle" class="toggleInput">
+					<label for="blockArticle">제목 차단 사용</label>
+					<span>목록 제목에 지정된 키워드가 있을 경우 해당 제목을 노출시키지 않거나 무시하도록 도와줍니다.</span>
+					<span>MLB타운, 한국야구타운, BULLPEN, TODAY베스트 페이지의 게시물과 하단의 베스트 글 목록에만 적용됩니다.</span>
+					<div id="blockInfo" class="toggleBox">
+						<textarea id="blockKeywords" rows="3" cols="40" name="blockKeywords" placeholder="차단 키워드 입력"></textarea>
+						<span>* 키워드를 <strong>세미콜론</strong>으로 구분해서 입력합니다. 예) 여자친구;소개팅</span>
+						<span>* 알파벳 키워드는 대, 소문자를 구분하지 않고 적용됩니다.</span>
+						<span>* 띄어쓰기 까지 차단 키워드로 설정되니 공백 입력을 주의하세요.</span>
+						<span>* 차단 키워드 수가 많을 수록 성능이 저하될 수 있으니 유의해 주시기 바랍니다.</span>
+						<div class="blockType">
+							<p>
+								<input type="radio" id="blockType_1" name="blockType" value="replace">
+								<label for="blockType_1">제목을 <strong>차단 문구로 변경</strong>하여 스스로 스킵하기</label>
+							</p>
+							<p>
+								<input type="radio" id="blockType_2" name="blockType" value="hidden">
+								<label for="blockType_2">목록에서 <strong>제거</strong>하여 노출시키지 않기</label>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<input type="checkbox" id="blockNickname" name="isBlockNickname" class="toggleInput">
+					<label for="blockNickname">닉네임 차단 사용</label>
+					<span>목록과 댓글에서 지정된 닉네임 사용자의 글을 노출시키지 않습니다.</span>
+					<span>MLB타운, 한국야구타운, BULLPEN, TODAY베스트 페이지의 게시물 목록, 댓글에만 적용됩니다.</span>
+					<div id="blockUserInfo" class="toggleBox">
+						<textarea rows="3" cols="40" id="blockNicknames" name="blockNicknames" placeholder="차단 닉네임 입력"></textarea>
+						<span>* 닉네임을 <strong>공백 없이 세미콜론</strong>으로로 구분해서 입력합니다. 예) 사용자1;사용자2</span>
+						<span>* 차단 닉네임 수가 많을 수록 성능이 저하될 수 있으니 유의해 주시기 바랍니다.</span>
+					</div>
+				</div>
+				<div class="row">
+					<input type="checkbox" id="showUserHistory" name="isShowUserHistory" checked="checked">
+					<label for="showUserHistory">본문 작성자의 최신 게시물 보기</label>
+					<span>본문 하단에 작성자의 최신 게시물을 불러옵니다.</span>
+					<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
+				</div>
+				<div class="row">
+					<input type="checkbox" id="insertReplyButton" name="isInsertReplyButton" checked="checked">
+					<label for="insertReplyButton">답글 달기 버튼 사용</label>
+					<span>댓글에 답글 버튼을 노출하고 버튼 클릭 시 해당 댓글의 작성자 닉네임을 댓글 입력창에 자동 입력합니다.</span>
+					<span>MLB타운, 한국야구타운, BULLPEN, TODAY베스트 페이지에만 적용됩니다.</span>
+				</div>
+				<div class="row">
+					<input type="checkbox" id="enableCommentView" name="isEnableCommentView" checked="checked">
+					<label for="enableCommentView">댓글 모아보기 사용</label>
+					<span>댓글 목록 중에서 특정 사용자의 댓글들만 모아서 볼 수 있습니다.</span>
+					<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
+				</div>
+				<div class="row">
+					<input type="checkbox" id="resizeVideo" name="isResizeVideo" checked="checked">
+					<label for="resizeVideo">동영상 사이즈 확장</label>
+					<span>동영상 사이즈를 본문 크기에 맞게 확장합니다.</span>
+					<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
+				</div>
+				<div class="row">
+					<input type="checkbox" id="skipPasswordChange" name="isSkipPasswordChange">
+					<label for="skipPasswordChange">비밀번호 변경 요청 무시</label>
+					<span>로그인 시 비밀번호 변경 요청을 무시하고 로그인을 완료합니다.</span>
+				</div>
+				<div class="row">
+					<input type="checkbox" id="blockNotice" name="isBlockNotice">
+					<label for="blockNotice">공지사항 가리기</label>
+					<span>게시물 목록에서 공지사항을 보이지 않게 설정합니다.</span>
+				</div>
+				<div class="row">
+					<input type="checkbox" id="enableShortcutKey" name="isEnableShortcutKey" checked="checked">
+					<label for="enableShortcutKey">단축키 사용</label>
+					<span>단축키를 이용하여 페이지 이동을 쉽게 도와줍니다.</span>
+					<span>A: 이전 페이지, S: 다음 페이지, D: 게시물 목록으로 스크롤 이동(댓글 스킵용)</span>
+					<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
+				</div>
+				<div class="row">
+					<input type="checkbox" id="enableContainerWidth" name="isEnableContainerWidth" class="toggleInput">
+					<label for="enableContainerWidth">지정 너비 사용</label>
+					<span>컨테이너의 너비를 임의로 설정하여 원하는 크기로 사용합니다.</span>
+					<div id="range" class="toggleBox">
+						<input id="containerWithRange" name="containerWith" type="range" min="780" max="1000" step="1" value="858">
+						<output id="containerWithOutput" for="containerWith" name="containerWith"></output>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<input type="checkbox" id="blockUser" />
-				<label for="blockUser">닉네임 차단 사용</label>
-				<span>목록과 댓글에서 지정된 닉네임 사용자의 글을 노출시키지 않습니다.</span>
-				<span>MLB타운, 한국야구타운, BULLPEN, TODAY베스트 페이지의 게시물 목록, 댓글에만 적용됩니다.</span>
-				<div id="blockUserInfo" class="toggleBox">
-					<textarea rows="3" cols="40" id="blockUserInput" placeholder="차단 닉네임 입력"></textarea>
-					<span>* 닉네임을 <strong>공백 없이 세미콜론</strong>으로로 구분해서 입력합니다. 예) 사용자1;사용자2</span>
-					<span>* 차단 닉네임 수가 많을 수록 성능이 저하될 수 있으니 유의해 주시기 바랍니다.</span>
-				</div>
-			</div>
-			<div class="row">
-				<input type="checkbox" id="userHistory" checked="checked" />
-				<label for="userHistory">본문 작성자의 최신 게시물 보기</label>
-				<span>본문 하단에 작성자의 최신 게시물을 불러옵니다.</span>
-				<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
-			</div>
-			<div class="row">
-				<input type="checkbox" id="reply" checked="checked" />
-				<label for="reply">답글 달기 버튼 사용</label>
-				<span>댓글에 답글 버튼을 노출하고 버튼 클릭 시 해당 댓글의 작성자 닉네임을 댓글 입력창에 자동 입력합니다.</span>
-				<span>MLB타운, 한국야구타운, BULLPEN, TODAY베스트 페이지에만 적용됩니다.</span>
-			</div>
-			<div class="row">
-				<input type="checkbox" id="userCommentView" checked="checked" />
-				<label for="userCommentView">댓글 모아보기 사용</label>
-				<span>댓글 목록 중에서 특정 사용자의 댓글들만 모아서 볼 수 있습니다.</span>
-				<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
-			</div>
-			<div class="row">
-				<input type="checkbox" id="video" checked="checked" />
-				<label for="video">동영상 사이즈 확장</label>
-				<span>동영상 사이즈를 본문 크기에 맞게 확장합니다.</span>
-				<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
-			</div>
-			<div class="row">
-				<input type="checkbox" id="imageSearch" checked="checked" />
-				<label for="imageSearch">이미지 구글 검색 버튼 사용</label>
-				<span>본문에 등록된 이미지에 구글 검색 버튼을 추가하여 이미지 검색을 도와줍니다.</span>
-				<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
-			</div>
-			<div class="row">
-				<input type="checkbox" id="passwd" />
-				<label for="passwd">비밀번호 변경 요청 무시</label>
-				<span>로그인 시 비밀번호 변경 요청을 무시하고 로그인을 완료합니다.</span>
-			</div>
-			<div class="row">
-				<input type="checkbox" id="notice" />
-				<label for="notice">공지사항 가리기</label>
-				<span>게시물 목록에서 공지사항을 보이지 않게 설정합니다.</span>
-			</div>
-			<div class="row">
-				<input type="checkbox" id="shortcut" checked="checked" />
-				<label for="shortcut">단축키 사용</label>
-				<span>단축키를 이용하여 페이지 이동을 쉽게 도와줍니다.</span>
-				<span>A: 이전 페이지, S: 다음 페이지, D: 게시물 목록으로 스크롤 이동(댓글 스킵용)</span>
-				<span>MLB타운, 한국야구타운, BULLPEN 페이지에만 적용됩니다.</span>
-			</div>
-			<div class="row">
-				<input type="checkbox" id="width" />
-				<label for="width">지정 너비 사용</label>
-				<span>컨테이너의 너비를 임의로 설정하여 원하는 크기로 사용합니다.</span>
-				<div id="range" class="toggleBox">
-					<input id="widthVal" name="widthVal" type="range" min="780" max="1000" step="1" value="858" />
-					<output id="slideCurrent" for="widthVal"></output>
-				</div>
-			</div>
-		</div>
 
-		<div id="action">
-			<button type="button" id="save">설정 저장</button>
-			<button type="button" id="reset">초기화</button>
-		</div>
+			<div id="action">
+				<button type="button" id="save">설정 저장</button>
+				<button type="button" id="reset">초기화</button>
+			</div>
+		</form>
 	</article>
 	<footer>
 		<!-- &copy;<a href="http://1upnote.com/mlbpark-plus/" target="_blank">1UPNOTE</a> -->
 	</footer>
 </section>
-<script src="./javascripts/jquery-2.0.0.custom.min.js"></script>
+<script src="./javascripts/jquery-2.1.1.min.js"></script>
 <script src="./javascripts/options.js"></script>
 </body>
 </html>

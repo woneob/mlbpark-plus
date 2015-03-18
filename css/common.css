@@ -17,10 +17,10 @@ body {padding:0 !important;}
 #hearder .menu li.h_cartoon img {height:20px !important;}
 
 /* navigation */
-#navi {display:table !important;height:auto !important;background:#4871bb !important;box-shadow:0 2px 0 #4871bb,0 3px 0 #2851a0,0 4px 0 #d9d9d9;}
+#navi {display:table !important;table-layout:fixed;height:auto !important;background:#4871bb !important;box-shadow:0 2px 0 #4871bb,0 3px 0 #2851a0,0 4px 0 #d9d9d9;}
 #navi .navi_bar {position:static !important;display:table-row !important;width:100% !important;height:40px !important;background:#43454a !important;}
 #navi .navi_bar li {position:static !important;display:table-cell !important;width:auto !important;background:none !important;text-indent:0 !important;font-weight:bold;line-height:1 !important;font-size:12px !important;}
-#navi .navi_bar li.s_navi1 {width:5% !important;}
+#navi .navi_bar li.s_navi1 {width:10% !important;}
 #navi .navi_bar li a {box-sizing:border-box;height:40px!important;background:none !important;background-repeat:none !important;padding:0 3px !important;color:#d7d7d7 !important;line-height:40px;font-family:Dotum,'돋움',sans-serif;text-align:center;box-shadow:inset 0 1px 0 rgba(0,0,0,.2),inset 0 2px 0 rgba(255,255,255,.07);text-shadow:-1px -1px 0 rgba(0,0,0,.1);}
 #navi .navi_bar li a.on {background-color:#4871bb !important;color:#fff !important;}
 #navi .navi_bar li a:hover {text-decoration:none;color:#fff !important;}
@@ -40,8 +40,8 @@ table[width="702"] td[width="94"][align="right"]{width:100%padding-top:10px;}
 table[width="702"] td[width="66"] {font-size:11px;}
 
 /* view --------------------- */
-td img[src^="http://image.donga.com/mlbpark/img200807/sub_line_"] {display:none;}
-td[background^="http://image.donga.com/mlbpark/img200807/sub_line_"] {background:none !important}
+td img[src^="http://image.donga.com/mlbpark/img200807/sub_line_"] {display:none !important;}
+td[background^="http://image.donga.com/mlbpark/img200807/sub_line_"] {background:none !important;}
 
 /* article --------------------- */
 td.G13 td.G13 {padding:20px;position:relative}

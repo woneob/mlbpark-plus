@@ -65,7 +65,7 @@ td.D11[width="117"] > a {display:none;}
 td.D11[width="117"] #recom_pop {display:none;}
 td.D11[width="76"] {text-align:right;}
 #viewVoter {float:right;padding:4px 10px 3px;color:#666;background:#fff;border-width:1px;border-style:solid;border-color:#e6e6e6 #ddd #bcbcbc;border-radius:3px;background-image:-webkit-linear-gradient(top,#fff,#f3f3f3 94%, #fff);box-shadow:0 1px 1px rgba(0,0,0,.02);font-family:Dotum;letter-spacing:-1px;text-shadow:0 1px 0 #fff;cursor:pointer;}
-#voterList {display:none;position:absolute;top:35px;z-index:1000000;right:5px;padding:3px;width:170px;background:#fff;border:1px solid #ffa500;border-radius:5px;box-shadow:rgba(0,0,0,.1) 1px 1px 1px;cursor:default;}
+#voterList {display:none;position:absolute;top:35px;z-index:1000000;right:5px;padding:3px;width:220px;background:#fff;border:1px solid #ffa500;border-radius:5px;box-shadow:rgba(0,0,0,.1) 1px 1px 1px;cursor:default;}
 #voterList.show {display:block;}
 #voterList .voterListHead {position:relative;padding:5px;margin-bottom:3px;border-bottom:1px solid #ddd;}
 #voterList .voterListHead h3 {color:#5a5a5a;}
@@ -75,16 +75,23 @@ td.D11[width="76"] {text-align:right;}
 #voterList ol::-webkit-scrollbar {width:8px;}
 #voterList ol::-webkit-scrollbar-button {display:none;}
 #voterList ol::-webkit-scrollbar-thumb {background:#f6f6f6;margin:3px;border-radius:3px;border:1px solid #ddd;}
-#voterList li {position:relative;padding:1px 5px 1px 30px !important;color:#666;word-break:break-all;white-space:pre-wrap;}
+#voterList li {position:relative;padding:1px 5px 1px 30px !important;color:#666;word-break:break-all;white-space:pre-wrap;font-size:12px;}
 #voterList li:before {width:22px;position:absolute;left:0;content:counter(item);counter-increment:item;display:inline-block;text-align:right;}
 #voterList li:hover {background-color:#fafafa;}
 #voterList li.blockUser {color:#fe4100;}
 #voterList li.emptyMsg {padding:13px 0 0 !important;text-align:center;color:#999;letter-spacing:-1px;}
 #voterList li.emptyMsg:before {display:none;}
 #voterList li.emptyMsg:hover {background:none;}
+#voterList li em {margin-left:4px;font-style:normal;font-size:11px;color:#999;}
 #voterListClose {position:absolute;top:4px;right:3px;display:block;width:15px;height:15px;overflow:hidden;text-indent:-9999px;background:url('chrome-extension://__MSG_@@extension_id__/images/close_thin.png') no-repeat 50% 50%;cursor:pointer;}
 
+.userMenu {position:absolute;z-index:1000001;padding:8px;background:#fff;border:1px solid #ffa500;border-radius:5px;box-shadow:rgba(0,0,0,.1) 1px 1px 1px;}
+.userMenu li {padding:0 !important;font-family:Dotum,'돋움',sans-serif;font-size:11px !important;cursor:pointer;color:#666;}
+.userMenu li + li {margin-top:3px;}
+
 td[width="687"] > table[width="702"]:nth-child(4) td[height="44"] {border-top:1px solid #ccc;border-bottom:1px solid #eee;}
+td[width="687"] > table[width="702"]:nth-of-type(2):not([background]) {border: 1px solid #eee;}
+td[width="687"] > table[width="702"]:nth-of-type(2):not([background]) td[background$="sub_line_702bg.gif"] {padding-top:5px;border-top:1px solid #f6f6f6;background-color: #f9f9f9 !important;}
 #container > table[width="980"] > tbody > tr[valign=top] > td[width="687"] > table[width="702"]:nth-child(4) > tbody > tr:nth-child(3) > td[background] {padding-top:5px;background:#f8f8f8 !important;border:1px solid #eee; !important;}
 td[width="687"] > table[width="702"] > tbody > tr:nth-child(3) table[width="702"] {width:100% !important;}
 td.G13 > div[align="justify"].blind {position:absolute;visibility:hidden;-webkit-transition:max-height .5s ease;overflow:hidden;}
@@ -151,16 +158,16 @@ form[name="writeForm"] td[width="56"] a[href^="javascript:startRequest"] {displa
 
 /* team */
 #team_show .G12read {padding-left:54px;}
-.G12read em {position:absolute;display:inline-block;margin:1px 0 0 -54px;width:48px;height:17px;overflow:hidden;background:url('chrome-extension://__MSG_@@extension_id__/images/team.png') no-repeat;cursor:pointer;}
-.G12read em:hover {opacity:.8;}
-em[data-team="nexen"] {background-position:0 -17px !important;}
-em[data-team="doosan"] {background-position:0 -34px !important;}
-em[data-team="lotte"] {background-position:0 -51px !important;}
-em[data-team="samsung"] {background-position:0 -68px !important;}
-em[data-team="sk"] {background-position:0 -85px !important;}
-em[data-team="lg"] {background-position:0 -102px !important;}
-em[data-team="hanwha"] {background-position:0 -119px !important;}
-em[data-team="nc"] {background-position:0 -136px !important;}
+.G12read .teamIcon {position:absolute;display:inline-block;margin:1px 0 0 -54px;width:48px;height:17px;overflow:hidden;background:url('chrome-extension://__MSG_@@extension_id__/images/team.png') no-repeat;cursor:pointer;}
+.G12read .teamIcon:hover {opacity:.8;}
+.teamIcon[data-team="nexen"] {background-position:0 -17px !important;}
+.teamIcon[data-team="doosan"] {background-position:0 -34px !important;}
+.teamIcon[data-team="lotte"] {background-position:0 -51px !important;}
+.teamIcon[data-team="samsung"] {background-position:0 -68px !important;}
+.teamIcon[data-team="sk"] {background-position:0 -85px !important;}
+.teamIcon[data-team="lg"] {background-position:0 -102px !important;}
+.teamIcon[data-team="hanwha"] {background-position:0 -119px !important;}
+.teamIcon[data-team="nc"] {background-position:0 -136px !important;}
 
 /* extra */
 .warnBtn {position:relative;top:-20px;display:inline-block;background:#fff;padding:6px 10px 5px;color:#555;font:12px 'Gulim';cursor:pointer;border-width:1px;border-style:solid;border-color:#e7e7e7 #c3c3c3 #bfbfbf #d8d8d8;box-shadow:1px 1px 1px rgba(0,0,0,.1);border-radius:5px;}
@@ -171,9 +178,6 @@ em[data-team="nc"] {background-position:0 -136px !important;}
 .highlight {background-color:#fffcc9;border:1px solid #f4f0b1;border-radius:3px;padding:1px 2px;margin:0 1px;color:#504730;}
 a:hover .highlight {background-color:#f6f3b7;border-color:#eae6a3;color:#c40000;text-decoration:none !important;}
 input.box2:focus {outline:none;}
-.iWrap {display:inline-block;position:relative;}
-.btn_iSearch {position:absolute;right:3px;bottom:3px;width:26px;height:26px;overflow:hidden;background:url("chrome-extension://__MSG_@@extension_id__/images/btn_iSearch.png") no-repeat;}
-.btn_iSearch:hover {background-position:0 -26px;}
 .imgOnerror {width:40%;margin:0 auto;padding:5px 0;background:#fff;border-radius:5px;border:1px solid #ddd;text-align:center;}
 .imgOnerror a {font:11px Dotum,sans-serif;color:#888 !important;letter-spacing:-1px;}
 a[href^="javascript:userInfo"] {white-space:pre-wrap;word-break:break-all;}
@@ -183,10 +187,9 @@ a[href^="javascript:userInfo"] {white-space:pre-wrap;word-break:break-all;}
 .btn_userCmt {width:15px;height:15px;vertical-align:middle;margin-left:2px;background:url('chrome-extension://__MSG_@@extension_id__/images/comment.png') no-repeat;border:none;text-indent:-9999px;cursor:pointer;}
 .btn_userCmt[disabled]{opacity:.7;}
 .userCmtLoading {background-image:url('chrome-extension://__MSG_@@extension_id__/images/cmtLoader.gif');cursor:default;}
-#commentModal {-webkit-transition: opacity 500ms ease-in;}
-#commentModalMask {position:fixed;z-index:9998;top:0;right:0;bottom:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.07);}
-#commentModalBox {-webkit-animation: bounce 300ms linear;position:fixed;z-index:9999;top:50%;left:50%;width:580px;padding:2px 2px 8px;margin-left:-292px;background:#fff;border-radius:5px;box-shadow:2px 2px 3px 
-rgba(0,0,0,.15),0 0 0 1px rgba(0,0,0,.2);}
+#commentModal {position:fixed;z-index:999999;top:0;right:0;bottom:0;left:0;margin:auto;display:flex;-webkit-box-align:center;align-items:center;justify-content:center;-webkit-transition: opacity 500ms ease-in;}
+#commentModalMask {position:absolute;z-index:1;top:0;right:0;bottom:0;left:0;margin:0;background:rgba(0,0,0,.07);}
+#commentModalBox {position:relative;z-index:2;-webkit-animation: bounce 300ms linear;width:580px;padding:2px 2px 8px;background:#fff;border-radius:5px;box-shadow:2px 2px 3px rgba(0,0,0,.15),0 0 0 1px rgba(0,0,0,.2);}
 @-webkit-keyframes bounce {
 	0% {-webkit-transform: scale3d(0.1,0.1,1);}
 	55% {-webkit-transform: scale3d(1.08,1.08,1);}
@@ -196,19 +199,15 @@ rgba(0,0,0,.15),0 0 0 1px rgba(0,0,0,.2);}
 #modalHead {position:relative;margin-bottom:12px;padding:7px 10px;background:-webkit-linear-gradient(bottom,#2a2e3d 0,#303846 100%);border:1px solid #222;border-radius:3px;color:#eee;box-shadow:0 1px 1px #999;}
 #modalHead h3 {font-weight:normal;cursor:default;}
 #modalHead h3 strong {color:#fff;}
-#cmtCount {color:#cbcfdb;font-size:11px;} 
+#cmtCount {margin-left:6px;color:#cbcfdb;font-size:11px;} 
 #commentModalClose {position:absolute;top:3px;right:5px;background:url('chrome-extension://__MSG_@@extension_id__/images/close.png') no-repeat 50% 50%;width:24px;height:24px;overflow:hidden;text-indent:-9999px;cursor:pointer;border:none;opacity:.6;}
 #commentModalClose:hover {opacity:1;}
 #userCmtList {margin:0 5px 10px;padding:0 5px;max-height:300px;overflow-y:auto;}
-#userCmtList td[width="1"] {display:none !important;}
-#userCmtList td {box-sizing:border-box;display:block !important;width:100% !important;overflow:hidden;padding:0 !important;height:auto !important;text-align:left !important;line-height:1.4;}
-#userCmtList td table, #userCmtList td tbody, #userCmtList td table tr {display:block;}
-#userCmtList td * {max-width:100%;}
-#userCmtList > td:nth-child(2n) {margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid #eee;}
-#userCmtList > td:last-child {border:none !important;}
-#userCmtList .D11 {padding:3px 0 !important;}
-#userCmtList .D11 font {color:#999;}
-#userCmtList .D11 img, #userCmtList .D11 br, #userCmtList .D11 font[color="9A9A9A"] {display:none;}
+#userCmtList li {overflow:hidden;white-space: normal !important;}
+#userCmtList li + li {margin-top:10px;border-top:1px solid #ececec;}
+#userCmtList li * {max-width: 100%;margin:0 0 10px!important;}
+#userCmtList .content {font-size:12px;}
+#userCmtList .datetime {display:block;margin-top:10px;color:#999;}
 #modalForm {overflow:hidden;padding:0 10px;}
 #modalForm textarea {float:left;width:470px;padding:5px;border:1px solid #ccc;resize:vertical;border-radius:2px;}
 #modalForm button {float:right;width:75px;height:54px;border:1px solid #ccc;border-radius:2px;background:-webkit-linear-gradient(bottom, #fff 0, #f6f6f6 2px, #fff 80%);cursor:pointer;font:12px Dotum,'돋움',sans-serif;}

@@ -1,52 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
+<meta charset="utf-8">
 <title>MLBPARK PLUS</title>
-<base target="_blank" />
-<link rel="stylesheet" href="./css/popup.css" />
+<base target="_blank">
+<link rel="stylesheet" href="./css/popup.css">
 </head>
 <body>
 	<div id="container">
 		<header>
-			<img src="images/logo_small.png" alt="MLBPARK PLUS" />
+			<img src="images/logo_small.png" alt="MLBPARK PLUS">
 			<span id="version"></span>
 			<a href="options.html" class="gotoOptions">전체 옵션</a>
 		</header>
 		
 		<div id="contents">
-			<div class="inputRow">
-				<input type="checkbox" id="notice" />
-				<label for="notice">공지사항 가리기 사용</label>
-			</div>
-			<div class="inputRow">
-				<input type="checkbox" id="titIcon" />
-				<label for="titIcon">제목 아이콘 사용</label>
-			</div>
-			<div class="inputRow">
-				<input type="checkbox" id="team" />
-				<label for="team">팀 아이콘 사용</label>
-			</div>
-			<div class="inputRow">
-				<input type="checkbox" id="block" />
-				<label for="block">제목 차단 사용</label>
-				<div class="txtInput">
-					<input type="text" id="blockInput" class="txtInput" placeholder="차단할 키워드 입력" />
-					<button type="button" id="blockBtn">추가</button>
+			<form id="popupForm">
+				<div class="inputRow">
+					<input type="checkbox" id="blockNotice" name="isBlockNotice">
+					<label for="blockNotice">공지사항 가리기 사용</label>
 				</div>
-			</div>
-			<div class="inputRow">
-				<input type="checkbox" id="blockUser" />
-				<label for="blockUser">닉네임 차단 사용</label>
-				<div class="txtInput">
-					<input type="text" id="blockUserInput" class="txtInput" placeholder="차단할 닉네임 입력" />
-					<button type="button" id="blockUserBtn">추가</button>
+				<div class="inputRow">
+					<input type="checkbox" id="showTitleIcon" name="isShowTitleIcon">
+					<label for="showTitleIcon">제목 아이콘 사용</label>
 				</div>
-			</div>
-			<div class="inputRow">
-				<input type="checkbox" id="userHistory" />
-				<label for="userHistory">본문 작성자의 최신 게시물 보기</label>
-			</div>
+				<div class="inputRow">
+					<input type="checkbox" id="showTeamIcon" name="isShowTeamIcon">
+					<label for="showTeamIcon">팀 아이콘 사용</label>
+				</div>
+				<div class="inputRow">
+					<input type="checkbox" id="blockArticle" name="isBlockArticle">
+					<label for="blockArticle">제목 차단 사용</label>
+					<div class="txtInput">
+						<input type="text" id="blockInput" class="keywordInput" placeholder="차단할 키워드 입력">
+						<button type="button" id="blockBtn">추가</button>
+					</div>
+				</div>
+				<div class="inputRow">
+					<input type="checkbox" id="blockNickname" name="isBlockNickname">
+					<label for="blockNickname">닉네임 차단 사용</label>
+					<div class="txtInput">
+						<input type="text" id="blockUserInput" class="keywordInput" placeholder="차단할 닉네임 입력">
+						<button type="button" id="blockUserBtn">추가</button>
+					</div>
+				</div>
+				<div class="inputRow">
+					<input type="checkbox" id="showUserHistory" name="isShowUserHistory">
+					<label for="showUserHistory">본문 작성자의 최신 게시물 보기</label>
+				</div>
+			</form>
 		</div>
 		
 		<div id="status">
@@ -64,7 +66,7 @@
 			<p class="twitter">Follow <a href="http://twitter.com/mlbparkplus" title="MLBPARK PLUS 공식 트위터">@mlbparkplus</a></p>
 		</footer>
 	</div>
-<script src="./javascripts/jquery-2.0.0.custom.min.js"></script>
+<script src="./javascripts/jquery-2.1.1.min.js"></script>
 <script src="./javascripts/popup.js"></script>
 </body>
 </html>
