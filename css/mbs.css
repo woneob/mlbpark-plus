@@ -178,9 +178,6 @@ form[name="writeForm"] td[width="56"] a[href^="javascript:startRequest"] {displa
 .highlight {background-color:#fffcc9;border:1px solid #f4f0b1;border-radius:3px;padding:1px 2px;margin:0 1px;color:#504730;}
 a:hover .highlight {background-color:#f6f3b7;border-color:#eae6a3;color:#c40000;text-decoration:none !important;}
 input.box2:focus {outline:none;}
-.iWrap {display:inline-block;position:relative;}
-.btn_iSearch {position:absolute;right:3px;bottom:3px;width:26px;height:26px;overflow:hidden;background:url("chrome-extension://__MSG_@@extension_id__/images/btn_iSearch.png") no-repeat;}
-.btn_iSearch:hover {background-position:0 -26px;}
 .imgOnerror {width:40%;margin:0 auto;padding:5px 0;background:#fff;border-radius:5px;border:1px solid #ddd;text-align:center;}
 .imgOnerror a {font:11px Dotum,sans-serif;color:#888 !important;letter-spacing:-1px;}
 a[href^="javascript:userInfo"] {white-space:pre-wrap;word-break:break-all;}

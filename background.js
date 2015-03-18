@@ -154,7 +154,6 @@ function migrateOptionData() {
 	ls.isResizeVideo = copiedObject.video == 1;
 	ls.isBlockNotice = copiedObject.notice == 1;
 	ls.isEnableShortcutKey = copiedObject.shortcut == 1;
-	ls.isEnableImageSearch = copiedObject.imageSearch == 1;
 	ls.isEnableContainerWidth = copiedObject.width == 1;
 	ls.containerWith = copiedObject.widthVal || 858;
 	ls.isSkipPasswordChange = copiedObject.passwd == 1;
@@ -177,7 +176,6 @@ function storeDefaultOptionValueIfNotExists() {
 	ls.isResizeVideo = ls.isResizeVideo || 'true';
 	ls.isBlockNotice = ls.isBlockNotice || 'false';
 	ls.isEnableShortcutKey = ls.isEnableShortcutKey || 'true';
-	ls.isEnableImageSearch = ls.isEnableImageSearch || 'true';
 	ls.isEnableContainerWidth = ls.isEnableContainerWidth || 'false';
 	ls.containerWith = ls.containerWith || '858';
 	ls.isSkipPasswordChange = ls.isSkipPasswordChange || 'false';
@@ -216,8 +214,7 @@ function onMessage(request, sender, sendResponse) {
 				isEnableCommentView: ls.isEnableCommentView,
 				isResizeVideo: ls.isResizeVideo,
 				isBlockNotice: ls.isBlockNotice,
-				isEnableShortcutKey: ls.isEnableShortcutKey,
-				isEnableImageSearch: ls.isEnableImageSearch
+				isEnableShortcutKey: ls.isEnableShortcutKey
 			});
 			break;
 		case 'main':

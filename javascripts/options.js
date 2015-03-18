@@ -19,7 +19,6 @@ var defaultValue = {
 	isResizeVideo: 'true',
 	isBlockNotice: 'false',
 	isEnableShortcutKey: 'true',
-	isEnableImageSearch: 'true',
 	isEnableContainerWidth: 'false',
 	containerWith: '858',
 	isSkipPasswordChange: 'false'

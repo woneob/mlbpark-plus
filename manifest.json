@@ -117,7 +117,6 @@
 	"options_page": "options.html",
 	"manifest_version": 2,
 	"web_accessible_resources": [
-		"images/btn_iSearch.png",
 		"images/btn_reply.png",
 		"images/check.png",
 		"images/close.png",
