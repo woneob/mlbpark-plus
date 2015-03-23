@@ -28,6 +28,9 @@ table[width="99%"] td[width="82%"] strong {font:bold 16px/1 Dotum,'돋움',sans-
 table[width="99%"] td[width="18%"] {width:auto !important;}
 table[width="99%"] td[width="18%"] .userIdVal {font-weight:normal;}
 
+.blockedNotice [background="http://image.donga.com/mlbpark/img200807/sub_tep_02.gif"] + table > tbody > tr:first-child:not([height="30"]),
+.blockedNotice [background="http://image.donga.com/mlbpark/img200807/sub_tep_02.gif"] + table > tbody > tr:not([height="30"]) + tr:not([height="30"]) {display: none;}
+
 /* today Best section */
 table[width="660"] {width:100% !important;}
 table[width="660"] > tbody > tr:first-child img[src="http://image.donga.com/mlbpark/img200807/icon_s2.gif"],
