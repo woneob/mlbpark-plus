@@ -12,7 +12,7 @@ chrome.extension.sendMessage({action:'width'}, function(response) {
 		var customWidth = doc.createElement('style'); 
 		var customStyle = doc.createTextNode('#wrap {max-width:' + o.containerWith + 'px !important;}');
 		customWidth.appendChild(customStyle);
-		doc.documentElement.insertBefore(customWidth);
+		doc.getElementsByTagName('head')[0].appendChild(customWidth);
 	}
 });
 
