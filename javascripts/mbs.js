@@ -206,16 +206,13 @@ function subjectLoop(links, linkDepth) {
 	}
 }
 
-function categoryLoop() {
+function blockNotice() {
 	//notice blind
-	if (!o.isBlockNotice) return;
-
-	var cat = container.getElementsByClassName('A11gray');
-	for (var i = 0, len = cat.length; i < len; i++) {
-		var t = cat[i];
-		if(t.textContent !== '공지') break;
-		up(t, 5).className = 'displayNone';
+	if (!o.isBlockNotice) {
+		return;
 	}
+
+	doc.documentElement.classList.add('blockedNotice');
 }
 
 function nicknameLoop(nickEl, upCount) {
@@ -772,6 +769,8 @@ function replyButton(textarea, myArea){
 chrome.extension.sendMessage({action:'mbs'}, function(response) {
 	o = new Options(response);
 
+	blockNotice();
+
 	doc.addEventListener('DOMContentLoaded', function(){
 		var container =  doc.getElementById('container');
 		var listLink;
@@ -798,7 +797,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			}
 
 			subjectLoop(listLink, linkDepth);
-			categoryLoop();
 			nicknameLoop(nickEl, upCount);
 			bestArticleLoop();
 		}

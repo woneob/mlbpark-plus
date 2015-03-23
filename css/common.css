@@ -2,7 +2,7 @@
 
 /* default layout --------------------- */
 html{overflow-x:auto !important;overflow-y:scroll !important;}
-body {padding:0 !important;}
+body {padding:0 !important;font-family: "굴림", Gulim, Arial, sans-serif !important;}
 #wrap {position:relative;max-width:858px;min-width:780px !important;overflow:visible !important;padding:0 15px;margin:0 auto;box-sizing:border-box;}
 #hearder, #hearder .gnb, #container, #container > table[width="980"], #footer {width:100% !important;}
 #hearder {height:80px !important}
