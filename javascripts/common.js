@@ -17,12 +17,12 @@ chrome.extension.sendMessage({action:'width'}, function(response) {
 });
 
 //user toolbox remove
-doc.onclick = function(){
+doc.addEventListener('click', function(){
 	var userMenu = doc.querySelectorAll('div[id^="nik_"]');
 	for (var i = 0, userMenuLen = userMenu.length; i < userMenuLen; i++){
 		userMenu[i].style.display = 'none';
 	}
-};
+}, false);
 
 doc.addEventListener('DOMContentLoaded', function(){
 	// Remove AD-Wrapper
