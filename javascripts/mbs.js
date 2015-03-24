@@ -8,7 +8,7 @@ var titIcons = {
 	warn: /혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|주의\)/,
 	adult: /19금|\[19\] |\(19\)|주번나|성진국/,
 	tv: /swf|avi|플짤|영상|flv/i,
-	vs: /(vs)/i,
+	vs: /vs/i,
 	music: /브금|bgm|음악|가수|노래|뮤직/i,
 	question: /질문|요\?|여\?|죠\?|나요/,
 	img: /짤방|jpg|gif|jyp/i,
