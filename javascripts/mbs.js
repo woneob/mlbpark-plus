@@ -16,31 +16,31 @@ var titIcons = {
 };
 var teams = {
 	kia: {
-		teamName: /(\[기아\]\s?|\[kia\]\s?)/i,
+		teamName: /^(\s+)?\[(기아|kia)\]\s?/i,
 		searchKeyword: 'kia+OR+%B1%E2%BE%C6'
 	},
 	nexen: {
-		teamName: /(\[넥센\]\s?)/,
+		teamName: /^(\s+)?\[넥센\]\s?/,
 		searchKeyword: '%B3%D8%BC%BE'
 	},
 	doosan: {
-		teamName: /(\[두산\]\s?)/,
+		teamName: /^(\s+)?\[두산\]\s?/,
 		searchKeyword: '%B5%CE%BB%EA'
 	},
 	lotte: {
-		teamName: /(\[롯데\]\s?)/,
+		teamName: /^(\s+)?\[롯데\]\s?/,
 		searchKeyword: '%B7%D4%B5%A5'
 	},
 	samsung: {
-		teamName: /(\[삼성\]\s?)/,
+		teamName: /^(\s+)?\[삼성\]\s?/,
 		searchKeyword: '%BB%EF%BC%BA'
 	},
 	sk: {
-		teamName: /(\[sk\]\s?)/i,
+		teamName: /^(\s+)?\[sk\]\s?/i,
 		searchKeyword: 'sk+OR+%BF%A1%BD%BA%C4%C9%C0%CC'
 	},
 	nc: {
-		teamName: /(\[엔씨\]\s?|\[nc\]\s?)/i,
+		teamName: /^(\s+)?\[(엔씨|nc)\]\s?/i,
 		searchKeyword: 'nc+OR+%BF%A3%BE%BE'
 	},
 	lg: {
@@ -48,7 +48,7 @@ var teams = {
 		searchKeyword: 'lg+OR+%BF%A4%C1%F6'
 	},
 	hanwha: {
-		teamName: /(\[한화\]\s?)/,
+		teamName: /^(\s+)?\[한화\]\s?/,
 		searchKeyword: '%C7%D1%C8%AD'
 	}
 };
