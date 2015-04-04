@@ -10,7 +10,7 @@ var titIcons = {
 	tv: /swf|avi|플짤|영상|flv/i,
 	vs: /(vs)/i,
 	music: /브금|bgm|음악|가수|노래|뮤직/i,
-	question: /질문|요\?|여\?|죠\?|나요/,
+	question: /질문|요\?|여\?|죠\?|나요|까요/,
 	img: /짤방|jpg|gif|jyp/i,
 	mobile: /맛폰/
 };
