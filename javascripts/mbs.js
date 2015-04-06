@@ -50,6 +50,10 @@ var teams = {
 	hanwha: {
 		teamName: /^(\s+)?\[한화\]\s?/,
 		searchKeyword: '%C7%D1%C8%AD'
+	},
+	kt: {
+		teamName: /^(\s+)?\[kt\]\s?/i,
+		searchKeyword: 'kt'
 	}
 };
 
