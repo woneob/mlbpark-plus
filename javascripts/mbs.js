@@ -778,6 +778,11 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 	blockNotice();
 
+	// KBL bbs only
+	if (o.isShowTeamIcon) {
+		doc.documentElement.classList.add('team_show');
+	}
+
 	doc.addEventListener('DOMContentLoaded', function() {
 		var container =  doc.getElementById('container');
 		var listLink;
@@ -796,11 +801,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				linkDepth = 1;
 				nickEl = container.querySelectorAll('td[width="82"] > font > a');
 				upCount = 7;
-			}
-
-			// KBL bbs only
-			if (o.isShowTeamIcon) {
-				doc.body.id = 'team_show';
 			}
 
 			subjectLoop(listLink, linkDepth);
