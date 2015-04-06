@@ -161,12 +161,12 @@ function subjectLoop(links, linkDepth) {
 		}
 	};
 
-	var createTeamIcon = function(t, k, matchKeyword) {
+	var createTeamIcon = function(t, k, regexp) {
 		var label = doc.createElement('a');
 		label.href = teamSearchUrl + teams[k].searchKeyword;
 		label.className = 'teamIcon';
 		label.setAttribute('data-team', k);
-		t.innerText = title.replace(matchKeyword, '');
+		t.innerText = title.replace(regexp, '');
 		t.parentNode.insertBefore(label, t);
 	};
 
@@ -200,9 +200,8 @@ function subjectLoop(links, linkDepth) {
 		// team icon
 		if (o.isShowTeamIcon) {
 			for (var k in teams) {
-				var matched = teams[k].teamName.exec(title);
-				if (matched) {
-					createTeamIcon(t, k, matched[1]);
+				if (teams[k].teamName.test(title)) {
+					createTeamIcon(t, k, teams[k].teamName);
 					break;
 				}
 			}
