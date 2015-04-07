@@ -8,6 +8,7 @@
 /* headline --------------------- */
 .heardline {box-sizing:border-box;width:100% !important;height:auto !important;margin-bottom:10px;overflow:hidden;border-color:#cdcdcd;}
 .heardline .tit_photo .txt {border:0 !important;}
+.heardline .tit_photo .txt span {display:-webkit-box !important;height:auto !important;-webkit-line-clamp:2;-webkit-box-orient:vertical;text-overflow:ellipsis;}
 .heardline ul {padding-left:416px !important;}
 .heardline ul li {width:100% !important;}
 .heardline ul li:last-child {margin-bottom:0 !important;}
