@@ -24,7 +24,7 @@ var defaultValue = {
 	isSkipPasswordChange: 'false'
 };
 
-function restore(obj){
+function restore(obj) {
 	var restoreElement = function(elem) {
 		var isChecked;
 		switch (elem.type) {
@@ -92,15 +92,15 @@ function save(e) {
 	saveComplete('저장되었습니다.');
 }
 
-function removeSaveMsg(){
+function removeSaveMsg() {
 	var saveMsg = doc.getElementById('saveMsg');
-	if (saveMsg){
+	if (saveMsg) {
 		saveMsg.parentNode.removeChild(saveMsg);
 	}
 }
 
 var timeout;
-function saveComplete(message){
+function saveComplete(message) {
 	removeSaveMsg();
 
 	actionEl = doc.getElementById('action');
@@ -110,7 +110,7 @@ function saveComplete(message){
 	actionEl.appendChild(saveMsg);
 
 	clearTimeout(timeout);
-	timeout = setTimeout(function(){
+	timeout = setTimeout(function() {
 		actionEl.removeChild(saveMsg);
 	}, 1000);
 }
@@ -123,10 +123,10 @@ function toggleContent() {
 
 	for (var i = 0, len = toggleInput.length; i < len; i++) {
 		toggleInput[i].addEventListener('change', toggle, false);
-	};
-};
+	}
+}
 
-window.onload = function(){
+window.onload = function() {
 	restore(ls);
 	toggleContent();
 

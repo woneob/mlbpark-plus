@@ -1,6 +1,7 @@
 function getParameterByName(val) {
 	var result;
 	var tmp = [];
+
 	location.search.substr(1).split('&').forEach(function(item) {
 		tmp = item.split('=');
 

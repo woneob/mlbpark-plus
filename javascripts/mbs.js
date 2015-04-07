@@ -3,44 +3,44 @@ var locHref = loc.href;
 var path = loc.pathname;
 var titIcons = {
 	game: /디아|\[스타|프야매|lol|게임/i,
-	female: /여자|처자|ㅊㅈ|여친|녀 |여성/,
+	female: /여자|처자|ㅊㅈ|여친|녀\s|여성/,
 	twitter: /트윗|트위터/,
 	warn: /혐짤|\[혐오|혐오\]|\(혐오|혐오\)|주의\]|주의\)/,
-	adult: /19금|\[19\] |\(19\)|주번나|성진국/,
+	adult: /19금|\[19\]|\(19\)|주번나|성진국/,
 	tv: /swf|avi|플짤|영상|flv/i,
-	vs: /(vs)/i,
+	vs: /vs/i,
 	music: /브금|bgm|음악|가수|노래|뮤직/i,
-	question: /질문|요\?|여\?|죠\?|나요/,
+	question: /질문|요\?|여\?|죠\?|나요|까요/,
 	img: /짤방|jpg|gif|jyp/i,
 	mobile: /맛폰/
 };
 var teams = {
 	kia: {
-		teamName: /(\[기아\]\s?|\[kia\]\s?)/i,
+		teamName: /^(\s+)?\[(기아|kia)\]\s?/i,
 		searchKeyword: 'kia+OR+%B1%E2%BE%C6'
 	},
 	nexen: {
-		teamName: /(\[넥센\]\s?)/,
+		teamName: /^(\s+)?\[넥센\]\s?/,
 		searchKeyword: '%B3%D8%BC%BE'
 	},
 	doosan: {
-		teamName: /(\[두산\]\s?)/,
+		teamName: /^(\s+)?\[두산\]\s?/,
 		searchKeyword: '%B5%CE%BB%EA'
 	},
 	lotte: {
-		teamName: /(\[롯데\]\s?)/,
+		teamName: /^(\s+)?\[롯데\]\s?/,
 		searchKeyword: '%B7%D4%B5%A5'
 	},
 	samsung: {
-		teamName: /(\[삼성\]\s?)/,
+		teamName: /^(\s+)?\[삼성\]\s?/,
 		searchKeyword: '%BB%EF%BC%BA'
 	},
 	sk: {
-		teamName: /(\[sk\]\s?)/i,
+		teamName: /^(\s+)?\[sk\]\s?/i,
 		searchKeyword: 'sk+OR+%BF%A1%BD%BA%C4%C9%C0%CC'
 	},
 	nc: {
-		teamName: /(\[엔씨\]\s?|\[nc\]\s?)/i,
+		teamName: /^(\s+)?\[(엔씨|nc)\]\s?/i,
 		searchKeyword: 'nc+OR+%BF%A3%BE%BE'
 	},
 	lg: {
@@ -48,15 +48,19 @@ var teams = {
 		searchKeyword: 'lg+OR+%BF%A4%C1%F6'
 	},
 	hanwha: {
-		teamName: /(\[한화\]\s?)/,
+		teamName: /^(\s+)?\[한화\]\s?/,
 		searchKeyword: '%C7%D1%C8%AD'
+	},
+	kt: {
+		teamName: /^(\s+)?\[kt\]\s?/i,
+		searchKeyword: 'kt'
 	}
 };
 
 // Repeat parentNode
 function up(el, n) {
 	var parent = el;
-	for(var i = 0; i < n; i++) {
+	for (var i = 0; i < n; i++) {
 		parent = parent.parentNode;
 	}
 
@@ -67,9 +71,9 @@ function readCookie(key) {
 	return (doc.cookie.match('(^|; )' + key + '=([^;]*)') || 0)[2];
 }
 
-function blockedTitle(elem, originTitle, keyword){
-	var blockedTitleConfirm = function(e){
-		if(!confirm('차단된 글을 열람하시겠습니까?')){
+function blockedTitle(elem, originTitle, keyword) {
+	var blockedTitleConfirm = function(e) {
+		if (!confirm('차단된 글을 열람하시겠습니까?')) {
 			e.preventDefault();
 		}
 	};
@@ -80,7 +84,7 @@ function blockedTitle(elem, originTitle, keyword){
 	elem.addEventListener('click', blockedTitleConfirm, false);
 }
 
-function createBlindButton(keyword, target){
+function createBlindButton(keyword, target) {
 	var containerClassName,
 		buttonId,
 		buttonText1,
@@ -98,7 +102,7 @@ function createBlindButton(keyword, target){
 		buttonText2 = ' 본문을 보시려면 클릭하세요.';
 	}
 
-	var buttonClick = function(){
+	var buttonClick = function() {
 		this.className = 'displayNone';
 
 		if (keyword === 'warn') {
@@ -157,12 +161,12 @@ function subjectLoop(links, linkDepth) {
 		}
 	};
 
-	var createTeamIcon = function(t, k, matchKeyword) {
+	var createTeamIcon = function(t, k, regexp) {
 		var label = doc.createElement('a');
 		label.href = teamSearchUrl + teams[k].searchKeyword;
 		label.className = 'teamIcon';
 		label.setAttribute('data-team', k);
-		t.innerText = title.replace(matchKeyword, '');
+		t.innerText = title.replace(regexp, '');
 		t.parentNode.insertBefore(label, t);
 	};
 
@@ -196,9 +200,8 @@ function subjectLoop(links, linkDepth) {
 		// team icon
 		if (o.isShowTeamIcon) {
 			for (var k in teams) {
-				var matched = teams[k].teamName.exec(title);
-				if (matched) {
-					createTeamIcon(t, k, matched[1]);
+				if (teams[k].teamName.test(title)) {
+					createTeamIcon(t, k, teams[k].teamName);
 					break;
 				}
 			}
@@ -217,7 +220,9 @@ function blockNotice() {
 
 function nicknameLoop(nickEl, upCount) {
 	//user block
-	if (!o.isBlockNickname) return;
+	if (!o.isBlockNickname) {
+		return;
+	}
 
 	for (var i = 0, len = nickEl.length; i < len; i++) {
 		if (o.blockNicknames.indexOf(nickEl[i].text) > -1) {
@@ -227,7 +232,9 @@ function nicknameLoop(nickEl, upCount) {
 }
 
 function bestArticleLoop() {
-	if (!o.isBlockArticle) return;
+	if (!o.isBlockArticle) {
+		return;
+	}
 
 	var bestLink = doc.querySelectorAll('td[width="190"] a');
 	var bestLinkLen = bestLink.length;
@@ -255,7 +262,7 @@ function bestArticleLoop() {
 	}
 }
 
-function userBlock_cmt(){
+function userBlock_cmt() {
 	if (o.isBlockNickname) {
 		var CmtNickEl = doc.querySelectorAll('td[width="140"] > font > a');
 
@@ -277,7 +284,7 @@ function userBlockClick(nickname) {
 	}, '*');
 }
 
-function addUserBlock(scop){
+function addUserBlock(scop) {
 	var userMenu = scop.querySelectorAll('div[id^=nik_]');
 
 	var insertMenu = function(t) {
@@ -325,12 +332,12 @@ function showUserHistory(nickname, userId, article) {
 		data: {mbsUid: userId},
 		cache: false,
 		timeout: 5000,
-		success: function(response){
+		success: function(response) {
 			$(historyListEl).append($(response).find('td[bgcolor="#FFFFFF"] > table:nth-child(2)')[0].outerHTML)
 				.find('a[target]')
 				.removeAttr('target');
 		},
-		error: function(xhr, textStatus, errorThrown){
+		error: function(xhr, textStatus, errorThrown) {
 			var errorEl = doc.createElement('p');
 			errorEl.id = 'errerMessage';
 			errorEl.innerText = '오류가 발생하여 최근 글을 불러올 수 없습니다. ';
@@ -363,12 +370,12 @@ String.prototype.urlReplace = function() {
 };
 
 
-$.expr[':'].Contains = function(a,i,m){
+$.expr[':'].Contains = function(a,i,m) {
 	return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
 };
 
 function blibdContent(subject, article, myArea) {
-	if(titIcons.warn.test(subject)) {
+	if (titIcons.warn.test(subject)) {
 		createBlindButton('warn', article);
 		return;
 	}
@@ -396,7 +403,7 @@ function resizeVideo() {
 	doc.head.appendChild(vdoCss);
 }
 
-function viewVoter(mbsC, mbsIdx, container){
+function viewVoter(mbsC, mbsIdx, container) {
 	var voterGroud = doc.querySelector('td.D11[width="117"]');
 
 	var child;
@@ -487,8 +494,8 @@ function viewVoter(mbsC, mbsIdx, container){
 				bbs: mbsC,
 				article_id: mbsIdx
 			},
-			success: function(data){
-				if(data === ''){
+			success: function(data) {
+				if (data === '') {
 					var emptyMsg = doc.createElement('li');
 					emptyMsg.className = 'emptyMsg';
 					emptyMsg.innerText = '아직 추천한 사람이 없습니다';
@@ -527,7 +534,7 @@ function viewVoter(mbsC, mbsIdx, container){
 		var voterListClose = doc.createElement('span');
 		voterListClose.id = 'voterListClose';
 		voterListClose.innerText = 'X';
-		voterListClose.addEventListener('click', function(){
+		voterListClose.addEventListener('click', function() {
 			voterList.style.display = 'none';
 			removeUserMenu();
 		});
@@ -546,7 +553,7 @@ function viewVoter(mbsC, mbsIdx, container){
 		voterList.id = 'voterList';
 		voterList.appendChild(voterListHead);
 		voterList.appendChild(voterOl);
-		voterList.addEventListener('click', function(e){
+		voterList.addEventListener('click', function(e) {
 			e.stopPropagation();
 		});
 
@@ -737,11 +744,11 @@ function commentLoop(nickname, mbsC, wday, mbsIdx) {
 	}
 }
 
-function replyButton(textarea, myArea){
+function replyButton(textarea, myArea) {
 	var cmtTxt = myArea.querySelectorAll('.G12');
 	var cmtTxtLen = cmtTxt.length;
 	var buttonClick = function() {
-		if (textarea.value !== '' && !confirm('아직 작성 중인 댓글이 있습니다.\n다시 작성하시겠습니까?')){
+		if (textarea.value !== '' && !confirm('아직 작성 중인 댓글이 있습니다.\n다시 작성하시겠습니까?')) {
 			return false;
 		}
 
@@ -771,7 +778,12 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 
 	blockNotice();
 
-	doc.addEventListener('DOMContentLoaded', function(){
+	// KBL bbs only
+	if (o.isShowTeamIcon) {
+		doc.documentElement.classList.add('team_show');
+	}
+
+	doc.addEventListener('DOMContentLoaded', function() {
 		var container =  doc.getElementById('container');
 		var listLink;
 		var linkDepth;
@@ -791,11 +803,6 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				upCount = 7;
 			}
 
-			// KBL bbs only
-			if (o.isShowTeamIcon) {
-				doc.body.id = 'team_show';
-			}
-
 			subjectLoop(listLink, linkDepth);
 			nicknameLoop(nickEl, upCount);
 			bestArticleLoop();
@@ -813,7 +820,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 		var wdayKey;
 		var wday;
 
-		if (locHref.indexOf('V.php') > -1){
+		if (locHref.indexOf('V.php') > -1) {
 			myArea = doc.getElementById('myArea');
 
 			mbsC = doc.getElementsByName('mbsC')[0].value;
@@ -872,7 +879,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 			cmtLoadBtn.innerText = '최신 댓글 불러오기';
 			cmtLoader.appendChild(cmtLoadBtn);
 
-			cmtLoadBtn.onclick = function(){
+			cmtLoadBtn.onclick = function() {
 				$.ajax({
 					type: 'post',
 					async: true,
@@ -922,8 +929,13 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 				var listEl = doc.querySelector('table[height="31"]');
 
 				doc.addEventListener('keyup', function(e) {
-					if (path === '/mbs/commentV.php') return;
-					if ($(e.target).is('input, textarea')) return;
+					if (path === '/mbs/commentV.php') {
+						return;
+					}
+
+					if ($(e.target).is('input, textarea')) {
+						return;
+					}
 
 					switch(e.which) {
 						case 65:
@@ -941,7 +953,7 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 							win.scroll(0,listElTop);
 							doc.body.style.cssText = '-webkit-transform:translate(0,0);transition:-webkit-transform .5s ease;';
 
-							$(doc.body).on('webkitTransitionEnd transitionend', function(){
+							$(doc.body).on('webkitTransitionEnd transitionend', function() {
 								doc.body.style.transition = 'none';
 							});
 						break;
@@ -961,7 +973,9 @@ chrome.extension.sendMessage({action:'mbs'}, function(response) {
 });
 
 win.addEventListener('message', function(e) {
-	if (win != e.source) return;
+	if (win != e.source) {
+		return;
+	}
 
 	switch(e.data.action) {
 		case 'userBlockDelivery' :
@@ -970,7 +984,7 @@ win.addEventListener('message', function(e) {
 					data: e.data
 				},
 				function(response) {
-					if(response.result) {
+					if (response.result) {
 						alert('"' + response.content + '" 님을 닉네임 차단에 등록했습니다.');
 						location.reload();
 					} else {
