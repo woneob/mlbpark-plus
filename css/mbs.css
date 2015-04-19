@@ -141,6 +141,7 @@ form[name="writeForm"] td[width="56"] a[href^="javascript:startRequest"] {displa
 	to {-webkit-transform: rotate(360deg);}
 }
 #errerMessage {;padding-top:27px;text-align:center;font-size:12px;color:#999}
+.G12read {font-family: Gulim, "굴림", sans-serif!important;}
 
 /* icons */
 .G12read a {vertical-align:middle;padding-right:3px;}
