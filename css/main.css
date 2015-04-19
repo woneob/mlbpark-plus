@@ -42,6 +42,7 @@
 .article_box .news_cont .news_list ul li {margin-bottom:3px !important;background:none !important;padding-left:0 !important;}
 .article_box .news_cont .news_list ul li a {display:inline !important;width:auto !important;}
 .article_box .news_cont .news_list ul li:first-child a {font-weight:bold !important;}
+.article_box .news_cont .news_list ul li:nth-child(n+7) {display:none;}
 .article_box .news_cont .news_list .id,
 .article_box .news_cont .news_list .icon {display:none;}
 /* notice */
@@ -50,6 +51,8 @@
 .article_box .news_cont .notice ul li {background:none !important;margin-bottom:4px !important;padding-left:0 !important;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
 .article_box .news_cont .notice ul li a, .article_box .news_cont .notice ul li a b {font-weight:normal !important;}
 .article_box .news_cont .notice ul li:first-child a, .article_box .news_cont .notice ul li:first-child a b {font-weight:bold !important;}
+.article_box .news_cont .notice ul li:nth-child(n+7) {display:none;}
+
 /* sidebar --------------------- */
 #main_content .right_cont {box-sizing:border-box;width:230px !important;height:328px;position:absolute;top:330px;right:0;border-left:1px solid #e3e3e3;border-right:1px solid #e3e3e3;}
 /* login box */
