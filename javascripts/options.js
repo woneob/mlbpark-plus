@@ -103,10 +103,11 @@ var timeout;
 function saveComplete(message) {
   removeSaveMsg();
 
-  actionEl = doc.getElementById('action');
-  saveMsg = doc.createElement('span');
+  var actionEl = doc.getElementById('action');
+  var saveMsg = doc.createElement('span');
   saveMsg.id = 'saveMsg';
   saveMsg.innerText = message;
+
   actionEl.appendChild(saveMsg);
 
   clearTimeout(timeout);
