@@ -15,7 +15,7 @@
 
       x = doc.cookie.indexOf(' ', x) + 1;
 
-      if (x == 0) {
+      if (x === 0) {
         break;
       }
     }
