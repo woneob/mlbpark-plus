@@ -30,7 +30,7 @@
     }, 1000);
   };
 
-  function postMessage(elem, inputElem, actionName) {
+  var postMessage = function(elem, inputElem, actionName) {
     var input = formElements[inputElem];
 
     elem.addEventListener('click', function() {
@@ -46,7 +46,7 @@
     }, false);
   }
 
-  function pressEnter(selector) {
+  var pressEnter = function(selector) {
     var txtInputs = doc.querySelectorAll(selector);
     var press = function(e) {
       if (e.keyCode == 13) {
@@ -59,7 +59,7 @@
     }
   }
 
-  function checkboxChange() {
+  var checkboxChange = function() {
     var checkboxes = doc.querySelectorAll('[type="checkbox"]');
 
     var changer = function() {
