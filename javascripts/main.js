@@ -85,7 +85,8 @@ $(doc).ready(function() {
               t.setAttribute('title','제목 : '+ title);
               t.onclick = function(){
                 return confirm('차단된 글을 열람하시겠습니까?');
-              }
+              };
+
               break;
             }
           }
