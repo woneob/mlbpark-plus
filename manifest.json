@@ -3,22 +3,22 @@
   "description": "MLBPARK 확장프로그램입니다.",
   "version": "5.0.2",
   "icons": {
-    "16": "images/icon_16.png",
-    "32": "images/icon_32.png",
-    "48": "images/icon_48.png",
-    "128": "images/icon_128.png"
+    "16": "images/appIcons/icon_16.png",
+    "32": "images/appIcons/icon_32.png",
+    "48": "images/appIcons/icon_48.png",
+    "128": "images/appIcons/icon_128.png"
   },
   "content_scripts": [
     {
       "matches": ["http://mlbpark.donga.com/*"]
-      ,"css":["css/common.css"]
-      ,"js":["javascripts/jquery-2.1.4.min.js","javascripts/common.js"]
+      ,"css":["styles/contents/common.css"]
+      ,"js":["scripts/libs/jquery-2.1.4.min.js","scripts/contents/common.js"]
       ,"run_at": "document_start"
     },
     {
       "matches": ["http://mlbpark.donga.com/"]
-      ,"css":["css/main.css"]
-      ,"js":["javascripts/main.js"]
+      ,"css":["styles/contents/main.css"]
+      ,"js":["scripts/contents/main.js"]
       ,"run_at": "document_start"
     },
     {
@@ -29,8 +29,8 @@
         "http://mlbpark.donga.com/mbs/commentV.php*"
       ]
       ,"run_at":"document_start"
-      ,"css":["css/mbs.css"]
-      ,"js":["javascripts/mbs.js"]
+      ,"css":["styles/contents/mbs.css"]
+      ,"js":["scripts/contents/mbs.js"]
     },
     {
       "matches": [
@@ -38,7 +38,7 @@
         "http://mlbpark.donga.com/bbs/view.php*"
       ]
       ,"run_at":"document_start"
-      ,"css":["css/bbs.css"]
+      ,"css":["styles/contents/bbs.css"]
     },
     {
       "matches": [
@@ -47,8 +47,8 @@
         "http://mlbpark.donga.com/bbs/write.php*"
       ]
       ,"run_at":"document_start"
-      ,"css":["css/write.css"]
-      ,"js":["javascripts/write.js"]
+      ,"css":["styles/contents/write.css"]
+      ,"js":["scripts/contents/write.js"]
     },
     {
       "matches": [
@@ -58,7 +58,7 @@
         "http://mlbpark.donga.com/mypage/my_emoticon.php*"
       ]
       ,"run_at":"document_start"
-      ,"css":["css/mypage.css"]
+      ,"css":["styles/contents/mypage.css"]
     },
     {
       "matches": [
@@ -67,40 +67,40 @@
         "http://mlbpark.donga.com/mypage/my_send_message.php*"
       ]
       ,"run_at":"document_start"
-      ,"css":["css/my_bulletin.css"]
-      ,"js":["javascripts/my_bulletin.js"]
+      ,"css":["styles/contents/my_bulletin.css"]
+      ,"js":["scripts/contents/my_bulletin.js"]
     },
     {
       "matches": [
         "https://secure.donga.com/n/membership/change_pw.php*"
       ]
       ,"run_at":"document_start"
-      ,"js":["javascripts/passwd.js"]
+      ,"js":["scripts/contents/passwd.js"]
     },
     {
       "matches": [
         "http://www.donga.com/members/login.php*"
       ]
       ,"run_at":"document_end"
-      ,"css":["css/login.css"]
+      ,"css":["styles/contents/login.css"]
     },
     {
       "matches": ["http://mlbpark.donga.com/*"]
       ,"exclude_matches":["http://mlbpark.donga.com/my*"]
-      ,"js":["javascripts/common_idle.js"]
+      ,"js":["scripts/contents/common_idle.js"]
       ,"run_at": "document_idle"
     }
   ],
   "browser_action": {
     "default_icon": {
-      "19": "images/icon_19.png",
-      "38": "images/icon_38.png"
+      "19": "images/appIcons/icon_19.png",
+      "38": "images/appIcons/icon_38.png"
     },
     "default_title": "MLBPARK PLUS",
-    "default_popup": "popup.html"
+    "default_popup": "pages/popup.html"
   },
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["scripts/background/background.js"]
   },
   "permissions": [
     "management",
@@ -114,12 +114,12 @@
     "http://pagead2.googlesyndication.com/*",
     "http://www.gstatic.com/*"
   ],
-  "options_page": "options.html",
+  "options_page": "pages/options.html",
   "manifest_version": 2,
   "web_accessible_resources": [
     "images/*",
-    "javascripts/*",
-    "css/*"
+    "scripts/*",
+    "styles/*"
   ],
   "minimum_chrome_version": "20"
 }

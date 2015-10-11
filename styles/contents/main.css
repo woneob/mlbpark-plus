@@ -59,7 +59,7 @@
 .login_box {width:100% !important;height:auto !important;background:none !important;margin-bottom:15px;padding:0 !important;border:none !important;}
 .login_box h3 {background:none !important;padding:13px 0 7px 10px !important;}
 .login_box h3 img {display:none;}
-.login_box h3:before {content:'';display:block;width:94px;height:12px;background:url('chrome-extension://__MSG_@@extension_id__/images/tit_login.png') no-repeat;}
+.login_box h3:before {content:'';display:block;width:94px;height:12px;background:url('chrome-extension://__MSG_@@extension_id__/images/contents/tit_login.png') no-repeat;}
 .login_box input, .login_box span, .login_box label {vertical-align:middle !important;}
 .login_box .login .txt_input {width:110px !important;}
 .login_box .login, .login_box .logout {box-sizing:border-box;width:208px !important;height:77px;padding:11px 10px 12px !important;border:1px solid #eee !important;border-bottom-width:0 !important;background-color:#f8f8f8;}

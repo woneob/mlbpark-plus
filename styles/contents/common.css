@@ -60,7 +60,7 @@ table[width="55"] td[background$="sub_icon_bg01.gif"] img {margin-right:3px;}
 #myArea {border-top:1px solid #ccc;}
 #myArea td[bgcolor="B8B8B8"] {display:none;}
 #myArea > table[width="702"] {width:100% !important;margin:0 !important;}
-#myArea table[width="97%"] tr .btn_reply {visibility:hidden;vertical-align:-1px;background:transparent url("chrome-extension://__MSG_@@extension_id__/images/btn_reply.png") no-repeat 0 0;width:28px;height:12px;overflow:hidden;cursor:pointer;border:none;text-indent:-9999px;}
+#myArea table[width="97%"] tr .btn_reply {visibility:hidden;vertical-align:-1px;background:transparent url("chrome-extension://__MSG_@@extension_id__/images/contents/btn_reply.png") no-repeat 0 0;width:28px;height:12px;overflow:hidden;cursor:pointer;border:none;text-indent:-9999px;}
 #myArea table[width="97%"] tr .btn_reply:hover {background-position:0 -12px;}
 #myArea table[width="97%"] tr:hover .btn_reply {visibility:visible;}
 #myArea table[width="97%"] td[width="140"] a {font:12px Dotum, '돋움', sans-serif;}
