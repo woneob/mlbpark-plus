@@ -34,7 +34,9 @@
     var input = formElements[inputElem];
 
     elem.addEventListener('click', function() {
-      if (!input.value.trim()) return;
+      if (!input.value.trim()) {
+        return;
+      }
 
       win.postMessage({
         action: actionName,
@@ -87,7 +89,9 @@
   }, false);
 
   win.addEventListener('message', function(e) {
-    if (win != e.source) return;
+    if (win != e.source) {
+      return;
+    }
 
     switch(e.data.action) {
       case 'titleBlockDelivery':
@@ -100,7 +104,7 @@
           function(response) {
             formElements[e.data.inputName].value = '';
 
-            if(response.result) {
+            if (response.result) {
               showMessage('저장되었습니다.');
             } else {
               showMessage(response.message);
