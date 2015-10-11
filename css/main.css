@@ -19,9 +19,9 @@
 .heardline ul li .txt strong {display:block !important;}
 .heardline ul li .txt strong a {display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:14px;color:#555;}
 .heardline ul li .txt .s_font {display: -webkit-box;width:auto !important;white-space:normal !important;text-overflow:clip !important;-webkit-line-clamp:3;word-wrap:break-word;-webkit-box-orient: vertical;color:#888;}
- 
+
 /* article box --------------------- */
-.article_box {position:relative;height:328px;box-sizing:border-box;width:560px !important;float:right;border-width:1px !important;margin-bottom:10px;} 
+.article_box {position:relative;height:328px;box-sizing:border-box;width:560px !important;float:right;border-width:1px !important;margin-bottom:10px;}
 .article_box .highlight_poll {box-sizing:border-box;float:none !important;width:auto !important;border:none !important;background:transparent !important;}
 .article_box .highlight_poll h3 {padding:12px 0 8px 16px !important;}
 .article_box .highlight_poll .video {margin-bottom:10px;padding:0 15px;}

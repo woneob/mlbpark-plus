@@ -118,8 +118,8 @@ td.A13oreng #search_text input.box2 {border:1px solid #ccc;padding:5px 6px;borde
 #memoAlarm div a {display:inline-block;text-decoration:none;border:1px solid #ccc;border-color:#ddd #ccc #aaa;padding:4px 6px 3px;border-radius:2px;background:#fefefe;font-size:11px;letter-spacing:-1px;color:#666;}
 #memoAlarm div a:hover {border-color:#ccc #bbb #999;background-color:#fff;}
 @-webkit-keyframes myfirst {
-	from {bottom:-300px;}
-	to {bottom: 10px;}
+  from {bottom:-300px;}
+  to {bottom: 10px;}
 }
 
 /* etc --------------------- */
@@ -127,7 +127,7 @@ td.A13oreng #search_text input.box2 {border:1px solid #ccc;padding:5px 6px;borde
 img[src="http://image.donga.com/common/new.gif"]{vertical-align:-2px !important;margin-right:2px !important;}
 td.D11[width="18%"] {font-weight:bold;font-size:12px !important;color:#333 !important;}
 td.D11 font {position:relative;margin-right:5px;}
-td.D11 img {vertical-align:middle;} 
+td.D11 img {vertical-align:middle;}
 font[color="666666"] {position:relative;}
 /* user information */
 div[id^="nik_"] {top:0;left:0;width:60px !important;background:#fff;margin:20px 0 0 !important;padding:5px 8px;font:normal 11px Dotum, '돋움', sans-serif;letter-spacing:-1px;color:#666;border-width:1px !important;box-shadow:1px 1px 1px rgba(0,0,0,.1);border-radius:3px;}
