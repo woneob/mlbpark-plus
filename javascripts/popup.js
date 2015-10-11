@@ -18,23 +18,16 @@
   var timeout;
   var showMessage = function(message) {
     var messageBox = doc.getElementById('message');
-
-    var show = function() {
-      messageBox.innerText = message;
-      messageBox.style.display = 'block';
-    };
-
-    var hide = function() {
-      messageBox.removeAttribute('style');
-    };
-
-    show();
+    messageBox.innerText = message;
+    messageBox.style.display = 'block';
 
     if (timeout) {
       clearTimeout(timeout);
     }
 
-    timeout = setTimeout(hide, 1000);
+    timeout = setTimeout(function() {
+      messageBox.removeAttribute('style');
+    }, 1000);
   };
 
   function postMessagenger(elem, inputElem, actionName) {
