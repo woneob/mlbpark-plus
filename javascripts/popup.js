@@ -30,7 +30,7 @@
     }, 1000);
   };
 
-  function postMessagenger(elem, inputElem, actionName) {
+  function postMessage(elem, inputElem, actionName) {
     var input = formElements[inputElem];
 
     elem.addEventListener('click', function() {
@@ -77,8 +77,8 @@
   doc.addEventListener('DOMContentLoaded', function() {
     restore();
 
-    postMessagenger(formElements.blockBtn, 'blockInput', 'titleBlockDelivery');
-    postMessagenger(formElements.blockUserBtn, 'blockUserInput', 'userBlockDelivery');
+    postMessage(formElements.blockBtn, 'blockInput', 'titleBlockDelivery');
+    postMessage(formElements.blockUserBtn, 'blockUserInput', 'userBlockDelivery');
 
     pressEnter('.keywordInput');
     checkboxChange();
@@ -96,21 +96,19 @@
     switch(e.data.action) {
       case 'titleBlockDelivery':
       case 'userBlockDelivery':
-        chrome.extension.sendMessage(
-          {
-            action: e.data.action,
-            data: e.data
-          },
-          function(response) {
-            formElements[e.data.inputName].value = '';
+        chrome.extension.sendMessage({
+          action: e.data.action,
+          data: e.data
+        },
+        function(response) {
+          formElements[e.data.inputName].value = '';
 
-            if (response.result) {
-              showMessage('저장되었습니다.');
-            } else {
-              showMessage(response.message);
-            }
+          if (response.result) {
+            showMessage('저장되었습니다.');
+          } else {
+            showMessage(response.message);
           }
-        );
+        });
       break;
     }
   }, false);
