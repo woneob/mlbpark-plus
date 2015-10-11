@@ -117,28 +117,9 @@
   "options_page": "options.html",
   "manifest_version": 2,
   "web_accessible_resources": [
-    "images/btn_reply.png",
-    "images/check.png",
-    "images/close.png",
-    "images/close_thin.png",
-    "images/cmtLoader.gif",
-    "images/comment.png",
-    "images/icon.png",
-    "images/loader.gif",
-    "images/logo.png",
-    "images/nav.png",
-    "images/team.png",
-    "images/tit_login.png",
-    "images/userIcon.gif",
-    "javascripts/jquery-2.1.4.min.js",
-    "javascripts/common.js",
-    "javascripts/common_idle.js",
-    "javascripts/main.js",
-    "javascripts/mbs.js",
-    "javascripts/my_bulletin.js",
-    "javascripts/passwd.js",
-    "javascripts/write.js",
-    "css/video.css"
+    "images/*",
+    "javascripts/*",
+    "css/*"
   ],
   "minimum_chrome_version": "20"
 }
