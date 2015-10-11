@@ -1,20 +1,24 @@
-function getParameterByName(val) {
-  var result;
-  var tmp = [];
+;(function(win) {
+  var getParameterByName = function(val) {
+    var result;
+    var tmp = [];
 
-  location.search.substr(1).split('&').forEach(function(item) {
-    tmp = item.split('=');
+    location.search.substr(1).split('&').forEach(function(item) {
+      tmp = item.split('=');
 
-    if (tmp[0] === val) {
-      result = decodeURIComponent(tmp[1]);
+      if (tmp[0] === val) {
+        result = decodeURIComponent(tmp[1]);
+      }
+    });
+
+    return result;
+  };
+
+  chrome.extension.sendMessage({
+    action: 'passwd'
+  }, function(res) {
+    if (res.isSkipPasswordChange === 'true') {
+      win.location = getParameterByName('gourl');
     }
   });
-
-  return result;
-}
-
-chrome.extension.sendMessage({action:'passwd'}, function(response) {
-  if (response.isSkipPasswordChange === 'true') {
-    window.location = getParameterByName('gourl');
-  }
-});
+})(window);
