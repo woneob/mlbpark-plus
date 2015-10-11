@@ -1,6 +1,6 @@
 {
   "name": "MLBPARK PLUS",
-  "description": "MLBPARK 확장프로그램입니다.",
+  "description": "MLBPARK 크롬 확장프로그램.",
   "version": "5.0.2",
   "icons": {
     "16": "images/appIcons/icon_16.png",
