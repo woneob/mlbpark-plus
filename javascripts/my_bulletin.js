@@ -1,7 +1,8 @@
 $(document).ready(function() {
   //replace with href of link
-  var elms = document.getElementsByTagName('a');
-  for (i=0; i<elms.length; i++) {
-    elms[i].href = elms[i].href.replace('nmlbpark.donga.com:8090', 'mlbpark.donga.com');
+  var links = document.getElementsByTagName('a');
+
+  for (var i = 0, len = links.length; i < len; i++) {
+    links[i].href = links[i].href.replace('nmlbpark.donga.com:8090', 'mlbpark.donga.com');
   }
 });
