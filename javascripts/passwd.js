@@ -2,8 +2,10 @@
   var getParameterByName = function(val) {
     var result;
     var tmp = [];
+    var urlParams = win.location.search.substr(1);
+    var urlParamArray = urlParams.split('&');
 
-    location.search.substr(1).split('&').forEach(function(item) {
+    urlParamArray.forEach(function(item) {
       tmp = item.split('=');
 
       if (tmp[0] === val) {
