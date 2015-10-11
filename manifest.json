@@ -12,7 +12,7 @@
 		{
 			"matches": ["http://mlbpark.donga.com/*"]
 			,"css":["css/common.css"]
-			,"js":["javascripts/jquery-2.1.1.min.js","javascripts/common.js"]
+			,"js":["javascripts/jquery-2.1.4.min.js","javascripts/common.js"]
 			,"run_at": "document_start"
 		},
 		{
@@ -130,7 +130,7 @@
 		"images/team.png",
 		"images/tit_login.png",
 		"images/userIcon.gif",
-		"javascripts/jquery-2.1.1.min.js",
+		"javascripts/jquery-2.1.4.min.js",
 		"javascripts/common.js",
 		"javascripts/common_idle.js",
 		"javascripts/main.js",
