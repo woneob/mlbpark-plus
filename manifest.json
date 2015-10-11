@@ -10,16 +10,29 @@
   },
   "content_scripts": [
     {
-      "matches": ["http://mlbpark.donga.com/*"]
-      ,"css":["styles/contents/common.css"]
-      ,"js":["scripts/libs/jquery-2.1.4.min.js","scripts/contents/common.js"]
-      ,"run_at": "document_start"
+      "matches": [
+        "http://mlbpark.donga.com/*"
+      ],
+      "css": [
+        "styles/contents/common.css"
+      ],
+      "js": [
+        "scripts/libs/jquery-2.1.4.min.js",
+        "scripts/contents/common.js"
+      ],
+      "run_at": "document_start"
     },
     {
-      "matches": ["http://mlbpark.donga.com/"]
-      ,"css":["styles/contents/main.css"]
-      ,"js":["scripts/contents/main.js"]
-      ,"run_at": "document_start"
+      "matches": [
+        "http://mlbpark.donga.com/"
+      ],
+      "css": [
+        "styles/contents/main.css"
+      ],
+      "js": [
+        "scripts/contents/main.js"
+      ],
+      "run_at": "document_start"
     },
     {
       "matches": [
@@ -27,28 +40,38 @@
         "http://mlbpark.donga.com/mbs/articleV.php*",
         "http://mlbpark.donga.com/bbs/mlb_today.php*",
         "http://mlbpark.donga.com/mbs/commentV.php*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "styles/contents/mbs.css"
+      ],
+      "js": [
+        "scripts/contents/mbs.js"
       ]
-      ,"run_at":"document_start"
-      ,"css":["styles/contents/mbs.css"]
-      ,"js":["scripts/contents/mbs.js"]
     },
     {
       "matches": [
         "http://mlbpark.donga.com/bbs/list.php*",
         "http://mlbpark.donga.com/bbs/view.php*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "styles/contents/bbs.css"
       ]
-      ,"run_at":"document_start"
-      ,"css":["styles/contents/bbs.css"]
     },
     {
       "matches": [
         "http://mlbpark.donga.com/mbs/articleW.php*",
         "http://mlbpark.donga.com/mbs/articleM.php*",
         "http://mlbpark.donga.com/bbs/write.php*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "styles/contents/write.css"
+      ],
+      "js": [
+        "scripts/contents/write.js"
       ]
-      ,"run_at":"document_start"
-      ,"css":["styles/contents/write.css"]
-      ,"js":["scripts/contents/write.js"]
     },
     {
       "matches": [
@@ -56,39 +79,55 @@
         "http://mlbpark.donga.com/mypage/my_scrap.php*",
         "http://mlbpark.donga.com/mypage/my_message.php*",
         "http://mlbpark.donga.com/mypage/my_emoticon.php*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "styles/contents/mypage.css"
       ]
-      ,"run_at":"document_start"
-      ,"css":["styles/contents/mypage.css"]
     },
     {
       "matches": [
         "http://mlbpark.donga.com/mypage/my_bulletin.php*",
         "http://mlbpark.donga.com/mbs/my_bulletin.php*",
         "http://mlbpark.donga.com/mypage/my_send_message.php*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "styles/contents/my_bulletin.css"
+      ],
+      "js": [
+        "scripts/contents/my_bulletin.js"
       ]
-      ,"run_at":"document_start"
-      ,"css":["styles/contents/my_bulletin.css"]
-      ,"js":["scripts/contents/my_bulletin.js"]
     },
     {
       "matches": [
         "https://secure.donga.com/n/membership/change_pw.php*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "scripts/contents/passwd.js"
       ]
-      ,"run_at":"document_start"
-      ,"js":["scripts/contents/passwd.js"]
     },
     {
       "matches": [
         "http://www.donga.com/members/login.php*"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "styles/contents/login.css"
       ]
-      ,"run_at":"document_end"
-      ,"css":["styles/contents/login.css"]
     },
     {
-      "matches": ["http://mlbpark.donga.com/*"]
-      ,"exclude_matches":["http://mlbpark.donga.com/my*"]
-      ,"js":["scripts/contents/common_idle.js"]
-      ,"run_at": "document_idle"
+      "matches": [
+        "http://mlbpark.donga.com/*"
+      ],
+      "exclude_matches": [
+        "http://mlbpark.donga.com/my*"
+      ],
+      "js": [
+        "scripts/contents/common_idle.js"
+      ],
+      "run_at": "document_idle"
     }
   ],
   "browser_action": {
@@ -100,7 +139,9 @@
     "default_popup": "pages/popup.html"
   },
   "background": {
-    "scripts": ["scripts/background/background.js"]
+    "scripts": [
+      "scripts/background/background.js"
+    ]
   },
   "permissions": [
     "management",
