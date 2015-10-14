@@ -32,8 +32,8 @@
 추가적인 설정이 필요할 경우에는 **MLBPARK PLUS 옵션 페이지**로 접속하시기 바랍니다.
 
 ### 옵션페이지 접속 방법들
-* Chrome 설정 및 관리 클릭 > 도구(L) > 확장 프로그램(L) > MLBPARK PLUS > 옵션
-* Chrome 설정 및 관리 클릭 > 설정(S) > 확장프로그램 탭 선택 > MLBPARK PLUS > 옵션
+* Chrome 맟춤설정 및 제어(&#9776;) > 도구 더보기 > 확장 프로그램(E) > MLBPARK PLUS > 옵션
+* Chrome 맟춤설정 및 제어(&#9776;) > 설정(S) > 확장프로그램 탭 > MLBPARK PLUS > 옵션
 * MLBPARK PLUS 아이콘 클릭 > 전체옵션
 * 주소창에 `chrome://extensions/` 입력 > MLBPARK PLUS > 옵션
 
