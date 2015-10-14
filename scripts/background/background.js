@@ -1,91 +1,108 @@
-var ls = localStorage;
+(function() {
+  var reqBlocks = function() {
+    var requests = {
+      viewReplace: {
+        callback: function(res) {
+          if (res.url.indexOf('articleVC.php') !== -1) {
+            return {
+              redirectUrl: res.url.replace('articleVC', 'articleV')
+            };
+          }
+        },
+        filter: {
+          urls: ['http://mlbpark.donga.com/*']
+        },
+        extra: ['blocking']
+      },
 
-chrome.webRequest.onBeforeRequest.addListener(
-  function(details) {
-    if (details.url.indexOf('articleVC.php') !== -1) {
-      return {
-        redirectUrl: details.url.replace('articleVC', 'articleV')
-      };
+      blockFrame: {
+        callback: function() {
+          return {
+            redirectUrl: 'javascript:void(0)'
+          };
+        },
+        filter: {
+          urls: [
+            'http://idolpark.donga.com/*',
+            'http://sports.donga.com/*',
+            'http://mlbpark.donga.com/poll/*',
+            'http://openapi.donga.com/SPORTS/suggestion',
+            'http://*.doubleclick.net/*',
+            'http://mlbpark.donga.com/mypage/memo_read.php'
+          ],
+          types: ['sub_frame']
+        },
+        extra: ['blocking']
+      },
+
+      blockScript: {
+        callback: function() {
+          return {
+            redirectUrl: 'javascript:void(0)'
+          };
+        },
+        filter: {
+          urls: [
+            'http://dimg.donga.com/acecounter/*',
+            'http://dimg.donga.com/carriage/SPORTS/*',
+            'http://pagead2.googlesyndication.com/*',
+            'http://www.gstatic.com/*',
+            'http://rtax.criteo.com/*'
+          ],
+          types: ['script']
+        },
+        extra: ['blocking']
+      },
+
+      blockAd: {
+        callback: function() {
+          return {
+            redirectUrl: 'javascript:void(0)'
+          };
+        },
+        filter: {
+          urls: [
+            'http://ar.donga.com/*',
+            'http://cad.donga.com/*',
+            'http://mlbpark.donga.com/acecounter/*',
+            'http://210.115.150.117/log/*',
+            'http://www2.donga.com:8080/*'
+          ]
+        },
+        extra: ['blocking']
+      },
+
+      iconReplace: {
+        callback: function() {
+          var iconSrc = '/images/contents/userIcon.gif';
+          return {
+            redirectUrl: chrome.extension.getURL(iconSrc)
+          };
+        },
+        filter: {
+          urls: [
+            'http://mlbpark.donga.com/data/',
+            'http://mlbpark.donga.com/data/emoticon/0.gif',
+            'http://mlbpark.donga.com/data/emoticon/1.gif'
+          ]
+        },
+        extra: ['blocking']
+      }
+    };
+
+    var beforeReq = chrome.webRequest.onBeforeRequest;
+    var req;
+
+    for (var type in requests) {
+      req = requests[type];
+      beforeReq.addListener(req.callback, req.filter, req.extra);
     }
-  },
-  {
-    urls: ['http://mlbpark.donga.com/*']
-  },
-  ['blocking']
-);
+  };
 
-chrome.webRequest.onBeforeRequest.addListener(
-  function() {
-    return {
-      redirectUrl: 'javascript:void(0)'
-    };
-  },
-  {
-    urls: [
-      'http://idolpark.donga.com/*',
-      'http://sports.donga.com/*',
-      'http://mlbpark.donga.com/poll/*',
-      'http://openapi.donga.com/SPORTS/suggestion',
-      'http://*.doubleclick.net/*',
-      'http://mlbpark.donga.com/mypage/memo_read.php'
-    ],
-    types: ['sub_frame']
-  },
-  ['blocking']
-);
+  reqBlocks();
+})();
 
-chrome.webRequest.onBeforeRequest.addListener(
-  function() {
-    return {
-      redirectUrl: 'javascript:void(0)'
-    };
-  },
-  {
-    urls: [
-      'http://dimg.donga.com/acecounter/*',
-      'http://dimg.donga.com/carriage/SPORTS/*',
-      'http://pagead2.googlesyndication.com/*',
-      'http://www.gstatic.com/*',
-      'http://rtax.criteo.com/*'
-    ],
-    types: ['script']
-  },
-  ['blocking']
-);
-
-chrome.webRequest.onBeforeRequest.addListener(
-  function() {
-    return {
-      redirectUrl: 'javascript:void(0)'
-    };
-  },
-  {
-    urls: [
-      'http://ar.donga.com/*',
-      'http://cad.donga.com/*',
-      'http://mlbpark.donga.com/acecounter/*',
-      'http://210.115.150.117/log/*',
-      'http://www2.donga.com:8080/*'
-    ]
-  },
-  ['blocking']
-);
-
-chrome.webRequest.onBeforeRequest.addListener(
-  function() {
-    return {
-      redirectUrl: chrome.extension.getURL('/images/contents/userIcon.gif')
-    };
-  },
-  {
-    urls: [
-      'http://mlbpark.donga.com/data/',
-      'http://mlbpark.donga.com/data/emoticon/0.gif',
-      'http://mlbpark.donga.com/data/emoticon/1.gif'
-    ]
-  },
-  ['blocking']
-);
+var ls = localStorage;
 
 String.prototype.postposition = function(str1, str2) {
   return ((this.charCodeAt(this.length - 1) - 0xAC00) % 28 ? str1 : str2);
