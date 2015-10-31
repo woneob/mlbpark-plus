@@ -147,6 +147,7 @@
     "management",
     "webRequest",
     "webRequestBlocking",
+    "storage",
     "http://*.donga.com/*",
     "http://*.donga.com:8080/*",
     "http://210.115.150.117/log/*",
