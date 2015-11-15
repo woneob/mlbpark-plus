@@ -4,7 +4,7 @@ html {background:#fff;}
 body {padding-top:20px;font:12px/1.4 Dotum,'돋움',sans-serif;color:#4c4c4c;overflow-y:scroll;}
 #container {width:540px;margin:0 auto;}
 header {position:relative;margin-bottom:5px;}
-header h1 {width:224px;height:38px;margin:0;background:url(/images/logo.png) no-repeat;text-indent:-9999px;}
+header h1 {width:224px;height:38px;margin:0;background:url(/images/browser/logo.png) no-repeat;text-indent:-9999px;}
 header a {position:absolute;right:7px;top:17px;color:#666;text-decoration:none;}
 header a:hover {text-decoration:underline;}
 article {padding:10px 15px;border-width:1px;border-style:solid;border-color:#e6e6e6 #ddd #ccc #e3e3e3;border-radius:5px;background:#f8f8f8;box-shadow:inset 0 1px 0 #fff,1px 1px 1px #eee;}
@@ -30,7 +30,7 @@ article {padding:10px 15px;border-width:1px;border-style:solid;border-color:#e6e
 #action .save {font:12px Dotum,'돋움',sans-serif;color:#4c4c4c;padding:3px 5px;}
 #action .reset {position:absolute;top:15px;right:0;border:none;background:none;text-decoration:underline;font-size:11px;color:#999;cursor:pointer;}
 #action .reset:hover {color:#5a5a5a;}
-#saveMsg {padding-left:15px;background:url(/images/check.png) no-repeat 0 0;line-height:16px;}
+#saveMsg {padding-left:15px;background:url(/images/browser/check.png) no-repeat 0 0;line-height:16px;}
 footer {padding:8px 0;font-size:11px;color:#999;text-align:center;}
 footer a {color:#999;text-decoration:none;}
 footer a:hover {color:#666;text-decoration:underline;}

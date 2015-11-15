@@ -6,7 +6,7 @@ body {padding:10px;background:#fff;font:12px/1.4 Dotum,'돋움',sans-serif;}
 header {position:relative;padding:10px 0 15px;font-size:11px;}
 header span {font-family:Arial,sans-serif;color:#999;vertical-align:middle;}
 header img {vertical-align: middle;}
-header .gotoOptions {position:absolute;top:11px;right:2px;padding-left:12px;background:url('/images/icon_settings.png') no-repeat 0 45%;text-decoration:none;letter-spacing:-1px;word-spacing:-1px;color:#666;}
+header .gotoOptions {position:absolute;top:11px;right:2px;padding-left:12px;background:url('/images/browser/icon_settings.png') no-repeat 0 45%;text-decoration:none;letter-spacing:-1px;word-spacing:-1px;color:#666;}
 header .gotoOptions:hover {color:#333;}
 
 #contents .inputRow {position:relative;margin-bottom:2px;padding:4px 4px 4px 25px;background-color:#fafafa;border:1px solid #f1f1f1;border-radius:2px;}
@@ -27,7 +27,7 @@ footer a:hover {color:#006aa1;}
 #links_external li {display:inline;}
 #links_external li + li:before {content:'\2022';margin-right:4px;color:#999;font-size:10px;}
 #links_external a {text-decoration:none;}
-.twitter {padding-left:14px;background:url('/images/icon_twitter.png') no-repeat 0 50%;}
+.twitter {padding-left:14px;background:url('/images/browser/icon_twitter.png') no-repeat 0 50%;}
 #status {height:16px;font-size:11px;text-align:center;padding-right:20px;letter-spacing:-1px;color:#fb6101;}
 #message {display:none;}
-#message:before {content:url('/images/check.png');vertical-align:middle;margin-right:2px;}
+#message:before {content:url('/images/browser/check.png');vertical-align:middle;margin-right:2px;}
