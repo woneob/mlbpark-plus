@@ -1,6 +1,8 @@
 ![MLBPARKPLUS](https://dl.dropbox.com/u/413146/logo_mlbparkPlus2.png)
 
-**MLBPARK PLUS**는 미섹사 [MLBPARK](http://mlbpark.donga.com/)를 쾌적하고 편리하게 이용할 수 있도록 도움을 주는 [Google Chrome](https://chrome.google.com) 전용 확장프로그램입니다.<br />
+**MLBPARK PLUS**는 미섹사 [MLBPARK](http://mlbpark.donga.com/)를 쾌적하고 편리하게 이용할 수 있도록 도움을 주는 [Google Chrome](https://chrome.google.com) 전용 확장프로그램입니다.
+
+**개발 지원 중단 안내**: mlbpark.com 웹사이트 개편으로 인해 본 확장프로그램을 더이상 사용할 수 없습니다. - 2016/03/18
 
 ## Features
 * **제목 아이콘**(이미지, 동영상, 19금, 질문 등)을 표시해줍니다.
